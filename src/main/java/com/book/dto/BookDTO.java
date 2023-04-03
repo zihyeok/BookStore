@@ -2,5 +2,7 @@ package com.book.dto;
 
 public class BookDTO {
 	
-	//디티오다 이새캬
+	//�뵒�떚�삤�떎 �씠�깉罹�
+	
+	//한글입니다
 }
