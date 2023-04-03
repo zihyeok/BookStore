@@ -11,7 +11,7 @@ public class BookStoreApplication {
 		//안녕하세요
 		
 		
-		//반갑습니다
+		//반갑습니다 하이!
 	}
 
 }
