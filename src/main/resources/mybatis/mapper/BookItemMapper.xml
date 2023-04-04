@@ -4,7 +4,7 @@
 PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.book.mapper.BookItemMapper">
+<mapper namespace="com.book.store.mapper.BookItemMapper">
 
 <select id="maxNum" resultType="int">
 	select nvl(max(SEQ_NO),0) from BookItem	

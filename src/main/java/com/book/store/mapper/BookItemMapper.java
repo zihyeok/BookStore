@@ -17,12 +17,12 @@ public interface BookItemMapper {
 
 	public List<BookDTO> getLists(int start,int end,String searchKey,String searchValue) throws Exception;
 
-	public BookDTO getReadData(int SEQ_NO) throws Exception;
+	public BookDTO getReadData(int seq_No) throws Exception;
 
-	public void updateSal_Count(int SEQ_NO) throws Exception;
+	public void updateSal_Count(int seq_No) throws Exception;
 
 	public void updateData(BookDTO dto) throws Exception;
 
-	public void deleteData(int SEQ_NO) throws Exception;
+	public void deleteData(int seq_No) throws Exception;
 
 }
