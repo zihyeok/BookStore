@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.book.mapper.BookItemMapper">
+
+<select id="maxNum" resultType="int">
+	select nvl(max(SEQ_NO),0) from BookItem	
+</select>
+
+<insert id="insertData" parameterType="com.book.dto.BookDTO">
+	insert into BookItem
+	(SEQ_NO,ISBN_THIRTEEN_NO,TITLE_NM,AUTHR_NM,
+	PUBLISHER_NM,PRC_VALUE,IMAGE_URL,BOOK_INTRCN_CN,KDC_NM,
+	PBLICTE_DE,SAL_COUNT) 
+	values(nvl(max(SEQ_NO),0)+1,#{ISBN_THIRTEEN_NO},
+	#{TITLE_NM},#{AUTHR_NM},#{PUBLISHER_NM},#{PRC_VALUE},
+	#{IMAGE_URL},#{BOOK_INTRCN_CN},#{KDC_NM},
+	#{PBLICTE_DE},#{SAL_COUNT})
+</insert>
+
+<select id="getDataCount" parameterType="map" resultType="int">
+	select nvl(count(*),0) from BookItem 
+	where ${searchKey} like '%' || #{searchValue} || '%'
+</select>
+
+<select id="getLists" parameterType="map" resultType="com.book.dto.BookDTO">
+	select * from (
+	select rownum rnum data.* from(
+	select SEQ_NO,ISBN_THIRTEEN_NO,TITLE_NM,AUTHR_NM,
+	PUBLISHER_NM,PRC_VALUE,IMAGE_URL,BOOK_INTRCN_CN,KDC_NM,
+	to_char(PBLICTE_DE,'YYYY-MM-DD') PBLICTE_DE,
+	SAL_COUNT from BookItem 
+	where ${searchKey} like '%' || #{searchValue} || '%' 
+	order by SEQ_NO desc) data)
+	<![CDATA[
+	where rnum>=#{start} and rnum<=#{end}
+	]]>
+</select>
+
+<update id="updateSal_Count" parameterType="int">
+	update BookItem set SAL_COUNT = SAL_COUNT+1 
+	where SEQ_NO = #{SEQ_NO}
+</update>
+
+<select id="getReadData" parameterType="int" resultType="com.book.dto.BookDTO">
+	select 
+	SEQ_NO,ISBN_THIRTEEN_NO,TITLE_NM,AUTHR_NM,
+	PUBLISHER_NM,PRC_VALUE,IMAGE_URL,BOOK_INTRCN_CN,KDC_NM,
+	to_char(PBLICTE_DE,'YYYY-MM-DD') PBLICTE_DE,
+	SAL_COUNT from BookItem 
+	where SEQ_NO = #{SEQ_NO}
+</select>
+
+<update id="updateData" parameterType="int">
+	update BookItem set 
+	ISBN_THIRTEEN_NO = #{ISBN_THIRTEEN_NO},
+	TITLE_NM = #{TITLE_NM},
+	AUTHR_NM = #{AUTHR_NM},
+	PUBLISHER_NM = #{PUBLISHER_NM},
+	PRC_VALUE = #{PRC_VALUE},
+	IMAGE_URL = #{IMAGE_URL},
+	BOOK_INTRCN_CN = #{BOOK_INTRCN_CN},
+	KDC_NM = #{KDC_NM},
+	PBLICTE_DE = #{PBLICTE_DE} 
+	where SEQ_NO = #{SEQ_NO}
+</update>
+
+<delete id="deleteData" parameterType="int">
+	delete from BookItem where SEQ_NO = #{SEQ_NO}
+</delete>
+
+
+</mapper>
