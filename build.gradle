@@ -37,9 +37,6 @@ dependencies {
 	// spring-boot-starter-validation
 	//입력받은 데이터의 조건검사
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	
-	// thymeleaf-extras-springsecurity5 타임리프에서 시큐리티 실행
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 }
 
 tasks.named('test') {
