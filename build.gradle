@@ -34,8 +34,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	
-	// spring-boot-starter-validation
-	//입력받은 데이터의 조건검사
+
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 }
 
