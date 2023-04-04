@@ -1,4 +1,4 @@
-package com.book.service;
+package com.book.store.service;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.book.dto.BookDTO;
-import com.book.mapper.BookItemMapper;
-import com.book.util.MyUtil;
+import com.book.store.dto.BookDTO;
+import com.book.store.mapper.BookItemMapper;
+import com.book.store.util.MyUtil;
 
 @Service
 public class BookItemServiceImpl implements BookItemService{

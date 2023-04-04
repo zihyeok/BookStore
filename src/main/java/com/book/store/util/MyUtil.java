@@ -1,4 +1,4 @@
-package com.book.util;
+package com.book.store.util;
 
 import org.springframework.stereotype.Service;
 

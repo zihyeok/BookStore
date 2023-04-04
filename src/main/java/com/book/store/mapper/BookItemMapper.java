@@ -1,10 +1,10 @@
-package com.book.mapper;
+package com.book.store.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.book.dto.BookDTO;
+import com.book.store.dto.BookDTO;
 
 @Mapper
 public interface BookItemMapper {

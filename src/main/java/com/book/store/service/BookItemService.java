@@ -1,8 +1,8 @@
-package com.book.service;
+package com.book.store.service;
 
 import java.util.List;
 
-import com.book.dto.BookDTO;
+import com.book.store.dto.BookDTO;
 
 public interface BookItemService {
 
