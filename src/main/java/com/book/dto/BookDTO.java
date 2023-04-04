@@ -4,4 +4,6 @@ public class BookDTO {
 		
 	private int num;
 //park
+	
+	//Minsung check
 }
