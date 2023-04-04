@@ -1,0 +1,104 @@
+<html lang="ko">
+<th:block th:fragment="headerFragment">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>header</title>
+  <link rel="stylesheet" href="css/header.css">
+  <link href="https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap&subset=korean" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- nav js -->
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="/js/header.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+</head>
+
+<!-- <body> -->
+
+<header>
+
+  <article id="header">
+      <section>
+        <div onclick="window.location.href='#'">
+          <img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSaCs3brkTgNSErgRmOs6ufpKtAVBVIA9kspw&usqp=CAU" alt="">
+        </div>
+        
+        <div class="backdiv"> </div>
+
+        
+        <nav class="lap-nav">
+          <ul class="clearfix">
+          
+            <li><a>이벤트</a>
+              <ul>
+                <li>진행/대기</li>
+                <li>당첨자 발표</li>
+                <li>전체보기</li>
+              </ul>
+            </li>
+            <li><a>고객지원</a>
+              <ul>
+                <li>공지사항</li>
+                <li>FAQ</li>
+                <li>자료실</li>
+              </ul>
+            </li>
+            <li><a>북클럽</a>
+              <ul>
+                <li>이달의 책</li>
+                <li>커뮤니티</li>
+              	<li>아지트</li>
+              </ul>
+            </li>
+            <li><a>브랜드</a>
+              <ul>
+                <li>문학동네</li>
+                <li>연혁</li>
+                <li>제휴문의</li>
+              </ul>
+            </li>
+            <li><a>도서</a>
+              <ul>
+                <li>새로나온 책</li>
+                <li>수상도서</li>
+                <li>매거진</li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        
+        <div class="sample two">
+    <input type="text" name="search" placeholder="search">
+    <button type="submit" class="btn btn-search fa fa-search"></button>
+    <button type="reset" class="btn btn-reset fa fa-times"></button>
+
+  </div>
+  
+  <i class="fas fa-user"></i>
+    <i class="fas fa-shopping-cart"></i>
+      </section>
+    </article>
+    
+<!-- <nav id="side-menu">
+  <div class="kaka">
+    <img src="http://hoyapd.com/hoya_iloom/images/kakao.png" alt="">
+    <p>카톡문의</p>
+  </div>
+  <div class="tictok">
+    <img src="http://hoyapd.com/hoya_iloom/images/tictok.png" alt="">
+    <p>톡톡문의</p>
+  </div>
+</nav> -->
+
+
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+</header>
+<!-- </body> -->
+</th:block>
+</html>
