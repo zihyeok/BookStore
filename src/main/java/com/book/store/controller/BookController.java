@@ -57,7 +57,7 @@ public class BookController {
 
 		int maxNum = bookItemService.maxNum();
 
-		dto.setSEQ_NO(maxNum);//일련번호 매기기
+		dto.setSeq_No(maxNum);//일련번호 매기기
 
 		bookItemService.insertData(dto);
 
