@@ -3,18 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <title>BookList</title>
+<link rel="stylesheet" type="text/css" href="css/BookList.css">
 </head>
 <body>
 
-<div class="text">Book List</div>
+<!-- ${#strings.replace(text, T(System).getProperty('line.separator'), '&lt;br /&gt;')} -->
 
-<div class="container">
-	<div class="row" th:if="${#lists.size(lists)}>0" th:each="lists : ${lists}">
-		<div class="img-box">
-		<img src="${lists.image_Url}" alt=""/>
+<div class="container" th:each="i : ${#numbers.sequence(0,2)}">
+	<div class="row" th:each="j : ${#numbers.sequence(0,2)}">
+		<div class="img-box" th:if="${#lists.size(lists)}>0" th:each="dto: ${lists[3*i+j]}">
+			<img alt="" th:src="${dto.image_Url}"><br/>
+			<span>제목:[[${dto.title_Nm}]]</span><br/>
+			<span>저자:[[${dto.authr_Nm}]]</span><br/>
+			<span>출판사:[[${dto.publisher_Nm}]]</span><br/>
+			<span>가격:[[${dto.prc_Value}]]</span><br/>
 		</div>
 	</div>
 </div>
+<div style="text-align: center;">
+<a th:utext="${pageIndexList }"></a>
+</div>
+
 
 </body>
 </html>
