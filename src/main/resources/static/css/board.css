@@ -9,10 +9,12 @@
   border:0px solid silver;
   outline: none;
   font-family: 'Noto Sans KR', sans-serif;
+ 
 }
 
 img {
   width: 100px;
+ 
 }
 
 body {
@@ -21,6 +23,7 @@ body {
   color: #999;
   line-height: 1rem;
   letter-spacing: 0.1px;
+ 
 }
 body {
   overflow: auto !important;
