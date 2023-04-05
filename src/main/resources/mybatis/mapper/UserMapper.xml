@@ -10,6 +10,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <insert id="insertData" parameterType="map">
-	insert into userdata values(#{userId},#{userPwd},#{userName},#{userAddr},#{userEmail},
+	insert into USERDATA values(#{userId},#{userPwd},#{userName},#{userAddr},#{userEmail},
 	#{userBirth},#{userTel},0,'RULE_USER')
 </insert>
+</mapper>
