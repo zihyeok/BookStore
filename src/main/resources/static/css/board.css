@@ -1,0 +1,437 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border:0px solid silver;
+  outline: none;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+img {
+  width: 100px;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.9rem;
+  color: #999;
+  line-height: 1rem;
+  letter-spacing: 0.1px;
+}
+body {
+  overflow: auto !important;
+  -webkit-overflow-scrolling: touch;
+  height: 100vh;
+  width: 100%;
+  margin: 0 auto;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #444;
+  border-radius: 10px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #eee;
+  border-radius: 10px;
+}
+h1, h2, h3 {
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #444;
+}
+
+h4, h5 {
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #444;
+}
+
+h1 {
+  font-size: 4rem;
+  line-height: 4.5rem;
+  text-transform: uppercase;
+  color: white;
+  text-align: center;
+}
+
+h2 {
+  font-size: 2.4rem;
+  line-height: 2.4rem;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+h4 {
+  font-size: 1.1rem;
+  line-height: 1.4rem;
+}
+
+h5 {
+  font-size: 0.9rem;
+  line-height: 2.8rem;
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  padding: 10px 30px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+}
+
+button:hover {
+  color: white;
+  background: black;
+}
+
+/*start*/
+
+.notice {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 15rem 0;
+  padding-bottom: 7rem;
+}
+
+.notice h2{
+  text-align: center;
+  font-size: 3rem;
+  margin-bottom: 7rem;
+}
+.notice>div{
+  display: flex;
+  justify-content: space-between;
+}
+.notice>div> :nth-child(1)>div{
+display: flex;
+justify-content: space-between;
+width: 500px;
+border-bottom: 1px solid #ccc;
+padding: 1rem 0;   cursor: pointer;
+}
+.notice>div> :nth-child(1)>div:nth-child(1){
+
+border-top: 2px solid #666;
+}
+
+.notice>div> :nth-child(2){
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.notice>div> :nth-child(2)>div{
+
+    background: #eee;
+    padding: 3rem;
+width: 280px;
+height: 330px;
+}
+.notice>div> :nth-child(2) h3{
+  margin: 0;
+  margin-bottom: 3rem;
+}
+ .notice>div> :nth-child(2) h5{
+   color: #999;
+   line-height: 2.5rem;
+
+ }
+ .quick{
+   width: 1200px;
+   margin: 0 auto;
+   text-align: center;
+
+ }
+  .quick img{
+    width: 147px;
+    opacity: 0.6;
+    transition: 0.8s;
+    cursor: pointer;
+    margin-bottom: 7rem;
+  }
+    .quick img:hover{
+      opacity: 1;
+      transition: 0.8s;
+    }
+  .quick h2{
+    margin-bottom: 4rem;
+  }
+  .search2{
+    text-align: center;
+    width: 1200px;
+    margin: 0 auto;
+  }
+  .search2 h2{
+    margin-bottom: 4rem;
+  }
+  .search2>div{
+    border: 1px solid #ccc;
+    padding: 4rem 0;
+    width: 1200px;
+    margin: 0 auto;
+  }
+.search2 select{
+    width: 80px;
+    border: 1px solid #666;
+  height: 50px;
+  padding: 0 5px;
+  font-family: inherit;
+  background: url('https://cdn2.iconfinder.com/data/icons/font-awesome/1792/angle-down-512.png') no-repeat;
+  border-radius: 0px;
+  background-position: 95% 50%;
+  background-size: 25px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  opacity: 0.6;
+  margin-right: 5px;
+
+  }
+.search2 select option{
+    color: #999;
+  }
+
+.search2 input{
+  height: 50px;
+  padding: 0 5px;
+  background: #eee;
+  width: 500px;
+}
+.search2 h4{
+  display: inline;
+  margin-right: 5px;
+}
+.search2 img{
+  width: 30px;
+  opacity: 0.4;
+  margin-left: 10px;
+  cursor: pointer;
+  transition: 0.8s;
+}
+.search2 img:hover{
+  transition: 0.8s;
+  opacity: 0.6;
+  outline: none;
+}
+
+
+.wrapper {
+  width: 800px;
+
+border-top: 2px solid #ccc;
+border-bottom: 1px solid #ccc;
+ margin: 4em auto;
+ margin-bottom: 2em;
+
+}
+
+.city-list-header {
+  display: flex;
+
+}
+
+.weather-header-details {
+  flex:1;
+
+}
+
+.city-list-header.heading {
+  padding: 0.75em 5px;
+color: #aaa;
+
+}
+
+summary {
+  list-style-type: none;
+  position: relative;
+  cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary::before {
+  content: "+";
+  position: absolute;
+  top: 0;
+  right: 0;
+
+}
+
+details[open] summary::before {
+  content: "–";
+}
+
+details {
+  padding: 1em 5px;
+  border-top: solid 1px #ccc;
+  margin-bottom: 5px;
+  background: #fff;
+}
+details p{
+  padding : 5rem 0;
+  text-align: center;
+  font-size: 1.7rem;
+  line-height: 2.5rem;
+
+}
+details[open] {
+  border: none;
+  background-color: #eee;
+}
+
+  .page{
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 7rem;
+
+  }
+  .r-list{
+    --uirListPaddingLeft: var(--rListPaddingLeft, 0);
+    --uirListMarginTop: var(--rListMarginTop, 0);
+    --uirListMarginBottom: var(--rListMarginBottom, 0);
+    --uirListListStyle: var(--rListListStyle, none);
+
+    padding-left: var(--uirListPaddingLeft) !important;
+    margin-top: var(--uirListMarginTop) !important;
+    margin-bottom: var(--uirListMarginBottom) !important;
+    list-style: var(--uirListListStyle) !important;
+  }
+
+  .r-link{
+    --uirLinkDisplay: var(--rLinkDisplay, inline-flex);
+    --uirLinkTextColor: var(--rLinkTextColor);
+    --uirLinkTextDecoration: var(--rLinkTextDecoration, none);
+
+    display: var(--uirLinkDisplay) !important;
+    color: var(--uirLinkTextColor) !important;
+    text-decoration: var(--uirLinkTextDecoration) !important;
+  }
+
+  /*
+  =====
+  COMPONENT
+  =====
+  */
+
+  .pagination{
+    --uiPaginationAlignmentX: var(--paginationAlignmentX, flex-start);
+    --uiPaginationAlignmentY: var(--paginationAlignmentY, center);
+
+    display: var(--paginationDisplay, flex);
+    align-items: var(--uiPaginationAlignmentY);
+    justify-content: var(--uiPaginationAlignmentX);
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .pagination__list{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: var(--uiPaginationAlignmentY);
+    justify-content: var(--uiPaginationAlignmentX);
+  }
+
+  .pagination__group:nth-child(n+2){
+    margin-left: var(--paginationGroupMargin, .25em);
+  }
+
+  .pagination__point{
+    padding: var(--paginationPointPadding, .5875em .8em);
+    line-height: 1;
+  }
+
+  /*
+  =====
+  SKIN
+  =====
+  */
+  .pagination{
+    --uiPaginationPointBgColor: var(--paginationPointBgColor);
+    --uiPaginationPointBorderWidth: var(--paginationPointBorderWidth);
+    --uiPaginationPointBorderColor: var(--paginationPointBorderColor);
+    --uiPaginationPointFontWeight: var(--paginationPointFontWeight);
+    --uiPaginationPointTextColor: var(--paginationPointTextColor);
+
+    --rLinkTextColor: var(--paginationPointTextColor);
+
+    --uiPaginationActivePointTextColor: var(--paginationActivePointTextColor);
+    --uiPaginationActivePointFontWeight: var(--paginationActivePointFontWeight, 700);
+    --uiPaginationActivePointBgColor: var(--paginationActivePointBgColor);
+    --uiPaginationActivePointBorderWidth: var(--paginationActivePointBorderWidth, 0);
+    --uiPaginationActivePointBorderColor: var(--paginationActivePointBorderColor, transparent);
+
+    --uiPaginationArrowSize: var(--paginationArrowSize, 22px);
+    --uiPaginationArrowMargin: var(--paginationArrowMargin, .25em);
+    --uiPaginationArrowDisplay: var(--paginationArrowDisplay, inline-flex);
+  }
+
+  .pagination__point{
+    background-color: var(--uiPaginationPointBgColor);
+    border: var(--uiPaginationPointBorderWidth) solid var(--uiPaginationPointBorderColor);
+
+    font-weight: var(--uiPaginationPointFontWeight);
+    color: var(--uiPaginationPointTextColor);
+  }
+
+  /*
+  The attribute selector helps to avoid mistakes with a11y
+  */
+
+  .pagination__point:not([href])[aria-current]{
+    --uiPaginationPointBgColor: var(--uiPaginationActivePointBgColor);
+    --uiPaginationPointBorderWidth: var(--uiPaginationActivePointBorderWidth);
+    --uiPaginationPointBorderColor: var(--uiPaginationActivePointBorderColor);
+    --uiPaginationPointFontWeight: var(--uiPaginationActivePointFontWeight);
+    --uiPaginationPointTextColor: var(--uiPaginationActivePointTextColor);
+
+    display: inline-flex;
+  }
+
+  .pagination__control{
+    align-items: center;
+    margin: 10px;
+  }
+
+  .pagination__symbol{
+    display: var(--uiPaginationArrowDisplay);
+    height: 1em;
+    font-size: var(--uiPaginationArrowSize);
+    line-height: 1;
+  }
+
+  .pagination__prev-symbol{
+    margin-right: var(--uiPaginationArrowMargin);
+  }
+
+  .pagination__next-symbol{
+    margin-left: var(--uiPaginationArrowMargin);
+  }
+
+  :root{
+    --paginationPointTextColor: #666;
+    --paginationActivePointTextColor: #fff;
+    --paginationActivePointBgColor: #666;
+    --paginationActivePointBorderColor: #666;
+    --paginationActivePointBorderWidth: 2px;
+  }
