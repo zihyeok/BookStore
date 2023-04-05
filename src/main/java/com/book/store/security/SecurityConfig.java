@@ -24,11 +24,12 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 		
+		//.anyRequest().authenticated() 상단주소외에는 전부 허용된계정만 접속
 		
 		http
 			.authorizeHttpRequests().antMatchers("/","css/**","/images/**","/js/**").permitAll()
 			.antMatchers("/api/v1/**").hasRole(UserRole.USER.name())
-			.anyRequest().authenticated()
+			
 			.and()
 				.csrf().disable().headers().frameOptions().disable()
 			.and()

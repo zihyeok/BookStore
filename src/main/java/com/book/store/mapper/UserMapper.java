@@ -11,4 +11,6 @@ public interface UserMapper {
 
 	
 	public Optional<UserData> findUserName(String name) throws Exception;
+	
+	public void insertData(UserData userData) throws Exception;
 }
