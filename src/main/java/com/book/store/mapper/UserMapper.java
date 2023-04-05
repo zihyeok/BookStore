@@ -10,5 +10,5 @@ import com.book.store.user.UserData;
 public interface UserMapper {
 
 	
-	public Optional<UserData> findbyUserName(String name) throws Exception;
+	public Optional<UserData> findUserName(String name) throws Exception;
 }

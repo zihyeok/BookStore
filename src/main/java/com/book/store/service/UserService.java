@@ -7,5 +7,5 @@ import com.book.store.user.UserData;
 public interface UserService {
 
 	
-	public Optional<UserData> findbyUserName(String name) throws Exception;
+	public Optional<UserData> findUserName(String userId) throws Exception;
 }

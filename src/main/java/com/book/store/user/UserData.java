@@ -1,5 +1,6 @@
 package com.book.store.user;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,5 +16,13 @@ public class UserData {
 	private String userBirth;
 	private String userTel;
 	private String userVip;
+	private String userRole;
+	
+	@Builder
+	public UserData(String email,String name,String role) {
+		this.userId = email;
+		this.userName = name;
+		this.userRole = role;
+	}
 
 }
