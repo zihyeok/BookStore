@@ -96,49 +96,41 @@ public class BookController {
 		}
 
 		int dataCount = bookItemService.getDataCount(searchKey, searchValue);
-
-		int numPerPage = 16;
+		//searchKey를 매개변수로 인식하지 못하는 현상 발행 - Mapper.java에 @Param을 붙여서 인식하게 만듬
+		int numPerPage = 9;
+		//한페이지에 9개의 아이템
 
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 
-		if(currentPage>totalPage) {
-			//항목 삭제해서 페이지에 아무것도 없는데 페이지가
-			//유지되는 상황을 막기위해
-			currentPage=totalPage;
-		}
+		if(currentPage>totalPage) { //항목 삭제해서 페이지에 아무것도 없는데 페이지가 유지되는 상황을 막기위해
+			currentPage=totalPage; }
 
-		int start = (currentPage-1)*numPerPage+1;
-		int end = currentPage*numPerPage;
+		int start = (currentPage-1)*numPerPage+1; int end = currentPage*numPerPage;
+		
 
-		List<BookDTO> lists = bookItemService.getLists(start, end, searchKey, searchValue);
-
-		String param = "";
-		if(searchValue!=null&&!searchValue.equals("")) {
-			param = "searchKey=" + searchKey;
-			param+= "&searchValue=" + URLEncoder.encode(searchValue,"utf-8");
-		}
+		List<BookDTO> lists = bookItemService.getLists(start, end, searchKey,searchValue);
+		//Mapper.xml에서 TO_CHAR부분 에러발생 데이터 형식이 이미 2023-04-05형태여서 그런듯
+	
+		String param = ""; if(searchValue!=null&&!searchValue.equals("")) { param =
+				"searchKey=" + searchKey; param+= "&searchValue=" +
+						URLEncoder.encode(searchValue,"utf-8"); }
 
 		String listUrl = "/BookList.action";
 
-		if(!param.equals("")) {
-			listUrl += "?" + param;
-		}
+		if(!param.equals("")) { listUrl += "?" + param; }
 
-		String pageIndexList = 
-				myUtil.pageIndexList(currentPage, totalPage, listUrl);
+		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
 
 		String articleUrl = "/BookArticle.action?pageNum=" + currentPage;
 
-		if(!param.equals("")) {
-			articleUrl += "&" + param;
-		}
+		if(!param.equals("")) { articleUrl += "&" + param; }
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("lists", lists);
+		mav.addObject("lists", lists); 
 		mav.addObject("pageIndexList", pageIndexList);
-		mav.addObject("dataCount", dataCount);
-		mav.addObject("articleUrl", articleUrl);
+		mav.addObject("dataCount", dataCount); 
+		mav.addObject("articleUrl",articleUrl); 
 		mav.addObject("pageNum", currentPage);
 
 		mav.setViewName("BookList");
@@ -241,48 +233,48 @@ public class BookController {
 		String pageNum = request.getParameter("pageNum");
 		String searchKey = request.getParameter("searchKey");
 		String searchValue = request.getParameter("searchValue");
-		
+
 		bookItemService.updateData(dto);
-		
+
 		String param = "pageNum=" + pageNum;
-		
+
 		if(searchValue!=null && !searchValue.equals("")) {
 			param += "&searchKey=" + searchKey;
 			param += "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");
 		}
 
-		
+
 		ModelAndView mav = new ModelAndView();
-		
+
 		mav.setViewName("redirect:BookList.action?" + param);
-		
+
 		return mav;
 
 	}
-	
+
 	@GetMapping("/BookDelete.action")
 	public ModelAndView deleted_ok(HttpServletRequest request) throws Exception{
-		
+
 		int seq_No = Integer.parseInt(request.getParameter("seq_No"));
 		String pageNum = request.getParameter("pageNum");
 		String searchKey = request.getParameter("searchKey");
 		String searchValue = request.getParameter("searchValue");
-		
+
 		bookItemService.deleteData(seq_No);
-		
+
 		String param = "pageNum=" + pageNum;
-		
+
 		if(searchValue!=null && !searchValue.equals("")) {
 			param += "&searchKey=" + searchKey;
 			param += "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");
 		}
-		
+
 		ModelAndView mav = new ModelAndView();
-		
+
 		mav.setViewName("redirect:BookList.action?" + param);
-		
+
 		return mav;
-		
+
 	}
 
 

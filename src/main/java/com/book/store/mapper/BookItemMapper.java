@@ -3,6 +3,7 @@ package com.book.store.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.book.store.dto.BookDTO;
 
@@ -13,9 +14,9 @@ public interface BookItemMapper {
 
 	public void insertData(BookDTO dto) throws Exception;
 
-	public int getDataCount(String searchKey,String searchValue) throws Exception;
+	public int getDataCount(@Param("searchKey")String searchKey,@Param("searchValue")String searchValue) throws Exception;
 
-	public List<BookDTO> getLists(int start,int end,String searchKey,String searchValue) throws Exception;
+	public List<BookDTO> getLists(@Param("start")int start,@Param("end")int end,@Param("searchKey")String searchKey,@Param("searchValue")String searchValue) throws Exception;
 
 	public BookDTO getReadData(int seq_No) throws Exception;
 
