@@ -1,0 +1,280 @@
+
+@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans:400');
+@import url('https://fonts.googleapis.com/css?family=Black+Han+Sans&display=swap&subset=korean');
+@font-face {
+    font-family: 'NEXON Lv1 Gothic OTF Light';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF Light.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+   font-family: 'NEXON Lv1 Gothic OTF';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv1 Gothic OTF.woff') format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
+@font-face {
+    font-family: 'NEXON Lv2 Gothic Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/NEXON Lv2 Gothic Bold.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/*
+# font-family: 'MapoFlowerIsland';
+강조: font-family: 'Black Han Sans', sans-serif;
+보통: font-family: 'NEXON Lv1 Gothic OTF';
+
+*/
+
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0px solid silver;
+
+}
+
+
+body {
+  font-family: 'NEXON Lv1 Gothic OTF Light';
+  font-size: 1rem;
+  line-height: 1.2rem;
+  color: #181818;
+  letter-spacing: 0.1px;
+}
+
+h1 {
+  font-family: 'S-CoreDream-9Black';
+  font-size: 2.3rem;
+  line-height: 3rem;
+  letter-spacing: 0.5rem;
+  text-transform: uppercase;
+}
+
+h2 {
+  font-family: 'NEXON Lv1 Gothic OTF';
+  font-size: 2.4rem;
+  line-height: 2.4rem;
+}
+
+h3 {
+  font-size: 1.4rem;
+  line-height: 1.4rem;
+}
+
+
+h4 {
+  font-size: 1rem;
+  line-height: 1rem;
+}
+
+h5 {
+  font-size: 0.7rem;
+  line-height: 0.7rem;
+}
+a{
+  color: black;
+  text-decoration: none;
+
+}
+/*
+화살표
+주요 색       네이버          카카오톡
+c80a1e       1ec800          f5e14b,333333
+
+바 색         톡톡
+fcf8ed        23c545
+dda4ab        ffffff
+b89c87
+*/
+/*<body style="overflow-x:hidden; overflow-y:auto;">*/
+
+/*  start */
+#header {
+  width: 100%;
+  min-width: 1200px;
+  text-transform: uppercase;
+  cursor: pointer;
+  background: #fff;
+  height: 120px;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  display: block;
+  transition: top 0.4s;
+  z-index: 999;
+  padding-top: 2rem;
+}
+
+#header section {
+  width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  position: relative;
+}
+
+#header section> :first-child {
+  float: left;
+  transition: 0.5s;
+}
+
+#header section> :first-child:hover {
+  opacity: 0.8;
+}
+
+#header section> :first-child img {
+  width: 7rem;
+  margin-top: 1.3rem;
+}
+
+.lap-nav {
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 2rem;
+}
+
+.lap-nav>ul>li {
+  float: right;
+  width: 6rem;
+  height: 23rem;
+  line-height: 3rem;
+  font-size: 0.9rem;
+  text-align: center;
+  list-style: none;
+}
+
+.lap-nav>ul>li>a {
+  width: 10rem;
+  padding: 0.5rem 0.7rem;
+  line-height: 4.5rem;
+  font-size: 1.2rem;
+  color: #222222;
+  transition: 0.6s;
+  border-bottom: 2px solid #fff;
+  font-family: 'NEXON Lv1 Gothic OTF';
+}
+
+.lap-nav>ul>li ul {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+.clearfix>li>ul>li {
+  display: block;
+  color: #222222aa;
+  border-bottom: 2px solid #fff;
+  transition: 0.4s;
+}
+
+.lap-nav>ul>li>a:hover {
+  border-bottom: 2px solid #c80a1e;
+}
+
+.lap-nav>ul>li>a:hover,
+.lap-nav>ul>li>ul>li:hover {
+  color: #c80a1e;
+}
+
+
+.sample input {
+  border-bottom: 1px solid #ccc;
+  font-size: 1rem;
+  height: 3rem;
+  padding: 0 0.4rem;
+  position: absolute;
+  width: 50%;
+}
+.sample input:focus {``
+  outline: none;
+}
+button.btn-search, button.btn-reset {
+  background: none;
+  border: none;
+  height: 3rem;
+  font-size: 1.2rem;
+  padding: 0.1rem;
+  position: absolute;
+  width: 3rem;
+  cursor:pointer;
+}
+.sample {
+  height: 5rem;
+  position: absolute;
+  width: 30%;
+  margin-top: 0.5rem;
+  right: 7rem;
+}
+.sample.two input {
+  right: 0;
+  transition: all 0.3s ease-in-out;
+  width: 13rem;
+}
+.sample.two input:focus {
+  width: 20rem;
+}
+.sample.two input:focus ~ button.btn-search {
+  color: #000000dd;
+  background: none;
+}
+.sample.two input:focus ~ button.btn-reset {
+  right: -2rem;
+  opacity: 1;
+}
+.sample.two button {
+  transition: all 0.3s ease-in-out;
+}
+.sample.two button.btn-search {
+  background:none;
+  height: 3rem;
+  right: 0;
+  top: 0.1rem;
+  transition: all 0.3s ease-in-out;
+  width: 3rem;
+}
+.sample.two button.btn-reset {
+  cursor:pointer;
+  background: none;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  font-size: 1rem;
+  height: 1.5rem;
+  line-height: 1.2rem;
+  padding: 0;
+  right: 0;
+  top: 0.9rem;
+  width: 1.5rem;
+  z-index: -1;
+  opacity: 0;
+}
+.fa-shopping-cart{
+  position: absolute;
+  right: 0;
+  top: 1.5rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+.fa-user{
+  position: absolute;
+  right: 3rem;
+  top: 1.5rem;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+#side-menu{
+    position: fixed;
+    right: 20px;
+    bottom: 5rem;
+    transition: all .5s;
+    z-index: 99;
+  }
+
+  #side-menu ul li{
+    list-style: none;
+    font-size: 1.2rem;
+    opacity: .6;
+  }
+

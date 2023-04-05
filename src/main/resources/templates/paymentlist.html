@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<!-- 내가넣은거 -->
+<link rel="stylesheet" href="css/paymentlist.css">
+<script type="text/javascript" src="js/paymentlist.js"></script>
+
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+
+<body>
+  <!-- Start Container -->
+  <div class="ui container">
+    <!-- Start Header -->
+    <div class="ui secondary menu">
+      <div class="right menu smallfont">
+        <a class="item">로그아웃</a>
+        <a class="item">고객센터</a>
+        <a class="item">공지사항</a>
+        <a class="item">한국어</a>
+      </div>
+    </div>
+    <div class="logoimg">
+      <img class="ui small image" src="http://p6.zdassets.com/hc/settings_assets/835286/200184768/1SJbpYB2qmmF6H0OzmzCXQ-hs-new-pdf-logo.gif">
+    </div>
+    <hr></hr>
+    <div class="ui center aligned grid">
+      <div class="centered column">
+        <div class="ui secondary menu mainmenu"> <!-- stackable here-->
+          <a class="item"><h3>대시보드</h3></a>
+          <a class="item activecustom"><h3>주문하기</h3></a>
+          <a class="item"><h3>배송하기</h3></a>
+          <a class="item"><h3>주문·배송 내역</h3></a>
+          <a class="item"><h3>마이페이지</h3></a>
+        </div>
+      </div>
+    </div>
+    <!-- End Header -->
+    
+    <!-- Start Contents -->
+    <div class="ui sub-container">
+      <!-- Top Message -->
+      <div class="ui grid"><!-- stackable here-->
+        <div class="two wide column">
+          <h3 class="ui header pointcolor">ORDERS</h3>
+        </div>
+        <div class="fourteen wide column">
+          <div class="smallfont">다양한 주문 관련 서비스를 이용하실 수 있습니다.</div>
+        </div>
+      </div>
+      <div class="ui fitted divider"></div>
+      <div class="ui hidden divider"></div>
+      <div class="ui hidden divider"></div>
+
+      <div class="ui grid">
+        <!-- Side Menu -->
+        <div class="three wide column">
+          <div class="ui vertical text menu sidemenu">
+            <a class="item activecustom"><i class="angle right icon"></i>
+              신규 주문 </a>
+            <a class="item"><i class="angle right icon"></i>
+              전체 보기 </a>
+            <a class="item"><i class="angle right icon"></i>
+              배송 준비 완료 </a>
+            <a class="item"><i class="angle right icon"></i>
+              라벨 출력 완료 </a>
+            <a class="item"><i class="angle right icon"></i>
+              삭제하기 </a>
+          </div>
+        </div>
+
+        <!-- Main Contents-->
+        <div class="thirteen wide column">
+          <button class="ui small compact pointbutton button">주문 등록</button>
+          <button class="ui small compact pointbutton button">주문 진행</button>
+          <div class="ui items">
+            <p>＊다량의 주문은 
+              <a class="pointcolor"><b>CSV로 업로드</b></a> 
+              할 수 있습니다. 
+              <a class="item pointcolor"><b>CLICK!</b></a>
+            </p>
+          </div>
+          
+          <!-- Table -->
+          <table id="example" class="hover row-border" cellspacing="0">
+            <thead>
+              <tr>
+                <th><input type="checkbox"></th>
+                <th>주문번호</th>
+                <th>주문일</th>
+                <th>샵 주문번호</th>
+                <th>받는사람</th>
+                <th>국가</th>
+                <th>상품</th>
+                <th>배송서비스</th>
+                <th>배송료</th>
+                <th>기능</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td>339</td>
+                <td>2015-09-30</td>
+                <td></td>
+                <td>Jone doe</td>
+                <td>United kingdom</td>
+                <td>Tshirt</td>
+                <td>UC Express</td>
+                <td>21335</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td>339</td>
+                <td>2015-09-30</td>
+                <td></td>
+                <td>Jone doe</td>
+                <td>United kingdom</td>
+                <td>Tshirt</td>
+                <td>UC Express</td>
+                <td>21335</td>
+                <td></td>
+              </tr>
+              <tr>
+                <td><input type="checkbox"></td>
+                <td>339</td>
+                <td>2015-09-30</td>
+                <td></td>
+                <td>Jone doe</td>
+                <td>United kingdom</td>
+                <td>Tshirt</td>
+                <td>UC Express</td>
+                <td>21335</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        
+          <div class="ui divider"></div>
+          <div class="smallfont">＊선택한 주문을 일괄　
+            <div class="ui compact mini button">삭제하기</div>
+            <div class="ui compact mini button">다운로드</div>
+          </div>
+        </div>
+ 
+      </div>
+      <!-- End UI grid-->
+    </div>
+    <!-- End Contents -->
+  
+  </div>
+  <!-- End Container -->
+
+  <!-- Start Footer -->
+  <div class="footercustom">
+    <div class="ui center aligned basic inverted segment">
+      <div class="smallfont">
+        © 2016. IMEX All Rights Reserved. </br>
+        1905, 48 Centum jungang-ro, Haeundae-gu , Busan, Korea　T 051.742.7777</div>
+    </div>
+  </div>
+  <!-- End Footer-->
+</body>
+</html>

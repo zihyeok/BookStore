@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
@@ -225,11 +224,11 @@ main button {
     .swiper-slide {
       text-align: center;
       display: flex;
-      /* ë‚´ìš©ì„ ì¤‘ì•™ì •ë ¬ í•˜ê¸°ìœ„í•´ flex ì‚¬ìš© */
+      /* ³»¿ëÀ» Áß¾ÓÁ¤·Ä ÇÏ±âÀ§ÇØ flex »ç¿ë */
       align-items: center;
-      /* ìœ„ì•„ë˜ ê¸°ì¤€ ì¤‘ì•™ì •ë ¬ */
+      /* À§¾Æ·¡ ±âÁØ Áß¾ÓÁ¤·Ä */
       justify-content: center;
-      /* ì¢Œìš° ê¸°ì¤€ ì¤‘ì•™ì •ë ¬ */
+      /* ÁÂ¿ì ±âÁØ Áß¾ÓÁ¤·Ä */
     }
 
     .swiper-slide img {

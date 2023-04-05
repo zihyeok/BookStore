@@ -1,0 +1,7 @@
+@charset "UTF-8";
+
+body { padding-top:50px}
+.no-line { border-top: none!important;}
+.thick-line { border-top: 2px solid!important;}
+.gr { background-color: #f2f2f0;}
+.w30 { width: 20%; min-width:200px;}
