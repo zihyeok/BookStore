@@ -25,38 +25,6 @@
 */
 
 
-
-
-* {
-  
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  border: 0px solid silver;
-  z-index: 1;
-  /* 
-  position: fixed;
-  z-index: 1; 
-  */
-
-}
-
-
-body {
-  font-family: 'NEXON Lv1 Gothic OTF Light';
-  font-size: 1rem;
-  line-height: 1.2rem;
-  color: #181818;
-  letter-spacing: 0.1px;
-  z-index: 1;
-}
-
-
-a{
-  color: black;
-  text-decoration: none;
-
-}
 /*
 화살표
 주요 색       네이버          카카오톡
@@ -76,19 +44,18 @@ b89c87
   text-transform: uppercase;
   cursor: pointer;
   background: #fff;
-  height: 50px;
+  height: 100px;
   overflow: hidden;
   position: fixed;
   top: 0;
   display: block;
   transition: top 0.4s;
-  z-index: 999;
   padding-top: 2rem;
-
-
+  
 }
 
 #header section {
+  
   width: 1200px;
   margin: 0 auto;
   display: flex;
@@ -267,7 +234,7 @@ button.btn-search, button.btn-reset {
     z-index: 99;
   }
 
-  #side-menu ul li{
+#side-menu ul li{
     list-style: none;
     font-size: 1.2rem;
     opacity: .6;

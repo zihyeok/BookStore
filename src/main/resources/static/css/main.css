@@ -6,6 +6,11 @@
       padding: 0;
       box-sizing: border-box;
       border: 0px solid silver;
+      
+      /* 
+	  position: fixed;
+	  z-index: 1; 
+	  */
     }
 
     body {
@@ -65,16 +70,7 @@
     #3967ED;
     }
 
-    button {
-       font-size: 0.7rem;
-       text-transform: uppercase;
-       padding: 10px 30px;
-       border: 1px solid #ccc;
-       background: white;
-       transition: 1s;
-       margin-top: 1rem;
-       border-radius: 50px;
-     }
+  
 
      button:hover {
        background: ;
@@ -85,11 +81,6 @@
 
     /* start */
 
-header {
-  width: 1000px;
-  margin: 0 auto;
-  background: #fff;
-}
 
 header img {
   width: 100px;
@@ -158,6 +149,7 @@ header img {
       background-position: center;
       background-size: cover;
       position: relative;
+      
     }
 
 

@@ -1,14 +1,6 @@
-<!doctype html>
-<html lang="en">
+<html layout:decorate="~{layout}">
+<meta charset="UTF-8">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3.0">
-  <title>main</title>
-  <link rel="stylesheet" href="css/main.css">
-  <script src="script.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 
   <!-- Layer popup start -->
       <script language="JavaScript">
@@ -28,10 +20,8 @@
   //-->
   </script>
 
-</head>
 
-<body>
-
+<div layout:fragment="content1" >
 
 
   <main>
@@ -321,7 +311,8 @@
   </script>
 
 
-  <!-- POPUP start -->
+<!-- POPUP start -->
+<!--  
 <div id="divpop" style="position:absolute;left:20%;;top:150px;z-index:200;visibility:hidden;">
  <table width=290px height=352px cellpadding=0 cellspacing=0>
 <tr>
@@ -345,6 +336,7 @@
 </tr>
 </table>
 </div>
+-->
 
 <script language="Javascript">
 cookiedata = document.cookie;
@@ -355,7 +347,7 @@ if ( cookiedata.indexOf("maindiv=done") < 0 ){
         document.all['divpop'].style.visibility = "hidden";
 }
 </script>
+</div>
 
-</body>
 
 </html>
