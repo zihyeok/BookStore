@@ -10,7 +10,7 @@ import com.book.store.user.UserData;
 public interface UserMapper {
 
 	
-	public Optional<UserData> findUserName(String name) throws Exception;
+	public Optional<UserData> findUserName(String userId) throws Exception;
 	
 	public void insertData(UserData userData) throws Exception;
 }

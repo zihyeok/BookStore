@@ -17,6 +17,7 @@ public class UserData {
 	private String userTel;
 	private String userVip;
 	private String userRole;
+	private String realPwd;
 	
 	@Builder
 	public UserData(String email,String name,String role) {

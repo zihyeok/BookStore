@@ -6,11 +6,11 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.book.store.mapper.UserMapper">
 
 <select id="findUserName" parameterType="String" resultType="com.book.store.user.UserData">
-	select * from user where userId = #{userId}
+	select * from userdata where userId = #{userId}
 </select>
 
 <insert id="insertData" parameterType="map">
 	insert into USERDATA values(#{userId},#{userPwd},#{userName},#{userAddr},#{userEmail},
-	#{userBirth},#{userTel},0,'RULE_USER')
+	#{userBirth},#{userTel},0,'RULE_USER',#{userPwd})
 </insert>
 </mapper>

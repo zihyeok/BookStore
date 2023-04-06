@@ -18,7 +18,9 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public Optional<UserData> findUserName(String userId) throws Exception {
 		
-		return null;
+		Optional<UserData> userData = userMapper.findUserName(userId);
+		
+		return userData;
 	}
 
 	@Override
