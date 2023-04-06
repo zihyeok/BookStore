@@ -1,29 +1,37 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>BookList</title>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- 밑의내용부터 content layout에 들어가니깐 이 내용이 charset=UTF-8라는 걸 적어야 한글이 안깨짐 -->
+<div layout:fragment="content">
+
 <link rel="stylesheet" type="text/css" href="css/BookList.css">
-</head>
-<body>
 
-<!-- ${#strings.replace(text, T(System).getProperty('line.separator'), '&lt;br /&gt;')} -->
+</br></br></br></br>
+</br></br></br></br>
 
-<div class="container" th:each="i : ${#numbers.sequence(0,2)}">
-	<div class="row" th:each="j : ${#numbers.sequence(0,2)}">
-		<div class="img-box" th:if="${#lists.size(lists)}>0" th:each="dto: ${lists[3*i+j]}">
-			<img alt="" th:src="${dto.image_Url}"><br/>
-			<span>제목:[[${dto.title_Nm}]]</span><br/>
-			<span>저자:[[${dto.authr_Nm}]]</span><br/>
+<div class="BookList-container" th:each="i : ${#numbers.sequence(0,2)}">
+	<div class="BookList-row" th:each="j : ${#numbers.sequence(0,2)}">
+		<div class="BookList-img-box" th:if="${#lists.size(lists)}>0" th:each="dto: ${lists[3*i+j]}">
+			<a th:href="@{${articleUrl}} + '&seq_No=' + @{${dto.seq_No}}">
+			<img alt="" th:src="@{${dto.image_Url}}"></a><br/>
+			
+			<span>[[${dto.title_Nm}]]</span><br/>
+			<span>[[${dto.authr_Nm}]]</span><br/>
 			<span>출판사:[[${dto.publisher_Nm}]]</span><br/>
-			<span>가격:[[${dto.prc_Value}]]</span><br/>
+			<span>가격:[[${dto.prc_Value}]]원</span><br/>
 		</div>
 	</div>
 </div>
+
+</br></br></br>
+
+<div style="text-align: right; margin-right: 200px;">
+	<button th:onclick="|location.href='@{BookCreated.action}'|">등록하기</button>
+</div>
+
+<br/>
 <div style="text-align: center;">
 <a th:utext="${pageIndexList }"></a>
 </div>
 
-
-</body>
+</div>
 </html>
