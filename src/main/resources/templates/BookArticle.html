@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+<meta charset="UTF-8">
+
+<body>
+
+<div layout:fragment="content">
+</br></br></br></br>
+</br></br></br></br>
+
+
+<div class="BookArticle-container" style="background-color: green; width: 100%; text-align: center;">
+	<!-- container안에 이 row div를 block처럼 만들어주겠다 -->
+	<div class="BookArticle-container-left" style="display: inline-block; background-color: yellow; width: 30%;">
+	<span>[[${dto.authr_Nm}]]</span><br/>
+	<span>출판사 : [[${dto.publisher_Nm}]]</span><br/>
+	<div>
+	리뷰
+	</div>
+	</div>
+	<div class="BookArticle-container-center" style="display: inline-block; background-color: yellow; width: 30%;">
+		<span>[[${dto.title_Nm}]]</span>
+		<img alt="" th:src="${dto.image_Url}" th:onclick="|location.href='@{${dto.image_Url}}'|">
+	</div>
+	<div class="BookArticle-container-right" style="display: inline-block; background-color: yellow ; width: 30%;">
+		<div>[[${dto.prc_Value}]]원</div><br/>
+		<div>배송안내	도서포함 15,000원 이상 무료배송</div><br/>
+		<div>주소</div><br/>
+	</div>
+	
+</div>
+
+<div class="BookArticle-container-bottom" style="margin-top: 50px; text-align: center; margin-bottom: 50px;">
+	<div class="BookArticle-container-bottom-tab">
+	<span>리뷰</span>
+	<span>교환/반품/품절</span>
+	</div>
+	
+	<div class="BookArticle-container-bottom-review">
+	리뷰
+	</div>
+</div>
+
+</div>
+
+</body>
+</html>

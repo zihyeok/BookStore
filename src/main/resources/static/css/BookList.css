@@ -1,29 +1,34 @@
 @charset "UTF-8";
 
-div.container {
+div.BookList-container {
 	
 	text-align: center;
-
+	font-family: "NanumGothicCoding";
+	font-weight: bold;
 	
 }
 
-div.container .row {
+div.BookList-container .BookList-row {
 	
 	display: inline-block;
 	margin-bottom: 20px;
+	width: 20%;
 	
 }
 
-div.container .row .img-box img {
+div.BookList-container .BookList-row .BookList-img-box img {
 	
-	width: 150px;
-	height: 180px;
-	margin-right: 150px;
+	width: 120px;
+	height: 150px;
+	border-radius: 5px;
+	
+
 }
 
-div.container .row .img-box span {
+div.BookList-container .BookList-row .BookList-img-box span {
 	
 	font-size: 10px;
-	margin-right: 150px;
+
+
 
 }

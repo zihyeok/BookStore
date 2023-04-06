@@ -1,20 +1,25 @@
 package com.book.store.controller;
 
+import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.book.store.dto.BookDTO;
+import com.book.store.dto.FileDTO;
 import com.book.store.service.BookItemService;
 import com.book.store.util.MyUtil;
 
@@ -34,34 +39,65 @@ public class BookController {
 		//메인화면으로 이동
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("Main");
+		mav.setViewName("test");
 
 		return mav;
 	}
 
-	@GetMapping("/created.action")
+	@GetMapping("/BookCreated.action")
 	public ModelAndView itemCreated() throws Exception{
 		//신규상품 등록 홈페이지로 이동
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("created");
+		mav.setViewName("BookCreated");
 
 		return mav;
 
 	}
 
-	@PostMapping("/created.action")
-	public ModelAndView itemCreated_ok(BookDTO dto) throws Exception{
-		//새로운 책을 등록하고자 할때
+	@PostMapping("/BookCreated.action")
+	public ModelAndView itemCreated_ok(BookDTO dto,@RequestParam(value = "upload",required = false) MultipartFile[] upload) throws Exception{
+		//새로운 책을 등록하고자 할때			//requestparam(value="html에서의 name", required 는 해당 매개변수가 필수면 true 아니면 false
+		
 		ModelAndView mav = new ModelAndView();
 
 		int maxNum = bookItemService.maxNum();
 
-		dto.setSeq_No(maxNum);//일련번호 매기기
-
+		dto.setSeq_No(maxNum+1);//일련번호 매기기
+		
+		for (MultipartFile file : upload) {
+			
+			if(!file.isEmpty()) {
+				
+				File f = new File("C:/sts-bundle/work/BookStore/src/main/resources/static/image");
+		
+				if(!f.exists()) {
+					
+					f.mkdirs();
+					
+				}
+				
+				String newFileName = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
+				newFileName+= System.nanoTime();
+				newFileName+= file.getOriginalFilename();
+				
+				dto.setImage_Url("image" + f.separator + newFileName);
+				//img url링크 이걸로 set
+				
+				System.out.println(dto.getImage_Url());
+				
+				f = new File(newFileName);
+				
+				file.transferTo(f);
+				//여기서 실제 존재하는 파일로 되는 것임
+				
+			}
+			
+		}
+		
 		bookItemService.insertData(dto);
 
-		mav.setViewName("/BookList.action");
+		mav.setViewName("redirect:BookList.action");
 
 		return mav;
 
@@ -106,11 +142,46 @@ public class BookController {
 			currentPage=totalPage; }
 
 		int start = (currentPage-1)*numPerPage+1; int end = currentPage*numPerPage;
-		
+
 
 		List<BookDTO> lists = bookItemService.getLists(start, end, searchKey,searchValue);
 		//Mapper.xml에서 TO_CHAR부분 에러발생 데이터 형식이 이미 2023-04-05형태여서 그런듯
-	
+
+		//제목이 너무 길어서 사이에 <br/>넣어보기
+		
+		/*
+		  
+		// 제목이 너무 길어서 css가 깨지길래 사이에<br/>해보기
+		//css width 너비 30%로 고정해서 막음
+		 
+		Iterator<BookDTO> it = lists.iterator();
+
+		while(it.hasNext()) {
+
+			BookDTO dto = it.next();
+
+			String title = dto.getTitle_Nm();
+
+			if(title.length()>=15) {
+
+				StringBuffer sb = new StringBuffer();
+
+				sb.append(title);
+
+				sb.insert(14, "<br/>");
+				//중간에 문자삽입 가능하게 만들어줌
+
+				dto.setTitle_Nm(sb.toString());
+
+				System.out.println(dto.getTitle_Nm());
+				
+				//th:utext써서 태그까지 출력하게 하려고함
+
+			}
+
+		}
+		*/
+
 		String param = ""; if(searchValue!=null&&!searchValue.equals("")) { param =
 				"searchKey=" + searchKey; param+= "&searchValue=" +
 						URLEncoder.encode(searchValue,"utf-8"); }
@@ -254,7 +325,8 @@ public class BookController {
 
 	@GetMapping("/BookDelete.action")
 	public ModelAndView deleted_ok(HttpServletRequest request) throws Exception{
-
+		
+		//이거 upload폴더에 있는 파일도 같이 지워야됨
 		int seq_No = Integer.parseInt(request.getParameter("seq_No"));
 		String pageNum = request.getParameter("pageNum");
 		String searchKey = request.getParameter("searchKey");
