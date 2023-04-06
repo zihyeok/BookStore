@@ -11,5 +11,8 @@ public interface UserService {
 	
 	public void insertData(UserData userData) throws Exception;
 	
+	public void insertOAuth(UserData userData) throws Exception;
+	
+	
 	
 }

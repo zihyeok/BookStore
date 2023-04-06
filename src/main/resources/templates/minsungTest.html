@@ -11,13 +11,13 @@
 <form action="" method="post">
 
 아이디:
-<input type="text" name="userId"> <br/>
+<input type="text" name="userId" th:value="${oauthId}"> <br/>
 
 비밀번호:
 <input type="text" name="userPwd"> <br/>
 
 이름:
-<input type="text" name="userName"> <br/>
+<input type="text" name="userName" th:value="${oauthName}"> <br/>
 
 주소:
 <input type="text" name="userAddr"> <br/>
@@ -31,7 +31,7 @@
 전화번호:
 <input type="text" name="userTel"> <br/>
 
-<button>버튼</button>
+<button>확인</button>
 </form>
 
 </body>

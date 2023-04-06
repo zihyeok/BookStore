@@ -30,4 +30,11 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
+	@Override
+	public void insertOAuth(UserData userData) throws Exception {
+
+		userMapper.insertOAuth(userData);
+		
+	}
+
 }

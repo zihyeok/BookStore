@@ -6,7 +6,9 @@ import com.book.store.user.UserData;
 import com.book.store.user.UserRole;
 
 import lombok.Builder;
+import lombok.Getter;
 
+@Getter
 public class OAuthAttributes {
 
 	private Map<String, Object> attributes;

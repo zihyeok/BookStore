@@ -25,5 +25,12 @@ public class UserData {
 		this.userName = name;
 		this.userRole = role;
 	}
+	
+	public UserData update(String name) {
+		
+		this.userName = name;
+		
+		return null;
+	}
 
 }

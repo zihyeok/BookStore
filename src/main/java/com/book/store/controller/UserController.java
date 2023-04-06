@@ -35,6 +35,8 @@ public class UserController {
 	@PostMapping("/user/loginpage")
 	public String logingo(UserData userData) throws Exception{
 		
+		
+		userData.setRealPwd(userData.getUserPwd());
 		userData.setUserPwd(passwordEncoder.encode(userData.getUserPwd()));
 		
 		
@@ -62,13 +64,23 @@ public class UserController {
 		mav.setViewName("minsungTest3");
 		
 		UserData user = (UserData) httpSession.getAttribute("user");
+		UserData OauthUser = (UserData) httpSession.getAttribute("OauthUser");
 		
 		if(user!=null) {
 			mav.addObject("userId", user.getUserId());
 			mav.addObject("userPwd", user.getUserPwd());
 			mav.addObject("userEmail", user.getUserEmail());
+			mav.addObject("realPwd", user.getRealPwd());
+			
 		}
+
+		if(OauthUser!=null) {
+			mav.addObject("oauthId", OauthUser.getUserId());
+			mav.addObject("oauthName", OauthUser.getUserName());
 		
+			mav.setViewName("minsungTest");
+			return mav;
+		}
 		
 		return mav;
 	}
