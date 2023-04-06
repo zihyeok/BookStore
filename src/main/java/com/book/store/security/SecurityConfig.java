@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.book.store.service.Oauth2UserService;
+import com.book.store.service.SecurityService;
 import com.book.store.user.UserRole;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class SecurityConfig {
 	
 	private final Oauth2UserService oauth2UserService;
+	private final SecurityService securityService;
 	
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
@@ -27,16 +29,16 @@ public class SecurityConfig {
 		//.anyRequest().authenticated() 상단주소외에는 전부 허용된계정만 접속
 		
 		http
-			.authorizeHttpRequests().antMatchers("/","css/**","/images/**","/js/**").permitAll()
+			.authorizeHttpRequests().antMatchers("/**","css/**","/images/**","/js/**").permitAll()
 			.antMatchers("/api/v1/**").hasRole(UserRole.USER.name())
 			
 			.and()
 				.csrf().disable().headers().frameOptions().disable()
 			.and()
-				.logout().logoutUrl("/logout").logoutSuccessUrl("/")
+				.logout().logoutUrl("/logout").logoutSuccessUrl("/hi")
 				.deleteCookies("JESSIONID").invalidateHttpSession(true)
 			.and()
-				.formLogin().loginPage("/user/login").defaultSuccessUrl("/")
+				.formLogin().loginPage("/user/login").defaultSuccessUrl("/hi")
 			.and()
 				.oauth2Login().defaultSuccessUrl("/").userInfoEndpoint()
 				.userService(oauth2UserService);

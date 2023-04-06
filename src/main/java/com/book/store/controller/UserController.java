@@ -1,32 +1,82 @@
 package com.book.store.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.book.store.service.UserService;
 import com.book.store.user.UserData;
 
-@Controller
+import lombok.RequiredArgsConstructor;
+
+@RestController
+@RequiredArgsConstructor
 public class UserController {
 	
-	@Resource
-	private UserService userService;
+	private final UserService userService;
+	private final PasswordEncoder passwordEncoder;
+	private final HttpSession httpSession;
 
 	@GetMapping("/user/loginpage")
-	public String loginpage() throws Exception{
+	public ModelAndView loginpage() throws Exception{
+		ModelAndView mav = new ModelAndView();
 		
-		return "minsungTest";
+		mav.setViewName("minsungTest");
+		
+		return mav;
 	}
 	
 	@PostMapping("/user/loginpage")
 	public String logingo(UserData userData) throws Exception{
 		
+		userData.setUserPwd(passwordEncoder.encode(userData.getUserPwd()));
+		
+		
 		userService.insertData(userData);
 		
 		
-		return "redirect:main.html";
+		return "success";
 	}
+	
+	@GetMapping("/user/login")
+	public ModelAndView userlogin() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("minsungTest2");
+		
+		return mav;
+		
+	}
+	
+	@GetMapping("/hi")
+	public ModelAndView test() {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("minsungTest3");
+		
+		UserData user = (UserData) httpSession.getAttribute("user");
+		
+		if(user!=null) {
+			mav.addObject("userId", user.getUserId());
+			mav.addObject("userPwd", user.getUserPwd());
+			mav.addObject("userEmail", user.getUserEmail());
+		}
+		
+		
+		return mav;
+	}
+	
+	
+	
+	
+	
+	
+	
 }
