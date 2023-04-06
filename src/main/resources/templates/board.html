@@ -1,82 +1,7 @@
-<!doctype html>
-<html lang="ko">
+<html layout:decorate="~{layout}">
+<meta charset="UTF-8">
 
-<head>
-  <meta charset="UTF-8">
-  
-  <title>login</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="	sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-<!-- 내가넣은거 -->
-<link rel="stylesheet" href="css/board.css">
-<script type="text/javascript" src="js/board.js"></script>
-
-</head>
-
-<body>
-
-  <div class="header" w3-include-html="header.html"></div>
-
-
-  <article class="notice">
-    <h2>고객센터</h2>
-    <div>
-      <div>
-        <div>
-          <h4><strong>공지사항</strong></h4>
-          <h5>+ 전체보기</h5>
-        </div>
-        <div>
-          <h5>네이버 알림 서비스 안내</h5>
-          <h5>2020.06.20</h5>
-        </div>
-        <div>
-          <h5>구매 안전 서비스 안내</h5>
-          <h5>2020.05.25</h5>
-        </div>
-        <div>
-          <h5>코로나 관련 배송 안내 사항</h5>
-          <h5>2020.04.12</h5>
-        </div>
-        <div>
-          <h5>일룸 이벤트 당첨자</h5>
-          <h5>2020.04.10</h5>
-        </div>
-        <div>
-          <h5>고객센터관련 업무사항</h5>
-          <h5>2020.04.01</h5>
-        </div>
-      </div>
-      <div>
-        <div>
-          <h3>1577-5670</h3>
-          <h5>업무시간<br>
-            평일 10:00 ~ 18:00 (점심시간 11:50~13:00)<br>
-            토.일.공휴일은 휴무입니다.<br>
-
-            통화량이 많아 연결이 어려우신 경우 게시판으로
-            문의주시면 빠른 답변 도움 드리겠습니다.</h5>
-        </div>
-        <div>
-          <h3>매장 전화문의</h3>
-          <h5>매장에서 구매하신 제품의 배송문의, 주문내용 변경 등은 해당 대리점에서 문의 가능합니다.
-            매장 운영시간은 매장 안내에서 확인하실 수 있습니다.</h5>
-        </div>
-      </div>
-
-
-    </div>
-  </article>
-
-
-
+<div layout:fragment="content2" >
 
   <article class="search2">
 
@@ -97,7 +22,9 @@
         <option>아이디</option>
         <option>별명</option>
       </select>
-      <input type="text"><img src="https://cdn.pixabay.com/photo/2016/03/31/19/14/magnifying-glass-1294834_1280.png">
+      <input type="text">
+	  <!-- 위치다시지정 -->
+      <img src="https://cdn.pixabay.com/photo/2016/03/31/19/14/magnifying-glass-1294834_1280.png">
       <div>
 
   </article>
@@ -347,11 +274,67 @@
 
   </div>
 
-  <div w3-include-html="footer.html"></div>
-  <script>
-    includeHTML();
-  </script>
 
-</body>
+
+
+
+  <article class="notice">
+    <h2>고객센터</h2>
+    <div>
+      <div>
+        <div>
+          <h4><strong>공지사항</strong></h4>
+          <h5>전체보기</h5>
+        </div>
+        <div>
+          <h5>네이버 알림 서비스 안내</h5>
+          <h5>2020.06.20</h5>
+        </div>
+        <div>
+          <h5>구매 안전 서비스 안내</h5>
+          <h5>2020.05.25</h5>
+        </div>
+        <div>
+          <h5>코로나 관련 배송 안내 사항</h5>
+          <h5>2020.04.12</h5>
+        </div>
+        <div>
+          <h5>일룸 이벤트 당첨자</h5>
+          <h5>2020.04.10</h5>
+        </div>
+        <div>
+          <h5>고객센터관련 업무사항</h5>
+          <h5>2020.04.01</h5>
+        </div>
+        
+        
+      </div>
+      <div>
+        <div>
+          <h3>1577-5670</h3>
+          <p>업무시간<br>
+            평일 10:00 ~ 18:00 (점심시간 11:50~13:00)<br>
+            토.일.공휴일은 휴무입니다.<br>
+
+            통화량이 많아 연결이 어려우신 경우 게시판으로
+            문의주시면 빠른 답변 도움 드리겠습니다.
+          </p>
+        </div>
+        <div>
+          <h3>매장 전화문의</h3>
+          <p>매장에서 구매하신 제품의 배송문의, 주문내용 변경 등은 해당 대리점에서 문의 가능합니다.
+            매장 운영시간은 매장 안내에서 확인하실 수 있습니다.
+          </p>
+        </div>
+      </div>
+
+
+    </div>
+  </article>
+
+
+ 
+
+</div>
 
 </html>

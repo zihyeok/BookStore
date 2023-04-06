@@ -29,4 +29,5 @@ public class UserController {
 		
 		return "redirect:main.html";
 	}
+	
 }
