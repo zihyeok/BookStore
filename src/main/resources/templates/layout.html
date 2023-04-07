@@ -29,16 +29,21 @@
 <script type="text/javascript" src="js/board.js"></script>
 <link rel="stylesheet" type="text/css" href="css/BoardCreated.css">
 
+<!-- boardarticle -->
+<link rel="stylesheet" href="css/boardarticle.css">
+
+
 </head>
 <body>
 <!-- header -->
 <nav th:replace="navbar :: navbarFragment"></nav>
 
 <!-- content -->
-<th:block layout:fragment="content"></th:block>
-<th:block layout:fragment="content1"></th:block>
-<th:block layout:fragment="content2"></th:block>
-
+<th:block layout:fragment="content"></th:block><!-- test -->
+<th:block layout:fragment="content1"></th:block><!-- main -->
+<th:block layout:fragment="content2"></th:block><!-- boardlist -->
+<th:block layout:fragment="content3"></th:block><!-- board -->
+<th:block layout:fragment="content4"></th:block><!-- board -->
 <!-- foorter -->
 <th:block th:replace="footer :: footer"></th:block>
 

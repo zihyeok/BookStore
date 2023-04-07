@@ -1,13 +1,20 @@
 package com.book.store.service;
 
+import java.util.Collections;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+
+import com.book.store.dto.OAuthAttributes;
+import com.book.store.user.UserData;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,10 +22,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class Oauth2UserService implements OAuth2UserService<OAuth2UserRequest, OAuth2User>{
 
-	public final HttpSession httpsession;
+	public final HttpSession httpSession;
+	public final UserService userSerice;
 	
 	@Override
-	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
+	public OAuth2User loadUser(OAuth2UserRequest userRequest) {
 	
 		OAuth2UserService<OAuth2UserRequest, OAuth2User> oauthUserService = new DefaultOAuth2UserService();
 		OAuth2User oauth2User = oauthUserService.loadUser(userRequest);
@@ -31,12 +39,34 @@ public class Oauth2UserService implements OAuth2UserService<OAuth2UserRequest, O
 		String userNameAttributeName = userRequest.getClientRegistration().getProviderDetails().getUserInfoEndpoint()
 				.getUserNameAttributeName();
 		
+		OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oauth2User.getAttributes());
+		
+		UserData user = null;
+		try {
+			user = saveOrUpdate(attributes);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		httpSession.setAttribute("OauthUser", user);
 		
 		
-		
-		
-		
-		return null;
+		return new DefaultOAuth2User(Collections.singleton(new SimpleGrantedAuthority(user.getUserRole())),
+				attributes.getAttributes(), attributes.getNameAttributeKey());
 	}
 
+	private UserData saveOrUpdate(OAuthAttributes attributes) throws Exception {
+		
+		UserData data = 
+				userSerice.findUserName(attributes.getEmail())
+				.map(item -> item.update(attributes.getName()))
+				.orElse(attributes.toEntity());
+		
+		
+		return data;
+	}
+	
+	
+	
+	
 }
