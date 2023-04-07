@@ -10,7 +10,7 @@
 
 <div class="BookList-container" th:each="i : ${#numbers.sequence(0,2)}">
 	<div class="BookList-row" th:each="j : ${#numbers.sequence(0,2)}">
-		<div class="BookList-img-box" th:if="${#lists.size(lists)}>0" th:each="dto: ${lists[3*i+j]}">
+		<div class="BookList-img-box" th:if="${#lists.size(lists)}>0" th:each="dto: ${lists}">
 			<a th:href="@{${articleUrl}} + '&seq_No=' + @{${dto.seq_No}}">
 			<img alt="" th:src="@{${dto.image_Url}}"></a><br/>
 			
@@ -30,7 +30,7 @@
 
 <br/>
 <div style="text-align: center;">
-<a th:utext="${pageIndexList }"></a>
+<a th:utext="${pageIndexList}"></a>
 </div>
 
 </div>

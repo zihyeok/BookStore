@@ -7,7 +7,9 @@
 </br></br></br></br>
 </br></br></br></br>
 
-
+<button th:onclick="@{|location.href='/BookUpdate.action?seq_No=${dto.seq_No}&${params}'|}">수정</button><br/>
+<button th:onclick="@{|location.href='/BookDelete.action?seq_No=${dto.seq_No}&${params}'|}">삭제</button><br/>
+<button th:onclick="@{|location.href='/BookList.action?${params}'|}">목록으로</button><br/>
 <div class="BookArticle-container" style="background-color: green; width: 100%; text-align: center;">
 	<!-- container안에 이 row div를 block처럼 만들어주겠다 -->
 	<div class="BookArticle-container-left" style="display: inline-block; background-color: yellow; width: 30%;">
@@ -41,6 +43,8 @@
 </div>
 
 </div>
+
+
 
 </body>
 </html>
