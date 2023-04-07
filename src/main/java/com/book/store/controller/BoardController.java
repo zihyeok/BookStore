@@ -35,29 +35,26 @@ public class BoardController {
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("Board");
+		mav.setViewName("boardarticle");
 		//jsp(html)로 갈때는 setViewName /class로 갈때는 setView
 		
 		return mav;
 
 	}
-	
-/*
-
-		@GetMapping("/created.action")
+		
+		@GetMapping("/board.action")
 		public ModelAndView created() throws Exception{
 
 			ModelAndView mav = new ModelAndView();
 
-			mav.setViewName("bbs/created");
+			mav.setViewName("board");
 			 //jsp(html)로 갈때는 setViewName /class로 갈때는 setView
 			
 			return mav;
 
 		}
 		
-		
-		@PostMapping("/created.action")
+		@PostMapping("/boardcreated.action")
 		public ModelAndView created_ok(BoardDTO dto,HttpServletRequest request) throws Exception{
 
 			ModelAndView mav = new ModelAndView();
@@ -69,14 +66,14 @@ public class BoardController {
 			
 			boardService.insertData(dto);
 
-			mav.setViewName("redirect:/list.action");
+			mav.setViewName("redirect:/boardlist.action");
 
 			return mav;
 
 		}
 		
-		
-		@GetMapping("/list.action")
+	
+		@GetMapping("/boardlist.action")
 		public ModelAndView list(HttpServletRequest request) throws Exception{
 			
 			
@@ -102,7 +99,7 @@ public class BoardController {
 			
 			int dataCount = boardService.getDataCount(searchKey, searchValue);
 			
-			int numPerPage = 5;
+			int numPerPage = 3;
 			int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 			
 			if(currentPage>totalPage) {
@@ -120,7 +117,7 @@ public class BoardController {
 				param+= "&searchValue=" + URLEncoder.encode(searchValue,"utf-8");
 			}
 			
-			String listUrl = "/list.action";
+			String listUrl = "/boardlist.action";
 			if(!param.equals("")) {
 				
 				listUrl += "?" + param;
@@ -145,13 +142,13 @@ public class BoardController {
 			//mav.addObject("pageNum", currentPage);//3번째 방법시 같이넘겨야함
 			
 
-			mav.setViewName("bbs/list");
+			mav.setViewName("boardlist");
 
 			return mav;
 			
 		}
 		
-		
+	
 		@GetMapping("/article.action")
 		public ModelAndView article(HttpServletRequest request) throws Exception{
 		
@@ -195,7 +192,7 @@ public class BoardController {
 			mav.addObject("lineSu", lineSu);
 			mav.addObject("pageNum", pageNum);
 			
-			mav.setViewName("bbs/article");
+			mav.setViewName("article");
 			
 			return mav;
 		}
@@ -239,7 +236,7 @@ public class BoardController {
 			mav.addObject("searchKey", searchKey);
 			mav.addObject("searchValue", searchValue);
 			
-			mav.setViewName("bbs/updated");
+			mav.setViewName("updated");
 			
 			return mav;
 		}
@@ -303,7 +300,7 @@ public class BoardController {
 			return mav;
 			
 		}
-*/
+
 	
 	
 }

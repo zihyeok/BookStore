@@ -1,0 +1,63 @@
+<html layout:decorate="~{layout}">
+<meta charset="UTF-8">
+
+<div layout:fragment="content" >
+
+</br></br></br></br>
+</br></br></br></br>
+</br></br></br></br>
+</br></br></br></br>
+</br></br></br></br>
+<!-- http://192.168.16.16:8080/boardlist.action -->
+<h2  style="text-align: center;">게시글 상세내용</h2>
+</br></br>
+<!-- th:text="${dto.num}" 값이안들어감 -->
+
+<article>
+<section id="detail-wrap">
+  <table id="board-detail">
+    <colgroup>
+      <col width="15%"/>
+      <col width="35%"/>
+      <col width="15%"/>
+      <col width="35%"/>
+    </colgroup>
+   
+    <tbody>
+      <tr>
+        <th scope="row">글 번호 : <a ></a> </th>
+        <td></td>
+        <th scope="row">조회수 :</th>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row">작성자 :</th>
+        <td></td>
+        <th scope="row">작성일 :</th>
+        <td></td>
+      </tr>
+      <tr>
+        <th scope="row">제목 :</th>
+        <td colspan="3"></td>
+      </tr>
+      <tr>
+        <td colspan="4"></td>
+      </tr>
+    </tbody>
+  </table>
+</section>  
+  
+</article>
+
+
+
+<!-- <textarea rows="12" cols="82" name="content"
+						style="padding-left: 20px; border: none; resize: none; background-color: #ffffff;"
+						class="boxTA" th:text="${dto.content}" disabled="disabled"></textarea>
+				 -->	
+
+
+
+</div>
+
+</html>

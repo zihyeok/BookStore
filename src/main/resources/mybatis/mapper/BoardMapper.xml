@@ -11,8 +11,8 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <insert id="insertData" parameterType="com.book.store.dto.BoardDTO">
-	insert into board (num,name,pwd,email,subject,content,ipAddr,hitCount,created) 
-	values(#{num},#{name},#{pwd},#{email},#{subject},#{content},#{ipAddr},0,sysdate)
+	insert into board (num,name,email,subject,content,ipAddr,hitCount,created) 
+	values(#{num},#{name},#{email},#{subject},#{content},#{ipAddr},0,sysdate)
 </insert>
 
 <select id="getDataCount" parameterType="map" resultType="int">
@@ -36,12 +36,12 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 </update>
 
 <select id="getReadData" parameterType="int" resultType="com.book.store.dto.BoardDTO">
-	select num,name,pwd,email,subject,content,ipAddr,hitCount,created from board 
+	select num,name,email,subject,content,ipAddr,hitCount,created from board 
 	where num=#{num}
 </select>
 
 <update id="updateData" parameterType="com.book.store.dto.BoardDTO">
-	update board set name=#{name},pwd=#{pwd},email=#{email},subject=#{subject},content=#{content} 
+	update board set name=#{name},email=#{email},subject=#{subject},content=#{content} 
 	where num=#{num}
 </update>
 

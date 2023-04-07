@@ -11,13 +11,13 @@
 			<div class="tab_content">
 
 				<div class="tab_box">
-					<p class="tit" style="text-align: center;">Q&A 게시판 등록</p>
+					<p class="tit" style="text-align: center;">Q&A 게시판 수정</p>
 					</br></br>
-					<form action="/boardcreated.action" method="post" name="myForm">
-					<!-- /boardcreated.action -->
+					<form action="" method="post" name="myForm">
+					
 					<div class="ask_box">
 						<p>
-						<label>제목</label> 
+						<label>제&nbsp;목</label> 
 						<input type="text"  name="subject" placeholder="제목를 입력해주세요."> 
 						</p>
 						<p>
@@ -35,14 +35,11 @@
 						</p>
 						
 						<div class="btn_box">
-							<button class="black-btn float-r m-btn" onclick="sendIt();">등록하기</button>
+							<button class="black-btn float-r m-btn" onclick="#">수정하기</button>
 						</div>
+						
 						<div class="btn_box">
-							<button class="black-btn float-r m-btn" onclick="document.myForm.subject.focus();">
-							다시입력</button>
-						</div>
-						<div class="btn_box">
-							<button class="black-btn float-r m-btn" onclick="location='/boardlist.action'">작성취소</button>
+							<button class="black-btn float-r m-btn" th:onclick="@{|location='/list.action?${params }'|}">수정취소</button>
 						</div>
 					
 					</form>
@@ -106,7 +103,7 @@
 		
 		
 		
-		f.action = "/boardcreated.action";
+		f.action = "/boardupdated.action";
 		f.submit();
 		
 	}
