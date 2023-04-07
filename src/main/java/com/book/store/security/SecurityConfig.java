@@ -40,7 +40,7 @@ public class SecurityConfig {
 			.and()
 				.formLogin().loginPage("/user/login").defaultSuccessUrl("/hi")
 			.and()
-				.oauth2Login().defaultSuccessUrl("/").userInfoEndpoint()
+				.oauth2Login().defaultSuccessUrl("/hi").userInfoEndpoint()
 				.userService(oauth2UserService);
 	
 		return http.build();
