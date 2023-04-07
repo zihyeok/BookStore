@@ -19,8 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.book.store.dto.BookDTO;
-import com.book.store.dto.FileDTO;
 import com.book.store.service.BookItemService;
+import com.book.store.util.FileManager;
 import com.book.store.util.MyUtil;
 
 //패키지 이름 com.book.store이여야만 함
@@ -56,44 +56,17 @@ public class BookController {
 	}
 
 	@PostMapping("/BookCreated.action")
-	public ModelAndView itemCreated_ok(BookDTO dto,@RequestParam(value = "upload",required = false) MultipartFile[] upload) throws Exception{
+	public ModelAndView itemCreated_ok(BookDTO dto,@RequestParam(value = "upload",required = false) MultipartFile[] upload,
+			HttpServletRequest request) throws Exception{
 		//새로운 책을 등록하고자 할때			//requestparam(value="html에서의 name", required 는 해당 매개변수가 필수면 true 아니면 false
-		
+
 		ModelAndView mav = new ModelAndView();
 
 		int maxNum = bookItemService.maxNum();
 
 		dto.setSeq_No(maxNum+1);//일련번호 매기기
 		
-		for (MultipartFile file : upload) {
-			
-			if(!file.isEmpty()) {
-				
-				File f = new File("C:/sts-bundle/work/BookStore/src/main/resources/static/image");
-		
-				if(!f.exists()) {
-					
-					f.mkdirs();
-					
-				}
-				
-				String newFileName = String.format("%1$tY%1$tm%1$td%1$tH%1$tM%1$tS", Calendar.getInstance());
-				newFileName+= System.nanoTime();
-				newFileName+= file.getOriginalFilename();
-				
-				dto.setImage_Url("image" + f.separator + newFileName);
-				//img url링크 이걸로 set
-				
-				System.out.println(dto.getImage_Url());
-				
-				f = new File(newFileName);
-				
-				file.transferTo(f);
-				//여기서 실제 존재하는 파일로 되는 것임
-				
-			}
-			
-		}
+		FileManager.doFileUpload(dto, upload);
 		
 		bookItemService.insertData(dto);
 
@@ -138,22 +111,27 @@ public class BookController {
 
 		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 
-		if(currentPage>totalPage) { //항목 삭제해서 페이지에 아무것도 없는데 페이지가 유지되는 상황을 막기위해
-			currentPage=totalPage; }
-
-		int start = (currentPage-1)*numPerPage+1; int end = currentPage*numPerPage;
-
+		if(currentPage>totalPage) {
+			currentPage=totalPage;
+		}
+		
+		int start = (currentPage-1)*numPerPage+1;
+		int end = currentPage*numPerPage;
 
 		List<BookDTO> lists = bookItemService.getLists(start, end, searchKey,searchValue);
 		//Mapper.xml에서 TO_CHAR부분 에러발생 데이터 형식이 이미 2023-04-05형태여서 그런듯
-
-		//제목이 너무 길어서 사이에 <br/>넣어보기
 		
+		for (int i = lists.size(); i < numPerPage; i++) {
+			
+			lists.add(null);
+			//list칸수 맞출려고 강제로 null값 주입
+		}
+
 		/*
-		  
+
 		// 제목이 너무 길어서 css가 깨지길래 사이에<br/>해보기
 		//css width 너비 30%로 고정해서 막음
-		 
+
 		Iterator<BookDTO> it = lists.iterator();
 
 		while(it.hasNext()) {
@@ -174,13 +152,13 @@ public class BookController {
 				dto.setTitle_Nm(sb.toString());
 
 				System.out.println(dto.getTitle_Nm());
-				
+
 				//th:utext써서 태그까지 출력하게 하려고함
 
 			}
 
 		}
-		*/
+		 */
 
 		String param = ""; if(searchValue!=null&&!searchValue.equals("")) { param =
 				"searchKey=" + searchKey; param+= "&searchValue=" +
@@ -299,12 +277,15 @@ public class BookController {
 	}
 
 	@PostMapping("/BookUpdate.action")
-	public ModelAndView updated_ok(HttpServletRequest request,BookDTO dto) throws Exception{
+	public ModelAndView updated_ok(HttpServletRequest request,BookDTO dto,
+			@RequestParam(value = "upload",required = false) MultipartFile[] upload) throws Exception{
 
 		String pageNum = request.getParameter("pageNum");
 		String searchKey = request.getParameter("searchKey");
 		String searchValue = request.getParameter("searchValue");
-
+		
+		FileManager.doFileUpload(dto, upload); //수정버튼 기존의 img_url을 새로 올리는 걸로 교체해야함
+	
 		bookItemService.updateData(dto);
 
 		String param = "pageNum=" + pageNum;
@@ -325,14 +306,17 @@ public class BookController {
 
 	@GetMapping("/BookDelete.action")
 	public ModelAndView deleted_ok(HttpServletRequest request) throws Exception{
-		
+
 		//이거 upload폴더에 있는 파일도 같이 지워야됨
 		int seq_No = Integer.parseInt(request.getParameter("seq_No"));
 		String pageNum = request.getParameter("pageNum");
 		String searchKey = request.getParameter("searchKey");
 		String searchValue = request.getParameter("searchValue");
-
+		String image_Url = request.getParameter("image_Url");
+		
 		bookItemService.deleteData(seq_No);
+		
+		FileManager.doFileDelete(image_Url);
 
 		String param = "pageNum=" + pageNum;
 
