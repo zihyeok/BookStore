@@ -30,7 +30,7 @@ public class UserData {
 		
 		this.userName = name;
 		
-		return null;
+		return this;
 	}
 
 }

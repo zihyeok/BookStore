@@ -46,6 +46,34 @@ public class UserController {
 		return "success";
 	}
 	
+	@GetMapping("user/oaupage")
+	public ModelAndView oauthlogin() throws Exception{
+		
+		ModelAndView mav = new ModelAndView();
+		
+		UserData OauthUser = (UserData) httpSession.getAttribute("OauthUser");
+		
+		mav.addObject("oauthId", OauthUser.getUserId());
+		mav.addObject("oauthName", OauthUser.getUserName());
+		
+		mav.setViewName("minsungTest4");
+		
+		return mav;
+	}
+	
+	@PostMapping("user/oaupage")
+	public ModelAndView oauthgo(UserData userData) throws Exception{
+		
+		ModelAndView mav = new ModelAndView();
+		
+		userService.insertData(userData);
+		httpSession.setAttribute("OauthUser", userData);
+		
+		mav.setViewName("redirect:/hi");
+		
+		return mav;
+	}
+	
 	@GetMapping("/user/login")
 	public ModelAndView userlogin() {
 		ModelAndView mav = new ModelAndView();
@@ -74,12 +102,18 @@ public class UserController {
 			
 		}
 
-		if(OauthUser!=null) {
-			mav.addObject("oauthId", OauthUser.getUserId());
-			mav.addObject("oauthName", OauthUser.getUserName());
 		
-			mav.setViewName("minsungTest");
+		if(OauthUser!=null && OauthUser.getUserPwd()==null) {
+		
+			mav.setViewName("redirect:/user/oaupage");
 			return mav;
+		}
+		
+		if(OauthUser!=null) {
+			mav.addObject("userId", OauthUser.getUserId());
+			mav.addObject("userPwd", OauthUser.getUserPwd());
+			mav.addObject("userEmail", OauthUser.getUserEmail());
+			
 		}
 		
 		return mav;

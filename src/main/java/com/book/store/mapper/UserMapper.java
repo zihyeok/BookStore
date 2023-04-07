@@ -12,6 +12,8 @@ public interface UserMapper {
 	
 	public Optional<UserData> findUserName(String userId) throws Exception;
 	
+	public Optional<UserData> findUserEmail(String email) throws Exception;
+	
 	public void insertData(UserData userData) throws Exception;
 	
 	public void insertOAuth(UserData userData) throws Exception;

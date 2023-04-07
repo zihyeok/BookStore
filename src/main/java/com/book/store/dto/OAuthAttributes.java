@@ -31,7 +31,20 @@ public class OAuthAttributes {
 			Map<String,Object> attributes) {
 		
 		
+		if(registrationId.equals("naver")) {//response
+			return ofNaver("id",attributes);
+		}
+		
+		if(registrationId.equals("kakao")) {//id
+			return ofKakao(userNameAttributeName,attributes);
+		}
+		
+		
 		return ofGoogle(userNameAttributeName,attributes);
+				
+				
+				
+		
 		
 	}
 	

@@ -24,6 +24,14 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	public Optional<UserData> findUserEmail(String email) throws Exception {
+		
+		Optional<UserData> userData = userMapper.findUserEmail(email);
+		
+		return userData;
+	}
+	
+	@Override
 	public void insertData(UserData userData) throws Exception {
 		
 		userMapper.insertData(userData);
@@ -36,5 +44,7 @@ public class UserServiceImpl implements UserService{
 		userMapper.insertOAuth(userData);
 		
 	}
+
+	
 
 }

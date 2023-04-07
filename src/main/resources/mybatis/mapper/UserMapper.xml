@@ -9,6 +9,10 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	select * from userdata where userId = #{userId}
 </select>
 
+<select id="findUserEmail" parameterType="String" resultType="com.book.store.user.UserData">
+	select * from userdata where userId = #{email}
+</select>
+
 <insert id="insertData" parameterType="map">
 	insert into USERDATA(userId,userPwd,userName,userAddr,userEmail,userBirth,userTel,userVip,userRole,realPwd) 
 	values(#{userId},#{userPwd},#{userName},#{userAddr},#{userEmail},
