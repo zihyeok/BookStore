@@ -5,14 +5,9 @@
   
   function sendIt() {
 		
-	  
 		var f = document.searchForm;
-		
-		alert("ddd");
-		
 		f.action = "/BookList.action";
 		f.submit();
-		
 		
 	}
   
@@ -20,11 +15,11 @@
   </script>
 
 
-<nav th:fragment="navbarFragment" class="navbar">
+<nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
 
 <div class="container-fluid">
 
-<header>
+<header style="position: fixed; z-index: 2;">
 
   <article id="header" >
       <section>
@@ -78,8 +73,7 @@
  <form action="" name="searchForm" method="GET">
   <div class="sample two">
   	
-	    <input type="text" name="searchValue" placeholder="search" >
-	    <input type="hidden" name="searchKey" value="title_Nm">
+	    <input type="text" name="searchValue" placeholder="search">
 	    <button type="submit" class="btn btn-search fa fa-search" onclick="sendIt();"></button>
 	    <!-- onclick="javascript:location.href='/BookList.action?searchKey=title_Nm&searchValue=에듀윌'" -->
 	    <button type="reset" class="btn btn-reset fa fa-times"></button>
@@ -89,7 +83,6 @@
   <i class="fas fa-user"></i>
     <i class="fas fa-shopping-cart"></i>
       </section>
-      
     </article>
     
 </header>

@@ -24,7 +24,6 @@
 
 */
 
-
 /*
 화살표
 주요 색       네이버          카카오톡
@@ -47,10 +46,12 @@ b89c87
   height: 100px;
   overflow: hidden;
   position: fixed;
+  z-index: 2;
   top: 0;
   display: block;
   transition: top 0.4s;
-  padding-top: 2rem;
+  padding-top: 2rem;  
+  
   
 }
 

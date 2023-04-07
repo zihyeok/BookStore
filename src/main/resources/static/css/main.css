@@ -62,17 +62,27 @@
     }
 
     a:hover {
-      color: #3967ED;
+      color: #804000;
+      /* color: #3967ED; */
     }
 
     a:active {
-      color:
-    #3967ED;
+      color:#804000;
+    /* #3967ED; */
     }
-
   
+  	main button {
+       font-size: 0.7rem;
+       text-transform: uppercase;
+       padding: 10px 30px;
+       border: 1px solid #ccc;
+       background: white;
+       transition: 1s;
+       margin-top: 1rem;
+       border-radius: 50px;
+     }
 
-     button:hover {
+     main button:hover {
        background: ;
        box-shadow: 200px 0 0 0 rgba(57,103,237,1) inset;
        color: white;
@@ -145,7 +155,8 @@ header img {
 
     main {
       height: 700px;
-      background: url('https://i.postimg.cc/pWT94zPM/photo-1510917087081-51e33cdcc51b.jpg') no-repeat;
+      background: url('https://cdn.shopify.com/s/files/1/0070/7032/files/Author-preneurs_resized_Getty_1341415617.jpg?v=1642714705&width=1024') no-repeat;
+     /*  background: url('https://www.themanual.com/wp-content/uploads/sites/9/2021/05/best-history-books-to-read-2021.jpg?p=1') no-repeat; */
       background-position: center;
       background-size: cover;
       position: relative;
@@ -170,7 +181,12 @@ main span {
 }
 
 
-
+main button:hover {
+       background: ;
+       box-shadow: 200px 0 0 0 rgba(57,103,237,1) inset;
+       color: white;
+       cursor: pointer;
+     }
 
 main button {
   margin-top: 1.3rem;
@@ -467,7 +483,7 @@ main button {
     }
 
 
-    footer nav ul {
+    footer ul {
       width: 800px;
       list-style: none;
       display: flex;
