@@ -1,0 +1,239 @@
+<html layout:decorate="~{layout}">
+<meta charset="UTF-8">
+
+<div layout:fragment="content2" >
+</br></br></br></br>
+</br></br></br></br>
+
+  <article class="search2">
+
+    <h2>Q & A 게시판</h2>
+    
+    <div>
+      <h4>Search</h4>
+ 
+      <select>
+        <option value="subject">제목</option>
+        <option value="name">글쓴이</option>
+        <option value="content">내용</option>
+      </select>
+     
+      <input type="text">
+	  <!-- 위치다시지정 -->
+      <img src="https://cdn.pixabay.com/photo/2016/03/31/19/14/magnifying-glass-1294834_1280.png">
+     </div>
+
+  </article>
+
+  <div class="wrapper">
+    <div class="city-list-header heading" >
+      <span class="weather-header-details">번호</span>
+      <span class="weather-header-details">작성자</span>
+      <span class="weather-header-details">작성일</span>
+      <span class="weather-header-details">조회수</span>
+      <span class="weather-header-details">제목</span>
+    </div>
+    
+    
+      <summary>
+        <div class="city-list-header" th:if="${#lists.size(lists)}>0" th:each="dto:${lists}">
+          <span class="weather-header-details" th:text="${dto.num}">번호</span>
+          <span class="weather-header-details" th:text="${dto.name}">작성자</span>
+          <span class="weather-header-details" th:text="${dto.created}">작성일</span>
+          <span class="weather-header-details" th:text="${dto.hitCount}">조회수</span>
+          <span class="weather-header-details" th:href="@{|${articleUrl}&num=@{${dto.num}}|}"
+					th:text="${dto.subject}">제목</span>
+        </div>
+      </summary>
+      
+    
+    <!-- <details>
+      <summary>
+        <div class="city-list-header">
+          <span class="weather-header-details">배송/시공</span>
+          <span class="weather-header-details">2017.03.13</span>
+          <span class="weather-header-details">배송설치비가 따로 청구되나요?</span>
+        </div>
+      </summary>
+      <div>
+        <p>그렇지 않습니다.<br>
+          <br>
+          현재 일룸 제품에 표시된 모든 가격은 일체의 배송 설치비가 포함된 것입니다.<br>
+          (그러나 제주도, 울릉도 등 산간지역은 배송비가 추가발생할수 있습니다.)<br>
+          <br>
+          저희 일룸은 퍼시스 그룹의 물류 시스템을 같이 사용하고 있어 <br>
+          <br>
+          고객님들께 타사에 비해 훨씬 경쟁력 있는 배송 설치 서비스가 가능합니다.</p>
+      </div>
+    </details> -->
+
+		
+		
+		
+	
+	
+  </div>
+
+  <div class="page">
+    <nav class="pagination">
+
+      <ol class="r-list pagination__list">
+        <a href="#0" class="r-link pagination__control">
+          <span class="pagination__symbol pagination__prev-symbol" >←</span>
+          <span class="pagination__control-text">prev</span>
+        </a>
+        
+        <li class="pagination__group">
+        <a href="#0" class="r-link pagination__point">
+        
+        <div>
+			<tr th:if="${#lists.size(dataCount)}>0" th:each="dataCount:${dataCount}">
+				<td colspan="5">
+				
+				<a th:utext="${pageIndexList }"></a>
+				
+				</td>
+			
+			</tr>
+			
+			<!-- 데이터가 없으면 (안나옴)-->
+			<tr th:if="${#lists.size(dataCount)}<0" th:each="dataCount:${dataCount}">
+			<td colspan="5" >등록된 게시물이 없습니다.</td>
+			</tr>
+			
+		</div>
+		
+        </a>
+        </li>
+        
+         <a href="#0" class="r-link pagination__control">
+          <span class="pagination__control-text">next</span>
+          <span class="pagination__symbol pagination__next-symbol" >→</span></a>
+      </nav>
+      </ol>
+	
+  </div>
+  
+		
+
+
+<div class="container product_detail">
+	<div class="in_box"><!--in_box S-->
+		
+		
+		<div class="content">
+		
+			<div class="tab_content">		
+				
+				<div class="tab_box">
+					<p class="tit">배송/반품/교환</p>
+
+					<div class="notice_box">
+						<p class="tit">구매 시 주의사항</p>
+						<div class="sub_txt">
+							<p>- 본 구매상품은 째깍악어 앱에서 등록하여 사용이 가능합니다.</p>
+							<p>- 수신자정보를 잘못 입력하여 타인이 코드를 기사용한 경우, 소비자 과실로 간주되어 환불이 불가합니다.</p>
+							<p>- 구매한 상품권에 대한 기타 문의는 고객센터로 문의 바랍니다.</p>
+						</div>
+
+						<p class="tit">주문 이후 예상되는 배송기간</p>
+						<div class="sub_txt">
+							<p>- 실물카드(10만원권)의 경우 대금 지급일로부터 3일 이내 발송, 7일 이내 배송완료</p>
+							<p>- 모바일 이용권(3만원, 5만원, 10만원권)의 경우 결제 완료 후 1일 이내 문자메시지로 발송완료</p>
+						</div>
+
+						<p class="tit">반품/교환 사유에 따른 요청 가능 기간</p>
+						<div class="sub_txt">
+							<p>- 코드가 노출되지 않은 미사용 실물카드에 한하여 구매일 포함7일까지 구매취소가 가능합니다.</p>
+							<p>- 실물카드 결함으로 인해 사용할 수 없거나 잔액이 액면가의 40% 이하인 경우에만 째깍악어 앱을 통해 환불이 가능합니다.</p>
+						</div>
+
+						<p class="tit">반품/교환 안내</p>
+						<div class="sub_txt">
+							<p>- 판매자 지정택배사 : CJ대한통운(1588-1255 유선접수 또는 홈페이지 접수)</p>
+							<p>- 보내실 곳 : 서울특별시 성동구 성수일로12길 20, 502호(성수동, 성동안심상가)</p>
+							<p>- 상품 불량과 같은 자사 과실로 발생된 반품일 경우 무료 처리 가능하며, 그 외의 사유는 단순변심으로 배송비 발생</p>
+							<p>- 반품 배송비는 환불 시 차감 후 처리되어 별도의 동봉 및 입금은 진행하지 않으며, 고객 직접 발송 시 착불로 발송처리</p>
+						</div>
+
+						<p class="tit">반품/교환 불가능 사유</p>
+						<div class="sub_txt">
+							<p>- 반품요청기간이 지난 경우</p>
+							<p>- 구매자의 책임 있는 사유로 상품 등이 훼손된 경우 (상품의 내용을 확인하기 위하여 포장을 훼손한 경우는 제외)</p>
+							<p>- 구매자의 사용에 의하여 상품의 가치가 감소한 경우</p>
+							<p>- 시간의 경과에 의하여 재판매가 곤란할 정도로 상품의 가치가 감소한 경우</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+	</div><!--in_box E-->
+</div><!--container E-->
+
+
+
+
+
+  <article class="notice">
+    <h2>고객센터</h2>
+    <div>
+      <div>
+        <div>
+          <h4><strong>공지사항</strong></h4>
+          <h5>전체보기</h5>
+        </div>
+        <div>
+          <h5>네이버 알림 서비스 안내</h5>
+          <h5>2020.06.20</h5>
+        </div>
+        <div>
+          <h5>구매 안전 서비스 안내</h5>
+          <h5>2020.05.25</h5>
+        </div>
+        <div>
+          <h5>코로나 관련 배송 안내 사항</h5>
+          <h5>2020.04.12</h5>
+        </div>
+        <div>
+          <h5>일룸 이벤트 당첨자</h5>
+          <h5>2020.04.10</h5>
+        </div>
+        <div>
+          <h5>고객센터관련 업무사항</h5>
+          <h5>2020.04.01</h5>
+        </div>
+        
+        
+      </div>
+      <div>
+        <div>
+          <h3>1577-5670</h3>
+          <p>업무시간<br>
+            평일 10:00 ~ 18:00 (점심시간 11:50~13:00)<br>
+            토.일.공휴일은 휴무입니다.<br>
+
+            통화량이 많아 연결이 어려우신 경우 게시판으로
+            문의주시면 빠른 답변 도움 드리겠습니다.
+          </p>
+        </div>
+        <div>
+          <h3>매장 전화문의</h3>
+          <p>매장에서 구매하신 제품의 배송문의, 주문내용 변경 등은 해당 대리점에서 문의 가능합니다.
+            매장 운영시간은 매장 안내에서 확인하실 수 있습니다.
+          </p>
+        </div>
+      </div>
+
+
+    </div>
+  </article>
+
+
+ 
+
+</div>
+
+</html>
