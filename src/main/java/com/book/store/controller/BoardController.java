@@ -35,7 +35,7 @@ public class BoardController {
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("boardarticle");
+		mav.setViewName("Main");
 		//jsp(html)로 갈때는 setViewName /class로 갈때는 setView
 		
 		return mav;
@@ -126,7 +126,7 @@ public class BoardController {
 			String pageIndexList = 
 					myUtil.pageIndexList(currentPage, totalPage, listUrl);
 			
-			String articleUrl = "/article.action?pageNum=" + currentPage;
+			String articleUrl = "/boardarticle.action?pageNum=" + currentPage;
 			if(!param.equals("")) {
 				articleUrl += "&" + param;
 			}
@@ -149,10 +149,11 @@ public class BoardController {
 		}
 		
 	
-		@GetMapping("/article.action")
+		@GetMapping("/boardarticle.action")
 		public ModelAndView article(HttpServletRequest request) throws Exception{
-		
+			
 			int num = Integer.parseInt(request.getParameter("num"));
+			
 			String pageNum = request.getParameter("pageNum");
 			
 			String searchKey = request.getParameter("searchKey");
@@ -169,12 +170,11 @@ public class BoardController {
 			if(dto==null) {
 				
 				ModelAndView mav = new ModelAndView();
-				mav.setViewName("redirect:list.action?pageNum=" + pageNum);
+				mav.setViewName("redirect:boardlist.action?pageNum=" + pageNum 
+						+ "&searchKey=" + searchKey + "&searchValue=" + searchValue);
 				
 				return mav;
 			}
-			
-			int lineSu = dto.getContent().split("\n").length;
 			
 			//dto.setContent(dto.getContent().replaceAll("\r\n", "<br/>"));
 			
@@ -189,10 +189,9 @@ public class BoardController {
 			
 			mav.addObject("dto", dto);
 			mav.addObject("params", param);
-			mav.addObject("lineSu", lineSu);
 			mav.addObject("pageNum", pageNum);
 			
-			mav.setViewName("article");
+			mav.setViewName("boardarticle");
 			
 			return mav;
 		}
