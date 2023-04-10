@@ -8,9 +8,11 @@
 </br></br></br></br>
 </br></br></br></br>
 
-<div class="BookList-container" th:each="i : ${#numbers.sequence(0,2)}">
+<div class="BookList-container" th:each="i : ${#numbers.sequence(0,2)}" th:if="${#lists.size(lists)}>0">
 	<div class="BookList-row" th:each="j : ${#numbers.sequence(0,2)}">
-		<div class="BookList-img-box" th:if="${#lists.size(lists)}>0" th:each="dto: ${lists[3*i+j]}">
+		
+		<div class="BookList-img-box" th:each="dto: ${lists[3*i+j]}"> 
+			
 			<a th:href="@{${articleUrl}} + '&seq_No=' + @{${dto.seq_No}}">
 			<img alt="" th:src="@{${dto.image_Url}}"></a><br/>
 			
@@ -18,7 +20,11 @@
 			<span>[[${dto.authr_Nm}]]</span><br/>
 			<span>출판사:[[${dto.publisher_Nm}]]</span><br/>
 			<span>가격:[[${dto.prc_Value}]]원</span><br/>
+			
 		</div>
+		
+		
+		
 	</div>
 </div>
 
@@ -30,7 +36,7 @@
 
 <br/>
 <div style="text-align: center;">
-<a th:utext="${pageIndexList }"></a>
+<a th:utext="${pageIndexList}"></a>
 </div>
 
 </div>
