@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.book.store.service.Oauth2UserService;
 import com.book.store.service.SecurityService;
@@ -63,5 +64,10 @@ public class SecurityConfig {
 		
 		return authenticationConfiguration.getAuthenticationManager();
 	}
+	
+	@Bean
+    MappingJackson2JsonView jsonView(){
+        return new MappingJackson2JsonView();
+    }
 
 }

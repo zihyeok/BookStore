@@ -1,9 +1,7 @@
 package com.book.store.controller;
 
-import java.io.File;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -65,9 +63,9 @@ public class BookController {
 		int maxNum = bookItemService.maxNum();
 
 		dto.setSeq_No(maxNum+1);//일련번호 매기기
-		
+
 		FileManager.doFileUpload(dto, upload);
-		
+
 		bookItemService.insertData(dto);
 
 		mav.setViewName("redirect:BookList.action");
@@ -114,15 +112,15 @@ public class BookController {
 		if(currentPage>totalPage) {
 			currentPage=totalPage;
 		}
-		
+
 		int start = (currentPage-1)*numPerPage+1;
 		int end = currentPage*numPerPage;
 
 		List<BookDTO> lists = bookItemService.getLists(start, end, searchKey,searchValue);
 		//Mapper.xml에서 TO_CHAR부분 에러발생 데이터 형식이 이미 2023-04-05형태여서 그런듯
-		
+
 		for (int i = lists.size(); i < numPerPage; i++) {
-			
+
 			lists.add(null);
 			//list칸수 맞출려고 강제로 null값 주입
 		}
@@ -283,9 +281,17 @@ public class BookController {
 		String pageNum = request.getParameter("pageNum");
 		String searchKey = request.getParameter("searchKey");
 		String searchValue = request.getParameter("searchValue");
-		
+		String image_Url = request.getParameter("image_Url");
+
+		//upload된게 없으면 그대로 두고 있으면 지워야됨
+		if(upload.length!=0) {
+
+			FileManager.doFileDelete(image_Url);
+
+		}
+
 		FileManager.doFileUpload(dto, upload); //수정버튼 기존의 img_url을 새로 올리는 걸로 교체해야함
-	
+
 		bookItemService.updateData(dto);
 
 		String param = "pageNum=" + pageNum;
@@ -313,9 +319,9 @@ public class BookController {
 		String searchKey = request.getParameter("searchKey");
 		String searchValue = request.getParameter("searchValue");
 		String image_Url = request.getParameter("image_Url");
-		
+
 		bookItemService.deleteData(seq_No);
-		
+
 		FileManager.doFileDelete(image_Url);
 
 		String param = "pageNum=" + pageNum;
