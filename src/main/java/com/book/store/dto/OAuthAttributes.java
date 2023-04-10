@@ -17,6 +17,13 @@ public class OAuthAttributes {
 	private String name;
 	private String email;
 	
+	//oauth로 로그인한 계정의 넘어온 회사를 구분하기위해 추가해줌
+	private String registrationId;
+	//회사입력
+	public void setRegistrationId(String registrationId) {
+		this.registrationId = registrationId;
+	}
+	
 	@Builder
 	public OAuthAttributes(Map<String, Object> attributes,String nameAttributeKey,String name,String email) {
 		
@@ -103,6 +110,7 @@ public class OAuthAttributes {
 					.name(name)
 					.email(email)
 					.role(UserRole.USER.getValue())
+					.registrationId(registrationId)
 					.build();
 		}
 	

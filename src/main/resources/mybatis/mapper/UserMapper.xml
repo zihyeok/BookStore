@@ -22,4 +22,10 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 <insert id="insertOAuth" parameterType="map">
 	insert into userdata(userId,userName,userRole) values(#{userId},#{userName},#{userRole})
 </insert>
+
+<update id="updateOAUData" parameterType="String">
+	update userdata set username = #{name}
+</update>
+
+
 </mapper>

@@ -17,4 +17,6 @@ public interface UserMapper {
 	public void insertData(UserData userData) throws Exception;
 	
 	public void insertOAuth(UserData userData) throws Exception;
+	
+	public void updateOAUData(String name) throws Exception;
 }

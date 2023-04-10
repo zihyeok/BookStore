@@ -11,10 +11,10 @@
 <form action="" method="post">
 
 아이디:
-<input type="text" name="userId" th:value="${oauthId}" readonly="readonly"> <br/>
+<input type="text" name="userId" th:value="${OauthUser.userId}" readonly="readonly"> <br/>
 
 이름:
-<input type="text" name="userName" th:value="${oauthName}" readonly="readonly"> <br/>
+<input type="text" name="userName" th:value="${OauthUser.userName}" readonly="readonly"> <br/>
 
 주소:
 <input type="text" name="userAddr"> <br/>
@@ -28,7 +28,7 @@
 전화번호:
 <input type="text" name="userTel"> <br/>
 
-<input type="hidden" name="userPwd" value="OAUTH_USER">
+<input type="hidden" name="userPwd" th:value="${OauthUser.userPwd}">
 <input type="hidden" name="realPwd" value="OAUTH_USER">
 
 <button>확인</button>

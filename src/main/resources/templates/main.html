@@ -1,4 +1,7 @@
 <html layout:decorate="~{layout}">
+<!-- <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header :: headLinkInit"> -->
+
 <meta charset="UTF-8">
 
 
@@ -17,16 +20,17 @@
       }
       document.all['divpop'].style.visibility = "hidden";
   }
-  //-->
+  //-->  
+  
   </script>
 
+<body>
 
 <div layout:fragment="content1" >
 
-
   <main>
     <div>
-      <img src="https://i.postimg.cc/WpC1QZtt/a.png">
+      <!-- <img src="https://i.postimg.cc/WpC1QZtt/a.png"> -->
       <h5> <span>— </span> <br>
 문학동네에서 발원한 다양한 임프란트와 계열사들이 함께하고 있으며,<br>
 저마다 개성있는 소리와 빛으로 풍요롭고 다채로운 책의 세계를 만들어가고 있습니다.<br>
@@ -36,6 +40,7 @@
     <div class= background>
     </div>
   </main>
+  
   <article class="imgs">
     <section>
       <div>
@@ -75,7 +80,7 @@
   <article class="video">
     <div>
       <iframe width="100%" height="500px" src="https://www.youtube.com/embed/foaQu71esOE" frameborder="0" allowfullscreen></iframe>
-    </div>
+    </div> 
 
     <div class="bg">
       <h2>문학동네 세계문학전집 <br> 10주년 기념 특강!</h2>
@@ -347,7 +352,9 @@ if ( cookiedata.indexOf("maindiv=done") < 0 ){
         document.all['divpop'].style.visibility = "hidden";
 }
 </script>
-</div>
+<!-- </div> -->
+
+</body>
 
 
 </html>

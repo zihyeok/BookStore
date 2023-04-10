@@ -45,6 +45,13 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
+	@Override
+	public void updateOAUData(String name) throws Exception {
+
+		userMapper.updateOAUData(name);
+		
+	}
+
 	
 
 }

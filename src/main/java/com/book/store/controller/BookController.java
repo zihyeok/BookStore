@@ -37,7 +37,7 @@ public class BookController {
 		//메인화면으로 이동
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("test");
+		mav.setViewName("main");
 
 		return mav;
 	}
