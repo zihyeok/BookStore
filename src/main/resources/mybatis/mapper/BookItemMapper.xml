@@ -35,7 +35,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	where seq_No = #{seq_No}
 </select>
 
-<update id="updateData" parameterType="int">
+<update id="updateData" parameterType="com.book.store.dto.BookDTO">
 	update BookItem set 
 	isbn_Thirteen_No = #{isbn_Thirteen_No},
 	title_Nm = #{title_Nm},

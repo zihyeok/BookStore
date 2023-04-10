@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<link rel="stylesheet" type="text/css" href="css/BookCreated.css">
+
+<h1>Board</h1>
+
+<h3>책 등록하기</h3>
+
+<div style="width: 50%; margin-left: 450px;">
+
+<form th:action="@{BookUpdate.action}" method="post" enctype="multipart/form-data">
+
+제목
+<input type="text" name="title_Nm" placeholder="title_Nm 입력하세요." th:value="${dto.title_Nm}">
+저자
+<input type="text" name="authr_Nm" placeholder="authr_Nm 입력하세요." th:value="${dto.authr_Nm}">
+출판사명
+<input type="text" name="publisher_Nm" placeholder="publisher_Nm 입력하세요." th:value="${dto.publisher_Nm}">
+카테고리
+<input type="text" name="kdc_Nm" placeholder="kdc_Nm 입력하세요." th:value="${dto.kdc_Nm}">
+가격
+<input type="text" name="prc_Value" placeholder="prc_Value 입력하세요." th:value="${dto.prc_Value}">
+일련번호
+<input type="text" name="isbn_Thirteen_No" placeholder="isbn_Thirteen_No 입력하세요." th:value="${dto.isbn_Thirteen_No}">
+
+<textarea name="book_Intrcn_Cn"  placeholder="book_Intrcn_Cn 입력하세요.">[[${dto.book_Intrcn_Cn}]]</textarea>
+
+<div>
+<input type="file" name="upload">
+</div>
+
+<div>
+	<button class="btn-555">등록하기</button>
+</div>
+
+<input type="hidden" name="seq_No" th:value="${dto.seq_No}"/>
+<input type="hidden" name="pblicte_De" th:value="${dto.pblicte_De}"/>
+<input type="hidden" name="image_Url" th:value="${dto.image_Url}"/>
+<input type="hidden" name="searchKey" th:value="${searchKey}"/>
+<input type="hidden" name="searchValue" th:value="${searchValue}"/>
+<input type="hidden" name="pageNum" th:value="${pageNum}"/>
+
+</form>
+
+</div>
+
+
+</body>
+</html>
