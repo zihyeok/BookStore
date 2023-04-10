@@ -6,7 +6,9 @@ import com.book.store.user.UserData;
 import com.book.store.user.UserRole;
 
 import lombok.Builder;
+import lombok.Getter;
 
+@Getter
 public class OAuthAttributes {
 
 	private Map<String, Object> attributes;
@@ -14,6 +16,13 @@ public class OAuthAttributes {
 	private String nameAttributeKey;
 	private String name;
 	private String email;
+	
+	//oauth로 로그인한 계정의 넘어온 회사를 구분하기위해 추가해줌
+	private String registrationId;
+	//회사입력
+	public void setRegistrationId(String registrationId) {
+		this.registrationId = registrationId;
+	}
 	
 	@Builder
 	public OAuthAttributes(Map<String, Object> attributes,String nameAttributeKey,String name,String email) {
@@ -29,7 +38,20 @@ public class OAuthAttributes {
 			Map<String,Object> attributes) {
 		
 		
+		if(registrationId.equals("naver")) {//response
+			return ofNaver("id",attributes);
+		}
+		
+		if(registrationId.equals("kakao")) {//id
+			return ofKakao(userNameAttributeName,attributes);
+		}
+		
+		
 		return ofGoogle(userNameAttributeName,attributes);
+				
+				
+				
+		
 		
 	}
 	
@@ -88,6 +110,7 @@ public class OAuthAttributes {
 					.name(name)
 					.email(email)
 					.role(UserRole.USER.getValue())
+					.registrationId(registrationId)
 					.build();
 		}
 	

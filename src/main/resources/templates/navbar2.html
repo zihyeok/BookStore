@@ -1,107 +1,25 @@
 <meta charset="UTF-8">
 
-<nav th:fragment="navbarFragment" class="navbar">
-
-
-<script type="text/javascript" src="/js/ajaxUtil.js"></script>
-
-<script type="text/javascript">
-
-function sendIt() {
-	  
-	var f = document.searchForm;
-	
-	f.action = "/BookList.action";
-	f.submit();
-	
-}
-
-function sendKeyword() {
-	
-	var searchValue = document.searchForm.searchValue.value;
-
-	if(searchValue==""){
+<script language="JavaScript">
+ 
+  
+  function sendIt() {
 		
-		hide();
-		return;
+		var f = document.searchForm;
+		f.action = "/BookList.action";
+		f.submit();
 		
 	}
-	
-	var params = "searchKey=title_Nm" + "&searchValue=" + searchValue;
-
-	sendRequest("/SuggestClient.action",params,displaySuggest,"POST");
-	
-}
-
-function displaySuggest(){
-	
-	if(httpRequest.readyState==4){
-		
-		if(httpRequest.status==200){
-			
-			var text = httpRequest.responseText;
-			
-			var resultText = JSON.parse(text);
-			
-			//alert(resultText.lists[0].title_Nm);
-			
-			var html = "";
-			
-			for(var i=0;i<5;i++){
-				
-				var suggest = resultText.lists[i];
-				
-				html+="<a href=\"javascript:select('"	+ suggest.title_Nm + "');\">"	+ suggest.title_Nm + "</a><br/>";
-				
-			}
-			
-			var suggestListDiv = document.getElementById("suggestListDiv");
-			suggestListDiv.innerHTML = html;
-			
-			show();
-
-		}
-		
-	}
-	
-}
-
-function select(selectKeyword) {
-	
-	document.searchForm.searchValue.value = selectKeyword;
-	hide();
-	
-}
-
-function show() {
-	
-	var suggestDiv = document.getElementById("suggestDiv");
-	
-	suggestDiv.style.display = "block";
-	
-	
-}
-
-function hide() {
-	
-	var suggestDiv = document.getElementById("suggestDiv");
-	
-	suggestDiv.style.display = "none";
-}
-
-window.onload = function () {
-	
-	hide();
-	
-}
+  
+  
+  </script>
 
 
-</script>
-
+<nav th:fragment="navbarFragment" class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
 
 <div class="container-fluid">
 
-<header>
+<header style="position: fixed; z-index: 2;">
 
   <article id="header" >
       <section>
@@ -152,26 +70,21 @@ window.onload = function () {
           </ul>
         </nav>
         
- 
+ <form action="" name="searchForm" method="GET">
   <div class="sample two">
-  	<form action="" name="searchForm" method="GET">
-	    <input type="text" name="searchValue" placeholder="search" onkeyup="sendKeyword();">
-	    <input type="hidden" name="searchKey" value="title_Nm">
+  	
+	    <input type="text" name="searchValue" placeholder="search">
 	    <button type="submit" class="btn btn-search fa fa-search" onclick="sendIt();"></button>
+	    <!-- onclick="javascript:location.href='/BookList.action?searchKey=title_Nm&searchValue=에듀윌'" -->
 	    <button type="reset" class="btn btn-reset fa fa-times"></button>
-	    
-	 </form>
-	 <div id="suggestDiv" class="suggest">
-		<div id="suggestListDiv"></div>
-	</div>
   </div>
-
+  </form>
+  
   <i class="fas fa-user"></i>
     <i class="fas fa-shopping-cart"></i>
       </section>
-      
     </article>
-
+    
 </header>
 <br/><br/><br/><br/>
 <br/><br/><br/>
