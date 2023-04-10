@@ -1,26 +1,103 @@
 <meta charset="UTF-8">
 
-<script language="JavaScript">
- 
-  
-  function sendIt() {
-		
+<nav th:fragment="navbarFragment" class="navbar">
+
+
+<script type="text/javascript" src="/js/ajaxUtil.js"></script>
+
+<script type="text/javascript">
+
+function sendIt() {
 	  
-		var f = document.searchForm;
+	var f = document.searchForm;
+	
+	f.action = "/BookList.action";
+	f.submit();
+	
+}
+
+function sendKeyword() {
+	
+	var searchValue = document.searchForm.searchValue.value;
+
+	if(searchValue==""){
 		
-		alert("ddd");
-		
-		f.action = "/BookList.action";
-		f.submit();
-		
+		hide();
+		return;
 		
 	}
-  
-  
-  </script>
+	
+	var params = "searchKey=title_Nm" + "&searchValue=" + searchValue;
+
+	sendRequest("/SuggestClient.action",params,displaySuggest,"POST");
+	
+}
+
+function displaySuggest(){
+	
+	if(httpRequest.readyState==4){
+		
+		if(httpRequest.status==200){
+			
+			var text = httpRequest.responseText;
+			
+			var resultText = JSON.parse(text);
+			
+			//alert(resultText.lists[0].title_Nm);
+			
+			var html = "";
+			
+			for(var i=0;i<5;i++){
+				
+				var suggest = resultText.lists[i];
+				
+				html+="<a href=\"javascript:select('"	+ suggest.title_Nm + "');\">"	+ suggest.title_Nm + "</a><br/>";
+				
+			}
+			
+			var suggestListDiv = document.getElementById("suggestListDiv");
+			suggestListDiv.innerHTML = html;
+			
+			show();
+
+		}
+		
+	}
+	
+}
+
+function select(selectKeyword) {
+	
+	document.searchForm.searchValue.value = selectKeyword;
+	hide();
+	
+}
+
+function show() {
+	
+	var suggestDiv = document.getElementById("suggestDiv");
+	
+	suggestDiv.style.display = "block";
+	
+	
+}
+
+function hide() {
+	
+	var suggestDiv = document.getElementById("suggestDiv");
+	
+	suggestDiv.style.display = "none";
+}
+
+window.onload = function () {
+	
+	hide();
+	
+}
 
 
-<nav th:fragment="navbarFragment" class="navbar">
+</script>
+
 
 <div class="container-fluid">
 
@@ -29,7 +106,7 @@
   <article id="header" >
       <section>
         <div onclick="window.location.href='#'">
-          <a href="/main"><img class="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSaCs3brkTgNSErgRmOs6ufpKtAVBVIA9kspw&usqp=CAU" alt=""></a>
+          <a href="/main"><img class="logo" src="/image/logo.png" alt=""></a>
         </div>
         
         <div class="backdiv"> </div>
@@ -75,24 +152,26 @@
           </ul>
         </nav>
         
- <form action="" name="searchForm" method="GET">
+ 
   <div class="sample two">
-  	
-	    <input type="text" name="searchValue" placeholder="search" >
+  	<form action="" name="searchForm" method="GET">
+	    <input type="text" name="searchValue" placeholder="search" onkeyup="sendKeyword();">
 	    <input type="hidden" name="searchKey" value="title_Nm">
 	    <button type="submit" class="btn btn-search fa fa-search" onclick="sendIt();"></button>
-	    <!-- onclick="javascript:location.href='/BookList.action?searchKey=title_Nm&searchValue=에듀윌'" -->
 	    <button type="reset" class="btn btn-reset fa fa-times"></button>
-
+	    
+	 </form>
+	 <div id="suggestDiv" class="suggest">
+		<div id="suggestListDiv"></div>
+	</div>
   </div>
-  </form>
-  
+
   <i class="fas fa-user"></i>
     <i class="fas fa-shopping-cart"></i>
       </section>
       
     </article>
-    
+
 </header>
 <br/><br/><br/><br/>
 <br/><br/><br/>

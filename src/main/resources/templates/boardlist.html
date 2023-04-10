@@ -1,5 +1,5 @@
 <html layout:decorate="~{layout}">
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <div layout:fragment="content2" >
 </br></br></br></br>
@@ -36,13 +36,13 @@
     
     
       <summary>
-        <div class="city-list-header" th:if="${#lists.size(lists)}>0" th:each="dto:${lists}">
-          <span class="weather-header-details" th:text="${dto.num}">번호</span>
+        <div class="city-list-header" th:if="${#lists.size(lists)}>0" th:each="dto:${lists}" >
+          <span class="weather-header-details">[[${dto.num}]]</span>
           <span class="weather-header-details" th:text="${dto.name}">작성자</span>
           <span class="weather-header-details" th:text="${dto.created}">작성일</span>
           <span class="weather-header-details" th:text="${dto.hitCount}">조회수</span>
-          <span class="weather-header-details" th:href="@{|${articleUrl}&num=@{${dto.num}}|}"
-					th:text="${dto.subject}">제목</span>
+          <span class="weather-header-details" th:text="${dto.subject}">제목</span>
+		<a th:href="@{|${articleUrl}&num=@{${dto.num}}|}">김치</a>
         </div>
       </summary>
       
