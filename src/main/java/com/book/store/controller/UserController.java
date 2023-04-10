@@ -1,10 +1,13 @@
 package com.book.store.controller;
 
+import java.io.PrintWriter;
+import java.util.Optional;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -53,8 +56,7 @@ public class UserController {
 		
 		UserData OauthUser = (UserData) httpSession.getAttribute("OauthUser");
 		
-		mav.addObject("oauthId", OauthUser.getUserId());
-		mav.addObject("oauthName", OauthUser.getUserName());
+		mav.addObject("OauthUser", OauthUser);
 		
 		mav.setViewName("minsungTest4");
 		
@@ -85,7 +87,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/hi")
-	public ModelAndView test() {
+	public ModelAndView test() throws Exception {
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -93,6 +95,8 @@ public class UserController {
 		
 		UserData user = (UserData) httpSession.getAttribute("user");
 		UserData OauthUser = (UserData) httpSession.getAttribute("OauthUser");
+		
+		
 		
 		if(user!=null) {
 			mav.addObject("userId", user.getUserId());
@@ -102,17 +106,19 @@ public class UserController {
 			
 		}
 
-		
-		if(OauthUser!=null && OauthUser.getUserPwd()==null) {
+		//OAuth로 첫 로그인시 기타 회원정보 추가를 위해 가입페이지로 이동
+		if(OauthUser!=null && OauthUser.getUserAddr()==null) {
 		
 			mav.setViewName("redirect:/user/oaupage");
 			return mav;
 		}
 		
+		
 		if(OauthUser!=null) {
 			mav.addObject("userId", OauthUser.getUserId());
 			mav.addObject("userPwd", OauthUser.getUserPwd());
 			mav.addObject("userEmail", OauthUser.getUserEmail());
+			
 			
 		}
 		

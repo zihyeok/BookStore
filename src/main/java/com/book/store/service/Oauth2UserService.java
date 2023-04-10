@@ -40,6 +40,7 @@ public class Oauth2UserService implements OAuth2UserService<OAuth2UserRequest, O
 				.getUserNameAttributeName();
 		
 		OAuthAttributes attributes = OAuthAttributes.of(registrationId, userNameAttributeName, oauth2User.getAttributes());
+		attributes.setRegistrationId(registrationId);
 		
 		UserData user = null;
 		try {
