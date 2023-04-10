@@ -3,6 +3,8 @@ package com.book.store.util;
 import java.io.File;
 import java.util.Calendar;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -10,7 +12,8 @@ import com.book.store.dto.BookDTO;
 
 public class FileManager {
 
-	public static void doFileUpload(BookDTO dto,@RequestParam(value = "upload",required = false) MultipartFile[] upload) throws Exception{
+	public static void doFileUpload(BookDTO dto,
+			@RequestParam(value = "upload",required = false) MultipartFile[] upload) throws Exception{
 		
 		for (MultipartFile file : upload) {
 				
@@ -32,6 +35,7 @@ public class FileManager {
 				
 				dto.setImage_Url("image" + "/" + newFileName);
 				//img url링크 이걸로 set
+				//역슬래쉬는 인식이 이상함
 
 				f = new File(newFileName);
 
