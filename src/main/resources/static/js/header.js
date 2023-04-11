@@ -51,7 +51,7 @@ $(function() {
             }) 
            
         });
-        		      
+        
 
         /*네비게이션 픽스*/
         var prevScrollpos = window.pageYOffset;
