@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3.0">
+  <title>book store</title>
+  <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+<!-- 내가넣은거 -->
+<link rel="stylesheet" href="/css/findPwd.css">
+</head>
+
+<body>
+<form action="" method="post" name="myForm">
+  <article class="login">
+    <h1>비밀번호 찾기</h1>
+<!--     <h2>환영합니다!<br/>book store입니다.</h2> -->
+
+    <div class="content-box">
+
+      <div>
+      </div>
+      
+      <div>
+      아이디
+        <input type="text" placeholder="아이디를 입력해주세요." name="userId" required>
+      </div>
+
+      <div>
+      이름
+        <input type="text" placeholder="성함을 입력해주세요." name="userName" required>
+      </div>
+      
+      <div>
+      전화번호
+        <input type="text" placeholder="숫자만 입력해주세요." name="userTel" required pattern="[0-9]*">
+      </div>
+
+      <div>
+        <label>
+        </label>
+        <div>
+        </div>
+      </div>
+
+      <button class="red-btn" id="submitBtn">비밀번호 찾기</button>
+      <a href="/user/login"><button class="white-btn" type="button">돌아가기</button></a>
+    </div>
+  </article>
+</form>
+</body>

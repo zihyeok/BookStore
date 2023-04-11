@@ -27,8 +27,12 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	update userdata set username = #{name} where userid = #{id}
 </update>
 
-<select id="findUserId" parameterType="map" resultType="String">
-	select userid from userdata where username=#{userName} and usertel=#{userTel} 
+<select id="findUserId" parameterType="map" resultType="string">
+	select userid from userdata where userName = #{userName} and userTel = #{userTel} 
+</select>
+
+<select id="findUserPwd" parameterType="map" resultType="String">
+	select realpwd from userdata where userName = #{userName} and userTel = #{userTel} and userId = #{userId}
 </select>
 
 </mapper>

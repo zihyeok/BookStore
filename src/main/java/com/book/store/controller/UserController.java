@@ -158,7 +158,17 @@ public class UserController {
 	@GetMapping("/login")
 	public ModelAndView mypage(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
-		request.getParameter("name");
+		String findid = request.getParameter("idAlert");
+		String findpwd = request.getParameter("pwdAlert");
+		if(findid!=null) {
+			
+			mav.addObject("idAlert", findid);
+		}
+		
+		if(findpwd!=null) {
+			
+			mav.addObject("pwdAlert", findpwd);
+		}
 		mav.setViewName("login");
 		
 		
@@ -180,17 +190,46 @@ public class UserController {
 		
 		String findId = userService.findUserId(request.getParameter("userName"), request.getParameter("userTel"));
 		
-		if(findId!=null || !findId.equals("")) {
-			String alert = "고객님의 아이디는 " + findId + "입니다.";
-			mav.addObject("idAlert", alert);
-		}
 		
 		String alert = "회원 정보가 없습니다.";
+		
+		if(findId!=null) {
+			alert = request.getParameter("userName") + "님의 아이디는 " + findId + "입니다.";
+			
+		}
+		
 		mav.addObject("idAlert", alert);
 		
 		mav.setViewName("redirect:/user/login");
 		
 		return mav;
 	}
+	
+	@GetMapping("findPwd")
+	public ModelAndView findpwd() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("findPwd");
+		
+		return mav;
+	}
+	
+	@PostMapping("findPwd")
+	public ModelAndView findpwd_do(HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		String data = userService.findUserPwd(request.getParameter("userId"), request.getParameter("userName"), request.getParameter("userTel"));
+		
+		String pwdAlert = "회원 정보가 없습니다";
+		
+		if(data!= null) {
+			pwdAlert = request.getParameter("userName") + "님의 비밀번호는 " + data + "입니다.";
+		}
+		
+		mav.addObject("pwdAlert", pwdAlert);
+		mav.setViewName("redirect:/user/login");
+		return mav;
+	}
+	
 	
 }
