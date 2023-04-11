@@ -32,9 +32,26 @@ $(function() {
               $header.stop().animate({
                 height: '120px'
               });
-            });
+            }); 
 
+        });       
+        
+                
+        $(function() {
+		  // 검색창 요소 선택
+		  var $searchInput = $('#search-input'),
+		  $header = $('#header');
+		  
+		  // 검색창에 입력할 때 이벤트 핸들러 등록
+		  $searchInput.on('input', function() {	
+		    
+		     $header.stop().animate({
+                height: '470px'
+              });
+            }) 
+           
         });
+        		      
 
         /*네비게이션 픽스*/
         var prevScrollpos = window.pageYOffset;
@@ -46,5 +63,5 @@ $(function() {
             document.getElementById("header").style.top = "-120px";
           }
           prevScrollpos = currentScrollPos;
-        }
+        } 
         
