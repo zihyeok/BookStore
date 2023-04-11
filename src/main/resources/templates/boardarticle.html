@@ -45,8 +45,19 @@
       	<th scope="row">내용 :[[${dto.content}]]</th>
         <td colspan="4"></td>
       </tr>
+
     </tbody>
+    
   </table>
+  <button style="margin-top: 20px; margin-right: 100px;" class="black-btn float-r m-btn" 
+  th:onclick="@{|location='/boardupdated.action?num=${dto.num }&${params }'|}">
+  수정</button>
+  <button style="margin-top: 20px; margin-right: 20px;" class="black-btn float-r m-btn" 
+  th:onclick="'location.href=\'boarddeleted_ok.action?num=' + @{${dto.num}} + '&' + @{${params}} + '\''">
+  삭제</button>
+  <button style="margin-top: 20px; margin-right: 20px;" class="black-btn float-r m-btn" 
+  th:onclick="@{|location.href='/boardlist.action?${params }'|}">
+  리스트</button>
 </section>  
   
 </article>

@@ -13,33 +13,37 @@
 				<div class="tab_box">
 					<p class="tit" style="text-align: center;">Q&A 게시판 수정</p>
 					</br></br>
-					<form action="" method="post" name="myForm">
+					<form th:action="@{boardupdated_ok.action}" method="post" name="myForm">
 					
 					<div class="ask_box">
 						<p>
 						<label>제&nbsp;목</label> 
-						<input type="text"  name="subject" placeholder="제목를 입력해주세요."> 
+						<input type="text"  name="subject" th:value="${dto.subject }"> 
 						</p>
 						<p>
 						<label>작성자</label> 
-						<input type="text"  name="name" placeholder="작성자를 입력해주세요."> 
+						<input type="text"  name="name" th:value="${dto.name }"> 
 						</p>
 						<p>
 						<label>이메일</label> 
-						<input type="text"  name="email" placeholder="이메일주소를 입력해주세요."> 
+						<input type="text"  name="email" th:value="${dto.email }"> 
 						</p>
 						
 						<p>
 						<label>내용</label> 
-						<textarea name="content" placeholder="내용을 입력해주세요."></textarea> 
+						<textarea name="content" th:text="${dto.content }"></textarea> 
 						</p>
 						
 						<div class="btn_box">
-							<button class="black-btn float-r m-btn" onclick="#">수정하기</button>
+							<button class="black-btn float-r m-btn" type="submit">수정하기</button>
 						</div>
-						
+						<input type="hidden" name="num" th:value="${dto.num }"/>
+						<input type="hidden" name="pageNum" th:value="${pageNum }"/>
+						<input type="hidden" name="searchKey" th:value="${searchKey }"/>
+						<input type="hidden" name="searchValue" th:value="${searchValue }"/>
+	
 						<div class="btn_box">
-							<button class="black-btn float-r m-btn" th:onclick="@{|location='/list.action?${params }'|}">수정취소</button>
+							<button class="black-btn float-r m-btn" th:onclick="@{|location='/boardlist.action?${params }'|}">수정취소</button>
 						</div>
 					
 					</form>
@@ -51,63 +55,10 @@
 		</div>
 
 	</div><!--in_box E-->
-</div><!--container E-->
+
 </br></br>
 
 </div>
 
-<script type="text/javascript">
-
-	//function sendIt() =>{} 화살표 함수
-	const sendIt = () => {
-		alert("김치------------------------------");
-	
-		var f = document.myForm;
-		
-		str = f.subject.value;
-		//str = str.trim();
-		if(!str){
-			alert("\n제목을 입력하세요.");
-			f.subject.focus();
-			return;
-		}
-		f.subject.value = str;
-		
-		str = f.name.value;
-		//str = str.trim();
-		if(!str){
-			alert("\n작성자을 입력하세요.");
-			f.name.focus();
-			return;
-		}
-				
-			
-		f.name.value = str;
-		
-		/* if(f.email.value){
-			if(!isValidEmail(f.email.value)){
-				alert("\n정상적인 E-Mail을 입력하세요.");
-				f.email.focus();
-				return;
-			}
-		} */
-		
-		str = f.content.value;
-		//str = str.trim();
-		if(!str){
-			alert("\n내용을 입력하세요.");
-			f.content.focus();
-			return;
-		}
-		f.content.value = str;
-		
-		
-		
-		f.action = "/boardupdated.action";
-		f.submit();
-		
-	}
-
-</script>
 
 </html>
