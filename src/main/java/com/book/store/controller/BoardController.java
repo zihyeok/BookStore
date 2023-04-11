@@ -47,7 +47,7 @@ public class BoardController {
 
 			ModelAndView mav = new ModelAndView();
 
-			mav.setViewName("board");
+			mav.setViewName("boardcreated");
 			 //jsp(html)로 갈때는 setViewName /class로 갈때는 setView
 			
 			return mav;
@@ -62,7 +62,7 @@ public class BoardController {
 			int maxNum = boardService.maxNum();
 			
 			dto.setNum(maxNum+1);
-			dto.setIpAddr(request.getRemoteAddr());
+			
 			
 			boardService.insertData(dto);
 
@@ -197,7 +197,7 @@ public class BoardController {
 		}
 		
 		
-		@GetMapping("/updated.action")
+		@GetMapping("/boardupdated.action")
 		public ModelAndView updated(HttpServletRequest request) throws Exception{
 		
 			int num = Integer.parseInt(request.getParameter("num"));
@@ -235,12 +235,12 @@ public class BoardController {
 			mav.addObject("searchKey", searchKey);
 			mav.addObject("searchValue", searchValue);
 			
-			mav.setViewName("updated");
+			mav.setViewName("boardupdated");
 			
 			return mav;
 		}
 		
-		@RequestMapping(value = "/updated_ok.action",method = {RequestMethod.GET,RequestMethod.POST})
+		@RequestMapping(value = "/boardupdated_ok.action",method = {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView updated_ok(BoardDTO dto,HttpServletRequest request) throws Exception{
 		
 			String pageNum = request.getParameter("pageNum");
@@ -263,14 +263,14 @@ public class BoardController {
 			
 			ModelAndView mav = new ModelAndView();
 			
-			mav.setViewName("redirect:/list.action?" + param);
+			mav.setViewName("redirect:/boardlist.action?" + param);
 			
 			return mav;
 			
 		}
 		
 
-		@GetMapping("/deleted_ok.action")
+		@GetMapping("/boarddeleted_ok.action")
 		public ModelAndView deleted_ok(HttpServletRequest request) throws Exception{
 			
 			int num = Integer.parseInt(request.getParameter("num"));
@@ -294,7 +294,7 @@ public class BoardController {
 			
 			ModelAndView mav = new ModelAndView();
 			
-			mav.setViewName("redirect:/list.action?" + param);
+			mav.setViewName("redirect:/boardlist.action?" + param);
 			
 			return mav;
 			

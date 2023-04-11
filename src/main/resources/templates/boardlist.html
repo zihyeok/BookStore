@@ -5,23 +5,38 @@
 </br></br></br></br>
 </br></br></br></br>
 
+<script type="text/javascript">
+	
+	function sendIt(){		
+		var f = document.searchForm;
+		
+		f.action = "/boardlist.action";
+		f.submit();
+	}
+
+</script>
+
   <article class="search2">
 
     <h2>Q & A 게시판</h2>
     
     <div>
+      <form action="" method="get" name="searchForm" style="">
       <h4>Search</h4>
- 
-      <select>
+      <select name="searchKey" >
         <option value="subject">제목</option>
-        <option value="name">글쓴이</option>
+        <option value="name">작성자</option>
         <option value="content">내용</option>
       </select>
-     
-      <input type="text">
-	  <!-- 위치다시지정 -->
-      <img src="https://cdn.pixabay.com/photo/2016/03/31/19/14/magnifying-glass-1294834_1280.png">
-     </div>
+      <input type="text" name="searchValue">
+      </form>
+      
+      <img style=" margin-left: 820px" src="https://cdn.pixabay.com/photo/2016/03/31/19/14/magnifying-glass-1294834_1280.png"
+      onclick="sendIt();">
+      
+      <button style="margin-top: 10px; " class="black-btn float-r m-btn" 
+  		onclick="location='/board.action'">등록</button>
+      </div>
 
   </article>
 
@@ -87,20 +102,11 @@
         <a href="#0" class="r-link pagination__point">
         
         <div>
-			<tr th:if="${#lists.size(dataCount)}>0" th:each="dataCount:${dataCount}">
-				<td colspan="5">
+        
+		<tr th:if="${#lists.size(dataCount)}>0" th:each="dataCount:${dataCount}">
+			<td ><a th:utext="${pageIndexList }"></a></td>
+		</tr>
 				
-				<a th:utext="${pageIndexList }"></a>
-				
-				</td>
-			
-			</tr>
-			
-			<!-- 데이터가 없으면 (안나옴)-->
-			<tr th:if="${#lists.size(dataCount)}<0" th:each="dataCount:${dataCount}">
-			<td colspan="5" >등록된 게시물이 없습니다.</td>
-			</tr>
-			
 		</div>
 		
         </a>

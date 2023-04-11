@@ -1,0 +1,60 @@
+<html layout:decorate="~{layout}">
+<meta charset="UTF-8">
+
+<div layout:fragment="content3" >
+
+
+<div class="container product_detail">
+  <div class="in_box">
+    <div class="content">
+      <div class="tab_content">
+        <div class="tab_box">
+          <p class="tit" style="text-align: center;">Q&A 게시판 등록</p>
+          <br /><br /><!-- th:action="@{boardcreated.action}" /action="/submit-form"  -->
+          <form th:action="@{boardcreated.action}" method="post" name="myForm" >
+            <div class="ask_box">
+              <p>
+                <label>제목</label>
+                <input type="text" name="subject" placeholder="제목를 입력해주세요." />
+              </p>
+              <p>
+                <label>작성자</label>
+                <input type="text" name="name" placeholder="작성자를 입력해주세요." />
+              </p>
+              <p>
+                <label>이메일</label>
+                <input type="text" name="email" placeholder="이메일주소를 입력해주세요." />
+              </p>
+
+              <p>
+                <label>내용</label>
+                <textarea name="content" placeholder="내용을 입력해주세요."></textarea>
+              </p>
+
+              <div class="btn_box">
+                <button class="black-btn float-r m-btn" type="submit">등록하기</button>
+              </div>
+              <div class="btn_box">
+                <button class="black-btn float-r m-btn" type="reset">다시입력</button>
+              </div>
+              <div class="btn_box">
+                <button class="black-btn float-r m-btn" onclick="history.back()">작성취소</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!--in_box E-->
+
+</br></br>
+
+
+
+
+</div>
+
+
+
+</html>
