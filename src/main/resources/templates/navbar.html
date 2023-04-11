@@ -46,18 +46,23 @@ function displaySuggest(){
 			//alert(resultText.lists[0].title_Nm);
 			
 			var html = "";
+			var img = "";
 			
+			//getElementById가 ""를 필요로 해서 이렇게 적어야됨
+			var suggestArray = ["suggest0","suggest1","suggest2","suggest3","suggest4"];
+			var suggest_Title_Array = ["suggest_Title0","suggest_Title1","suggest_Title2","suggest_Title3","suggest_Title4"];
+
 			for(var i=0;i<5;i++){
 				
 				var suggest = resultText.lists[i];
+				var suggestArrayElement =  document.getElementById(suggestArray[i]);
+				var suggest_Title_ArrayElement =  document.getElementById(suggest_Title_Array[i]);
 				
-				html+="<a href=\"javascript:select('"	+ suggest.title_Nm + "');\">"	+ suggest.title_Nm + "</a><br/>";
+				suggest_Title_ArrayElement.innerHTML="<a href=\"javascript:select('" + suggest.title_Nm + "');\">"+  suggest.title_Nm + "</a>";
+				suggestArrayElement.src = suggest.image_Url
 				
 			}
-			
-			var suggestListDiv = document.getElementById("suggestListDiv");
-			suggestListDiv.innerHTML = html;
-			
+
 			show();
 
 		}
@@ -113,7 +118,7 @@ window.onload = function () {
 
         <nav class="lap-nav">
           <ul class="clearfix">
-          
+      
             <li><a>이벤트</a>
               <ul>
                 <li>진행/대기</li>
@@ -154,16 +159,23 @@ window.onload = function () {
         
  
   <div class="sample two">
+  
   	<form action="" name="searchForm" method="GET">
 	    <input type="text" name="searchValue" placeholder="search" onkeyup="sendKeyword();">
 	    <input type="hidden" name="searchKey" value="title_Nm">
 	    <button type="submit" class="btn btn-search fa fa-search" onclick="sendIt();"></button>
 	    <button type="reset" class="btn btn-reset fa fa-times"></button>
-	    
+	    <div id="suggestDiv" class="suggest">
+	    	<div style="width: 600px; display: inline-block;">
+	    	<div style="background-color: green; width: 20%;"><img alt="" src="" id="suggest0" style="width: 30px; height: 30px;"></div><div style="background-color: yellow; width: 80%;"><span id="suggest_Title0"></span></div><br/>
+	    	<img alt="" src="" id="suggest1" style="width: 30px; height: 30px;"><span id="suggest_Title1"></span><br/>
+	    	<img alt="" src="" id="suggest2" style="width: 30px; height: 30px;"><span id="suggest_Title2"></span><br/>
+	    	<img alt="" src="" id="suggest3" style="width: 30px; height: 30px;"><span id="suggest_Title3"></span><br/>
+	    	<img alt="" src="" id="suggest4" style="width: 30px; height: 30px;"><span id="suggest_Title4"></span><br/>
+	    	</div>
+		</div>
 	 </form>
-	 <div id="suggestDiv" class="suggest">
-		<div id="suggestListDiv"></div>
-	</div>
+	 
   </div>
 
   <i class="fas fa-user"></i>
