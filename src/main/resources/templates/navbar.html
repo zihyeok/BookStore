@@ -46,18 +46,22 @@ function displaySuggest(){
 			//alert(resultText.lists[0].title_Nm);
 			
 			var html = "";
+			var img = "";
 			
+			//getElementById가 ""를 필요로 해서 이렇게 적어야됨
+			var suggestArray = ["suggest0","suggest1","suggest2","suggest3","suggest4"];
+			var suggest_Title_Array = ["suggest_Title0","suggest_Title1","suggest_Title2","suggest_Title3","suggest_Title4"];
+
 			for(var i=0;i<5;i++){
 				
 				var suggest = resultText.lists[i];
-				
-				html+="<a href=\"javascript:select('"	+ suggest.title_Nm + "');\">"	+ suggest.title_Nm + "</a><br/>";
+				var suggestArrayElement =  document.getElementById(suggestArray[i]);
+				var suggest_Title_ArrayElement =  document.getElementById(suggest_Title_Array[i]);
+				suggest_Title_ArrayElement.innerHTML="<a href=\"javascript:select('" + suggest.title_Nm + "');\">"+  suggest.title_Nm + "</a>";
+				suggestArrayElement.src = suggest.image_Url
 				
 			}
-			
-			var suggestListDiv = document.getElementById("suggestListDiv");
-			suggestListDiv.innerHTML = html;
-			
+
 			show();
 
 		}
@@ -66,7 +70,7 @@ function displaySuggest(){
 	
 }
 
-function select(selectKeyword) {//글자 고른거 들어가는거 
+function select(selectKeyword) {
 	
 	document.searchForm.searchValue.value = selectKeyword;
 	hide();
@@ -113,7 +117,7 @@ window.onload = function () {
 
         <nav class="lap-nav">
           <ul class="clearfix">
-          
+      
             <li><a>이벤트</a>
               <ul>
                 <li>진행/대기</li>
@@ -152,21 +156,38 @@ window.onload = function () {
           </ul>
         </nav>
         
- 
-  <div class="sample two">
-  	<form action="" name="searchForm" method="GET">
-	    <input type="text" name="searchValue" placeholder="search" onkeyup="sendKeyword();">
-	    <input type="hidden" name="searchKey" value="title_Nm">
-	    <button type="submit" class="btn btn-search fa fa-search" onclick="sendIt();"></button>
-	    <button type="reset" class="btn btn-reset fa fa-times"></button>
-	    
-	 </form>
-	 <div id="suggestDiv" class="suggest">
-		<div id="suggestListDiv"></div>
-	</div>
-  </div>
+        <div class="sample two" id="search-input">
+        <form action="" name="searchForm" method="GET"> 		
+ 		
+ 		
+          <ul class="clearfix-2">          
+            <li>
+		    	<input type="text" name="searchValue" placeholder="search" onkeyup="sendKeyword();">
+			    <input type="hidden" name="searchKey" value="title_Nm">
+			    <button type="submit" class="btn btn-search fa fa-search" onclick="sendIt();"></button>
+			    <button type="reset" class="btn btn-reset fa fa-times"></button>		
+				
+				<ul>
+				  <li>
+					<div id="suggestDiv" class="suggest">
+					<ul>
+				    	<li><img alt="" src="" id="suggest0"><span id="suggest_Title0"></span></li><br/>
+				    	<li><img alt="" src="" id="suggest1"><span id="suggest_Title1"></span></li><br/>
+				    	<li><img alt="" src="" id="suggest2"><span id="suggest_Title2"></span></li><br/>
+				    	<li><img alt="" src="" id="suggest3"><span id="suggest_Title3"></span></li><br/>
+				    	<li><img alt="" src="" id="suggest4"><span id="suggest_Title4"></span></li><br/>
+				    </ul>
+					</div>
+					
+				  </li>
+				</ul>
+			</li>			
+		  </ul>	
+		  
+		</form>
+  		</div>  
 
-  <i class="fas fa-user"></i>
+  	<i class="fas fa-user"></i>
     <i class="fas fa-shopping-cart"></i>
       </section>
       
