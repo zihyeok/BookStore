@@ -25,6 +25,8 @@ public class UserData {
 	private String userRole;
 	private String realPwd;
 	
+	
+	//oauth유저용 빌더메소드
 	@Builder
 	public UserData(String email,String name,String role,String registrationId) {
 		this.userId = email;
