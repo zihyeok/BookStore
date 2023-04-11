@@ -46,11 +46,21 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void updateOAUData(String name) throws Exception {
+	public void updateOAUData(String name,String id) throws Exception {
 
-		userMapper.updateOAUData(name);
+		userMapper.updateOAUData(name,id);
 		
 	}
+
+	@Override
+	public String findUserId(String userName, String userTel) throws Exception {
+
+		String userid = userMapper.findUserId(userName, userTel);
+		
+		return userid;
+	}
+
+	
 
 	
 

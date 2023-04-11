@@ -2,8 +2,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <div layout:fragment="content" >
-<!-- boardarticle -->
-<link rel="stylesheet" href="css/boardarticle.css">
+<!-- 전체 디자인 -->
+<link rel="stylesheet" href="/css/board.css">
+<!-- 버튼용 -->
+<link rel="stylesheet" type="text/css" href="/css/BoardCreated.css">
+
 </br></br></br></br>
 </br></br></br></br>
 </br></br></br></br>
@@ -26,38 +29,42 @@
    
     <tbody>
       <tr>
-        <th scope="row">글 번호 :[[${dto.num}]] </th>
-        <td></td>
-        <th scope="row">조회수 : [[${dto.hitCount}]]</th>
-        <td></td>
+        <th>글 번호 :</th>
+        <td>[[${dto.num}]]</td>
+        <th>조회수 :</th>
+        <td>[[${dto.hitCount}]]</td>
       </tr>
       <tr>
-        <th scope="row">작성자 :[[${dto.name}]]</th>
-        <td></td>
-        <th scope="row">작성일 :[[${dto.created}]]</th>
-        <td></td>
+        <th>작성자 :</th>
+        <td>[[${dto.name}]]</td>
+        <th>작성일 :</th>
+        <td>[[${dto.created}]]</td>
       </tr>
       <tr>
-        <th scope="row">제목 :[[${dto.subject}]]</th>
-        <td colspan="3"></td>
+        <th>제목 :</th>
+        <td colspan="3">[[${dto.subject}]]</td>
       </tr>
       <tr>
-      	<th scope="row">내용 :[[${dto.content}]]</th>
-        <td colspan="4"></td>
+      	<th>내용 :</th>
+        <td colspan="4">[[${dto.content}]]</td>
       </tr>
 
     </tbody>
     
   </table>
-  <button style="margin-top: 20px; margin-right: 100px;" class="black-btn float-r m-btn" 
+  
+  <div style="margin-top: 20px; margin-right: 100px;">
+  <button  class="black-btn float-r m-btn" 
   th:onclick="@{|location='/boardupdated.action?num=${dto.num }&${params }'|}">
   수정</button>
-  <button style="margin-top: 20px; margin-right: 20px;" class="black-btn float-r m-btn" 
+  <button class="black-btn float-r m-btn" 
   th:onclick="'location.href=\'boarddeleted_ok.action?num=' + @{${dto.num}} + '&' + @{${params}} + '\''">
   삭제</button>
-  <button style="margin-top: 20px; margin-right: 20px;" class="black-btn float-r m-btn" 
+  <button class="black-btn float-r m-btn" 
   th:onclick="@{|location.href='/boardlist.action?${params }'|}">
   리스트</button>
+  </div>
+  
 </section>  
   
 </article>

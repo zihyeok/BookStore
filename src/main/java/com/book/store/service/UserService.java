@@ -15,8 +15,9 @@ public interface UserService {
 	
 	public void insertOAuth(UserData userData) throws Exception;
 	
-	public void updateOAUData(String name) throws Exception;
+	public void updateOAUData(String name,String id) throws Exception;
 	
+	public String findUserId(String userName,String userTel) throws Exception;
 	
 	
 }

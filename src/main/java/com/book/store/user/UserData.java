@@ -35,12 +35,12 @@ public class UserData {
 		this.userPwd = registrationId;
 	}
 	
-	public UserData update(String name) {
+	public UserData update(String name,String id) {
 		
 		this.userName = name;
 		
 		try {
-			userService.updateOAUData(name);
+			userService.updateOAUData(name,id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

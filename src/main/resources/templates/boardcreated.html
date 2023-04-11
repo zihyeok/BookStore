@@ -1,7 +1,8 @@
 <html layout:decorate="~{layout}">
 <meta charset="UTF-8">
 
-<div layout:fragment="content3" >
+<div layout:fragment="content" >
+<link rel="stylesheet" type="text/css" href="/css/BoardCreated.css">
 
 
 <div class="container product_detail">
@@ -37,11 +38,15 @@
               <div class="btn_box">
                 <button class="black-btn float-r m-btn" type="reset">다시입력</button>
               </div>
-              <div class="btn_box">
-                <button class="black-btn float-r m-btn" onclick="history.back()">작성취소</button>
-              </div>
+              
+              </form>
             </div>
-          </form>
+            
+          	<div class="btn_box" style="margin-top: 20px;">
+                <button class="black-btn float-r m-btn" onclick="location.href='/boardlist.action'">
+                작성취소</button>
+			</div>
+			
         </div>
       </div>
     </div>

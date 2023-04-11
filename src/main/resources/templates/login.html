@@ -5,14 +5,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3.0">
   <title>book store</title>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 <!-- 내가넣은거 -->
-<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="/css/login.css">
 </head>
 
 <body>
-
+<form action="" method="post" name="myForm">
   <article class="login">
     <h1>Login</h1>
     <h2>환영합니다!<br/>book store입니다.</h2>
@@ -22,40 +22,41 @@
       <div>
         book store 통합 아이디로 로그인 하실 수 있습니다.
       </div>
-
+      
+      <span th:if="${idAlert != null}" th:text="${idAlert}"></span>
+      
       <div>
-        <input type="text" placeholder="아이디를 입력해주세요.">
+        <input type="text" placeholder="아이디를 입력해주세요." name="username" id="username">
       </div>
 
       <div>
-        <input type="password" placeholder="비밀번호를 입력해주세요.">
+        <input type="password" placeholder="비밀번호를 입력해주세요." name="password">
       </div>
 
       <div>
         <label>
-          <input type="checkbox">아이디 저장
+          <input type="checkbox" id="checkbox">아이디 저장
         </label>
         <div>
-          <a href="#">아이디 찾기</a>
+          <a href="/user/findId">아이디 찾기</a>
           <a href="#">비밀번호 찾기</a>
         </div>
       </div>
 
-      <button class="red-btn">로그인</button>
-      <button class="white-btn">회원가입</button>
-
-      <hr />
-
+      <button class="red-btn" id="submitBtn">로그인</button>
+      <a href="/user/member"><button class="white-btn" type="button">회원가입</button></a>
+		
+      <hr/>
+	
+	
       <div>
         <p>간편 로그인</p>
-        <button class="white-btn"><img src="https://i.imgur.com/Y5lDbfv.png" alt="구글 로그인">구글 로그인</button>
-        <button class="white-btn"><img src="https://i.imgur.com/do4jkuA.png" alt="카카오 로그인">카카오 로그인</button>
-        <button class="white-btn"><img src="https://i.imgur.com/rA3sTfG.png" alt="네이버 로그인">네이버 로그인</button>
-
+        <a href="/oauth2/authorization/google"><button class="white-btn" type="button"><img src="https://i.imgur.com/Y5lDbfv.png" alt="구글 로그인">구글 로그인</button></a>
+        <a href="/oauth2/authorization/kakao"><button class="white-btn" type="button"><img src="https://i.imgur.com/do4jkuA.png" alt="카카오 로그인">카카오 로그인</button></a>
+        <a href="/oauth2/authorization/naver"><button class="white-btn" type="button"><img src="https://i.imgur.com/rA3sTfG.png" alt="네이버 로그인">네이버 로그인</button></a>
       </div>
 
     </div>
-
   </article>
-
+</form>
 </body>

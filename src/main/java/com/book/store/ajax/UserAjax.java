@@ -42,6 +42,7 @@ public class UserAjax {
 				return map;
 			}
 		}
+		
 		Map<String,Object> map = new HashMap<String, Object>();
 		
 		String alert = userid + " 는 사용가능한 아이디입니다";
