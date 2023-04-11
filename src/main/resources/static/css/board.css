@@ -1,6 +1,27 @@
 @charset "UTF-8";
-
-
+/*boardarticle*/
+#detail-wrap{
+  width: 100%;
+  min-height: 65rem;
+}
+#board-detail{
+  width: 80%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding-top: 5rem;
+  border-top: 2px solid #272559; 
+  border-bottom: 1px solid #ccc; 
+  border-collapse: collapse;
+}
+#board-detail tbody th{
+  color: #454545; 
+  vertical-align: middle; 
+  text-align: center;
+}
+#board-detail tbody th, #board-detail tbody td{
+  padding: 1rem 1rem; 
+  border-bottom: 1px solid #ccc;
+}
 
 
 /*start*/
@@ -137,27 +158,32 @@ height: 330px;
 
 .wrapper {
   width: 800px;
-
-border-top: 2px solid #ccc;
-border-bottom: 1px solid #ccc;
- margin: 4em auto;
- margin-bottom: 2em;
+  border-top: 2px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  margin: 4em auto;
+  margin-bottom: 2em;
 
 }
 
 .city-list-header {
   display: flex;
-
+  
+  border-bottom:1.5px solid #9C9C9C ; 
+  margin-top: 10px;
+  margin-bottom: 40px;
+  
 }
 
 .weather-header-details {
   flex:1;
-
+  font-size: 120%;
+  font-family: 'NEXON Lv1 Gothic OTF';
+  
 }
 
 .city-list-header.heading {
-  padding: 0.75em 5px;
-color: #aaa;
+  padding: 1em;
+  
 
 }
 

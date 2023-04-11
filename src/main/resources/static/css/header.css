@@ -87,8 +87,7 @@ b89c87
 .lap-nav {
   display: inline-block;
   cursor: pointer;
-  margin-left: 2rem;
-  
+  margin-left: 2rem;  
 
   /* 
   position: relative; 
@@ -128,7 +127,7 @@ b89c87
 
 .clearfix>li>ul>li {
   display: block;
-  color: #222222aa;
+  color: #222222;
   border-bottom: 2px solid #fff;
   transition: 0.4s;
 }
@@ -142,6 +141,78 @@ b89c87
   color: #c80a1e;
 }
 
+
+.clearfix-2 {
+  display: inline-block;
+  cursor: pointer;
+  margin-left: 2rem;  
+
+  /* 
+  position: relative; 
+  
+  position: fixed;
+  z-index: 1; 
+  */
+}
+
+.clearfix-2>li {	
+	float: right;
+	/* width: 100%; */
+	height: 23rem;
+	/* line-height: 2rem; */
+	font-size: 0.8rem;
+	text-align: center;	
+	
+}
+
+.clearfix-2>ul>li ul {
+	width: 100%;
+	height: 100%;
+	background: #fff;
+}
+
+.clearfix-2 {
+	background-color: #fff;
+}
+
+.clearfix-2>li>ul>li {	
+	display: block;
+	color: #222222;
+	border-bottom: 2px solid #fff;
+	transition: 0.4s;	
+}
+
+.suggest {
+	margin-top: 4.2rem;
+	width: 100%;
+	text-align: left;
+	display: table;
+	
+}
+
+.suggest>ul>li {	
+	display: inline-flex;
+	vertical-align: middle;
+    align-items: center;
+    border-bottom: 2px solid #fff;
+	
+}
+
+.suggest>ul>li img {
+	width: 40px;
+	height: 45px;
+	/* margin: auto 0.1; */
+	display: table;
+	margin-right: 1rem;
+}
+
+clearfix-2 span {
+	
+	display: table-cell;
+    vertical-align: middle;
+	/* float: right; */
+	/* margin: auto; */
+}
 
 .sample input {
   border-bottom: 1px solid #ccc;
@@ -177,10 +248,11 @@ button.btn-search, button.btn-reset {
   width: 13rem;
 }
 .sample.two input:focus {
-  width: 20rem;
+  width: 20rem;  
 }
+
 .sample.two input:focus ~ button.btn-search {
-  color: #000000dd;
+  color: #000000;
   background: none;
 }
 .sample.two input:focus ~ button.btn-reset {
@@ -232,7 +304,7 @@ button.btn-search, button.btn-reset {
     right: 20px;
     bottom: 5rem;
     transition: all .5s;
-    z-index: 99;
+    z-index: 90;
   }
 
 #side-menu ul li{
