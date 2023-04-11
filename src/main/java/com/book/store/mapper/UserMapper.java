@@ -20,5 +20,5 @@ public interface UserMapper {
 	
 	public void updateOAUData(String name,String id) throws Exception;
 	
-	public String findUser(String userName,String userTel) throws Exception;
+	public String findUserId(String userName,String userTel) throws Exception;
 }

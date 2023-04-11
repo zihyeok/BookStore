@@ -158,6 +158,7 @@ public class UserController {
 	@GetMapping("/login")
 	public ModelAndView mypage(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
+		request.getParameter("name");
 		mav.setViewName("login");
 		
 		
@@ -177,14 +178,17 @@ public class UserController {
 	public ModelAndView findid_do(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
-		String findId = userService.findUser(request.getParameter("userName"), request.getParameter("userTel"));
+		String findId = userService.findUserId(request.getParameter("userName"), request.getParameter("userTel"));
 		
 		if(findId!=null || !findId.equals("")) {
-			
-			mav.addObject("findId", findId);
+			String alert = "고객님의 아이디는 " + findId + "입니다.";
+			mav.addObject("idAlert", alert);
 		}
 		
+		String alert = "회원 정보가 없습니다.";
+		mav.addObject("idAlert", alert);
 		
+		mav.setViewName("redirect:/user/login");
 		
 		return mav;
 	}
