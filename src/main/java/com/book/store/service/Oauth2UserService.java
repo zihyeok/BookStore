@@ -60,7 +60,7 @@ public class Oauth2UserService implements OAuth2UserService<OAuth2UserRequest, O
 		
 		UserData data = 
 				userSerice.findUserName(attributes.getEmail())
-				.map(item -> item.update(attributes.getName()))
+				.map(item -> item.update(attributes.getName(),attributes.getEmail()))
 				.orElse(attributes.toEntity());
 		
 		

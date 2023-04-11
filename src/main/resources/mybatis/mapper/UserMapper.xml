@@ -23,9 +23,12 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	insert into userdata(userId,userName,userRole) values(#{userId},#{userName},#{userRole})
 </insert>
 
-<update id="updateOAUData" parameterType="String">
-	update userdata set username = #{name}
+<update id="updateOAUData" parameterType="map">
+	update userdata set username = #{name} where userid = #{id}
 </update>
 
+<select id="findUser" parameterMap="map" resultType="String">
+	select userid from userdata where username=#{userName} and usertel=#{userTel} 
+</select>
 
 </mapper>

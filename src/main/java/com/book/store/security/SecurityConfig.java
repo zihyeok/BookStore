@@ -36,12 +36,12 @@ public class SecurityConfig {
 			.and()
 				.csrf().disable().headers().frameOptions().disable()
 			.and()
-				.logout().logoutUrl("/logout").logoutSuccessUrl("/hi")
+				.logout().logoutUrl("/logout").logoutSuccessUrl("/user/hi")
 				.deleteCookies("JESSIONID").invalidateHttpSession(true)
 			.and()
-				.formLogin().loginPage("/user/login").defaultSuccessUrl("/hi")
+				.formLogin().loginPage("/user/login").defaultSuccessUrl("/user/hi")
 			.and()
-				.oauth2Login().defaultSuccessUrl("/hi").userInfoEndpoint()
+				.oauth2Login().defaultSuccessUrl("/user/hi").userInfoEndpoint()
 				.userService(oauth2UserService);
 	
 		return http.build();

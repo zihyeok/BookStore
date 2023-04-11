@@ -4,6 +4,8 @@ import java.io.PrintWriter;
 import java.util.Optional;
 
 import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -70,40 +72,49 @@ public class UserController {
 		
 		ModelAndView mav = new ModelAndView();
 		
-//		UserData OauthUser = (UserData) httpSession.getAttribute("OauthUser");
-//		
-//		mav.addObject("OauthUser", OauthUser);
-//		
+		UserData OauthUser = (UserData) httpSession.getAttribute("OauthUser");
+		
+		mav.addObject("OauthUser", OauthUser);
+		
 		mav.setViewName("membershipOau");
 		
 		return mav;
 	}
 	
 	@PostMapping("/oaumember")
-	public ModelAndView oauthgo(UserCreateForm data) throws Exception{
+	public ModelAndView oauthgo(HttpServletRequest request) throws Exception{
 		
 		ModelAndView mav = new ModelAndView();
 		
 		UserData oauthUser = (UserData) httpSession.getAttribute("OauthUser");
 		
+		String addr = request.getParameter("userAddr") +" "+ request.getParameter("addr_detail");
+		String birth = request.getParameter("birth_year") +"-"+ request.getParameter("birth_month")+"-"+request.getParameter("birth_day");
 		
-//		userService.insertData(userData);
-//		httpSession.setAttribute("OauthUser", userData);
-//		
-		mav.setViewName("redirect:/hi");
+		oauthUser.setUserAddr(addr);
+		oauthUser.setUserEmail(request.getParameter("userEmail"));
+		oauthUser.setUserTel(request.getParameter("userTel"));
+		oauthUser.setUserBirth(birth);
+		oauthUser.setRealPwd(request.getParameter("realPwd"));
+		
+		
+		userService.insertData(oauthUser);
+		httpSession.setAttribute("OauthUser", oauthUser);
+		
+		mav.setViewName("redirect:/user/hi");
 		
 		return mav;
 	}
 	
-	@GetMapping("/user/login")
-	public ModelAndView userlogin() {
-		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("minsungTest2");
-		
-		return mav;
-		
-	}
+//	@GetMapping("/login")
+//	public ModelAndView userlogin() {
+//		ModelAndView mav = new ModelAndView();
+//		
+//		mav.setViewName("minsungTest2");
+//		
+//		return mav;
+//		
+//	}
 	
 	@GetMapping("/hi")
 	public ModelAndView test() throws Exception {
@@ -128,7 +139,7 @@ public class UserController {
 		//OAuth로 첫 로그인시 기타 회원정보 추가를 위해 가입페이지로 이동
 		if(OauthUser!=null && OauthUser.getUserAddr()==null) {
 		
-			mav.setViewName("redirect:/user/oaupage");
+			mav.setViewName("redirect:/user/oaumember");
 			return mav;
 		}
 		
@@ -144,8 +155,38 @@ public class UserController {
 		return mav;
 	}
 	
+	@GetMapping("/login")
+	public ModelAndView mypage(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("login");
+		
+		
+		return mav;
+	}
 	
+	@GetMapping("findId")
+	public ModelAndView findid() {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("findId");
+		
+		return mav;
+	}
 	
-	
+	@PostMapping("findId")
+	public ModelAndView findid_do(HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		String findId = userService.findUser(request.getParameter("userName"), request.getParameter("userTel"));
+		
+		if(findId!=null || !findId.equals("")) {
+			
+			mav.addObject("findId", findId);
+		}
+		
+		
+		
+		return mav;
+	}
 	
 }
