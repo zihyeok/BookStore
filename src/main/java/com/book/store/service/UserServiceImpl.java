@@ -53,12 +53,14 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public String findUser(String userName, String userTel) throws Exception {
+	public String findUserId(String userName, String userTel) throws Exception {
 
-		String userData = userMapper.findUser(userName, userTel);
+		String userid = userMapper.findUserId(userName, userTel);
 		
-		return userData;
+		return userid;
 	}
+
+	
 
 	
 

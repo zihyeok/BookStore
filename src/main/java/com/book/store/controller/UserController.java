@@ -178,7 +178,7 @@ public class UserController {
 	public ModelAndView findid_do(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
-		String findId = userService.findUser(request.getParameter("userName"), request.getParameter("userTel"));
+		String findId = userService.findUserId(request.getParameter("userName"), request.getParameter("userTel"));
 		
 		if(findId!=null || !findId.equals("")) {
 			String alert = "고객님의 아이디는 " + findId + "입니다.";
