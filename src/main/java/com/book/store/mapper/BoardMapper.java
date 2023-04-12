@@ -22,13 +22,14 @@ public interface BoardMapper {
 	
 	public List<BoardDTO> getLists(@Param("start")int start,@Param("end")int end,@Param("searchKey")String searchKey,@Param("searchValue")String searchValue) throws Exception;
 	
-	public BoardDTO getReadData(int num) throws Exception;
+	public BoardDTO getReadData(int boardNum) throws Exception;
 	
-	public void updateHitCount(int num) throws Exception;
+	public void updateHitCount(int boardNum) throws Exception;
 	
 	public void updateData(BoardDTO dto) throws Exception;
 	
-	public void deleteData(int num) throws Exception;
+	public void deleteData(int boardNum) throws Exception;
 	
+	public BoardDTO preReadData(@Param("boardNum")String boardNum,@Param("subject")String subject,@Param("searchKey")String searchKey,@Param("searchValue")String searchValue) throws Exception;
 	
 }

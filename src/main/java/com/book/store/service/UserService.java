@@ -2,6 +2,8 @@ package com.book.store.service;
 
 import java.util.Optional;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.book.store.user.UserData;
 
 public interface UserService {
@@ -17,7 +19,9 @@ public interface UserService {
 	
 	public void updateOAUData(String name,String id) throws Exception;
 	
-	public String findUserId(String userName,String userTel) throws Exception;
+	public String findUserId(@Param("userName") String userName,@Param("userTel")String userTel) throws Exception;
+	
+	public String findUserPwd(@Param("userId")String userId,@Param("userName")String userName,@Param("userTel")String userTel) throws Exception;
 	
 	
 }

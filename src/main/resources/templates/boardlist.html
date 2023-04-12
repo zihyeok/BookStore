@@ -12,7 +12,7 @@
 	function sendIt(){		
 		var f = document.searchForm;
 		
-		f.action = "/boardlist.action";
+		f.action = "/BoardList.action";
 		f.submit();
 	}
 
@@ -37,7 +37,7 @@
       <img style=" margin-left: 820px" src="https://cdn.pixabay.com/photo/2016/03/31/19/14/magnifying-glass-1294834_1280.png"
       onclick="sendIt();">
       
-      <button style="margin-top: 10px; " class="black-btn float-r m-btn" onclick="location='/board.action'">
+      <button style="margin-top: 10px; " class="black-btn float-r m-btn" onclick="location='/Board.action'">
       등록</button>
       </div>
 
@@ -55,13 +55,18 @@
     
       <summary>
         <div class="city-list-header" th:if="${#lists.size(lists)}>0" th:each="dto:${lists}" >
-          <span style="margin-left: 20px;" class="weather-header-details">[[${dto.num}]]</span>
+          <span style="margin-left: 20px;" class="weather-header-details">[[${dto.boardNum}]]</span>
           <span style="margin-left: 30px;" class="weather-header-details" th:text="${dto.name}">작성자</span>
           <span style="margin-right: 80px;" class="weather-header-details" th:text="${dto.created}">작성일</span>
           <span style="margin-right: 10px;" class="weather-header-details" th:text="${dto.hitCount}">조회수</span>
-          <a th:href="@{|${articleUrl}&num=@{${dto.num}}|}" style="margin-bottom: 30px;">
-	          <span style="margin-right: 110px;" class="weather-header-details" th:text="${dto.subject}" th:href="@{|${articleUrl}&num=@{${dto.num}}|}">
-	          제목</span>
+          <a th:href="@{|${articleUrl}&num=@{${dto.boardNum}}|}" style="margin-bottom: 30px;">
+	          <span style="margin-right: 110px;" class="weather-header-details" 
+	          th:text="${dto.subject}" th:href="@{|${articleUrl}&num=@{${dto.boardNum}&searchValue=${searchValue }}|}">
+	          제목                    
+	          </span>
+	          <!--  댓글 번호 참고 
+	          <span th:if="${dto.commentCount!=0 }">[[${dto.commentCount}]]</span>
+	           -->
 		  </a>
 		  
 		 	
@@ -102,7 +107,14 @@
 	<a th:utext="${pageIndexList}"></a>
   </div>
   
-  
+	<!--  페이징 참고 기달
+	<c:if test="${totalDataCount!=0 }">
+		${pageIndexList }
+	</c:if>
+	<c:if test="${totalDataCount==0 }">
+		등록된 게시물이 없습니다.
+	</c:if>
+	 -->
 		
 
 

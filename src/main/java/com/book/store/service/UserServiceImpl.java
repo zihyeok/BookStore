@@ -60,6 +60,12 @@ public class UserServiceImpl implements UserService{
 		return userid;
 	}
 
+	@Override
+	public String findUserPwd(String userId, String userName, String userTel) throws Exception {
+		
+		return userMapper.findUserPwd(userId, userName, userTel);
+	}
+
 	
 
 	

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.book.store.mapper.BoardCommentMapper">
+
+<select id="maxNum" resultType="int">
+	select nvl(max(commentNum),0) from boardComment
+</select>
+
+<insert id="insertData" parameterType="com.book.store.dto.BoardCommentDTO">
+	insert into boardComment (commentNum,boardNum,name,content,created) 
+	values(#{commentNum},#{boardNum},#{name},#{content},sysdate)
+</insert>
+
+<select id="getDataCount" parameterType="map" resultType="int">
+	select nvl(count(*),0) from boardComment 
+	where boardNum=#{boardNum} 
+</select>
+
+<select id="getLists" parameterType="map" resultType="com.book.store.dto.BoardCommentDTO">
+	select * from (
+	select rownum rnum,data.* from (
+	select commentNum,boardNum,name,content,to_char(created,'YYYY-MM-DD') created 
+	from boardComment where boardNum=#{boardNum} 
+	order by commentNum desc) data) 
+<![CDATA[
+	where rnum>=#{start} and rnum<=#{end}
+]]>
+</select>
+
+<delete id="deleteData" parameterType="int">
+	delete from boardComment where boardNum=#{boardNum} 
+</delete>
+
+
+
+
+
+
+</mapper>
