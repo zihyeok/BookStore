@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,7 +58,7 @@ public class BookController {
 	@PostMapping("/BookCreated.action")
 	public ModelAndView itemCreated_ok(BookDTO dto,@RequestParam(value = "upload",required = false) MultipartFile[] upload,
 			HttpServletRequest request) throws Exception{
-		//새로운 책을 등록하고자 할때			//requestparam(value="html에서의 name", required 는 해당 매개변수가 필수면 true 아니면 false
+		//새로운 책을 등록하고자 할때		//requestparam(value="html에서의 name", required 는 해당 매개변수가 필수면 true 아니면 false
 
 		ModelAndView mav = new ModelAndView();
 
