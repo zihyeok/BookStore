@@ -231,5 +231,13 @@ public class UserController {
 		return mav;
 	}
 	
+	@GetMapping("/payTest")
+	public ModelAndView payTest() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("kakaopay_Test");
+		
+		return mav;
+	}
+	
 	
 }
