@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.book.store.service.UserService;
 import com.book.store.user.UserData;
@@ -32,6 +34,7 @@ import lombok.RequiredArgsConstructor;
 public class UserAjax {
 	
 	private final UserService userService;
+	private final HttpSession httpsession;
 	
 	
 	@PostMapping("/findId")
@@ -67,7 +70,6 @@ public class UserAjax {
 	
 	//카카오페이 결제
 	@RequestMapping("/kakopay")
-	@ResponseBody
 	public String kakopay() {
 		
 		try {
@@ -75,7 +77,7 @@ public class UserAjax {
 			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			connection.setRequestMethod("POST");
 			connection.setRequestProperty("Authorization", "KakaoAK 051b33bdbbe0ba43924808b0a780bb6c");
-			connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+			connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset='utf-8'");
 			connection.setDoOutput(true);
 			
 			String parameter = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=초코파이&quantity=1&total_amount=2200&tax_free_amount=0&approval_url=http://localhost:8080/success&fail_url=http://localhost:8080/fail&cancel_url=http://localhost:8080/cancel";
@@ -116,8 +118,61 @@ public class UserAjax {
 	}
 	
 	@RequestMapping("/success")
-	public String success() {
-		return "성공";
+	public ModelAndView success(HttpServletRequest request) {
+		
+		String pg_token = request.getParameter("pg_token");
+		String tid = (String) httpsession.getAttribute("pay_tid");
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("tid", tid);
+		mav.setViewName("kakaopay_success");
+		
+//		try {
+//			URL url = new URL("https://kapi.kakao.com/v1/payment/approve");
+//			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//			connection.setRequestMethod("POST");
+//			connection.setRequestProperty("Authorization", "KakaoAK 051b33bdbbe0ba43924808b0a780bb6c");
+//			connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+//			connection.setDoOutput(true);
+//			
+//			String parameter = "cid=TC0ONETIME&tid="+tid+"&partner_order_id=partner_order_id&partner_user_id=partner_user_id&pg_token="+pg_token;
+//			
+//			OutputStream ops = connection.getOutputStream();
+//			
+//			DataOutputStream dop = new DataOutputStream(ops);
+//			
+//			dop.writeBytes(parameter);
+//			dop.close();
+//			
+//			int result = connection.getResponseCode();
+//			
+//			InputStream ips;
+//			
+//			if(result==200) {
+//				
+//				ips = connection.getInputStream();
+//			}else {
+//				
+//				ips = connection.getErrorStream(); 
+//			}
+//			
+//			InputStreamReader isr = new InputStreamReader(ips);
+//			
+//			BufferedReader bfr = new BufferedReader(isr);
+//			
+//			return bfr.readLine();
+//			
+//		} catch (MalformedURLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		
+		
+		
+		
+		return mav;
 	}
 
 	@RequestMapping("/fail")
@@ -129,4 +184,15 @@ public class UserAjax {
 	public String cancel() {
 		return "취소";
 	}
+	
+	//결제가 완료될때까지 대기하는 페이지
+	@RequestMapping("/ready")
+	public ModelAndView ready(HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("kakaopay_ready");
+		httpsession.setAttribute("pay_tid", request.getParameter("tid"));
+		return mav;
+	}
+	
+	
 }
