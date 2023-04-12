@@ -34,5 +34,4 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 <select id="findUserPwd" parameterType="map" resultType="String">
 	select realpwd from userdata where userName = #{userName} and userTel = #{userTel} and userId = #{userId}
 </select>
-
 </mapper>
