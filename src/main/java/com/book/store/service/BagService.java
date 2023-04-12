@@ -15,6 +15,6 @@ public interface BagService {
 
 	public BookDTO getReadData(int seq_No) throws Exception;
 
-	public void deleteData(int bagId) throws Exception;
+	public void deleteData(int seq_No) throws Exception;
 
 }
