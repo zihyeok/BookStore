@@ -5,6 +5,61 @@
 
 <link rel="stylesheet" type="text/css" href="css/BookList.css">
 
+<script type="text/javascript" src="/js/ajaxUtil.js"></script>
+<script type="text/javascript">
+
+function sendBag(seq_No){
+	
+	if(seq_No==""){
+		
+		return;
+	}
+	
+	var params = "seq_No=" + seq_No;
+	
+	sendRequest("/selectItem.action",params,returnBag,"POST");
+	
+}
+
+function returnBag(){
+	
+	if(httpRequest.readyState==4){
+		
+		if(httpRequest.status==200){
+			
+			var text = httpRequest.responseText;
+			var resultText = JSON.parse(text);
+			var count = Object.keys(resultText.lists).length;
+	
+			
+			for(var i=0;i<count;i++){
+				
+				var like = document.getElementById(resultText.lists[i].seq_No);
+				like.innerHTML="장바구니 담김";
+			}
+			
+		}
+		
+	}
+	
+}
+
+function sendAllItem(){
+	
+	var params = null;
+	sendRequest("/allItem.action",params,returnBag,"POST");
+	
+}
+
+window.onload = function(){
+	
+	sendAllItem();
+	
+}
+
+
+</script>
+
 </br></br></br></br>
 </br></br></br></br>
 
@@ -20,7 +75,8 @@
 			<span>[[${dto.authr_Nm}]]</span><br/>
 			<span>출판사:[[${dto.publisher_Nm}]]</span><br/>
 			<span>가격:[[${dto.prc_Value}]]원</span><br/>
-			
+			<a th:onclick="|javascript:sendBag('${dto.seq_No}')|">찜</a>
+			<div th:id="${dto.seq_No}"></div>
 		</div>
 		
 		

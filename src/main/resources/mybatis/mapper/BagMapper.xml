@@ -7,7 +7,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.book.store.mapper.BagMapper">
 
 <select id="maxNum" resultType="int">
-	select nvl(max(num),0) from BagItem
+	select nvl(max(bagId),0) from BagItem
 </select>
 
 <insert id="insertData" parameterType="com.book.store.dto.BagDTO">
@@ -15,12 +15,14 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 </insert>
 
 <select id="getLists" parameterType="String" resultType="com.book.store.dto.BookDTO">
-	select seq_No,title_Nm,publisher_Nm,prc_value,img_Url,authr_Nm from BookItem 
-	where seq_No = (select seq_No from BagItem where userId = #{userId})
+	SELECT  b.seq_No,a.title_Nm,a.publisher_Nm,a.prc_value,a.image_Url,a.authr_Nm
+    FROM BookItem a INNER JOIN BagItem b 
+    ON a.seq_No = b.seq_No 
+    where b.userId = #{userId}
 </select>
 
 <select id="getReadData" parameterType="int" resultType="com.book.store.dto.BookDTO">
-	select title_Nm,publisher_Nm,prc_value,img_Url,authr_Nm from BookItem 
+	select title_Nm,publisher_Nm,prc_value,image_Url,authr_Nm from BookItem 
 	where seq_No = #{seq_No}
 </select>
 
