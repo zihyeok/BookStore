@@ -20,10 +20,12 @@
     <div class="content-box">
 
       <div>
-        book store 통합 아이디로 로그인 하실 수 있습니다.
+        book store 통합 아이디로 로그인 하실 수 있습니다.<br/>
+        <span th:if="${idAlert != null}" th:text="${idAlert}" style="color: black;"></span>
+        <span th:if="${pwdAlert != null}" th:text="${pwdAlert}" style="color: black;"></span>
       </div>
       
-      <span th:if="${idAlert != null}" th:text="${idAlert}"></span>
+      
       
       <div>
         <input type="text" placeholder="아이디를 입력해주세요." name="username" id="username">
@@ -35,11 +37,10 @@
 
       <div>
         <label>
-          <input type="checkbox" id="checkbox">아이디 저장
         </label>
         <div>
           <a href="/user/findId">아이디 찾기</a>
-          <a href="#">비밀번호 찾기</a>
+          <a href="/user/findPwd">비밀번호 찾기</a>
         </div>
       </div>
 
