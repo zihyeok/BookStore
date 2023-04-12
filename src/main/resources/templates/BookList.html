@@ -5,6 +5,139 @@
 
 <link rel="stylesheet" type="text/css" href="css/BookList.css">
 
+<script type="text/javascript" src="/js/ajaxUtil.js"></script>
+<script th:inline="javascript">
+
+function sendBag(seq_No){
+	
+	if(seq_No==""){
+		
+		return;
+	}
+	
+	if([[${session.user}]] == null){
+		//session.user.userId 이건 비교할 수 없음 session.user는 비교가 됨
+		//user가 없으면 애시당초 userId를 찾을 수가 없어서 에러가 남 그래서 딱 session.user까지만 비교를 해야 함
+		
+		alert("로그인 후 이용해주세요");
+		
+		window.location.href="/insertItem.action?seq_No=" + seq_No;
+		
+	}else if([[${session.user}]] != null){
+		
+		var params = "seq_No=" + seq_No;
+		
+		sendRequest("/insertItem.action",params,returnBag,"POST");
+		//주의 : callback함수가 있으면 json형태로 값을 무조건 반환해주기 때문에 중간에 redirect같은 것이 안 됨
+		
+	}
+
+}
+
+function returnBag(){
+	
+	if(httpRequest.readyState==4){
+		
+		if(httpRequest.status==200){
+			
+			var text = httpRequest.responseText;
+			var resultText = JSON.parse(text);
+			var count = Object.keys(resultText.lists).length;
+			for(var i=0;i<count;i++){
+
+				show(resultText.lists[i].seq_No);
+				
+			}
+		
+		}
+		
+	}
+	
+}
+
+function sendDeleteBag(seq_No){
+
+	if(seq_No==""){
+		
+		return;
+		
+	}
+	
+	if([[${session.user}]] == null){
+		
+		alert("로그인이 만료되었습니다");
+		
+		window.location.href="/deleteItem.action?seq_No=" + seq_No;
+		
+	}else if([[${session.user}]] != null){
+		
+		var params = "seq_No=" + seq_No;
+		
+		sendRequest("/deleteItem.action",params,returnDeleteBag,"POST");
+		
+	}
+	
+}
+
+function returnDeleteBag(){
+	
+	if(httpRequest.readyState==4){
+		
+		if(httpRequest.status==200){
+			
+			var text = httpRequest.responseText;
+			
+			var resultText = JSON.parse(text);
+			
+			hide(resultText.bagDTO.seq_No);
+
+		}
+		
+	}
+	
+}
+
+function sendAllItem(){
+
+	var params = null;
+		
+	sendRequest("/selectItem.action",params,returnBag,"POST");
+
+}
+
+window.onload = function(){
+	
+	sendAllItem();
+	
+}
+
+function show(seq_No) {
+
+	var d_No = "delete" + seq_No;
+
+	var beforeItem = document.getElementById(seq_No);
+	beforeItem.style.display = "none";
+	
+	var afterItem = document.getElementById(d_No);
+	afterItem.style.display = "block";
+	
+}
+
+function hide(seq_No) {
+	
+	var d_No = "delete" + seq_No;
+
+	var beforeItem = document.getElementById(seq_No);
+	beforeItem.style.display = "block";
+	
+	var afterItem = document.getElementById(d_No);
+	afterItem.style.display = "none";
+	
+}
+
+
+</script>
+
 </br></br></br></br>
 </br></br></br></br>
 
@@ -20,6 +153,13 @@
 			<span>[[${dto.authr_Nm}]]</span><br/>
 			<span>출판사:[[${dto.publisher_Nm}]]</span><br/>
 			<span>가격:[[${dto.prc_Value}]]원</span><br/>
+			
+			<div th:id="${dto.seq_No}">
+			<a th:onclick="|javascript:sendBag('${dto.seq_No}')|"><button>🤍</button></a>
+			</div>
+			<div th:id="'delete' + ${dto.seq_No}" style="display: none;">
+			<a th:onclick="|javascript:sendDeleteBag('${dto.seq_No}')|"><button>❤️</button></a>
+			</div>
 			
 		</div>
 		

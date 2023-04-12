@@ -30,7 +30,7 @@
     <tbody>
       <tr>
         <th>글 번호 :</th>
-        <td>[[${dto.num}]]</td>
+        <td>[[${dto.boardNum}]]</td>
         <th>조회수 :</th>
         <td>[[${dto.hitCount}]]</td>
       </tr>
@@ -54,27 +54,63 @@
   </table>
   
   <div style="margin-top: 20px; margin-right: 100px;">
-  <button  class="black-btn float-r m-btn" 
-  th:onclick="@{|location='/boardupdated.action?num=${dto.num }&${params }'|}">
-  수정</button>
-  <button class="black-btn float-r m-btn" 
-  th:onclick="'location.href=\'boarddeleted_ok.action?num=' + @{${dto.num}} + '&' + @{${params}} + '\''">
-  삭제</button>
-  <button class="black-btn float-r m-btn" 
-  th:onclick="@{|location.href='/boardlist.action?${params }'|}">
-  리스트</button>
+	  <button  class="black-btn float-r m-btn" 
+	  th:onclick="@{|location='/BoardUpdated.action?num=${dto.boardNum }&${params }'|}">
+	  수정</button>
+	  <button class="black-btn float-r m-btn" 
+	  th:onclick="'location.href=\'BoardDeleted_ok.action?num=' + @{${dto.boardNum}} + '&' + @{${params}} + '\''">
+	  삭제</button>
+	  <button class="black-btn float-r m-btn" 
+	  th:onclick="@{|location.href='/BoardList.action?${params }'|}">
+	  리스트</button>
   </div>
+  
+	<div>
+	이전글 : 
+	<a th:if="${!empty preSubject }" th:href="@{|location='/BoardArticle.action?${params}&num=${preNum}'|}">
+	[[${preSubject}]]
+	</a>
+	
+	</div>
   
 </section>  
   
 </article>
 
+<table width="700" border="0" cellpadding="0" cellspacing="0" style="margin: auto;">
+<tr>
+	<td width="600" colspan="4" height="3" bgcolor="#e6d4a6"></td>
+</tr>
 
+<tr>
+	<td width="60" height="30" bgcolor="#eeeeee" align="center">작성자</td>
+	<td width="240" height="30" style="padding-left: 10px;">
+	<input type="text" id="name" size="35" maxlength="20" class="boxTF"/>
+	</td>
+</tr>
 
-<!-- <textarea rows="12" cols="82" name="content"
-						style="padding-left: 20px; border: none; resize: none; background-color: #ffffff;"
-						class="boxTA" th:text="${dto.content}" disabled="disabled"></textarea>
-				 -->	
+<tr>
+	<td width="600" colspan="4" height="1" bgcolor="#e6d4a6"></td>
+</tr>
+
+<tr>
+	<td width="60" height="30" bgcolor="#eeeeee" align="center">내용</td>
+	<td width="540" colspan="3" style="padding-left: 10px;">
+		<textarea rows="3" cols="85" class="boxTA" style="height: 50px; resize: none;" id="content"></textarea>
+	</td>
+	
+<tr>
+	<td width="600" colspan="4" height="3" bgcolor="#e6d4a6"></td>
+</tr>
+
+<tr>
+	<td width="600" colspan="4" height="30" align="right" style="padding-right: 15px;">
+		<input type="button" value="등록하기" class="btn2" id="sendButton"/>
+	</td>
+</tr>
+
+</table>
+
 
 
 

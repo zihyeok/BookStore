@@ -11,8 +11,9 @@
       <div class="tab_content">
         <div class="tab_box">
           <p class="tit" style="text-align: center;">Q&A 게시판 등록</p>
-          <br /><br /><!-- th:action="@{boardcreated.action}" /action="/submit-form"  -->
-          <form th:action="@{boardcreated.action}" method="post" name="myForm" >
+          <br /><br />
+          <!-- th:action="@{boardcreated.action}" /action="/submit-form"  -->
+          <form th:action="@{BoardCreated.action}" method="post" name="myForm" >
             <div class="ask_box">
               <p>
                 <label>제목</label>
@@ -43,7 +44,7 @@
             </div>
             
           	<div class="btn_box" style="margin-top: 20px;">
-                <button class="black-btn float-r m-btn" onclick="location.href='/boardlist.action'">
+                <button class="black-btn float-r m-btn" onclick="location.href='/BoardList.action'">
                 작성취소</button>
 			</div>
 			
