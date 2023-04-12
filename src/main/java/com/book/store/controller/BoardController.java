@@ -62,8 +62,7 @@ public class BoardController {
 			int maxNum = boardService.maxNum();
 			
 			dto.setNum(maxNum+1);
-			
-			
+						
 			boardService.insertData(dto);
 
 			mav.setViewName("redirect:/boardlist.action");
