@@ -35,7 +35,7 @@ public class BoardController {
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("Main");
+		mav.setViewName("boardlist");
 		//jsp(html)로 갈때는 setViewName /class로 갈때는 setView
 		
 		return mav;

@@ -1,19 +1,19 @@
 package com.book.store.dto;
 
-public class ReviewDTO {	
+import lombok.Data;
+
+@Data
+public class ReviewDTO {		
 	
-	private int seq_No;
-	
-	private String userId;
+	private int num;
+	private int seq_No;	
 	private String userName;
-	private String reviewId;
+	private String userPwd;
+	private String content;	
 	
-	private String subject;
-	private String content;
-
-	private String created;
-	private String fix_created;
-
-	private int hitCount;
-
+	private String ipAddr;
+	
+	private String created;	
+	private String fix_created;	
+	
 }
