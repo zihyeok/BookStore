@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,9 +28,49 @@ public class BagController {
 
 	@Resource
 	BagService bagService = new BagServiceImpl();
+	
+	@GetMapping("/bag.action")
+	public ModelAndView goBag(HttpServletRequest request) throws Exception{
+		
+		UserData user = null;
+
+		if(httpSession.getAttribute("user")!="") {
+
+			user = (UserData) httpSession.getAttribute("user");
+
+
+		}else if(httpSession.getAttribute("OauthUser")!="") {
+
+			user = (UserData) httpSession.getAttribute("OauthUser");
+
+		}
+		
+		if(user==null) {
+		
+			ModelAndView mav = new ModelAndView();
+			
+			mav.setViewName("redirect:/user/login");
+
+			return mav;
+
+		}
+		
+		String userId = user.getUserId();
+		
+		List<BookDTO> lists = bagService.getLists(userId);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("lists", lists);
+		
+		mav.setViewName("basket");
+		
+		return mav;
+		
+	}
 
 	@RequestMapping("/insertItem.action")
-	public ModelAndView insertItem(HttpServletRequest request,BagDTO dto,HttpServletResponse response) throws Exception{
+	public ModelAndView insertItem(HttpServletRequest request,BagDTO dto) throws Exception{
 				//여기에 request 말고도 매개변수로 bagdto dto를 받게되면 ajax로 넘어올때 bagdto정보도 같이 넘어옴
 
 		UserData user = null;
@@ -161,6 +202,48 @@ public class BagController {
 		return mav;		
 
 		
+	}
+	
+	@RequestMapping("deleteBag.action")
+	public ModelAndView deleteItem(HttpServletRequest request) throws Exception{
+		
+		System.out.println("들어옴?");
+		
+		UserData user = null;
+		
+		int seq_No = Integer.parseInt(request.getParameter("seq_No"));
+		
+		if(httpSession.getAttribute("user")!="") {
+
+			user = (UserData) httpSession.getAttribute("user");
+
+
+		}else if(httpSession.getAttribute("OauthUser")!="") {
+
+			user = (UserData) httpSession.getAttribute("OauthUser");
+
+		}
+		
+		if(user==null) {
+		//else if는 안되고 if는 됨
+			ModelAndView mav = new ModelAndView();
+
+			mav.setViewName("redirect:/user/login");
+
+			return mav;
+
+		}
+		
+		String userId = user.getUserId();
+		
+		bagService.deleteData(seq_No);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("redirect:/bag.action");
+		
+		return mav;
+
 	}
 	
 }

@@ -41,6 +41,7 @@ function returnBag(){
 		if(httpRequest.status==200){
 			
 			var text = httpRequest.responseText;
+			alert(text);
 			var resultText = JSON.parse(text);
 			var count = Object.keys(resultText.lists).length;
 			for(var i=0;i<count;i++){
