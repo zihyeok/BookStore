@@ -23,7 +23,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 <select id="getLists" parameterType="map" resultType="com.book.store.dto.BoardDTO">
 	select * from (
 	select rownum rnum,data.* from (
-	select boardNum,name,subject,hitCount,to_char(created,'YYYY-MM-DD') created 
+	select boardNum,name,subject,content,hitCount,to_char(created,'YYYY-MM-DD') created 
 	from board where ${searchKey} like '%' || #{searchValue} || '%' 
 	order by boardNum desc) data) 
 <![CDATA[

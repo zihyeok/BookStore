@@ -7,6 +7,9 @@
 <!-- 버튼용 -->
 <link rel="stylesheet" type="text/css" href="/css/BoardCreated.css">
 
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+
 </br></br></br></br>
 </br></br></br></br>
 </br></br></br></br>
@@ -86,6 +89,8 @@
   
 </article>
 
+<span id="listData" style="display: block;"></span>
+
 <table width="700" border="0" cellpadding="0" cellspacing="0" style="margin: auto;">
 <tr>
 	<td width="600" colspan="4" height="3" bgcolor="#e6d4a6"></td>
@@ -120,7 +125,102 @@
 
 </table>
 
+<span id="listData" style="display: block;"></span>
 
+<!-- 댓글창 합쳐보기 -->
+<script type="text/javascript">
+
+$(function () {
+	listPage(1);	
+});
+
+$(document).ready(function() {
+
+	$("#sendButton").click(function(){
+		
+		var params = "name=" + $("#name").val()
+					+ "&boardNum=" + ${dto.boardNum}
+					+ "&content=" + $("#content").val();
+		
+		$.ajax({
+			
+			type:"post",
+			url:"/CommentCreated.action",
+			data:params,
+			success:function(args){//가져온 데이터를 args에 담아서
+				
+				$("#listData").html(args);
+				
+				$("#name").val("");
+				$("#content").val("");
+				
+				$("#name").focus();
+				
+			},
+			beforeSend:showRequest,
+			error:function(e){
+				alert(e.responseText);
+			}
+			
+		});
+		
+	});
+	
+});
+	
+
+
+function showRequest() {
+	
+	var name = $.trim($("#name").val());
+	var content = $.trim($("#content").val());
+	
+	if(!name){
+		alert("\n이름을 입력하세요");
+		
+		$("#name").focus();
+		return false;
+	}
+
+	if(!content){
+		alert("\n내용을 입력하세요");
+		$("#content").focus();
+		return false;
+	}
+	
+	if(content.length>200){
+		alert("\n내용은 200자까지 가능합니다");
+		$("#content").focus();
+		return false;
+	}
+	
+	return true;
+	
+}
+
+function listPage(page) {
+	
+	var url = "/CommentList.action";
+	
+	$.post(url,{pageNum:page,boardNum:${dto.boardNum}},function(args){
+		$("#listData").html(args);
+	
+	});
+	
+}
+
+function deleteData(num,page) {
+	
+	var url = "/CommentDeleted.action";
+	
+	$.post(url,{commentNum:num,pageNum:page,boardNum:${dto.boardNum}},function(args){
+		$("#listData").html(args);
+		
+	});
+	
+}
+
+</script>
 
 
 </div>
