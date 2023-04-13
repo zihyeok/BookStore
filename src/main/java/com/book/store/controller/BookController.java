@@ -43,6 +43,7 @@ public class BookController {
 
 		return mav;
 	}
+	
 
 	@GetMapping("/BookCreated.action")
 	public ModelAndView itemCreated() throws Exception{
@@ -192,6 +193,7 @@ public class BookController {
 	public ModelAndView article(HttpServletRequest request) throws Exception{
 
 		int seq_No = Integer.parseInt(request.getParameter("seq_No"));
+
 		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
 
 		String searchKey = request.getParameter("searchKey");
@@ -340,6 +342,5 @@ public class BookController {
 		return mav;
 
 	}
-
 
 }
