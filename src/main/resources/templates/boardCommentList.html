@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" http-equiv="Content-Type" ><!-- http-equiv="Content-Type" 한글나오게함 -->
+<title>대댓글</title>
+</head>
+
+<body>
+
+  </br></br></br></br>
+
+  <table th:if="${DataCount != 0}" width="700" border="0" cellpadding="0" cellspacing="0" style="margin: auto;">
+
+    <div th:each="dto: ${lists}" th:if="${#lists.size(lists) > 0}">
+      <tr>
+        <td colspan="2" bgcolor="#999999" height="1"></td>
+      </tr>
+      <tr height="30" bgcolor="#dbdbdb">
+        <td width="300" style="padding-left: 10px;">
+          <b>No. [[${dto.listNum}]]&nbsp;&nbsp;[[${dto.name}]]</b>
+        </td>
+        <td width="300" align="right" style="padding-right: 10px;">
+          [[${dto.created}]]&nbsp;
+          <a th:href="@{|location.href='/CommentDeleted.action?${dto.commentNum }&${pageNum }'|}">삭제</a>
+        </td>
+      </tr>
+      <tr>
+        <td height="50" style="padding-left: 10px;" colspan="2">
+          [[${dto.content}]]
+        </td>
+      </tr>
+    </div>
+
+    <tr>
+      <td colspan="2" bgcolor="#dbdbdb" height="2">
+      </td>
+    </tr>
+    <tr height="30">
+      <td align="center" colspan="2">
+        [[${pageIndexList}]]
+      </td>
+    </tr>
+  </table>
+  
+
+
+
+
+</body>
+</html>

@@ -12,7 +12,7 @@ public interface BoardCommentService {
 	
 	public int getDataCount(int boardNum) throws Exception;
 	
-	public List<BoardCommentDTO> getLists(int start,int end,String searchKey,String searchValue) throws Exception;
+	public List<BoardCommentDTO> getLists(int start,int end,int boardNum) throws Exception;
 	
 	public void deleteData(int boardNum) throws Exception;
 }

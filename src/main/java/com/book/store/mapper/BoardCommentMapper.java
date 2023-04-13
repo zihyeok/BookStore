@@ -17,7 +17,7 @@ public interface BoardCommentMapper {
 	
 	public int getDataCount(@Param("boardNum")int boardNum) throws Exception;
 	
-	public List<BoardCommentDTO> getLists(@Param("start")int start,@Param("end")int end,@Param("searchKey")String searchKey,@Param("searchValue")String searchValue) throws Exception;
+	public List<BoardCommentDTO> getLists(@Param("start")int start,@Param("end")int end,@Param("boardNum")int boardNum) throws Exception;
 	
 	public void deleteData(int boardNum) throws Exception;
 	

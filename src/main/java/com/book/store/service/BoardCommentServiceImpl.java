@@ -29,9 +29,9 @@ public class BoardCommentServiceImpl implements BoardCommentService{
 	}
 
 	@Override
-	public List<BoardCommentDTO> getLists(int start, int end, String searchKey, String searchValue) throws Exception {
+	public List<BoardCommentDTO> getLists(int start, int end, int boardNum) throws Exception {
 		
-		return boardCommentMapper.getLists(start, end, searchKey, searchValue);
+		return boardCommentMapper.getLists(start, end, boardNum);
 	}
 
 	@Override
@@ -46,10 +46,6 @@ public class BoardCommentServiceImpl implements BoardCommentService{
 	}
 
 
-	
-
-	
-	
 	
 	
 }
