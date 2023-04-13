@@ -21,7 +21,6 @@ function getXmlHttpRequest(){
 
 var httpRequest = null;
 
-
 function sendRequest(url,params,callback,method){
 
 	httpRequest = getXmlHttpRequest();

@@ -1,8 +1,4 @@
-/**
- * 
- */
- 
- // document.getElementById(' ').classList.toggle(' ');
+// document.getElementById(' ').classList.toggle(' ');
 //  document.getElementById(" ").style.display = " ";
 
 // var pCont = document.querySelectorAll(".page p")
@@ -118,4 +114,3 @@ window.addEventListener("load", function() {
     }
   }
 });
- 

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+<script type="text/javascript">
+
+$(function(){
+	
+	var urlParams = new URLSearchParams(window.location.search);
+	var pg_token = urlParams.get('pg_token');
+	var tid = $("#tid").val();
+	
+	$.ajax({
+		
+		url:"https://kapi.kakao.com/v1/payment/approve",
+		type:'POST',
+		data:{
+			'cid' : 'TC0ONETIME',
+			'tid' : tid,
+			'partner_order_id' : 'partner_order_id',
+			'partner_user_id' : 'partner_user_id',
+			'pg_token' : pg_token
+		},
+		headers:{
+			'Authorization' : 'KakaoAK 051b33bdbbe0ba43924808b0a780bb6c',
+			'Content-type' : 'application/x-www-form-urlencoded;charset=utf-8'
+		},
+		dataType:"json",
+		success:function(data){
+			
+			alert(JSON.stringify(data))
+		},
+		error:function(error){
+			
+			alert(error);
+		}
+	});
+	
+	
+	
+});
+</script>
+<body>
+
+<h2>결제완료</h2>
+
+
+
+<input type="hidden" th:value="${tid}" id="tid">
+</body>
+</html>

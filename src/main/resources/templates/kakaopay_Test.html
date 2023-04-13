@@ -18,8 +18,9 @@ $(function(){
 			success:function(data){
 				
 				var url = data.next_redirect_pc_url;
+				var tid = data.tid;
 				
-				window.open(url);
+				window.location.href = '/ready?url='+url+'&tid='+tid;
 			},
 			error:function(error){
 				
