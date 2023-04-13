@@ -30,6 +30,8 @@ public interface BoardMapper {
 	
 	public void deleteData(int boardNum) throws Exception;
 	
-	public BoardDTO preReadData(@Param("boardNum")String boardNum,@Param("subject")String subject,@Param("searchKey")String searchKey,@Param("searchValue")String searchValue) throws Exception;
+	public BoardDTO preReadData(@Param("boardNum")int boardNum,@Param("subject")String subject,@Param("searchKey")String searchKey,@Param("searchValue")String searchValue) throws Exception;
+	
+	public BoardDTO nextReadData(@Param("boardNum")int boardNum,@Param("subject")String subject,@Param("searchKey")String searchKey,@Param("searchValue")String searchValue) throws Exception;
 	
 }

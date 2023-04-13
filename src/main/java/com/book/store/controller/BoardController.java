@@ -121,7 +121,8 @@ public class BoardController {
 			int start = (currentPage-1)*numPerPage+1;
 			int end = currentPage*numPerPage;
 			
-		
+			
+			
 			List<BoardDTO> lists = boardService.getLists(start, end, searchKey, searchValue);
 			
 			int listNum,n = 0;
@@ -147,6 +148,7 @@ public class BoardController {
 			
 			String param = "";
 			
+			
 			if(searchValue!=null&&!searchValue.equals("")) {
 				param = "searchKey=" + searchKey;
 				param+= "&searchValue=" + URLEncoder.encode(searchValue,"utf-8");
@@ -165,6 +167,7 @@ public class BoardController {
 			
 			if(!param.equals("")) {
 				articleUrl += "&" + param;
+				
 			}
 			
 			
@@ -177,6 +180,7 @@ public class BoardController {
 			mav.addObject("pageIndexList", pageIndexList);
 			mav.addObject("dataCount", dataCount);
 			mav.addObject("articleUrl", articleUrl);
+			
 			//mav.addObject("pageNum", currentPage);//3번째 방법시 같이넘겨야함
 			
 
@@ -199,8 +203,13 @@ public class BoardController {
 			String searchKey = request.getParameter("searchKey");
 			String searchValue = request.getParameter("searchValue");
 			
-			if(searchValue!=null) {
-				searchValue = URLDecoder.decode(searchValue,"utf-8");
+			if(searchValue==null) {
+				searchKey = "subject";
+				searchValue = "";
+			}else {
+				if(request.getMethod().equalsIgnoreCase("GET")) {
+					searchValue = URLDecoder.decode(searchValue,"utf-8");
+				}
 			}
 			
 			boardService.updateHitCount(num);
@@ -208,7 +217,6 @@ public class BoardController {
 			BoardDTO dto = boardService.getReadData(num);
 			
 			if(dto==null) {
-				
 				
 				mav.setViewName("redirect:BoardList.action?pageNum=" + pageNum 
 						+ "&searchKey=" + searchKey + "&searchValue=" + searchValue);
@@ -219,17 +227,9 @@ public class BoardController {
 			
 			//dto.setContent(dto.getContent().replaceAll("\r\n", "<br/>"));
 			
-			String param = "pageNum=" + pageNum;
 			
-			if(searchValue!=null && !searchValue.equals("")) {
-				param += "&searchKey=" + searchKey;
-				param += "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");
-			}
-			
-//------------------------------------------------------------- 이전글
-		
-			
-			String boardNum = request.getParameter("boardNum");
+			//이전글
+			int boardNum = num;
 			String subject = request.getParameter("subject");
 			
 			BoardDTO preDTO = boardService.preReadData(boardNum, subject, searchKey, searchValue);
@@ -240,20 +240,28 @@ public class BoardController {
 			    preNum = preDTO.getBoardNum();
 			    preSubject=preDTO.getSubject();
 			}
+			
+			BoardDTO nextDTO = boardService.nextReadData(boardNum, subject, searchKey, searchValue);
 		
-//-------------------------------------------------------------			
+			int nextNum=0;
+			String nextSubject = "";
+			if(nextDTO!=null) {
+				nextNum = nextDTO.getBoardNum();
+				nextSubject=nextDTO.getSubject();
+			}
 			
 			
-			/*
-			 * request.setAttribute("preNum", preNum); 
-			 * request.setAttribute("preSubject",preSubject);
-			 * request.setAttribute("nextNum", nextNum);
-			 * request.setAttribute("nextSubject", nextSubject);
-			 */
+			String param = "pageNum=" + pageNum;
+			
+			if(searchValue!=null && !searchValue.equals("")) {
+				param += "&searchKey=" + searchKey;
+				param += "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");
+			}
 			
 			mav.addObject("preNum", preNum);
 			mav.addObject("preSubject", preSubject);
-			
+			mav.addObject("nextNum", nextNum);
+			mav.addObject("nextSubject", nextSubject);
 			
 			mav.addObject("dto", dto);
 			mav.addObject("params", param);

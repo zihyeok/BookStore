@@ -61,7 +61,8 @@
           <span style="margin-right: 10px;" class="weather-header-details" th:text="${dto.hitCount}">조회수</span>
           <a th:href="@{|${articleUrl}&num=@{${dto.boardNum}}|}" style="margin-bottom: 30px;">
 	          <span style="margin-right: 110px;" class="weather-header-details" 
-	          th:text="${dto.subject}" th:href="@{|${articleUrl}&num=@{${dto.boardNum}&searchValue=${searchValue }}|}">
+	          th:text="${dto.subject}" th:href="@{|${articleUrl}&num=@{${dto.boardNum}}|}">
+	          <!-- &searchValue=${searchValue } -->
 	          제목                    
 	          </span>
 	          <!--  댓글 번호 참고 
