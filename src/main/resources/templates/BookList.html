@@ -44,6 +44,7 @@ function returnBag(){
 			alert(text);
 			var resultText = JSON.parse(text);
 			var count = Object.keys(resultText.lists).length;
+			
 			for(var i=0;i<count;i++){
 
 				show(resultText.lists[i].seq_No);
