@@ -1,10 +1,95 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- 내가넣은거 -->
 <link rel="stylesheet" href="css/basket.css">
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+<script type="text/javascript" src="/js/ajaxUtil.js"></script>
+<script th:inline="javascript">
+
+var itemList = document.getElementsByName("item");
+var seq_No_List = document.getElementsByName("seq_No");
+
+$(function(){
+	
+	//체크박스 전체 체크
+	$("#checkAll").click(function () {
+		
+		  $("input[name=item]").prop("checked", $(this).prop("checked"));
+		  
+		  var price = 0;
+			
+			$.each(itemList,function(index,item){
+				
+				if(item.checked==true){
+					
+					price += parseInt(item.value);
+									
+				}
+				
+			});
+			
+			$("#totalPrice").html(price + "원");
+		
+	});
+	
+	//하나의 체크박스가 풀렸을때 천체 체크의 체크취소
+	$("input[name=item]").click(function(){
+		
+		if($("input[name=item]:checked").length == $("input[name=item]").length){
+			
+			$("#checkAll").prop("checked",true);
+			
+		}else {
+			
+			$("#checkAll").prop("checked",false);
+			
+		}
+		
+	});
+	
+	//하나의 아이템 선택했을 때 값이 바뀜
+	$("input[name=item]").click(function(){
+		
+		var price = 0;
+		
+		$.each(itemList,function(index,item){
+			
+			if(item.checked==true){
+				
+				price += parseInt(item.value);
+								
+			}
+			
+		});
+		
+		$("#totalPrice").html(price + "원");
+		
+	});
+	
+	$("#deleteBag").click(function(){
+		
+		$.each(itemList,function(index,item){
+			
+			if(item.checked==true){
+				
+				var seq_No = "seq_No=" + item.id;
+				alert(item.id);
+				
+				window.location.href="deleteBag.action?" + seq_No;
+				
+			}
+			
+		});
+		
+	});
+	
+});
+
+</script>
+
 </head>
 <body>
     <section class="cart">
@@ -19,56 +104,42 @@
             <form>
                 <thead>
                     <tr>
-                        <td><input type="checkbox"></td>
+                        <td><input type="checkbox" id="checkAll"></td>
                         <td colspan="2">상품정보</td>
                         <td>옵션</td>
                         <td>상품금액</td>
                         <td>배송비</td>
                     </tr>
                 </thead>
+                
                 <tbody>
-                    <tr class="cart__list__detail">
-                        <td><input type="checkbox"></td>
-                        <td><img src="image/keyboard.jpg" alt="magic keyboard"></td>
-                        <td><a href="#">애플 공식 브랜드스토어</a><span class="cart__list__smartstore"> 스마트스토어</span>
-                            <p>Apple 매직 키보드 - 한국어(MK2A3KH/A)</p>
-                            <sapn class="price">116,62원</sapn><span
-                                style="text-decoration: line-through; color: lightgray;">119,000</span>
+                    <tr class="cart__list__detail" th:each="dto,dtoStat: ${lists}">
+                        <td><input type="checkbox" th:id="${dto.seq_No}" name="item"
+                        th:value="${dto.prc_Value}"></td>
+                        <td><img th:src="${dto.image_Url}" alt="image"></td>
+                        <td><a th:href="'/BookArticle.action?seq_No=' + @{${dto.seq_No}} + '&pageNum=1'">해당 상품 페이지</a>
+                            <p>[[${dto.publisher_Nm}]]</p>
+                            <span class="price">
+                            [[${dto.prc_Value}]]</span>
                         </td>
                         <td class="cart__list__option">
-                            <p>모델명 : 키보드 - 한국어 MK2A3KH/A / 1개</p>
+                            <p>제목 : [[${dto.title_Nm}]]</p>
                             <button class="cart__list__optionbtn">주문조건 추가/변경</button>
                         </td>
-                        <td><span class="price">116,620원</span><br>
+                        <td><span class="price">[[${dto.prc_Value}]]원</span><br>
                             <button class="cart__list__orderbtn">주문하기</button>
                         </td>
                         <td>무료</td>
-                    </tr>
-                    <tr class="cart__list__detail">
-                        <td style="width: 2%;"><input type="checkbox"></td>
-                        <td style="width: 13%;">
-                            <img src="image/mouse.jpg" alt="magic mouse">
-                        </td>
-                        <td style="width: 27%;"><a href="#">컴퓨존</a><span class="cart__list__smartstore"> 스마트스토어</span>
-                            <p>[애플] Magic Mouse [MK2E3KH/A]</p>
-                            <span class=" price">88,900원</span>
-                        </td>
-                        <td class="cart__list__option" style="width: 27%;">
-                            <p>상품 주문 수량: 1개</p>
-                            <button class="cart__list__optionbtn">주문조건 추가/변경</button>
-                        </td>
-                        <td style="width: 15%;"><span class="price">88,900원</span><br>
-                            <button class="cart__list__orderbtn">주문하기</button>
-                        </td>
-                        <td style="width: 15%;">무료</td>
+                        <td><input type="hidden" name="seq_No" th:value="${dto.seq_No}"></td>
                     </tr>
                 </tbody>
+                
                 <tfoot>
                     <tr>
-                        <td colspan="3"><input type="checkbox"> <button class="cart__list__optionbtn">선택상품 삭제</button>
-                            <button class="cart__list__optionbtn">선택상품 찜</button>
+                        <td colspan="3"><input type="checkbox"> 
+                        	<button class="cart__list__optionbtn" id="deleteBag">선택상품 삭제</button>
                         </td>
-                        <td></td>
+                        <td id="totalPrice"></td>
                         <td></td>
                         <td></td>
                     </tr>
@@ -76,7 +147,7 @@
             </form>
         </table>
         <div class="cart__mainbtns">
-            <button class="cart__bigorderbtn left">홈으로 이동하기</button>
+            <button class="cart__bigorderbtn left" onclick="javascript:location.href='/main'">홈으로 이동하기</button>
             <button class="cart__bigorderbtn right">주문하기</button>
         </div>
     </section>
