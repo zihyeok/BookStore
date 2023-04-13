@@ -65,9 +65,14 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public BoardDTO preReadData(String boardNum, String subject, String searchKey, String searchValue)
+	public BoardDTO preReadData(int boardNum, String subject, String searchKey, String searchValue)
 			throws Exception {
 		return boardMapper.preReadData(boardNum, subject, searchKey, searchValue);
+	}
+
+	@Override
+	public BoardDTO nextReadData(int boardNum, String subject, String searchKey, String searchValue) throws Exception {
+		return boardMapper.nextReadData(boardNum, subject, searchKey, searchValue);
 	}
 
 	

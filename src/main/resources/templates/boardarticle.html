@@ -65,13 +65,22 @@
 	  리스트</button>
   </div>
   
-	<div>
+	<!-- 이전글 다음글 -->
+	<div style="text-align: center;">
 	이전글 : 
-	<a th:if="${!empty preSubject }" th:href="@{|location='/BoardArticle.action?${params}&num=${preNum}'|}">
-	[[${preSubject}]]
+	<a th:if="${preSubject != null and preSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${preNum}|}">
+	  <span th:text="${preSubject}"></span>
 	</a>
-	
 	</div>
+	
+	<div style="text-align: center;"> 
+	다음글 : 
+	<a th:if="${nextSubject != null and nextSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${nextNum}|}">
+	  <span th:text="${nextSubject}"></span> 
+	</a>
+	</div>
+	
+	
   
 </section>  
   

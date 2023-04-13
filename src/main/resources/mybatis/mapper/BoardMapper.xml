@@ -55,24 +55,23 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	select boardNum,subject from board
 	where ${searchKey} like '%' || #{searchValue} || '%' 
 <![CDATA[
-	and boardNum<#{boardNum}
+	and (boardNum<#{boardNum})
 	order by boardNum desc)data 
 	where rownum=1
 ]]> 
-
 </select>
 
-<!-- 
+
 <select id="nextReadData" parameterType="map" resultType="com.book.store.dto.BoardDTO">
 	select data.* from (
 	select boardNum,subject from board
 	where ${searchKey} like '%' || #{searchValue} || '%' 
 <![CDATA[
-	and boardNum>#{boardNum}
+	and (boardNum>#{boardNum})
 	order by boardNum asc)data 
 	where rownum=1
 ]]> 
 </select> 
--->
+
 
 </mapper>

@@ -24,6 +24,8 @@ public interface BoardService {
 	
 	public void deleteData(int boardNum) throws Exception;
 	
-	public BoardDTO preReadData(String boardNum,String subject,String searchKey,String searchValue) throws Exception;
+	public BoardDTO preReadData(int boardNum,String subject,String searchKey,String searchValue) throws Exception;
+	
+	public BoardDTO nextReadData(int boardNum,String subject,String searchKey,String searchValue) throws Exception;
 	
 }
