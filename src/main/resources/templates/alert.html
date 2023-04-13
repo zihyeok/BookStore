@@ -4,22 +4,15 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<script type="text/javascript">
+<script th:inline="javascript">
 
-	var message = [[${message}]];
+	var message = [[${alert}]];
 	
 	window.onload = function(){
-		
 		alert(message);
-		location.href='/logout';
+		location.href='/user/login';
 	}
-	
-
-
-
-
 </script>
 <body>
-
 </body>
 </html>

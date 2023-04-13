@@ -35,8 +35,7 @@ public class UserAjax {
 	
 	private final UserService userService;
 	private final HttpSession httpsession;
-	
-	
+
 	@PostMapping("/findId")
 	public Map<String, Object> findId(HttpServletRequest request) throws Exception {
 		

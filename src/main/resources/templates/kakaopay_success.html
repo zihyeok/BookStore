@@ -13,6 +13,8 @@ $(function(){
 	var pg_token = urlParams.get('pg_token');
 	var tid = $("#tid").val();
 	
+	$("body").hide();
+	 
 	$.ajax({
 		
 		url:"https://kapi.kakao.com/v1/payment/approve",
@@ -31,7 +33,9 @@ $(function(){
 		dataType:"json",
 		success:function(data){
 			
-			alert(JSON.stringify(data))
+			
+			$("#json").html(JSON.stringify(data))
+			$("body").show();
 		},
 		error:function(error){
 			
@@ -45,7 +49,8 @@ $(function(){
 </script>
 <body>
 
-<h2>결제완료</h2>
+ㅎㅇㅎㅇ 결제완료
+<div id="json"></div>
 
 
 
