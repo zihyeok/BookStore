@@ -9,53 +9,28 @@ import com.book.store.dto.ReviewDTO;
 import com.book.store.mapper.ReviewMapper;
 
 @Service
-public class ReviewServiceImpl implements ReviewService{
-	
-	@Autowired
-	private ReviewMapper reviewMapper;
+public class ReviewServiceImpl implements ReviewService {
 
-	@Override
-	public int maxNum() throws Exception {
+    @Autowired
+    private ReviewMapper reviewMapper;
 
-		return reviewMapper.maxNum();
-	}
+    @Override
+    public void insertReview(ReviewDTO review) {
+        reviewMapper.insertReview(review);
+    }
 
-	@Override
-	public void insertData(ReviewDTO dto) throws Exception {
-		reviewMapper.insertData(dto);
-		
-	}
+    @Override
+    public List<ReviewDTO> selectReviewBySeqNo(int seq_No) {
+        return reviewMapper.selectReviewBySeqNo(seq_No);
+    }
 
-	@Override
-	public int getDataCount(String searchKey, String searchValue) throws Exception {
-		
-		return reviewMapper.getDataCount(searchKey, searchValue);
-	}
+    @Override
+    public void updateReview(ReviewDTO review) {
+        reviewMapper.updateReview(review);
+    }
 
-	@Override
-	public List<ReviewDTO> getLists(int start, int end, String searchKey, String searchValue) throws Exception {
-		
-		return reviewMapper.getLists(start, end, searchKey, searchValue);
-	}
-
-	@Override
-	public ReviewDTO getReadData(int num) throws Exception {
-		
-		return reviewMapper.getReadData(num);
-	}
-
-	@Override
-	public int updateData(ReviewDTO dto) throws Exception {
-		
-		return reviewMapper.updateData(dto);
-	}
-
-	@Override
-	public int deleteData(int num) throws Exception {
-		
-		return reviewMapper.deleteData(num);
-	}
-
-
-
+    @Override
+    public void deleteReview(int num) {
+        reviewMapper.deleteReview(num);
+    }
 }

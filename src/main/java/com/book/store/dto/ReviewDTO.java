@@ -5,10 +5,9 @@ import lombok.Data;
 @Data
 public class ReviewDTO {		
 	
-	private int num;
-	private int seq_No;	
+	private int reviewId;
+	private int seq_No;
 	private String userName;
-	private String userPwd;
 	private String content;	
 	
 	private String ipAddr;
