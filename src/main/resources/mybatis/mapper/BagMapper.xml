@@ -26,8 +26,8 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	where seq_No = #{seq_No}
 </select>
 
-<delete id="deleteData" parameterType="int">
-	delete from BagItem where seq_No = #{seq_No}
+<delete id="deleteData" parameterType="map">
+	delete from BagItem where seq_No = #{seq_No} and userId = #{userId}
 </delete>
 
 
