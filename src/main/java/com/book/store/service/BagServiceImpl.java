@@ -36,8 +36,8 @@ public class BagServiceImpl implements BagService{
 	}
 
 	@Override
-	public void deleteData(int seq_No) throws Exception {
-		bagMapper.deleteData(seq_No);
+	public void deleteData(int seq_No,String userId) throws Exception {
+		bagMapper.deleteData(seq_No,userId);
 	}
 
 	

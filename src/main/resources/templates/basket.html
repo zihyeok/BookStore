@@ -11,6 +11,7 @@
 
 var itemList = document.getElementsByName("item");
 var seq_No_List = document.getElementsByName("seq_No");
+var title_Nm_List = document.getElementsByName("title_Nm");
 
 $(function(){
 	
@@ -71,22 +72,100 @@ $(function(){
 	
 	$("#deleteBag").click(function(){
 		
-		$.each(itemList,function(index,item){
+		var boo = false;
+		var value = [];
+		
+		for(i=0; i<itemList.length; i++){
 			
-			if(item.checked==true){
-				
-				var seq_No = "seq_No=" + item.id;
-				alert(item.id);
-				
-				window.location.href="deleteBag.action?" + seq_No;
-				
+			if(itemList[i].checked){
+				boo = true;
+				value.push(seq_No_List[i].value);
 			}
-			
-		});
+		}
+		
+		if(!boo){
+			alert("삭제하실 항목을 적어도 하나이상 선택해 주십시오.");
+			return;
+		}
+		
+		var data = value.join(",");
+		window.location.href = 'deleteBag.action?data=' + data;
 		
 	});
 	
-});
+	$("#let_Go").click(function(){
+		
+		//주문번호 : 주문을 버튼을 누른시간
+		var now = new Date();
+		var nano = now.getTime();
+		
+		var boo = false;
+		var total_Price = 0;
+		var bookName = [];
+		var bookNum = [];
+		
+		for(i=0; i<itemList.length; i++){
+			
+			if(itemList[i].checked){
+				boo = true;
+				total_Price += parseInt(itemList[i].value);
+				bookName.push(title_Nm_List[i].value);
+				bookNum.push(seq_No_List[i].value);
+			}
+		}
+		
+		if(!boo){
+			alert("구매하실 항목을 적어도 하나이상 선택해 주십시오.");
+			return;
+		}
+		
+		//ajax로 보낼 상품명 1개이상일땐 '상품명' 외 n권...
+		var item_name = '';
+		if(bookName.length > 1){
+			item_name = bookName[0] + '외 ' + (bookName.length - 1) + '권';
+		}else{
+			item_name = bookName[0];
+		}
+		
+		$.ajax({
+			url:"https://kapi.kakao.com/v1/payment/ready",
+			type:'POST',
+			data:{
+				'cid' : 'TC0ONETIME',
+				'partner_order_id' : nano,
+				'partner_user_id' : [[${userId}]],
+				'item_name' : item_name,
+				'quantity' : bookName.length,
+				'total_amount' : total_Price,
+				'tax_free_amount' : 0,
+				'approval_url' : 'http://localhost:8080/success',
+				'cancel_url' : 'http://localhost:8080/cancel',
+				'fail_url' : 'http://localhost:8080/fail'
+			},
+			headers:{
+				'Authorization' : 'KakaoAK 051b33bdbbe0ba43924808b0a780bb6c',
+				'Content-type' : 'application/x-www-form-urlencoded;charset=utf-8'
+			},
+			dataType:"json",
+			success:function(data){
+				
+				var url = data.next_redirect_pc_url;
+				var tid = data.tid;
+				
+				window.location.href = 'ready?url='+url+'&tid='+tid+'&orderId='+nano+'&bookNum='+bookNum.join(",");
+			},
+			error:function(error){
+				
+				alert(error);
+			}
+		
+		
+		});
+	
+	
+	});
+	
+});	
 
 </script>
 
@@ -130,14 +209,15 @@ $(function(){
                             <button class="cart__list__orderbtn">주문하기</button>
                         </td>
                         <td>무료</td>
-                        <td><input type="hidden" name="seq_No" th:value="${dto.seq_No}"></td>
+                        <td><input type="hidden" name="seq_No" th:value="${dto.seq_No}">
+                        <input type="hidden" name="title_Nm" th:value="${dto.title_Nm}"></td>
                     </tr>
                 </tbody>
                 
                 <tfoot>
                     <tr>
                         <td colspan="3"><input type="checkbox"> 
-                        	<button class="cart__list__optionbtn" id="deleteBag">선택상품 삭제</button>
+                        	<button class="cart__list__optionbtn" type="button" id="deleteBag">선택상품 삭제</button>
                         </td>
                         <td id="totalPrice"></td>
                         <td></td>
@@ -148,7 +228,7 @@ $(function(){
         </table>
         <div class="cart__mainbtns">
             <button class="cart__bigorderbtn left" onclick="javascript:location.href='/main'">홈으로 이동하기</button>
-            <button class="cart__bigorderbtn right">주문하기</button>
+            <button class="cart__bigorderbtn right" type="button" id="let_Go">주문하기</button>
         </div>
     </section>
 </body>

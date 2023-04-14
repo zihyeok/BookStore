@@ -5,13 +5,13 @@
 <title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-<script type="text/javascript">
+<script th:inline="javascript">
 
 $(function(){
 	
 	var urlParams = new URLSearchParams(window.location.search);
 	var pg_token = urlParams.get('pg_token');
-	var tid = $("#tid").val();
+	var tid = [[${tid}]];
 	
 	$("body").hide();
 	 
@@ -22,8 +22,8 @@ $(function(){
 		data:{
 			'cid' : 'TC0ONETIME',
 			'tid' : tid,
-			'partner_order_id' : 'partner_order_id',
-			'partner_user_id' : 'partner_user_id',
+			'partner_order_id' : [[${orderId}]],
+			'partner_user_id' : [[${user}]],
 			'pg_token' : pg_token
 		},
 		headers:{
@@ -54,6 +54,5 @@ $(function(){
 
 
 
-<input type="hidden" th:value="${tid}" id="tid">
 </body>
 </html>
