@@ -34,4 +34,9 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 <select id="findUserPwd" parameterType="map" resultType="String">
 	select realpwd from userdata where userName = #{userName} and userTel = #{userTel} and userId = #{userId}
 </select>
+
+<select id="findUserBagItem" parameterType="String" resultType="int">
+	select nvl(count(*),0) from bagitem where userid = #{userId}
+</select>
+
 </mapper>

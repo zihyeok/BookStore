@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.book.store.service.BagService;
 import com.book.store.service.UserService;
 import com.book.store.user.UserData;
 
@@ -34,9 +35,9 @@ import lombok.RequiredArgsConstructor;
 public class UserAjax {
 	
 	private final UserService userService;
+	private final BagService bagService;
 	private final HttpSession httpsession;
-	
-	
+
 	@PostMapping("/findId")
 	public Map<String, Object> findId(HttpServletRequest request) throws Exception {
 		
@@ -72,58 +73,89 @@ public class UserAjax {
 	@RequestMapping("/kakopay")
 	public String kakopay() {
 		
-		try {
-			URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
-			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-			connection.setRequestMethod("POST");
-			connection.setRequestProperty("Authorization", "KakaoAK 051b33bdbbe0ba43924808b0a780bb6c");
-			connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset='utf-8'");
-			connection.setDoOutput(true);
-			
-			String parameter = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=초코파이&quantity=1&total_amount=2200&tax_free_amount=0&approval_url=http://localhost:8080/success&fail_url=http://localhost:8080/fail&cancel_url=http://localhost:8080/cancel";
-			
-			OutputStream ops = connection.getOutputStream();
-			
-			DataOutputStream dop = new DataOutputStream(ops);
-			
-			dop.writeBytes(parameter);
-			dop.close();
-			
-			int result = connection.getResponseCode();
-			
-			InputStream ips;
-			
-			if(result==200) {
-				
-				ips = connection.getInputStream();
-			}else {
-				
-				ips = connection.getErrorStream(); 
-			}
-			
-			InputStreamReader isr = new InputStreamReader(ips);
-			
-			BufferedReader bfr = new BufferedReader(isr);
-			
-			return bfr.readLine();
-			
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+//		try {
+//			URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
+//			HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+//			connection.setRequestMethod("POST");
+//			connection.setRequestProperty("Authorization", "KakaoAK 051b33bdbbe0ba43924808b0a780bb6c");
+//			connection.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset='utf-8'");
+//			connection.setDoOutput(true);
+//			
+//			String parameter = "cid=TC0ONETIME&partner_order_id=partner_order_id&partner_user_id=partner_user_id&item_name=초코파이&quantity=1&total_amount=2200&tax_free_amount=0&approval_url=http://localhost:8080/success&fail_url=http://localhost:8080/fail&cancel_url=http://localhost:8080/cancel";
+//			
+//			OutputStream ops = connection.getOutputStream();
+//			
+//			DataOutputStream dop = new DataOutputStream(ops);
+//			
+//			dop.writeBytes(parameter);
+//			dop.close();
+//			
+//			int result = connection.getResponseCode();
+//			
+//			InputStream ips;
+//			
+//			if(result==200) {
+//				
+//				ips = connection.getInputStream();
+//			}else {
+//				
+//				ips = connection.getErrorStream(); 
+//			}
+//			
+//			InputStreamReader isr = new InputStreamReader(ips);
+//			
+//			BufferedReader bfr = new BufferedReader(isr);
+//			
+//			return bfr.readLine();
+//			
+//		} catch (MalformedURLException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
 		
 		return "hello";
 	}
 	
 	@RequestMapping("/success")
-	public ModelAndView success(HttpServletRequest request) {
+	public ModelAndView success(HttpServletRequest request) throws NumberFormatException, Exception {
+		
+		UserData user = null;
+
+		if(httpsession.getAttribute("user")!="") {
+
+			user = (UserData) httpsession.getAttribute("user");
+
+
+		}else if(httpsession.getAttribute("OauthUser")!="") {
+
+			user = (UserData) httpsession.getAttribute("OauthUser");
+
+		}
+		
+		if(user==null) {
+		
+			ModelAndView mav = new ModelAndView();
+			
+			mav.setViewName("redirect:/user/login");
+
+			return mav;
+
+		}
 		
 		String pg_token = request.getParameter("pg_token");
-		String tid = (String) httpsession.getAttribute("pay_tid");
+		String tid = (String) httpsession.getAttribute("tid");
+		String orderId = (String) httpsession.getAttribute("orderId");
+		String[] book_No = ((String) httpsession.getAttribute("bookNum")).split(",");
+		for(String title_No : book_No) {
+			bagService.deleteData(Integer.parseInt(title_No), user.getUserId());
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("tid", tid);
+		mav.addObject("user", user.getUserId());
+		mav.addObject("orderId", orderId);
 		mav.setViewName("kakaopay_success");
 		
 //		try {
@@ -189,8 +221,10 @@ public class UserAjax {
 	@RequestMapping("/ready")
 	public ModelAndView ready(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
+		httpsession.setAttribute("tid", request.getParameter("tid"));
+		httpsession.setAttribute("bookNum", request.getParameter("bookNum"));
+		httpsession.setAttribute("orderId", request.getParameter("orderId"));
 		mav.setViewName("kakaopay_ready");
-		httpsession.setAttribute("pay_tid", request.getParameter("tid"));
 		return mav;
 	}
 	

@@ -15,14 +15,14 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	values(#{commentNum},#{boardNum},#{name},#{content},sysdate)
 </insert>
 
-<select id="getDataCount" parameterType="map" resultType="int">
+<select id="getDataCount" resultType="int" parameterType="int">
 	select nvl(count(*),0) from boardComment 
 	where boardNum=#{boardNum} 
 </select>
 
 <select id="getLists" parameterType="map" resultType="com.book.store.dto.BoardCommentDTO">
 	select * from (
-	select rownum rnum,data.* from (
+	select rownum rnum, data.* from (
 	select commentNum,boardNum,name,content,to_char(created,'YYYY-MM-DD') created 
 	from boardComment where boardNum=#{boardNum} 
 	order by commentNum desc) data) 

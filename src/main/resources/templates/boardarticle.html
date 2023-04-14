@@ -7,6 +7,118 @@
 <!-- 버튼용 -->
 <link rel="stylesheet" type="text/css" href="/css/BoardCreated.css">
 
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<!-- 댓글창 합쳐보기 -->
+<!-- <script th:inline="javascript"> -->
+
+
+<script th:inline="javascript">
+
+$(function () {
+	
+	listPage(1);
+	
+});
+
+$(document).ready(function() {
+
+	$("#sendButton").click(function(){
+		
+		var param = "name=" + $("#name").val()
+					+ "&boardNum=" + [[${dto.boardNum}]]
+					+ "&content=" + $("#content").val();
+							alert(param);//-----------------------------
+		$.ajax({
+			
+			type:"post",
+			url:"/CommentCreated.action",
+			data:param,
+			success:function(args){//가져온 데이터를 args에 담아서
+				//success 받은값
+				$("#listData").html(args);
+				
+				$("#name").val("");
+				$("#content").val("");
+				
+				$("#name").focus();
+				
+			},
+			//beforeSend:showRequest,
+			error:function(e){
+				alert(e.responseText);
+			}
+			
+		});
+		
+	});
+	
+});
+
+function showRequest() {
+	
+	var name = $.trim($("#name").val());
+	var content = $.trim($("#content").val());
+	
+	if(!name){
+		alert("\n이름을 입력하세요");
+		
+		$("#name").focus();
+		return false;
+	}
+
+	if(!content){
+		alert("\n내용을 입력하세요");
+		$("#content").focus();
+		return false;
+	}
+	
+	if(content.length>200){
+		alert("\n내용은 200자까지 가능합니다");
+		$("#content").focus();
+		return false;
+	}
+	
+	return true;
+	
+}
+
+
+function listPage(page) {
+	//확인 alert(page);
+	var url = "/CommentList.action";
+	
+	$.post(url,{pageNum:page,boardNum:[[${dto.boardNum}]]},function(args){
+		$("#listData").html(args);
+		//alert("22222222222222222222");
+	
+	});
+	
+	
+}
+
+/* 
+
+ function deleteData(num,page) {
+	
+	var url = "/CommentDeleted.action";
+	
+	$.post(url,{commentNum:num,pageNum:page,boardNum:${dto.boardNum}},function(args){
+		$("#listData").html(args);
+		
+	});
+	
+} 
+*/
+
+
+
+
+</script>
+
+
+
 </br></br></br></br>
 </br></br></br></br>
 </br></br></br></br>
@@ -63,6 +175,7 @@
 	  <button class="black-btn float-r m-btn" 
 	  th:onclick="@{|location.href='/BoardList.action?${params }'|}">
 	  리스트</button>
+	 <!--  <input type="hidden" name="boardNum" value="${dto.boardNum }"/> -->
   </div>
   
 	<!-- 이전글 다음글 -->
@@ -85,6 +198,8 @@
 </section>  
   
 </article>
+
+<span id="listData" style="display: block;"></span>
 
 <table width="700" border="0" cellpadding="0" cellspacing="0" style="margin: auto;">
 <tr>
@@ -119,6 +234,8 @@
 </tr>
 
 </table>
+
+<!-- <span id="listData" style="display: block;"></span> 나중에 확인-->
 
 
 

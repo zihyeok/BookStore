@@ -3,6 +3,7 @@ package com.book.store.controller;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.book.store.dto.BoardCommentDTO;
 import com.book.store.dto.BoardDTO;
 import com.book.store.service.BoardCommentService;
+import com.book.store.service.BoardCommentServiceImpl;
 import com.book.store.service.BoardService;
 import com.book.store.util.MyUtil;
 import com.sun.xml.bind.v2.runtime.reflect.ListIterator;
@@ -31,7 +33,9 @@ public class BoardController {
 	@Resource
 	private BoardService boardService;//호출하면 BoardServiceImpl이 딸려들어옴
 	
-	private BoardCommentService boardCommentService;
+	@Resource
+	BoardCommentService boardCommentService = new BoardCommentServiceImpl();
+	
 	
 	@Autowired
 	MyUtil myUtil; //@Service로 구현된 MyUtil을 불러온것
@@ -42,7 +46,7 @@ public class BoardController {
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("boardlist");
+		mav.setViewName("boardCommentList");
 		//jsp(html)로 갈때는 setViewName /class로 갈때는 setView
 		
 		return mav;
@@ -84,91 +88,89 @@ public class BoardController {
 		public ModelAndView list(BoardDTO dto,HttpServletRequest request) throws Exception{
 			
 			
-			String pageNum = request.getParameter("pageNum");//문자만 따온건가?
+			String pageNum = request.getParameter("pageNum");
+		    int currentPage = 1;
 			
-			int currentPage = 1;
-			
-			if(pageNum!=null) {
-				currentPage = Integer.parseInt(pageNum);
-			}
+			if (pageNum != null) {
+		        currentPage = Integer.parseInt(pageNum);
+		    }
 			
 			String searchKey = request.getParameter("searchKey");
-			String searchValue = request.getParameter("searchValue");
+		    String searchValue = request.getParameter("searchValue");
+
 			
-			if(searchValue==null) {
-				searchKey = "subject";
-				searchValue = "";
-			}else {
-				if(request.getMethod().equalsIgnoreCase("GET")) {
-					searchValue = URLDecoder.decode(searchValue,"utf-8");
-				}
-			}
+			if (searchValue == null) {
+		        searchKey = "subject";
+		        searchValue = "";
+		    } else {
+		        if (request.getMethod().equalsIgnoreCase("GET")) {
+		            searchValue = URLDecoder.decode(searchValue, "utf-8");
+		        }
+		    }
 			
 			int dataCount = boardService.getDataCount(searchKey, searchValue);
-			
-			int numPerPage = 3;
-			int totalPage = 0;
-			
-			if (dataCount!=0) {
-				totalPage = myUtil.getPageCount(numPerPage, dataCount);
-			}
-			
-			
-			if(currentPage>totalPage) {
-				currentPage=totalPage;
-			}
-			
-			int start = (currentPage-1)*numPerPage+1;
-			int end = currentPage*numPerPage;
-			
-			
-			
-			List<BoardDTO> lists = boardService.getLists(start, end, searchKey, searchValue);
-			
-			int listNum,n = 0;
-			int commentCount = 0;
-			//일련번호
-			
-			/*88888888888888888888888888888888888888888888888888888888888888888
-			 
-			ListIterator<Object> it = (ListIterator<Object>) lists.listIterator(); 
-			
-			while (it.hasNext()) {
 
-				BoardDTO vo = (BoardDTO)it.next();
-				
-				listNum = dataCount-(start+n-1);
-				commentCount = boardCommentService.getDataCount(vo.getBoardNum());
-				//boardNum에 따라 댓글 수가 달라야함
-				vo.setListnum(listNum);
-				vo.setCommentCount(commentCount);
-				n++;
+			int numPerPage = 3;
+		    int totalPage = 0;
+
+		    if (dataCount != 0) {
+		        totalPage = myUtil.getPageCount(numPerPage, dataCount);
+		    }
+
+		    if (currentPage > totalPage) {
+		        currentPage = totalPage;
+		    }
+			
+			int start = (currentPage - 1) * numPerPage + 1;
+		    int end = currentPage * numPerPage;
+
+		    List<BoardDTO> lists = boardService.getLists(start, end, searchKey, searchValue);
+		    //System.out.println(lists+"-----------------------------");
+		    
+			/* /일련번호 888888888888888888888888888 */
+			
+			int listNum = 0;
+			int n = 0;
+			int commentCount = 0;
+			int boardNum = 0;
+			
+			Iterator<BoardDTO> it = lists.iterator();
+
+			while (it.hasNext()) {
+			    BoardDTO vo = (BoardDTO) it.next();
+			    listNum = dataCount - (start + n - 1);
+			    
+			    
+			    if (boardNum != 0) {
+			    commentCount = boardCommentService.getDataCount(vo.getBoardNum());
+			    vo.setCommentCount(commentCount);
+			    }
+			   
+			    vo.setListnum(listNum);
+			    n++;
+			    
 			}
-			*/
+			
 			
 			String param = "";
+
+		    if (searchValue != null && !searchValue.equals("")) {
+		        param = "searchKey=" + searchKey;
+		        param += "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");
+		    }
+
+		    String listUrl = "/BoardList.action";
+		    if (!param.equals("")) {
+		        listUrl += "?" + param;
+		    }
 			
-			
-			if(searchValue!=null&&!searchValue.equals("")) {
-				param = "searchKey=" + searchKey;
-				param+= "&searchValue=" + URLEncoder.encode(searchValue,"utf-8");
-			}
-			
-			String listUrl = "/BoardList.action";
-			if(!param.equals("")) {
-				
-				listUrl += "?" + param;
-			}
-			
-			String pageIndexList = 
-					myUtil.pageIndexList(currentPage, totalPage, listUrl);
-			
-			String articleUrl = "/BoardArticle.action?pageNum=" + currentPage;
-			
-			if(!param.equals("")) {
-				articleUrl += "&" + param;
-				
-			}
+		    String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
+
+		    String articleUrl = "/BoardArticle.action?pageNum=" + currentPage;
+
+		    if (!param.equals("")) {
+		        articleUrl += "&" + param;
+		    }
 			
 			
 			//ModelAndView로 전송
@@ -375,7 +377,11 @@ public class BoardController {
 			return mav;
 			
 		}
-
+		
+		//BoardCommentController--------------------------------------
 	
-	
+		
+		
+		
+		
 }

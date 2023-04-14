@@ -231,6 +231,7 @@ public class UserController {
 		return mav;
 	}
 	
+	//결제페이지 테스트
 	@GetMapping("/payTest")
 	public ModelAndView payTest() {
 		ModelAndView mav = new ModelAndView();
@@ -238,6 +239,41 @@ public class UserController {
 		
 		return mav;
 	}
+	
+	@GetMapping("/mypage")
+	public ModelAndView myPage() throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		
+		UserData user = null;
+		int bagitem_length = 0;
+		
+		if(httpSession.getAttribute("user") != null) {
+			user = (UserData) httpSession.getAttribute("user");
+			bagitem_length = userService.findUserBagItem(user.getUserId());
+			
+		}else if(httpSession.getAttribute("OauthUser") != null) {
+			user = (UserData) httpSession.getAttribute("OauthUser");
+			bagitem_length = userService.findUserBagItem(user.getUserId());
+		}
+		
+		if(user==null) {
+			mav.addObject("alert", "로그인 후 이용해주세요.");
+			mav.setViewName("alert");
+			return mav;
+		}
+		
+		mav.addObject("user", user);
+		mav.addObject("bagitem_length", bagitem_length);
+		
+		mav.setViewName("mypage");
+		
+		
+		
+		return mav;
+	}
+	
+	
 	
 	
 }

@@ -6,13 +6,25 @@
 <!-- 내가넣은거 -->
 <link rel="stylesheet" href="/css/mypage.css">
 </head>
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+<script th:inline="javascript">
+
+$(function(){
+	
+	if([[${user}]]==null){
+		alert('로그인 후 이용해주세요.');
+		window.location.href = "/user/login";
+	}
+	
+});
+</script>
 <body>
 	
 	<div class="wrap">
 	  <div class="greenContainer">
 	    <div>
 	      <div class="grade">GOLD</div>
-	      <div class="name">Jaden</div>
+	      <div class="name">[[${user.userName}]]</div>
 	    </div>    
 	    <div class="modify">i</div>    
 	  </div>
@@ -38,7 +50,7 @@
 	      
 	      <div class="item">
 	        <div>
-	          <div class="green number">6</div>
+	          <div class="green number">[[${bagitem_length}]]</div>
 	          <div class="text">장바구니</div>
 	        </div>
 	        <div class="icon"> > </div>

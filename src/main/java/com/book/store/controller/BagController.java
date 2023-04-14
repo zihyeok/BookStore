@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -62,6 +63,7 @@ public class BagController {
 		
 		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("userId", user.getUserId());
 		mav.addObject("lists", lists);
 		
 		mav.setViewName("basket");
@@ -192,7 +194,7 @@ public class BagController {
 		
 		String userId = user.getUserId();
 		
-		bagService.deleteData(seq_No);
+		bagService.deleteData(seq_No,userId);
 		
 		List<BookDTO> lists = bagService.getLists(userId);
 
@@ -207,14 +209,10 @@ public class BagController {
 		
 	}
 	
-	@RequestMapping("deleteBag.action")
+	@GetMapping("deleteBag.action")
 	public ModelAndView deleteItem(HttpServletRequest request) throws Exception{
-		
-		System.out.println("들어옴?");
-		
+		ModelAndView mav = new ModelAndView();
 		UserData user = null;
-		
-		int seq_No = Integer.parseInt(request.getParameter("seq_No"));
 		
 		if(httpSession.getAttribute("user")!="") {
 
@@ -229,7 +227,7 @@ public class BagController {
 		
 		if(user==null) {
 		//else if는 안되고 if는 됨
-			ModelAndView mav = new ModelAndView();
+			
 
 			mav.setViewName("redirect:/user/login");
 
@@ -239,9 +237,12 @@ public class BagController {
 		
 		String userId = user.getUserId();
 		
-		bagService.deleteData(seq_No);
+		String[] value = request.getParameter("data").split(",");
 		
-		ModelAndView mav = new ModelAndView();
+		for(String seq_No : value) {
+			
+			bagService.deleteData(Integer.parseInt(seq_No),userId);			
+		}
 		
 		mav.setViewName("redirect:/bag.action");
 		

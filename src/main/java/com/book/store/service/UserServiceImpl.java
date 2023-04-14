@@ -66,6 +66,12 @@ public class UserServiceImpl implements UserService{
 		return userMapper.findUserPwd(userId, userName, userTel);
 	}
 
+	@Override
+	public int findUserBagItem(String userId) throws Exception {
+		
+		return userMapper.findUserBagItem(userId);
+	}
+
 	
 
 	

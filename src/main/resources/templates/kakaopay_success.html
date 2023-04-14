@@ -5,14 +5,16 @@
 <title>Insert title here</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
-<script type="text/javascript">
+<script th:inline="javascript">
 
 $(function(){
 	
 	var urlParams = new URLSearchParams(window.location.search);
 	var pg_token = urlParams.get('pg_token');
-	var tid = $("#tid").val();
+	var tid = [[${tid}]];
 	
+	$("body").hide();
+	 
 	$.ajax({
 		
 		url:"https://kapi.kakao.com/v1/payment/approve",
@@ -20,8 +22,8 @@ $(function(){
 		data:{
 			'cid' : 'TC0ONETIME',
 			'tid' : tid,
-			'partner_order_id' : 'partner_order_id',
-			'partner_user_id' : 'partner_user_id',
+			'partner_order_id' : [[${orderId}]],
+			'partner_user_id' : [[${user}]],
 			'pg_token' : pg_token
 		},
 		headers:{
@@ -31,7 +33,9 @@ $(function(){
 		dataType:"json",
 		success:function(data){
 			
-			alert(JSON.stringify(data))
+			
+			$("#json").html(JSON.stringify(data))
+			$("body").show();
 		},
 		error:function(error){
 			
@@ -45,10 +49,10 @@ $(function(){
 </script>
 <body>
 
-<h2>결제완료</h2>
+ㅎㅇㅎㅇ 결제완료
+<div id="json"></div>
 
 
 
-<input type="hidden" th:value="${tid}" id="tid">
 </body>
 </html>
