@@ -29,7 +29,7 @@
 일련번호
 <input type="text" name="isbn_Thirteen_No" placeholder="isbn_Thirteen_No 입력하세요." th:value="${dto.isbn_Thirteen_No}">
 
-<textarea name="book_Intrcn_Cn"  placeholder="book_Intrcn_Cn 입력하세요.">[[${dto.book_Intrcn_Cn}]]</textarea>
+<textarea name="book_Intrcn_Cn"  placeholder="book_Intrcn_Cn 입력하세요." th:utext="${dto.book_Intrcn_Cn}"></textarea>
 
 <div>
 <input type="file" name="upload">

@@ -61,12 +61,22 @@
 
   <article class="slider">
     <h2>NEW BOOK</h2>
-    <div class="swiper-container">
+     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="https://i.postimg.cc/g0DzrrKb/1.jpg"></div>
-        <div class="swiper-slide"><img src="https://i.postimg.cc/VvSm7gPz/2.jpg"></div>
-        <div class="swiper-slide"><img src="https://i.postimg.cc/HLpHGd1Z/3.jpg"></div>
-        <div class="swiper-slide"><img src="https://i.postimg.cc/wB0zgZ66/4.jpg"></div>
+        <div class="swiper-slide" th:each="i : ${#numbers.sequence(0,3)}" th:if="${#lists.size(recentLists)}>0">
+     <a th:href="'/BookArticle.action?seq_No=' + @{${recentLists[4*i].seq_No}}">
+     <img th:src="${recentLists[4*i].image_Url}" style="width: 200px; height: 250px; margin-right: 50px;"></a>
+     
+     <a th:href="'/BookArticle.action?seq_No=' + @{${recentLists[4*i+1].seq_No}}">
+     <img th:src="${recentLists[4*i+1].image_Url}" style="width: 200px; height: 250px; margin-right: 50px;"></a>
+     
+     <a th:href="'/BookArticle.action?seq_No=' + @{${recentLists[4*i+2].seq_No}}">
+     <img th:src="${recentLists[4*i+2].image_Url}" style="width: 200px; height: 250px; margin-right: 50px;"></a>
+     <a th:href="'/BookArticle.action?seq_No=' + @{${recentLists[4*i+3].seq_No}}">
+     
+     <img th:src="${recentLists[4*i+3].image_Url}" style="width: 200px; height: 250px; margin-right: 50px;"></a>
+
+        </div>
       </div>
 
       <!-- 네비게이션 지정 -->
@@ -105,164 +115,27 @@
   <article class="big">
     <h2>요즘 이 책</h2>
     <div>
-      <section>
+      <section th:if="${#lists.size(topSalLists)}>0" th:each="topLists:${topSalLists}">
         <div class="image-container">
 
-          <img src="https://www.munhak.com/data/book/1794455158_2ghMECkZ_b681777f5ca1f3587144a437eaddadfddba5bb05.jpg" />
+          <img th:src="${topLists.image_Url}" />
 
           <div class="after">
 
-            <img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png">
+        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" 
+        	th:onclick="|location.href='@{/BookArticle.action(seq_No=${topLists.seq_No})}'|">
             <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
 
           </div>
 
-          <div class="object">
-            SALE
-          </div>
+          <!-- <div class="object">
+            Top
+          </div> -->
         </div>
 
-        <p>일곱해의 마지막</p>
-
+        <p>[[${topLists.title_Nm}]]</p>
       </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://www.munhak.com/data/book/1794455158_fHyNKa6t_c14c8004281227466d6b5ae6aa973e0617ea7ee5.jpg" />
-
-          <div class="after">
-
-            <img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-          </div>
-
-
-        </div>
-        <p>여름의 빌라</p>
-
-      </section>
-
-      <section>
-        <div class="image-container">
-
-          <img src="https://www.munhak.com/data/book/1794455158_zNQeMrKj_89876517f228a917516cdba71c8aace8ee28a620.jpg" />
-
-          <div class="after">
-
-            <img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-          </div>
-        </div>
-        <p>파르티잔 극장</p>
-      </section>
-
-      <section>
-        <div class="image-container">
-
-          <img src="https://www.munhak.com/data/book/238371604_uE6zFLmV_6648b7f6fa5494cc7c74eca0d084b31f2073210b.jpg" />
-
-          <div class="after">
-
-            <img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-          </div>
-          <div class="object">
-            SALE
-          </div>
-        </div>
-        <p>미친 이별</p>
-      </section>
-
-      <section>
-        <div class="image-container">
-
-          <img src="https://www.munhak.com/data/book/1794455158_82F6brfW_4725b0912f7d6c054924a2d0ae794a88556b5f52.jpg" />
-
-          <div class="after">
-
-            <img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-          </div>
-          <div class="object">
-            SALE
-          </div>
-        </div>
-        <p>결혼하면 애는 그냥<br> 생기는 줄 알았는데</p>
-      </section>
-
-      <section>
-        <div class="image-container">
-
-          <img src="https://www.munhak.com/data/book/1794455158_wH4kFTrn_2bb324734e2acf9bf324fc7411ebea2beef46465.jpg" />
-
-          <div class="after">
-
-            <img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-          </div>
-        </div>
-        <p>화이트 호스</p>
-      </section>
-
-      <section>
-        <div class="image-container">
-
-          <img src="https://www.munhak.com/data/book/1794455158_9cgwPsvR_19f745a8cd50630cc901fadffb846e670e733584.jpg" />
-
-          <div class="after">
-
-            <img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-          </div>
-        </div>
-        <p>룬의 아이들 1</p>
-      </section>
-
-      <section>
-        <div class="image-container">
-
-          <img src="https://www.munhak.com/data/book/1794455158_2kZ4Len1_e73dc5b69e9a0c22c576223e7e8dd52c47cb643b.jpg" />
-
-          <div class="after">
-
-            <img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-          </div>
-          <div class="object">
-            SALE
-          </div>
-        </div>
-        <p>집의 귓속말</p>
-      </section>
-
-      <section>
-        <div class="image-container">
-
-          <img src="https://www.munhak.com/data/book/1794455158_0T8n6bC4_2b65715b910fdb7422eeff78fe58a9910f0206a3.jpg" />
-
-          <div class="after">
-
-            <img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-          </div>
-        </div>
-        <p>오늘의 착각</p>
-      </section>
-
-      <section>
-        <div class="image-container">
-
-          <img src="https://www.munhak.com/data/book/238371604_S4ibAxwP_b6b1ba43dfd30a5b4547be5a325fdb964dc20a99.jpg" />
-
-          <div class="after">
-
-            <img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-          </div>
-        </div>
-        <p>내가 아니라 그가 나의 꽃</p>
-      </section>
-
+	</div>
   </article>
 
   <article class="products">
