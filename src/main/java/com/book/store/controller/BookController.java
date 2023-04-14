@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.book.store.dto.BookDTO;
 import com.book.store.service.BookItemService;
+import com.book.store.service.BookItemServiceImpl;
 import com.book.store.util.FileManager;
 import com.book.store.util.MyUtil;
 
@@ -29,7 +30,7 @@ import com.book.store.util.MyUtil;
 public class BookController {
 
 	@Resource
-	private BookItemService bookItemService;
+	BookItemService bookItemService;
 
 	@Autowired
 	private MyUtil myUtil;
@@ -37,8 +38,18 @@ public class BookController {
 	@RequestMapping("/main")
 	public ModelAndView home() throws Exception{
 		//메인화면으로 이동
+		
+		int start = 1;
+		int end = 20;
+		
+		List<BookDTO> recentLists = bookItemService.recentLists(start, end);
+		List<BookDTO> topSalLists = bookItemService.topSalLists(start, end);
+		
 		ModelAndView mav = new ModelAndView();
 
+		mav.addObject("recentLists", recentLists);
+		mav.addObject("topSalLists", topSalLists);
+		
 		mav.setViewName("main");
 
 		return mav;
@@ -194,8 +205,20 @@ public class BookController {
 
 		int seq_No = Integer.parseInt(request.getParameter("seq_No"));
 
-		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		String pageNum = request.getParameter("pageNum");
+		
+		//pageNum을 무조건 받아야 article로 들어오는데 주소에 &pageNum 일일이 쓰기 귀찮아서 이렇게 함
+		if(pageNum==null) {
 
+			pageNum = "1";
+			Integer.parseInt(pageNum);
+			
+		}else {
+			
+			Integer.parseInt(pageNum);
+			
+		}
+		
 		String searchKey = request.getParameter("searchKey");
 		String searchValue = request.getParameter("searchValue");
 
@@ -229,7 +252,7 @@ public class BookController {
 		mav.addObject("params", param);
 		mav.addObject("pageNum", pageNum);
 
-		mav.setViewName("BookArticle");
+		mav.setViewName("product");
 
 		return mav;
 
