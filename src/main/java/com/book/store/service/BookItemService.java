@@ -13,6 +13,10 @@ public interface BookItemService {
 	public int getDataCount(String searchKey,String searchValue) throws Exception;
 
 	public List<BookDTO> getLists(int start,int end,String searchKey,String searchValue) throws Exception;
+	
+	public List<BookDTO> recentLists(int start,int end) throws Exception;
+	
+	public List<BookDTO> topSalLists(int start,int end) throws Exception;
 
 	public BookDTO getReadData(int SEQ_NO) throws Exception;
 
