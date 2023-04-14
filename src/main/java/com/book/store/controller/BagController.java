@@ -1,5 +1,6 @@
 package com.book.store.controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -107,7 +108,7 @@ public class BagController {
 		bagService.insertData(dto);
 		
 		List<BookDTO> lists = bagService.getLists(userId);
-
+		
 		ModelAndView mav = new ModelAndView("jsonView");
 		//ajax로 가져와서 userid의 seq_no를 조회후 해당 seq_no가 있으면 찜 버튼에 불이 들어와있게 설정해야됨
 		//getLists 처음에는 하위쿼리로 실행하려했으나 하위쿼리로 가져오는 값이 2개이상이 되어서 에러가남
@@ -137,7 +138,9 @@ public class BagController {
 		if(user==null) {
 			
 			ModelAndView mav = new ModelAndView();
-
+			
+			//json계속 보내주는데 고쳐야됨 진행되는데 문제는 없음
+			//->해결함 BookList.html의 selectAll js함수를 session.user 값이 있을때만 실행시키면 해결
 			mav.setViewName("redirect:/user/login");
 
 			return mav;
@@ -147,7 +150,7 @@ public class BagController {
 		String userId = user.getUserId();
 
 		List<BookDTO> lists = bagService.getLists(userId);
-
+		
 		ModelAndView mav = new ModelAndView("jsonView");
 		
 		mav.addObject("lists", lists);

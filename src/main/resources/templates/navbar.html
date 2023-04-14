@@ -40,7 +40,6 @@ function displaySuggest(){
 		if(httpRequest.status==200){
 			
 			var text = httpRequest.responseText;
-			
 			var resultText = JSON.parse(text);
 			
 			//alert(resultText.lists[0].title_Nm);
@@ -58,7 +57,7 @@ function displaySuggest(){
 				var suggestArrayElement =  document.getElementById(suggestArray[i]);
 				var suggest_Title_ArrayElement =  document.getElementById(suggest_Title_Array[i]);
 				suggest_Title_ArrayElement.innerHTML="<a href=\"javascript:select('" + suggest.title_Nm + "');\">"+  suggest.title_Nm + "</a>";
-				suggestArrayElement.src = suggest.image_Url
+				suggestArrayElement.src = suggest.image_Url;
 				
 			}
 
@@ -94,7 +93,7 @@ function hide() {
 }
 
 window.onload = function () {
-	
+
 	hide();
 	
 }
@@ -188,7 +187,8 @@ window.onload = function () {
   		</div>  
 
   	<i class="fas fa-user"></i>
-    <a href="/bag.action"><i class="fas fa-shopping-cart"></i></a>
+    <a href="/bag.action" th:if="${session.user}!=null"><i class="fas fa-shopping-cart"></i></a>
+    <a href="/user/login" th:unless="${session.user}!=null" onclick="javascript:alert('로그인 후 이용해주세요')"><i class="fas fa-shopping-cart"></i></a>
       </section>
       
     </article>
