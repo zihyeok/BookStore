@@ -25,10 +25,10 @@
 			<span>가격:[[${dto.prc_Value}]]원</span><br/>
 			
 			<div th:id="${dto.seq_No}">
-			<a th:onclick="|javascript:sendBag('${dto.seq_No}')|"><button>🤍</button></a>
+			<a th:onclick="|javascript:sendBag('${dto.seq_No}')|"><button type="button">🤍</button></a>
 			</div>
 			<div th:id="'delete' + ${dto.seq_No}" style="display: none;">
-			<a th:onclick="|javascript:sendDeleteBag('${dto.seq_No}')|"><button>❤️</button></a>
+			<a th:onclick="|javascript:sendDeleteBag('${dto.seq_No}')|"><button type="button">❤️</button></a>
 			</div>
 			
 		</div>

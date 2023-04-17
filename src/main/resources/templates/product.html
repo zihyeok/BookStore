@@ -18,6 +18,35 @@
 	
 		<!-- product.css -->
 		<link rel="stylesheet" href="css/product.css">
+		<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+		<script th:inline="javascript">
+		
+		$(function () {
+			listPage(1);			
+		});
+		
+		function listPage(page){
+			
+			var params = "seq_No=" + [[${dto.seq_No}]] + "&pageNum=" + page;
+
+			$.ajax({
+				type:"POST",
+				url:"/ReviewList.action",
+				data:params,
+				dataType:"text",
+				success:function(args){
+	
+					$("#reviewListData").html(args);
+					
+				}
+			
+			});
+			
+		}
+
+		
+		</script>
+		
     </head>
     <!-- End Head -->
 <!-- 삭제만들어야함 -->
@@ -97,23 +126,34 @@
 							<span th:utext="${dto.book_Intrcn_Cn}"></span>
 
 						</div>
-
 						<div class="tab_box">
+						<form action="ReviewCreated.action" method="POST">
 							<p class="tit">상품 Review</p>
 							
+							<span id="reviewListData" style="display: block;"></span>
+							
 							<div class="ask_box">
+								<p>
+								<input type="radio" name="reviewStar" value="5" id="rate1">★
+								<input type="radio" name="reviewStar" value="4" id="rate2">★
+								<input type="radio" name="reviewStar" value="3" id="rate3">★
+								<input type="radio" name="reviewStar" value="2" id="rate4">★
+								<input type="radio" name="reviewStar" value="1" id="rate5">★
+								</p>
+								<!-- disabled적용하면 form으로 안 날라감 -->
 								<p th:if="${session.user==null}"><label>UserID</label> <input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
-								<p th:unless="${session.user==null}"><label>UserID</label> <input type="text" th:value="${session.user.userId}" disabled="disabled"></p>
+								<p th:unless="${session.user==null}"><label>UserID</label> <input type="text" th:value="${session.user.userId}" name="userId" readonly="readonly"></p>
 								<p th:if="${session.user==null}"><label>내용</label> <textarea disabled="disabled"></textarea></p>
-								<p th:unless="${session.user==null}"><label>내용</label> <textarea placeholder="문의내용을 입력해주세요."></textarea></p>
-								
-								<div class="btn_box">
-									<button class="black-btn float-r m-btn">문의 보내기</button>
+								<p th:unless="${session.user==null}"><label>내용</label> <textarea name="content" placeholder="문의내용을 입력해주세요."></textarea></p>
+								<input type="hidden" name="seq_No" th:value="${dto.seq_No}">
+								<div class="btn_box" th:if="${session.user!=null}">
+									<button class="black-btn float-r m-btn" id="sendReview">문의 보내기</button>
 								</div>
 							
 							</div>
-							
+						</form>
 						</div>
+
 						
 						<div class="tab_box">
 							<p class="tit">배송/반품/교환</p>
