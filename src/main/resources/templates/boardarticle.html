@@ -23,40 +23,78 @@ $(function () {
 });
 
 $(document).ready(function() {
-
+	
 	$("#sendButton").click(function(){
 		
 		var param = "name=" + $("#name").val()
 					+ "&boardNum=" + [[${dto.boardNum}]]
 					+ "&content=" + $("#content").val();
-							alert(param);//-----------------------------
+							//alert(param);//-----------------------------
 		$.ajax({
-			
-			type:"post",
-			url:"/CommentCreated.action",
-			data:param,
-			success:function(args){//가져온 데이터를 args에 담아서
-				//success 받은값
-				$("#listData").html(args);
-				
-				$("#name").val("");
-				$("#content").val("");
-				
-				$("#name").focus();
-				
-			},
-			//beforeSend:showRequest,
-			error:function(e){
-				alert(e.responseText);
-			}
-			
+		    type: "POST",
+		    url: "/CommentCreated.action",
+		    data: param,
+		    dataType:"text",
+		    beforeSend: function(xhr) {
+		        // 요청 전에 실행할 코드
+		        showRequest();
+		    },
+		    success: function(data) {
+		        // 응답 성공 시 실행할 코드
+		        $("#listData").html(data);
+		        $("#name").val("");
+		        $("#content").val("");
+		        $("#name").focus();
+		    },
+		    error: function(xhr, status, error) {
+		        // 응답 실패 시 실행할 코드
+		        alert("에러 발생: " + error);
+		    }
 		});
 		
 	});
 	
 });
 
-function showRequest() {
+/* function listPage(page) {
+	
+	var url = "/CommentList.action";
+	//alert(url);
+	
+	$.post(url,{pageNum:page,boardNum:[[${dto.boardNum}]]},function(args){
+		$("#listData").html(args);
+
+	});
+	
+	$("#listData").attr("style", "display:block");
+	$("#listData").show();
+	
+}  */
+
+
+function listPage(page) {
+	var url = "/CommentList.action";
+		
+	var boardNum = "boardNum=" + [[${dto.boardNum}]];
+	var pageNum = "pageNum=" + page;
+	//alert(boardNum);
+	$.ajax({
+		url: url,
+		type: "POST",
+		dataType:"text",
+		data: {boardNum,pageNum},
+		success: function(args) {
+			$("#listData").html(args);
+			$("#listData").show();
+		},
+		error:function(e){
+			alert(e.responsetext);
+		}
+	});
+}
+
+
+ function showRequest() {
 	
 	var name = $.trim($("#name").val());
 	var content = $.trim($("#content").val());
@@ -82,21 +120,14 @@ function showRequest() {
 	
 	return true;
 	
-}
+} 
 
 
-function listPage(page) {
-	//확인 alert(page);
-	var url = "/CommentList.action";
-	
-	$.post(url,{pageNum:page,boardNum:[[${dto.boardNum}]]},function(args){
-		$("#listData").html(args);
-		//alert("22222222222222222222");
-	
-	});
-	
-	
-}
+
+
+
+
+
 
 /* 
 
@@ -235,7 +266,7 @@ function listPage(page) {
 
 </table>
 
-<!-- <span id="listData" style="display: block;"></span> 나중에 확인-->
+<span id="listData" style="display: block;"></span> 
 
 
 

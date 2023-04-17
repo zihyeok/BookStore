@@ -4,6 +4,7 @@
 <meta charset="UTF-8" http-equiv="Content-Type" ><!-- http-equiv="Content-Type" 한글나오게함 -->
 <title>대댓글</title>
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 <body>
 
@@ -17,16 +18,16 @@
       </tr>
       <tr height="30" bgcolor="#dbdbdb">
         <td width="300" style="padding-left: 10px;">
-          <b>No.[[${dto.listNum}]] &nbsp;&nbsp;[[${dto.name}]]</b><!-- [[${dto.listNum}]] -->
+          <b>No. <a th:utext="${dto.listNum}"></a> &nbsp;&nbsp;<a th:utext="${dto.name}"></a></b><!-- [[${dto.listNum}]] <a th:utext="${dto.listNum}"></a> -->
         </td>
         <td width="300" align="right" style="padding-right: 10px;">
-          [[${dto.created}]]&nbsp;
+          <a th:utext="${dto.created}"></a> &nbsp;
           <a th:href="@{|location.href='/CommentDeleted.action?${dto.commentNum }&${pageNum }'|}">삭제</a>
         </td>
       </tr>
       <tr>
         <td height="50" style="padding-left: 10px;" colspan="2">
-          [[${dto.content}]]
+          <a th:utext="${dto.content}"></a>
         </td>
       </tr>
     </div>
@@ -35,9 +36,10 @@
       <td colspan="2" bgcolor="#dbdbdb" height="2">
       </td>
     </tr>
+    
     <tr height="30">
       <td align="center" colspan="2">
-         [[${pageIndexList}]]
+         <a th:utext="${pageIndexList}"></a>
       </td>
     </tr>
   </table>

@@ -14,7 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.book.store.dto.BoardCommentDTO;
 import com.book.store.service.BoardCommentService;
 import com.book.store.service.BoardCommentServiceImpl;
-import com.book.store.util.MyUtil;
+import com.book.store.util.BoardUtil;
+
 
 @RestController
 public class BoardCommentContoller {
@@ -23,7 +24,7 @@ public class BoardCommentContoller {
 	BoardCommentService boardCommentService = new BoardCommentServiceImpl();
 	
 	@Autowired
-	MyUtil myUtil;
+	BoardUtil myUtil;
 	
 	@RequestMapping("/CommentCreated.action")
 	public ModelAndView commentCreated(BoardCommentDTO dto,HttpServletRequest request) throws Exception{
@@ -51,10 +52,11 @@ public class BoardCommentContoller {
 	public ModelAndView CommentList(BoardCommentDTO dto,HttpServletRequest request) throws Exception{
 		
 		int boardNum = Integer.parseInt(request.getParameter("boardNum"));
+	
 		
 		String pageNum = request.getParameter("pageNum");//문자만 따온건가?
-		
-		//System.out.println(boardNum+"========================");
+		System.out.println(pageNum+"1923091203909103");
+		System.out.println(boardNum+"========================");
 		
 		int currentPage = 1;
 		int numPerPage = 3;
@@ -86,28 +88,19 @@ public class BoardCommentContoller {
 		//System.out.println(lists);
 		
 		int listNum = 0;
-		int n = 0;
 		int commentCount = 0;
 		
 		//일련번호
-		Iterator<BoardCommentDTO> it = lists.iterator();
-		
-		while (it.hasNext()) {//일련번호만 set시키는거임
-
-			BoardCommentDTO vo = (BoardCommentDTO)it.next();
-			
-			listNum = dataCount-(start+n-1);
-			
-			vo.setListnum(listNum);
-			
-			vo.setContent(vo.getContent().replaceAll("\n", "<br/>"));
-			
-			n++;
+		for (int i = 0; i < lists.size(); i++) {
+		    BoardCommentDTO vo = lists.get(i);
+		    listNum = dataCount - (start + i + 1);
+		    vo.setListnum(listNum);
+		    vo.setContent(vo.getContent().replaceAll("\n", "<br/>"));
 		}
 		
-		String listUrl = "";
+		//System.out.println(it+"--------------------------");
 		
-		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
+		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage);
 		
 		//ModelAndView로 전송
 		ModelAndView mav = new ModelAndView();
@@ -118,9 +111,11 @@ public class BoardCommentContoller {
 		mav.addObject("pageIndexList", pageIndexList);
 		mav.addObject("dataCount", dataCount);
 		mav.addObject("pageNum", pageNum);
-	
+		
 		//mav.addObject("pageNum", currentPage);//3번째 방법시 같이넘겨야함
-
+		//System.out.println(pageNum);
+		
+		
 		mav.setViewName("boardCommentList");
 
 		return mav;

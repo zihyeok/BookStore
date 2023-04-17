@@ -130,25 +130,19 @@ public class BoardController {
 			/* /일련번호 888888888888888888888888888 */
 			
 			int listNum = 0;
-			int n = 0;
 			int commentCount = 0;
 			int boardNum = 0;
 			
-			Iterator<BoardDTO> it = lists.iterator();
-
-			while (it.hasNext()) {
-			    BoardDTO vo = (BoardDTO) it.next();
-			    listNum = dataCount - (start + n - 1);
-			    
+			for (int i = 0; i < lists.size(); i++) {
+			    BoardDTO vo = lists.get(i);
+			    listNum = dataCount - (start + i + 1);
 			    
 			    if (boardNum != 0) {
-			    commentCount = boardCommentService.getDataCount(vo.getBoardNum());
-			    vo.setCommentCount(commentCount);
+			        commentCount = boardCommentService.getDataCount(vo.getBoardNum());
+			        vo.setCommentCount(commentCount);
 			    }
-			   
-			    vo.setListnum(listNum);
-			    n++;
 			    
+			    vo.setListnum(listNum);
 			}
 			
 			
@@ -172,7 +166,7 @@ public class BoardController {
 		        articleUrl += "&" + param;
 		    }
 			
-			
+		    
 			//ModelAndView로 전송
 			ModelAndView mav = new ModelAndView();
 			
@@ -185,7 +179,7 @@ public class BoardController {
 			
 			//mav.addObject("pageNum", currentPage);//3번째 방법시 같이넘겨야함
 			
-
+			
 			mav.setViewName("boardlist");
 
 			return mav;
