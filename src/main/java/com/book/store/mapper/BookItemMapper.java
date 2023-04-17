@@ -17,6 +17,10 @@ public interface BookItemMapper {
 	public int getDataCount(@Param("searchKey")String searchKey,@Param("searchValue")String searchValue) throws Exception;
 
 	public List<BookDTO> getLists(@Param("start")int start,@Param("end")int end,@Param("searchKey")String searchKey,@Param("searchValue")String searchValue) throws Exception;
+	
+	public List<BookDTO> recentLists(@Param("start")int start,@Param("end")int end) throws Exception;
+	
+	public List<BookDTO> topSalLists(@Param("start")int start,@Param("end")int end) throws Exception;
 
 	public BookDTO getReadData(int seq_No) throws Exception;
 

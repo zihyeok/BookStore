@@ -66,4 +66,16 @@ public class BookItemServiceImpl implements BookItemService{
 		
 	}
 
+	@Override
+	public List<BookDTO> recentLists(int start, int end) throws Exception {
+		
+		return bookItemMapper.recentLists(start, end);
+	}
+
+	@Override
+	public List<BookDTO> topSalLists(int start, int end) throws Exception {
+	
+		return bookItemMapper.topSalLists(start, end);
+	}
+
 }

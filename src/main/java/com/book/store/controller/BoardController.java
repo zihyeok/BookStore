@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.book.store.dto.BoardCommentDTO;
 import com.book.store.dto.BoardDTO;
 import com.book.store.service.BoardCommentService;
+import com.book.store.service.BoardCommentServiceImpl;
 import com.book.store.service.BoardService;
 import com.book.store.util.MyUtil;
 import com.sun.xml.bind.v2.runtime.reflect.ListIterator;
@@ -32,7 +33,9 @@ public class BoardController {
 	@Resource
 	private BoardService boardService;//호출하면 BoardServiceImpl이 딸려들어옴
 	
-	private BoardCommentService boardCommentService;
+	@Resource
+	BoardCommentService boardCommentService = new BoardCommentServiceImpl();
+	
 	
 	@Autowired
 	MyUtil myUtil; //@Service로 구현된 MyUtil을 불러온것
@@ -122,9 +125,8 @@ public class BoardController {
 		    int end = currentPage * numPerPage;
 
 		    List<BoardDTO> lists = boardService.getLists(start, end, searchKey, searchValue);
-
+		    //System.out.println(lists+"-----------------------------");
 		    
-		    //int boardNum = Integer.parseInt(request.getParameter("num"));
 			/* /일련번호 888888888888888888888888888 */
 			
 			int listNum = 0;
@@ -143,7 +145,7 @@ public class BoardController {
 			    commentCount = boardCommentService.getDataCount(vo.getBoardNum());
 			    vo.setCommentCount(commentCount);
 			    }
-			    
+			   
 			    vo.setListnum(listNum);
 			    n++;
 			    
@@ -378,128 +380,7 @@ public class BoardController {
 		
 		//BoardCommentController--------------------------------------
 	
-		@PostMapping("/CommentCreated.action")
-		public ModelAndView commentCreated(BoardCommentDTO dto,HttpServletRequest request) throws Exception{
-
-			ModelAndView mav = new ModelAndView();
-			
-			int num = Integer.parseInt(request.getParameter("boardNum"));
-			
-			int maxNum = boardCommentService.maxNum();
-			
-			dto.setCommentNum(maxNum+1);
-			dto.setBoardNum(num);
-			
-			boardCommentService.insertData(dto);
-			
-			//주소 확인
-			mav.setViewName("redirect:/boardCommentList.action");
-
-			return mav;
-
-		}
 		
-		@GetMapping("/CommentList.action")
-		public ModelAndView CommentList(BoardCommentDTO dto,HttpServletRequest request) throws Exception{
-			
-			int num = Integer.parseInt(request.getParameter("boardNum"));
-			
-			String pageNum = request.getParameter("pageNum");//문자만 따온건가?
-			String searchKey = request.getParameter("searchKey");
-			String searchValue = request.getParameter("searchValue");
-			
-			int currentPage = 1;
-			
-			if(pageNum!=null && !pageNum.equals("")) {
-				currentPage = Integer.parseInt(pageNum);
-			}
-			
-			
-			int dataCount = boardCommentService.getDataCount(num);
-			
-			int numPerPage = 3;
-			int totalPage = 0;
-			
-			if (dataCount!=0) {
-				totalPage = myUtil.getPageCount(numPerPage, dataCount);
-			}
-			
-			if(currentPage>totalPage) {
-				currentPage=totalPage;
-			}
-			
-			int start = (currentPage-1)*numPerPage+1;
-			int end = currentPage*numPerPage;
-			int boardNum = num;
-			
-			
-			List<BoardCommentDTO> lists = boardCommentService.getLists(start, end, boardNum);
-			
-			int listNum,n = 0;
-			int commentCount = 0;
-			
-			//일련번호
-			Iterator<BoardCommentDTO> it = lists.iterator();
-			
-			while (it.hasNext()) {//일련번호만 set시키는거임
-
-				BoardCommentDTO vo = (BoardCommentDTO)it.next();
-				
-				listNum = dataCount-(start+n-1);
-				
-				vo.setListnum(listNum);
-				
-				vo.setContent(vo.getContent().replaceAll("\n", "<br/>"));
-				
-				n++;
-			}
-			
-			String listUrl = "";
-			
-			/*String param = "";
-			 * String listUrl = "/BoardList.action";
-			 * 
-			 * if(!param.equals("")) {
-			 * 
-			 * listUrl += "?" + param; }
-			 */
-			
-			String pageIndexList = 
-					myUtil.pageIndexList(currentPage, totalPage, listUrl);
-			
-			//ModelAndView로 전송
-			ModelAndView mav = new ModelAndView();
-			
-			
-			//포워딩할 데이터
-			mav.addObject("lists", lists);
-			mav.addObject("pageIndexList", pageIndexList);
-			mav.addObject("dataCount", dataCount);
-			mav.addObject("pageNum", pageNum);
-			
-			//mav.addObject("pageNum", currentPage);//3번째 방법시 같이넘겨야함
-			
-
-			mav.setViewName("boardCommentList");
-
-			return mav;
-			
-		}
-		
-		@GetMapping("/CommentDeleted.action")
-		public ModelAndView CommentDeleted(BoardCommentDTO dto,HttpServletRequest request) throws Exception{
-			
-			int num = Integer.parseInt(request.getParameter("boardNum"));
-		
-			boardCommentService.deleteData(num);
-			
-			ModelAndView mav = new ModelAndView();
-			
-			mav.setViewName("redirect:/boardCommentList.action");
-			
-			return mav;
-			
-		}
 		
 		
 		
