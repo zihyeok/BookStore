@@ -27,15 +27,15 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public int getDataCount(String searchKey, String searchValue) throws Exception {
+	public int getDataCount(int seq_No) throws Exception {
 		
-		return reviewMapper.getDataCount(searchKey, searchValue);
+		return reviewMapper.getDataCount(seq_No);
 	}
 
 	@Override
-	public List<ReviewDTO> getLists(int start, int end, String searchKey, String searchValue) throws Exception {
+	public List<ReviewDTO> getLists(int start, int end, int seq_No) throws Exception {
 		
-		return reviewMapper.getLists(start, end, searchKey, searchValue);
+		return reviewMapper.getLists(start, end, seq_No);
 	}
 
 	@Override
@@ -54,6 +54,12 @@ public class ReviewServiceImpl implements ReviewService{
 	public int deleteData(int num) throws Exception {
 		
 		return reviewMapper.deleteData(num);
+	}
+
+	@Override
+	public ReviewDTO getAvgStar(String searchKey, String searchValue) throws Exception {
+		
+		return reviewMapper.getAvgStar(searchKey, searchValue);
 	}
 
 
