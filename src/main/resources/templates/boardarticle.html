@@ -16,6 +16,9 @@
 
 <script th:inline="javascript">
 
+
+
+
 $(function () {
 	
 	listPage(1);
@@ -23,40 +26,59 @@ $(function () {
 });
 
 $(document).ready(function() {
-
+	
 	$("#sendButton").click(function(){
 		
 		var param = "name=" + $("#name").val()
 					+ "&boardNum=" + [[${dto.boardNum}]]
 					+ "&content=" + $("#content").val();
-							alert(param);//-----------------------------
+						
 		$.ajax({
-			
-			type:"post",
-			url:"/CommentCreated.action",
-			data:param,
-			success:function(args){//가져온 데이터를 args에 담아서
-				//success 받은값
-				$("#listData").html(args);
-				
-				$("#name").val("");
-				$("#content").val("");
-				
-				$("#name").focus();
-				
-			},
-			//beforeSend:showRequest,
+		    type: "POST",
+		    url: "/CommentCreated.action",
+		    data: param,
+		    dataType:"text",
+		    success:function(args){
+		      $("#listData").html(args);
+		      $("#name").val("");
+		      $("#content").val("");
+		      $("#name").focus();
+		        
+		    },
+		    beforeSend:showRequest,
 			error:function(e){
-				alert(e.responseText);
-			}
-			
+				alert(e.responsetext);
+		    }
 		});
 		
 	});
 	
 });
 
-function showRequest() {
+
+function listPage(page) {
+	
+	var url = "/CommentList.action";
+		
+	var params = "boardNum=" + [[${dto.boardNum}]] + "&pageNum=" + page;
+	
+	$.ajax({
+		url: url,
+		type: "POST",
+		dataType:"text",
+		data:params,
+		success: function(args) {
+			$("#listData").html(args);
+			$("#listData").show();
+		},
+		error:function(e){
+			alert(e.responsetext);
+		}
+	});
+}
+
+
+ function showRequest() {
 	
 	var name = $.trim($("#name").val());
 	var content = $.trim($("#content").val());
@@ -82,38 +104,33 @@ function showRequest() {
 	
 	return true;
 	
-}
-
-
-function listPage(page) {
-	//확인 alert(page);
-	var url = "/CommentList.action";
-	
-	$.post(url,{pageNum:page,boardNum:[[${dto.boardNum}]]},function(args){
-		$("#listData").html(args);
-		//alert("22222222222222222222");
-	
-	});
-	
-	
-}
-
-/* 
-
- function deleteData(num,page) {
-	
-	var url = "/CommentDeleted.action";
-	
-	$.post(url,{commentNum:num,pageNum:page,boardNum:${dto.boardNum}},function(args){
-		$("#listData").html(args);
-		
-	});
-	
 } 
-*/
 
-
-
+ 
+ function deleteData(num,page) {
+		
+	var params = "commentNum=" + num + "&boardNum=" + [[${dto.boardNum}]] + "&pageNum=" + page;
+		
+		$.ajax({
+			url:"/CommentDeleted.action",
+			type: "POST",
+			dataType:"text",
+			data:params,
+			success: function(args) {
+				$("#listData").html(args);
+				
+			},
+			error:function(e){
+				alert(e.responsetext);
+			}
+		});
+		
+	}
+ 
+//홈페이지에 접속하자마자 실행
+ window.onload = function() { 
+	 listPage(1);
+	}
 
 </script>
 
@@ -235,7 +252,7 @@ function listPage(page) {
 
 </table>
 
-<!-- <span id="listData" style="display: block;"></span> 나중에 확인-->
+<span id="listData" style="display: block;"></span> 
 
 
 
