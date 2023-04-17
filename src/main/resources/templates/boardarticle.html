@@ -16,6 +16,9 @@
 
 <script th:inline="javascript">
 
+
+
+
 $(function () {
 	
 	listPage(1);
@@ -29,26 +32,22 @@ $(document).ready(function() {
 		var param = "name=" + $("#name").val()
 					+ "&boardNum=" + [[${dto.boardNum}]]
 					+ "&content=" + $("#content").val();
-							//alert(param);//-----------------------------
+						
 		$.ajax({
 		    type: "POST",
 		    url: "/CommentCreated.action",
 		    data: param,
 		    dataType:"text",
-		    beforeSend: function(xhr) {
-		        // 요청 전에 실행할 코드
-		        showRequest();
+		    success:function(args){
+		      $("#listData").html(args);
+		      $("#name").val("");
+		      $("#content").val("");
+		      $("#name").focus();
+		        
 		    },
-		    success: function(data) {
-		        // 응답 성공 시 실행할 코드
-		        $("#listData").html(data);
-		        $("#name").val("");
-		        $("#content").val("");
-		        $("#name").focus();
-		    },
-		    error: function(xhr, status, error) {
-		        // 응답 실패 시 실행할 코드
-		        alert("에러 발생: " + error);
+		    beforeSend:showRequest,
+			error:function(e){
+				alert(e.responsetext);
 		    }
 		});
 		
@@ -56,33 +55,18 @@ $(document).ready(function() {
 	
 });
 
-/* function listPage(page) {
-	
-	var url = "/CommentList.action";
-	//alert(url);
-	
-	$.post(url,{pageNum:page,boardNum:[[${dto.boardNum}]]},function(args){
-		$("#listData").html(args);
-
-	});
-	
-	$("#listData").attr("style", "display:block");
-	$("#listData").show();
-	
-}  */
-
 
 function listPage(page) {
+	
 	var url = "/CommentList.action";
 		
-	var boardNum = "boardNum=" + [[${dto.boardNum}]];
-	var pageNum = "pageNum=" + page;
-	//alert(boardNum);
+	var params = "boardNum=" + [[${dto.boardNum}]] + "&pageNum=" + page;
+	
 	$.ajax({
 		url: url,
 		type: "POST",
 		dataType:"text",
-		data: {boardNum,pageNum},
+		data:params,
 		success: function(args) {
 			$("#listData").html(args);
 			$("#listData").show();
@@ -122,29 +106,31 @@ function listPage(page) {
 	
 } 
 
-
-
-
-
-
-
-
-/* 
-
+ 
  function deleteData(num,page) {
-	
-	var url = "/CommentDeleted.action";
-	
-	$.post(url,{commentNum:num,pageNum:page,boardNum:${dto.boardNum}},function(args){
-		$("#listData").html(args);
 		
-	});
-	
-} 
-*/
-
-
-
+	var params = "commentNum=" + num + "&boardNum=" + [[${dto.boardNum}]] + "&pageNum=" + page;
+		
+		$.ajax({
+			url:"/CommentDeleted.action",
+			type: "POST",
+			dataType:"text",
+			data:params,
+			success: function(args) {
+				$("#listData").html(args);
+				
+			},
+			error:function(e){
+				alert(e.responsetext);
+			}
+		});
+		
+	}
+ 
+//홈페이지에 접속하자마자 실행
+ window.onload = function() { 
+	 listPage(1);
+	}
 
 </script>
 

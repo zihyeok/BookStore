@@ -65,8 +65,7 @@
 	          <!-- &searchValue=${searchValue } -->
 	          제목                    
 	          </span>
-	          <!--  일련번호 -->
-	          <span th:if="${dto.commentCount != 0}">[[${dto.commentCount}]]</span>
+	         
 	          
 		  </a>
 		  
@@ -97,9 +96,6 @@
     </details> -->
 
 		
-		
-		
-	
 	
   </div>
 
@@ -107,17 +103,10 @@
   
   <div style="text-align: center;">
 	<a th:if="${pageIndexList != null}" th:utext="${pageIndexList}"></a>
-	<a th:if="${pageIndexList == 0 and pageIndexList == null and pageIndexLis == ''}">등록된 게시물이 없습니다.</a>
+	<a th:if="${pageIndexList == null or pageIndexList == ''}">등록된 게시물이 없습니다.</a>
   </div>
   
-	<!--  페이징 참고 기달
-	<c:if test="${totalDataCount!=0 }">
-		${pageIndexList }
-	</c:if>
-	<c:if test="${totalDataCount==0 }">
-		등록된 게시물이 없습니다.
-	</c:if>
-	 -->
+
 		
 
 

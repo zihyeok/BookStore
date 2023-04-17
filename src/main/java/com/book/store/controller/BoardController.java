@@ -127,24 +127,6 @@ public class BoardController {
 		    List<BoardDTO> lists = boardService.getLists(start, end, searchKey, searchValue);
 		    //System.out.println(lists+"-----------------------------");
 		    
-			/* /일련번호 888888888888888888888888888 */
-			
-			int listNum = 0;
-			int commentCount = 0;
-			int boardNum = 0;
-			
-			for (int i = 0; i < lists.size(); i++) {
-			    BoardDTO vo = lists.get(i);
-			    listNum = dataCount - (start + i + 1);
-			    
-			    if (boardNum != 0) {
-			        commentCount = boardCommentService.getDataCount(vo.getBoardNum());
-			        vo.setCommentCount(commentCount);
-			    }
-			    
-			    vo.setListnum(listNum);
-			}
-			
 			
 			String param = "";
 

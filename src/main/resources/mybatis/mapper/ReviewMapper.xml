@@ -30,7 +30,8 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	select rownum rnum,data.* from (
 	select reviewId,seq_No,reviewStar,userId,content,to_char(created,'YYYY-MM-DD') created,
 	to_char(fix_created,'YYYY-MM-DD') fix_created 
-	from review where seq_No = #{seq_No} order by reviewId desc) data) 
+	from review where seq_No = #{seq_No} 
+	order by reviewId desc) data) 
 <![CDATA[
 	where rnum>=#{start} and rnum<=#{end}
 ]]>

@@ -43,7 +43,7 @@ public class ReviewController {
 		dto.setReviewId(maxNum+1);
 		dto.setIpAddr(request.getRemoteAddr());
 		
-		System.out.println(dto);
+		
 		
 		reviewService.insertData(dto);
 		
