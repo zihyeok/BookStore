@@ -21,4 +21,9 @@ public interface BagMapper {
 	
 	public void deleteData(@Param("seq_No")int seq_No,@Param("userId")String userId) throws Exception;
 	
+//	이 하단은 주문완료 테이블 메소드
+	
+	public int findOG(String userId) throws Exception;
+	
+	public void insertOrderData(@Param("orderId")int orderId,@Param("userId")String userId,@Param("seq_No")int seq_No,@Param("orderGroup")int orderGroup) throws Exception;
 }

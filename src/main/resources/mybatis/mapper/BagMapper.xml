@@ -30,7 +30,16 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	delete from BagItem where seq_No = #{seq_No} and userId = #{userId}
 </delete>
 
+<!-- 이 하단은 장바구니에서 구매이후 주문완료 테이블 -->
 
+<select id="findOG" parameterType="String" resultType="int">
+	SELECT nvl(MAX(ordergroup),0) FROM orderbag WHERE userid = #{userId}
+</select>
+
+<insert id="insertOrderData">
+	insert into orderbag(orderid,userid,seq_No,orderdate,ordergroup) 
+	values (#{orderId},#{userId},#{seq_No},sysdate,#{orderGroup})
+</insert>
 
 
 </mapper>

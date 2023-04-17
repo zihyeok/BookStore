@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.book.store.service.BagService;
 import com.book.store.service.UserService;
 import com.book.store.user.UserCreateForm;
 import com.book.store.user.UserData;
@@ -30,6 +31,7 @@ public class UserController {
 	private final UserService userService;
 	private final PasswordEncoder passwordEncoder;
 	private final HttpSession httpSession;
+	private final BagService bagservice;
 
 	//회원가입 페이지로 이동
 		@GetMapping("/member")

@@ -7,14 +7,79 @@
 <link rel="stylesheet" href="css/basket.css">
 <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 <script type="text/javascript" src="/js/ajaxUtil.js"></script>
+</head>
+<body>
+    <section class="cart">
+        <div class="cart__information">
+            <ul>
+                <li>장바구니 상품은 최대 30일간 저장됩니다.</li>
+                <li>가격, 옵션 등 정보가 변경된 경우 주문이 불가할 수 있습니다.</li>
+                <li>오늘출발 상품은 판매자 설정 시점에 따라 오늘출발 여부가 변경될 수 있으니 주문 시 꼭 다시 확인해 주시기 바랍니다.</li>
+            </ul>
+        </div>
+        <table class="cart__list">
+            <form>
+                <thead>
+                    <tr>
+                        <td><input type="checkbox" id="checkAll"></td>
+                        <td colspan="2">상품정보</td>
+                        <td>옵션</td>
+                        <td>상품금액</td>
+                        <td>배송비</td>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr class="cart__list__detail" th:each="dto,dtoStat: ${lists}">
+                        <td><input type="checkbox" th:id="${dto.seq_No}" name="item"
+                        th:value="${dto.prc_Value}"></td>
+                        <td><img th:src="${dto.image_Url}" alt="image"></td>
+                        <td><a th:href="'/BookArticle.action?seq_No=' + @{${dto.seq_No}} + '&pageNum=1'">해당 상품 페이지</a>
+                            <p>[[${dto.publisher_Nm}]]</p>
+                            <span class="price">
+                            [[${dto.prc_Value}]]</span>
+                        </td>
+                        <td class="cart__list__option">
+                            <p>제목 : [[${dto.title_Nm}]]</p>
+                            <button class="cart__list__optionbtn" type="button">주문조건 추가/변경</button>
+                        </td>
+                        <td><span class="price">[[${dto.prc_Value}]]원</span><br>
+                            <button class="cart__list__orderbtn" type="button" id="one_Order" name="one_Order">주문하기</button>
+                        </td>
+                        <td>무료</td>
+                        <td><input type="hidden" name="seq_No" th:value="${dto.seq_No}">
+                        <input type="hidden" name="title_Nm" th:value="${dto.title_Nm}"></td>
+                    </tr>
+                </tbody>
+                
+                <tfoot>
+                    <tr>
+                        <td colspan="3"><input type="checkbox"> 
+                        	<button class="cart__list__optionbtn" type="button" id="deleteBag">선택상품 삭제</button>
+                        </td>
+                        <td id="totalPrice"></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+            </form>
+        </table>
+        <div class="cart__mainbtns">
+            <button class="cart__bigorderbtn left" onclick="javascript:location.href='/main'">홈으로 이동하기</button>
+            <button class="cart__bigorderbtn right" type="button" id="let_Go">주문하기</button>
+        </div>
+    </section>
+</body>
 <script th:inline="javascript">
 
 var itemList = document.getElementsByName("item");
 var seq_No_List = document.getElementsByName("seq_No");
 var title_Nm_List = document.getElementsByName("title_Nm");
 
+/** 개별 구매버튼*/
+var buttons = document.getElementsByName('one_Order');
+
 $(function(){
-	
 	//체크박스 전체 체크
 	$("#checkAll").click(function () {
 		
@@ -95,9 +160,8 @@ $(function(){
 	
 	$("#let_Go").click(function(){
 		
-		//주문번호 : 주문을 버튼을 누른시간
-		var now = new Date();
-		var nano = now.getTime();
+		//주문번호 : 7자리 난수
+		var orderId = Math.floor(Math.random() * 10000000);
 		
 		var boo = false;
 		var total_Price = 0;
@@ -132,7 +196,7 @@ $(function(){
 			type:'POST',
 			data:{
 				'cid' : 'TC0ONETIME',
-				'partner_order_id' : nano,
+				'partner_order_id' : orderId,
 				'partner_user_id' : [[${userId}]],
 				'item_name' : item_name,
 				'quantity' : bookName.length,
@@ -152,84 +216,80 @@ $(function(){
 				var url = data.next_redirect_pc_url;
 				var tid = data.tid;
 				
-				window.location.href = 'ready?url='+url+'&tid='+tid+'&orderId='+nano+'&bookNum='+bookNum.join(",");
+				window.location.href = 'ready?url='+url+'&tid='+tid+'&orderId='+orderId+'&bookNum='+bookNum.join(",");
 			},
 			error:function(error){
 				
 				alert(error);
 			}
-		
-		
+		});
+	});
+	
+	//단독 구매버튼
+// 	$('[id^="one_Order"]').click(function(){
+//         var value = $(this).val();
+//         var title = $(this).attr("name");
+        
+//         //alert("value : " + value + ", name : " + name);
+//         if(confirm(title + "을 구매하시겠습니까?")){
+        	
+//         }
+//     });
+	$('button[name="one_Order"]').on('click', function() {
+		  // 버튼이 속한 <tr> 요소 찾기
+		  var $tr = $(this).closest('tr');
+		  // name="seq_No"의 value 값 가져오기
+		  var seqNo = $tr.find('input[name="seq_No"]').val();
+		  // name="title_Nm"의 value 값 가져오기
+		  var title = $tr.find('input[name="title_Nm"]').val();
+		  // name="item"의 value 값 가져오기
+		  var price = $tr.find('input[name="item"]').val();
+
+		  //확인 클릭시 ajax로 
+		 if(confirm(title + '을 구매하시겠습니까?')){
+			 
+			var orderId = Math.floor(Math.random() * 10000000);
+			 
+			 $.ajax({
+					url:"https://kapi.kakao.com/v1/payment/ready",
+					type:'POST',
+					data:{
+						'cid' : 'TC0ONETIME',
+						'partner_order_id' : orderId,
+						'partner_user_id' : [[${userId}]],
+						'item_name' : title,
+						'quantity' : 1,
+						'total_amount' : price,
+						'tax_free_amount' : 0,
+						'approval_url' : 'http://localhost:8080/success',
+						'cancel_url' : 'http://localhost:8080/cancel',
+						'fail_url' : 'http://localhost:8080/fail'
+					},
+					headers:{
+						'Authorization' : 'KakaoAK 051b33bdbbe0ba43924808b0a780bb6c',
+						'Content-type' : 'application/x-www-form-urlencoded;charset=utf-8'
+					},
+					dataType:"json",
+					success:function(data){
+						
+						var url = data.next_redirect_pc_url;
+						var tid = data.tid;
+						
+						window.location.href = 'ready?url='+url+'&tid='+tid+'&orderId='+orderId+'&bookNum='+seqNo;
+					},
+					error:function(error){
+						
+						alert(error);
+					}
+				});
+		 }
+		  
+		  
 		});
 	
 	
-	});
+	
 	
 });	
-
 </script>
-
-</head>
-<body>
-    <section class="cart">
-        <div class="cart__information">
-            <ul>
-                <li>장바구니 상품은 최대 30일간 저장됩니다.</li>
-                <li>가격, 옵션 등 정보가 변경된 경우 주문이 불가할 수 있습니다.</li>
-                <li>오늘출발 상품은 판매자 설정 시점에 따라 오늘출발 여부가 변경될 수 있으니 주문 시 꼭 다시 확인해 주시기 바랍니다.</li>
-            </ul>
-        </div>
-        <table class="cart__list">
-            <form>
-                <thead>
-                    <tr>
-                        <td><input type="checkbox" id="checkAll"></td>
-                        <td colspan="2">상품정보</td>
-                        <td>옵션</td>
-                        <td>상품금액</td>
-                        <td>배송비</td>
-                    </tr>
-                </thead>
-                
-                <tbody>
-                    <tr class="cart__list__detail" th:each="dto,dtoStat: ${lists}">
-                        <td><input type="checkbox" th:id="${dto.seq_No}" name="item"
-                        th:value="${dto.prc_Value}"></td>
-                        <td><img th:src="${dto.image_Url}" alt="image"></td>
-                        <td><a th:href="'/BookArticle.action?seq_No=' + @{${dto.seq_No}} + '&pageNum=1'">해당 상품 페이지</a>
-                            <p>[[${dto.publisher_Nm}]]</p>
-                            <span class="price">
-                            [[${dto.prc_Value}]]</span>
-                        </td>
-                        <td class="cart__list__option">
-                            <p>제목 : [[${dto.title_Nm}]]</p>
-                            <button class="cart__list__optionbtn">주문조건 추가/변경</button>
-                        </td>
-                        <td><span class="price">[[${dto.prc_Value}]]원</span><br>
-                            <button class="cart__list__orderbtn">주문하기</button>
-                        </td>
-                        <td>무료</td>
-                        <td><input type="hidden" name="seq_No" th:value="${dto.seq_No}">
-                        <input type="hidden" name="title_Nm" th:value="${dto.title_Nm}"></td>
-                    </tr>
-                </tbody>
-                
-                <tfoot>
-                    <tr>
-                        <td colspan="3"><input type="checkbox"> 
-                        	<button class="cart__list__optionbtn" type="button" id="deleteBag">선택상품 삭제</button>
-                        </td>
-                        <td id="totalPrice"></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tfoot>
-            </form>
-        </table>
-        <div class="cart__mainbtns">
-            <button class="cart__bigorderbtn left" onclick="javascript:location.href='/main'">홈으로 이동하기</button>
-            <button class="cart__bigorderbtn right" type="button" id="let_Go">주문하기</button>
-        </div>
-    </section>
-</body>
 </html>
