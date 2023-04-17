@@ -9,7 +9,9 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -24,7 +26,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.book.store.dto.BookDTO;
 import com.book.store.service.BagService;
+import com.book.store.service.BookItemService;
 import com.book.store.service.UserService;
 import com.book.store.user.UserData;
 
@@ -37,6 +41,7 @@ public class UserAjax {
 	private final UserService userService;
 	private final BagService bagService;
 	private final HttpSession httpsession;
+	private final BookItemService bookitemservice;
 
 	@PostMapping("/findId")
 	public Map<String, Object> findId(HttpServletRequest request) throws Exception {
@@ -148,14 +153,27 @@ public class UserAjax {
 		String tid = (String) httpsession.getAttribute("tid");
 		String orderId = (String) httpsession.getAttribute("orderId");
 		String[] book_No = ((String) httpsession.getAttribute("bookNum")).split(",");
+		
+		int orderGroup = bagService.findOG(user.getUserId());
+		
+		List<BookDTO> lists = new ArrayList<BookDTO>();
+		
 		for(String title_No : book_No) {
+			//장바구니 아이템 삭제
 			bagService.deleteData(Integer.parseInt(title_No), user.getUserId());
+			
+			//결제완료 데이터 추가
+			bagService.insertOrderData(Integer.parseInt(orderId), user.getUserId(), Integer.parseInt(title_No), orderGroup+1);
+			
+			//결제완료 페이지에서 보여질 구매한 List데이터 추가
+			lists.add(bookitemservice.getReadData(Integer.parseInt(title_No)));
 		}
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("tid", tid);
 		mav.addObject("user", user.getUserId());
 		mav.addObject("orderId", orderId);
+		mav.addObject("lists", lists);
 		mav.setViewName("kakaopay_success");
 		
 //		try {
