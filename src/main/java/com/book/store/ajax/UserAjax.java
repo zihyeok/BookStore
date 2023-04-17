@@ -167,6 +167,9 @@ public class UserAjax {
 			
 			//결제완료 페이지에서 보여질 구매한 List데이터 추가
 			lists.add(bookitemservice.getReadData(Integer.parseInt(title_No)));
+			
+			//결제완료후 VIP점수 누적
+			userService.updateVip(user.getUserId());
 		}
 		
 		ModelAndView mav = new ModelAndView();
