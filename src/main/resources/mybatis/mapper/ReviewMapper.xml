@@ -7,42 +7,47 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.book.store.mapper.ReviewMapper">
 
 <select id="maxNum" resultType="int">
-	select nvl(max(num),0) from review
+	select nvl(max(reviewId),0) from review
 </select>
 
 <insert id="insertData" parameterType="com.book.store.dto.ReviewDTO">
-	insert into review (num,seq_No,userName,userPwd,content,created) 
-	values(#{num},#{seq_No},#{userName},#{userPwd},#{content},sysdate)
+	insert into review (reviewId,seq_No,reviewStar,userId,content,created) 
+	values(#{reviewId},#{seq_No},#{reviewStar},#{userId},#{content},sysdate) 
 </insert>
 
-<select id="getDataCount" parameterType="map" resultType="int">
+<select id="getDataCount" parameterType="int" resultType="int">
 	select nvl(count(*),0) from review 
+	where seq_No = #{seq_No}
+</select>
+
+<select id="getAvgStar" parameterType="map" resultType="int">
+	select nvl(avg(reviewStar),0) from review 
 	where ${searchKey} like '%' || #{searchValue} || '%'
 </select>
 
 <select id="getLists" parameterType="map" resultType="com.book.store.dto.ReviewDTO">
 	select * from (
 	select rownum rnum,data.* from (
-	select num,seq_No,userName,content,to_char(created,'YYYY-MM-DD') created 
-	from review where ${searchKey} like '%' || #{searchValue} || '%' 
-	order by num desc) data) 
+	select reviewId,seq_No,reviewStar,userId,content,to_char(created,'YYYY-MM-DD') created,
+	to_char(fix_created,'YYYY-MM-DD') fix_created 
+	from review where seq_No = #{seq_No} order by reviewId desc) data) 
 <![CDATA[
 	where rnum>=#{start} and rnum<=#{end}
 ]]>
 </select>
 
 <select id="getReadData" parameterType="int" resultType="com.book.store.dto.ReviewDTO">
-	select num,seq_No,userName,userPwd,content,created from review 
-	where num=#{num}
+	select reviewId,seq_No,userId,content,created from review 
+	where reviewId=#{reviewId}
 </select>
 
 <update id="updateData" parameterType="com.book.store.dto.ReviewDTO">
 	update review set content=#{content} 
-	where num=#{num}
+	where reviewId=#{reviewId}
 </update>
 
 <delete id="deleteData" parameterType="int">
-	delete from review where num=#{num}
+	delete from review where reviewId=#{reviewId}
 </delete>
 
 

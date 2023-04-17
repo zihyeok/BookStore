@@ -40,6 +40,19 @@ public class BagServiceImpl implements BagService{
 		bagMapper.deleteData(seq_No,userId);
 	}
 
+	@Override
+	public int findOG(String userId) throws Exception {
+		
+		return bagMapper.findOG(userId);
+	}
+	
+	@Override
+	public void insertOrderData(int orderId, String userId, int seq_No, int orderGroup) throws Exception {
+		bagMapper.insertOrderData(orderId, userId, seq_No, orderGroup);
+	}
+
+	
+
 	
 	
 }
