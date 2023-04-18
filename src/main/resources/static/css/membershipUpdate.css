@@ -1,0 +1,284 @@
+@charset "utf-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0px solid silver;
+}
+
+img {
+  width: 100px;
+}
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  color: #333;
+  letter-spacing: 0.1px;
+}
+
+h2 {
+  font-size: 1.2em;
+  line-height: 1.2rem;
+  text-align: center;
+}
+
+h3 {
+  font-size: 1.4em;
+  line-height: 1.4rem;
+}
+
+a:link { color: #666; text-decoration: none;}
+a:visited { color: #666;}
+a:hover { color: #666;}
+a:active { color: #666;}
+
+ul {
+  list-style: none;
+}
+
+.ico {
+  left: 6px;
+  top: 4px;
+  vertical-align: -6px;  
+}
+
+input {
+  font-family: 'Noto Sans KR', sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 14px;
+  margin: 10px 0;
+  font-size: 1rem;
+}
+
+input:focus {
+  outline: none;
+}
+
+input[type="checkbox"] {
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+  color: #4c4c4c;
+  font-size: 12px;
+  max-width: 100%;
+}
+
+input[type="checkbox"] +.ico {
+  display: inline-block;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  background: url(https://res.kurly.com/pc/service/common/2006/ico_checkbox.svg) no-repeat 50% 50%;
+  background-size: 24px 24px;
+  vertical-align: -2px;
+}
+
+input[type="checkbox"]:checked +.ico {
+  background: url(https://res.kurly.com/pc/service/common/2006/ico_checkbox_checked.svg) no-repeat 50% 50%;
+  background-size: 24px 24px;
+}
+
+input[type=radio] {
+  position: absolute;
+  z-index: 1;
+  opacity: 0;
+}
+
+input[type=radio]+.ico {
+  display: inline-block;
+  position: relative;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 100%;
+  vertical-align: -4px;
+}
+
+input[type=radio]:checked+.ico {
+  border: 1px solid #5f0081;
+  background-color: #5f0080;
+}
+
+input[type=radio]:checked+.ico::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 10px;
+  height: 10px;
+  margin: -5px 0 0 -5px;
+  border-radius: 100%;
+  background-color: #fff;
+}
+
+button {
+  width: 50%;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding: 14px;
+  margin-left: 10px;
+  border: 1px solid #5f0080;
+  border-radius: 4px;
+  color: #5f0080;
+  background: white;
+  transition: 0.3s;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  background: #5f0080;
+  color: #fff;
+}
+
+
+/* start */
+
+
+
+form {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 100px 5%;
+}
+
+form> div div {
+  margin-bottom: 1rem;
+}
+
+form div label {
+  /* font-size: 1rem; */
+  font-weight: bold;
+}
+
+form div label.imp::after {
+  content: "*";
+  color: #ee6a7b;
+}
+
+form .membership div div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+form .membership div input {
+  width: 100%;
+}
+
+form .membership div ul li {
+  width: 100%;
+}
+
+form .membership .add {
+  position: relative;
+  margin-bottom: 0;
+}
+
+form .membership .add img {
+  position: absolute;
+  right: 10px;
+  width: 28px;
+  height: 28px;
+}
+
+form .membership .birth {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+form .membership .birth input {
+  border: none;
+  margin: 0;
+  text-align: center;
+}
+
+form .membership :nth-child(9) {
+  margin: 2rem 0;
+}
+
+form .membership :nth-child(8) ul,
+form .membership :nth-child(9) p {
+  margin: 20px 0;
+}
+
+form .membership :nth-child(8) ul li,
+form .membership :nth-child(9) ul li {
+  margin: 20px 0;
+  font-size: 1rem;
+}
+
+form .terms {
+  margin: 2rem 0;
+}
+
+form .terms span {
+  color: #ccc;
+}
+
+form .terms div {
+  margin: 1rem 0;
+}
+
+form .terms div p {
+  margin: 10px 0;
+}
+
+form .terms> :nth-child(1) {
+  margin: 1rem 0;
+}
+
+form .terms> :nth-child(2) {
+  line-height: 1.4rem;
+  margin: 1rem 0;
+  border-bottom: 1px solid #eee;
+}
+
+form .terms> :nth-child(3),
+form .terms :nth-child(4),
+form .terms :nth-child(5) {
+  position: relative;
+}
+
+form .terms> :nth-child(3) a,
+form .terms :nth-child(4) a,
+form .terms :nth-child(5) a {
+  position: absolute;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  background: url('https://res.kurly.com/mobile/ico/1908/btn_arrow_333_76x76.png') no-repeat 100% 46%;
+  background-size: 36px 36px;
+}
+
+form .terms :nth-child(6) div {
+  margin-left: 10%;  
+}
+
+form .terms :nth-child(6) div img {
+  display: block;
+  width: 240px;
+  margin-top: 10px;
+}
+
+form> button {
+  margin: 0 auto;
+  width: 100%;
+}
+
+
+/* end */
