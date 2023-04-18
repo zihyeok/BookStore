@@ -24,4 +24,6 @@ public interface UserService {
 	public String findUserPwd(@Param("userId")String userId,@Param("userName")String userName,@Param("userTel")String userTel) throws Exception;
 	
 	public int findUserBagItem(String userName) throws Exception;
+	
+	public void updateVip(String userId) throws Exception;
 }

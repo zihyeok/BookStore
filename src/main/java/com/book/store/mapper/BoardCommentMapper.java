@@ -19,7 +19,7 @@ public interface BoardCommentMapper {
 	
 	public List<BoardCommentDTO> getLists(@Param("start")int start,@Param("end")int end,@Param("boardNum")int boardNum) throws Exception;
 	
-	public void deleteData(int boardNum) throws Exception;
+	public void deleteData(int commentNum) throws Exception;
 	
 	
 }

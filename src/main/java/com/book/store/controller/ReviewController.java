@@ -51,7 +51,6 @@ public class ReviewController {
 
 		dto.setReviewId(maxNum+1);
 		dto.setIpAddr(request.getRemoteAddr());
-
 		reviewService.insertData(dto);
 
 		ModelAndView mav = new ModelAndView();
