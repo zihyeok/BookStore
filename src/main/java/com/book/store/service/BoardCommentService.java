@@ -15,4 +15,9 @@ public interface BoardCommentService {
 	public List<BoardCommentDTO> getLists(int start,int end,int boardNum) throws Exception;
 	
 	public void deleteData(int commentNum) throws Exception;
+	
+	public void updateData(BoardCommentDTO dto) throws Exception;
+	
+	public BoardCommentDTO getReadData(int commentNum) throws Exception;
+	
 }

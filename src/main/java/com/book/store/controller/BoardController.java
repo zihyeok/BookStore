@@ -174,7 +174,7 @@ public class BoardController {
 			
 			ModelAndView mav = new ModelAndView();
 			
-			int num = Integer.parseInt(request.getParameter("num"));
+			int boardNum = Integer.parseInt(request.getParameter("num"));
 			
 			String pageNum = request.getParameter("pageNum");
 			
@@ -190,9 +190,9 @@ public class BoardController {
 				}
 			}
 			
-			boardService.updateHitCount(num);
+			boardService.updateHitCount(boardNum);
 			
-			BoardDTO dto = boardService.getReadData(num);
+			BoardDTO dto = boardService.getReadData(boardNum);
 			
 			if(dto==null) {
 				
@@ -207,7 +207,6 @@ public class BoardController {
 			
 			
 			//이전글
-			int boardNum = num;
 			String subject = request.getParameter("subject");
 			
 			BoardDTO preDTO = boardService.preReadData(boardNum, subject, searchKey, searchValue);
@@ -240,7 +239,7 @@ public class BoardController {
 			mav.addObject("preSubject", preSubject);
 			mav.addObject("nextNum", nextNum);
 			mav.addObject("nextSubject", nextSubject);
-			
+		
 			mav.addObject("dto", dto);
 			mav.addObject("params", param);
 			mav.addObject("pageNum", pageNum);
@@ -354,8 +353,7 @@ public class BoardController {
 			
 		}
 		
-		//BoardCommentController--------------------------------------
-	
+
 		
 		
 		

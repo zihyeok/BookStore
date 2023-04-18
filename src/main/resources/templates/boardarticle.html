@@ -39,11 +39,11 @@ $(document).ready(function() {
 		    data: param,
 		    dataType:"text",
 		    success:function(args){
-		      $("#listData").html(args);
+		      
 		      $("#name").val("");
 		      $("#content").val("");
 		      $("#name").focus();
-		        
+		      listPage(1);
 		    },
 		    beforeSend:showRequest,
 			error:function(e){
@@ -117,7 +117,7 @@ function listPage(page) {
 			dataType:"text",
 			data:params,
 			success: function(args) {
-				$("#listData").html(args);
+				listPage(page);
 				
 			},
 			error:function(e){
@@ -127,10 +127,6 @@ function listPage(page) {
 		
 	}
  
-//홈페이지에 접속하자마자 실행
- window.onload = function() { 
-	 listPage(1);
-	}
 
 </script>
 
