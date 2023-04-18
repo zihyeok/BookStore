@@ -39,4 +39,10 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	select nvl(count(*),0) from bagitem where userid = #{userId}
 </select>
 
+<update id="updateVip" parameterType="String">
+	UPDATE userdata
+	SET uservip = uservip + 1
+	WHERE userid = #{userId}
+</update>
+
 </mapper>

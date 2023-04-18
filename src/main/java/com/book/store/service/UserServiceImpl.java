@@ -72,6 +72,11 @@ public class UserServiceImpl implements UserService{
 		return userMapper.findUserBagItem(userId);
 	}
 
+	@Override
+	public void updateVip(String userId) throws Exception {
+		userMapper.updateVip(userId);
+	}
+
 	
 
 	
