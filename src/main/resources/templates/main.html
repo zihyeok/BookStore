@@ -65,17 +65,16 @@
       <div class="swiper-wrapper">
         <div class="swiper-slide" th:each="i : ${#numbers.sequence(0,3)}" th:if="${#lists.size(recentLists)}>0">
      <a th:href="'/BookArticle.action?seq_No=' + @{${recentLists[4*i].seq_No}}">
-     <img th:src="${recentLists[4*i].image_Url}" style="width: 200px; height: 250px; margin-right: 50px;"></a>
+     <img th:src="${recentLists[4*i].image_Url}" style="width: 150px; height: 200px; margin-right: 50px;"></a>
      
      <a th:href="'/BookArticle.action?seq_No=' + @{${recentLists[4*i+1].seq_No}}">
-     <img th:src="${recentLists[4*i+1].image_Url}" style="width: 200px; height: 250px; margin-right: 50px;"></a>
+     <img th:src="${recentLists[4*i+1].image_Url}" style="width: 150px; height: 200px; margin-right: 50px;"></a>
      
      <a th:href="'/BookArticle.action?seq_No=' + @{${recentLists[4*i+2].seq_No}}">
-     <img th:src="${recentLists[4*i+2].image_Url}" style="width: 200px; height: 250px; margin-right: 50px;"></a>
+     <img th:src="${recentLists[4*i+2].image_Url}" style="width: 150px; height: 200px; margin-right: 50px;"></a>
      <a th:href="'/BookArticle.action?seq_No=' + @{${recentLists[4*i+3].seq_No}}">
      
-     <img th:src="${recentLists[4*i+3].image_Url}" style="width: 200px; height: 250px; margin-right: 50px;"></a>
-
+     <img th:src="${recentLists[4*i+3].image_Url}" style="width: 150px; height: 200px; margin-right: 20px;"></a>
         </div>
       </div>
 

@@ -25,6 +25,11 @@ div{
   color: #24855b;
 }
 
+.brown{
+  color: #6c500d;
+}
+
+
 .wrap{
   background-color: #F8F8F8;  
 }
@@ -46,6 +51,26 @@ div{
 .greenContainer .modify{
   margin-left: auto;
 }
+
+/*갈색 배경*/
+.brownContainer{  
+  height: 132px;
+  background-color: #6c500d;    
+  
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+.brownContainer .name{
+   font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+} 
+.brownContainer .modify{
+  margin-left: auto;
+}
+
 
 /* 단골상점 , 상품후기 , 적립금 박스 */
 .summaryContainer{
