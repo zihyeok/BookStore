@@ -6,6 +6,49 @@
 <link rel="stylesheet" type="text/css" href="css/BookList.css">
 
 <script type="text/javascript" src="/js/ajaxUtil.js"></script>
+
+
+</br></br></br></br>
+</br></br></br></br>
+
+<div class="BookList-container" th:each="i : ${#numbers.sequence(0,2)}" th:if="${#lists.size(lists)}>0">
+	<div class="BookList-row" th:each="j : ${#numbers.sequence(0,2)}">
+		
+		<div class="BookList-img-box" th:each="dto: ${lists[3*i+j]}"> 
+			
+			<a th:href="@{${articleUrl}} + '&seq_No=' + @{${dto.seq_No}}">
+			<img alt="" th:src="@{${dto.image_Url}}"></a><br/>
+			
+			<span>[[${dto.title_Nm}]]</span><br/>
+			<span>[[${dto.authr_Nm}]]</span><br/>
+			<span>출판사:[[${dto.publisher_Nm}]]</span><br/>
+			<span>가격:[[${dto.prc_Value}]]원</span><br/>
+			
+			<div th:id="${dto.seq_No}">
+			<a th:onclick="|javascript:sendBag('${dto.seq_No}')|"><button type="button">🤍</button></a>
+			</div>
+			<div th:id="'delete' + ${dto.seq_No}" style="display: none;">
+			<a th:onclick="|javascript:sendDeleteBag('${dto.seq_No}')|"><button type="button">❤️</button></a>
+			</div>
+			
+		</div>
+		
+		
+		
+	</div>
+</div>
+
+</br></br></br>
+
+<div style="text-align: right; margin-right: 200px;">
+	<button th:onclick="|location.href='@{BookCreated.action}'|">등록하기</button>
+</div>
+
+<br/>
+<div style="text-align: center;">
+<a th:utext="${pageIndexList}"></a>
+</div>
+
 <script th:inline="javascript">
 
 function sendBag(seq_No){
@@ -41,12 +84,12 @@ function returnBag(){
 		if(httpRequest.status==200){
 			
 			var text = httpRequest.responseText;
-			alert(text);
 			var resultText = JSON.parse(text);
 			var count = Object.keys(resultText.lists).length;
+
 			for(var i=0;i<count;i++){
 
-				show(resultText.lists[i].seq_No);
+				showLike(resultText.lists[i].seq_No);
 				
 			}
 		
@@ -87,10 +130,9 @@ function returnDeleteBag(){
 		if(httpRequest.status==200){
 			
 			var text = httpRequest.responseText;
-			
 			var resultText = JSON.parse(text);
 			
-			hide(resultText.bagDTO.seq_No);
+			hideLike(resultText.bagDTO.seq_No);
 
 		}
 		
@@ -99,38 +141,49 @@ function returnDeleteBag(){
 }
 
 function sendAllItem(){
-
-	var params = null;
+	
+	if([[${session.user}]]!=null){
 		
-	sendRequest("/selectItem.action",params,returnBag,"POST");
+		var params = null;
+		
+		sendRequest("/selectItem.action",params,returnBag,"POST");
+		
+	}
 
 }
 
 window.onload = function(){
 	
 	sendAllItem();
+	//navbar.html 하이드 여기서 실행이 안됨 why? window.onload가 2번 겹쳐서 그럼  그래서 hide();를 여기서 써줌
+	hide();
 	
 }
 
-function show(seq_No) {
-
-	var d_No = "delete" + seq_No;
+function showLike(seq_No) {
 
 	var beforeItem = document.getElementById(seq_No);
-	beforeItem.style.display = "none";
-	
-	var afterItem = document.getElementById(d_No);
-	afterItem.style.display = "block";
-	
+	//beforeItem이 null값이 나오면 다음 단계로 진행이 안됨 그래서 if으로 걸러야됨
+	if(beforeItem!=null){
+
+		var d_No = "delete" + seq_No;
+		
+		beforeItem.style.display = "none";
+		
+		var afterItem = document.getElementById(d_No);
+		afterItem.style.display = "block";
+		
+	}
+
 }
 
-function hide(seq_No) {
+function hideLike(seq_No) {
 	
 	var d_No = "delete" + seq_No;
 
 	var beforeItem = document.getElementById(seq_No);
 	beforeItem.style.display = "block";
-	
+
 	var afterItem = document.getElementById(d_No);
 	afterItem.style.display = "none";
 	
@@ -138,47 +191,6 @@ function hide(seq_No) {
 
 
 </script>
-
-</br></br></br></br>
-</br></br></br></br>
-
-<div class="BookList-container" th:each="i : ${#numbers.sequence(0,2)}" th:if="${#lists.size(lists)}>0">
-	<div class="BookList-row" th:each="j : ${#numbers.sequence(0,2)}">
-		
-		<div class="BookList-img-box" th:each="dto: ${lists[3*i+j]}"> 
-			
-			<a th:href="@{${articleUrl}} + '&seq_No=' + @{${dto.seq_No}}">
-			<img alt="" th:src="@{${dto.image_Url}}"></a><br/>
-			
-			<span>[[${dto.title_Nm}]]</span><br/>
-			<span>[[${dto.authr_Nm}]]</span><br/>
-			<span>출판사:[[${dto.publisher_Nm}]]</span><br/>
-			<span>가격:[[${dto.prc_Value}]]원</span><br/>
-			
-			<div th:id="${dto.seq_No}">
-			<a th:onclick="|javascript:sendBag('${dto.seq_No}')|"><button>🤍</button></a>
-			</div>
-			<div th:id="'delete' + ${dto.seq_No}" style="display: none;">
-			<a th:onclick="|javascript:sendDeleteBag('${dto.seq_No}')|"><button>❤️</button></a>
-			</div>
-			
-		</div>
-		
-		
-		
-	</div>
-</div>
-
-</br></br></br>
-
-<div style="text-align: right; margin-right: 200px;">
-	<button th:onclick="|location.href='@{BookCreated.action}'|">등록하기</button>
-</div>
-
-<br/>
-<div style="text-align: center;">
-<a th:utext="${pageIndexList}"></a>
-</div>
 
 </div>
 </html>

@@ -41,8 +41,8 @@ public class BoardCommentServiceImpl implements BoardCommentService{
 	}
 
 	@Override
-	public int getDataCount(int boardNum) throws Exception {
-		return boardCommentMapper.getDataCount(boardNum);
+	public int getDataCount(int commentNum) throws Exception {
+		return boardCommentMapper.getDataCount(commentNum);
 	}
 
 

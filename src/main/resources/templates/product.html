@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en" class="no-js" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+
+<div layout:fragment="content2">
     <!-- Begin Head -->
     <head>
         
@@ -14,258 +16,37 @@
         <link rel="shortcut icon" href="img/favicon2.ico" type="image/x-icon">
         <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
 	
-
-	<style>
+		<!-- product.css -->
+		<link rel="stylesheet" href="css/product.css">
+		<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+		<script th:inline="javascript">
 		
-		* {padding: 0; margin: 0; text-decoration: none; box-sizing: border-box; }
+		$(function () {
+			listPage(1);			
+		});
+		
+		function listPage(page){
+			
+			var params = "seq_No=" + [[${dto.seq_No}]] + "&pageNum=" + page;
 
-html, body, div, span, applet, object, iframe, table, caption, tbody, tfoot, thead, tr, th, td, 
-del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, 
-h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, 
-dl, dt, dd, ol, ul, li, fieldset, form, label, legend {
-     vertical-align: baseline; font-family: inherit; font-weight: inherit; font-style: inherit; font-size: 100%; outline: 0; padding: 0; margin: 0; border: 0;}
+			$.ajax({
+				type:"POST",
+				url:"/ReviewList.action",
+				data:params,
+				dataType:"text",
+				success:function(args){
+	
+					$("#reviewListData").html(args);
+					
+				}
+			
+			});
+			
+		}
 
-ul, ol, li {list-style: none; }
-
-a {text-decoration: none; color: #000; }
-
-a:hover a:focus {text-decoration: none; outline: 0;}
-
-img {width:100%; vertical-align: top; border: 0 none; }
-table {border-collapse: separate; border-spacing: 0;}
-strong{font-weight:bold}
-caption, th, td {font-weight: normal;text-align: left;}
-
-blockquote:before, blockquote:after, q:before, q:after {content: "";}
-
-blockquote, q {quotes: "" "";}
-
-.clearfix::before, .clearfix::after, .clearfix:before, .clearfix:after {content: ""; display: block; }
-
-.clearfix::after, .clearfix:after {clear: both; }
-
-.hidden {font-size: 0px;line-height: 0px; text-indent: -9999px; position:absolute; overflow:hidden; left:-999em; width:0; height:0; visibility: hidden;}
-
-
-.in_box{max-width: 1170px; padding:0 15px; width:100%; margin: 0 auto; position: relative; overflow: hidden;}
-.displayN{display:none;}
-.float-r{float:right}
-.float-l{float:left}
-.txt-red{color:#b12424;}
-
-/*header*/
-.header{width:100%; border-bottom:1px solid #ebebeb}
-.header .logo{width:105px; padding:20px 0;}
-
-/* footer */
-.footer{background:#f5f5f5; margin-top:80px; padding:45px 0;}
-.footer .top_footer ul li{display:inline-block; margin-right:12px; font-size:11px; font-weight: bold; }
-.footer .top_footer ul li a{color:#222;}
-.footer .txt_box{color:#666; font-size:11px; margin-top:5px}
-.footer .txt_box p{line-height:20px; }
-.footer .txt_box p .bar{vertical-align: top; padding: 0 2px;}
-
-/*btn*/
-.btn{box-sizing: border-box; border: 2px solid transparent; text-align: center; width:100%; padding:15px 0; font-size:18px; font-weight:bold; cursor:pointer;}
-.m-btn{box-sizing: border-box; border: 2px solid transparent; text-align: center; width:auto; padding:10px 30px; font-size:13px; font-weight:normal; cursor:pointer;}
-.black-btn{color: #ffffff !important; background-color: #222222 !important; border-color: #222222 !important;}
-.btn_box{width:100%}
-
-/*container*/
-/********productshop********/
-
-/*main_banner*/
-.container .main_banner{width:100%; background:url(../img/shop/main_ban_bg.png) no-repeat; background-size:cover}
-
-/*productwrap*/
-.productwrap{font-size:0;}
-.productwrap .product{display:inline-block; width:calc(50% - 20px); margin-top:80px;}
-.productwrap>div:nth-child(odd){margin-right:40px;}
-
-.productwrap .product .product_txt{margin-top:20px;}
-.productwrap .product .product_txt p{color:#222; font-weight:normal;}
-.productwrap .product .product_txt p:not(:last-child){font-size:18px; line-height:26px;}
-.productwrap .product .product_txt p:last-child{font-size:24px; line-height:40px;}
-
-.productwrap .product.preparing .thumb{position:relative;}
-.productwrap .product.preparing .thumb:before{content:''; background:rgba(0,0,0,.5); width:100%; height:100%; display:block; position:absolute;}
-.productwrap .product.preparing .thumb:after{content: '상품 준비중'; color: #fff; position: absolute; width: 100%; text-align: center; font-size: 16px; top: 50%; left:0; transform: translateY(-50%);}
-.productwrap .product.preparing .price{color:#cccccc; text-decoration: line-through;}
-
-
-/********productdetail********/
-.product_detail{margin-top:50px}
-.product_detail .product_top{font-size:0;}
-.product_detail .product_top>div{width:calc(50% - 30px); display:inline-block; vertical-align: text-top;}
-.product_detail .product_top>div:first-child{margin-right:60px; overflow:hidden}
-.product_detail .product_box{font-size:15px;}
-.product_detail .product_top .thumb_l{width:100%;}
-.product_detail .product_top .thumb_l .slick-arrow, .product_detail .product_top .thumb_l .slick-dots{display:none !important}
-.product_detail .product_top .thumb_s{overflow: hidden; margin-top:13px; width:100%; position:relative}
-.product_detail .product_top .thumb_s>div{width:90%; max-height: 100px;  margin:0 auto; overflow:hidden}
-.product_detail .product_top .thumb_s img{margin:5px; cursor: pointer;}
-.product_detail .product_top .thumb_s img.slick-current{border:1px solid #707070}
-.slick-arrow{position:absolute; top:46%;}
-.slick-arrow.slick-prev{left:5px;}
-.slick-arrow.slick-next{right:5px; }
-.slick-prev:before, .slick-next:before{color:#666 !important;}
-
-.productname{position: relative; width: 100%; height: 50px; border: 1px solid #ccc; line-height: 50px;}
-.productname.active{border: 1px solid #222; border-bottom: 1px solid #ccc;}
-.productname ul{position: absolute; width: calc(100% + 2px); border: 1px solid #222; background: #fff; left: -1px; top: 49px; display:none;}
-.productname ul.active{border-top:0;}
-.productname p{padding:0 5px; cursor:pointer; color:#ccc}
-.productname p:after{content: ""; width: 0px; height: 0px; border-top: 7px solid transparent; border-right: 7px solid #ccc; transform: rotate(45deg); bottom: 45%; right: 13px;
-    position: absolute;}
-.productname ul li:hover, .productname ul li:focus{background-color:#f5f5f5;}
-
-/**/.drop-down01 {position: relative; display: block; width: 100%; height: 50px; line-height: 50px; border: 1px solid #ccc;}      
-.drop-down01 select {display: none;}
-.drop-down01 .select-list-link{font-size: 0; position: absolute; top: 0; width: 100%; display: block; left: 0;}
-.drop-down01 .select-list-link:after{content: ""; width: 0px; height: 0px; border-top: 7px solid transparent; border-right: 7px solid #ccc; transform: rotate(45deg); bottom: 45%; right: 13px;
-    position: absolute;}
-.drop-down01 .select-list {position: absolute; top: -1px; left: -1px; z-index: 3; margin-top: 50px; padding: 0; background-color: #fff; width: calc(100% + 2px); }      
-.drop-down01 .select-list li {display: none; border-left: 1px solid #222; border-right: 1px solid #222;}    
-.drop-down01 .select-list li:first-child{border-top:1px solid #222;}
-.drop-down01 .select-list li:last-child{ border-bottom: 1px solid #222;}
-.drop-down01 .select-list li span {display: inline-block; min-height: 50px; min-width: 280px; width: 100%; padding: 0 15px 0 70px; background-color: #fff; background-position: left 10px center;
-    background-repeat: no-repeat; font-size: 16px; text-align: left; color: #222; box-sizing: border-box; background-size: 40px; cursor:pointer;}     
-.drop-down01 .select-list li span:hover,.drop-down01 .select-list li span:focus {background-color:#f5f5f5;}
-.clone-slt span{background-size: 40px; padding: 0 15px 0 70px; background-position: left 10px center; background-repeat: no-repeat; display: inline-block; max-height: 48px;}
-
-.product_detail .product_option .drop-down02{margin-top:15px; position: relative; display: block; width: 100%; height:40px; border: 1px solid #ccc;}
-.product_detail .product_option .drop-down02 .productprice{display:none; width: calc(100% + 2px); background: #fff;border-bottom: 1px solid #222;
-    z-index: 1; position: absolute; top: 38px; left: -1px; line-height: 40px; border-top: 1px solid #222;}
-.product_detail .product_option .drop-down02 .productprice li{padding: 0 10px; cursor:pointer; border-right: 1px solid #222; border-left: 1px solid #222;}
-.product_detail .product_option .drop-down02 .productprice li:hover,
-.product_detail .product_option .drop-down02 .productprice li:focus{background-color:#f5f5f5;}
-.product_detail .product_option .drop-down02 p{padding: 0 10px; cursor:pointer; width:100%; height: 40px; line-height: 40px; position: absolute; top: 0; left: 0; z-index: 2;}
-.product_detail .product_option .drop-down02 p:after{content: ""; width: 0px; height: 0px; border-top: 7px solid transparent; border-right: 7px solid #ccc; transform: rotate(45deg); bottom: 45%; right: 13px;
-    position: absolute;}
-.product_detail .product_option .drop-down02.productprice{}
-
-.price_rows{padding:20px 0; border-bottom:1px solid #eee; position:relative}
-.price_rows .price_unit {position: absolute; right: 0; bottom: 20px; font-weight: bold; font-size: 18px;}
-.price_rows .close_btn{background:url(../image/shop/option_delet_btn@3x.png) no-repeat center center; background-size:70%; cursor:pointer; width:20px; height:20px; color:#666; position:absolute; right: 0; top: 19px;}
-.price_rows .price_btn{margin-top:15px;}
-.price_rows .price_btn>input{font-size: 0; margin-left: -1px; cursor:pointer; color:#ccc; width:30px; height:30px; border:0; outline:0; display: inline-block; text-align: center;}
-.price_rows .price_btn>input.number{font-size: 15px; vertical-align:bottom; color:#666; cursor:default; border:1px solid #ccc;}
-.price_rows .price_btn>input.plus_btn{background:url(../image/shop/quantity_plus_btn@3x.png) no-repeat center center; background-size:100%}
-.price_rows .price_btn>input.minus_btn{background:url(../image/shop/quantity_minus_btn@3x.png) no-repeat center center; background-size:100%}
-.price_txt{ position: absolute; right: 0; bottom: 20px; font-weight: bold; font-size: 18px;}
-.product_detail .product_txt{border-bottom:1px solid #ebebeb;padding-bottom:20px;}
-.product_detail .product_txt p{color:#222; font-weight:normal;}
-.product_detail .product_txt p:not(:last-child){font-size:18px; line-height:26px;}
-.product_detail .product_txt p:last-child{font-size:24px; line-height:40px; margin-top: 20px;}
-
-.product_detail .product_info{padding-top:20px; font-size:13px;}
-.product_detail .product_info p{padding-bottom:20px; color:#666}
-.product_detail .product_info strong{width: 90px; display: inline-block; color: #222; vertical-align: top;} 
-.product_detail .product_info span{width: calc(100% - 95px); display: inline-block;} 
-
-.product_detail .product_option{padding-top:20px; position:relative; min-height:250px; z-index:1}
-/*.product_detail .product_option select{width:100%; padding:0 5px; display:block; margin-bottom:10px}*/
-.product_detail .product_option select.productname{height:50px;}
-.product_detail .product_option select.productprice{height:36px;}
-.product_detail .product_option .option_btm{/*position:absolute; bottom:-50px;*/ width:100%; display:block}
-.product_detail .product_option .price{padding-top:20px}
-.product_detail .product_option .price>strong{font-size:16px; line-height: 46px;}
-.product_detail .product_option .price span{color:#2cb0c9; font-size:18px; float:right}
-.product_detail .product_option .price span>strong{font-size:30px; }
-.product_detail .product_option .btn_box{margin-top:20px}
-
-.product_detail .content{margin-top:120px}
-.product_detail .tab_list{width:100%; background:#fff;}
-.product_detail .tab_list ul{font-size:0; width:100%; background:#fff; border-bottom: 1px solid #ebebeb;}
-.product_detail .tab_list ul li{width:calc(100% / 3); display:inline-block; cursor:pointer; font-size:16px; text-align:center; padding:13px 0} 
-.product_detail .tab_list ul li.active{font-weight:bold; border-bottom:2px solid #222}
-
-.product_detail .tab_list.activefixx{position:fixed; top:0; left:0;}
-.product_detail .tab_list.activefixx ul{max-width:1140px; margin:0 auto}
-
-.product_detail .tab_box{padding-top:120px;}
-.product_detail .tab_box .tit{font-size:21px; font-weight:bold; padding-bottom:15px}
-.product_detail .tab_box .ask_box{background:#f5f5f5; border-top:3px solid #222; padding:40px 50px 115px 50px;}
-.product_detail .tab_box .ask_box p{margin-top:10px}
-.product_detail .tab_box .ask_box label{width:80px; display:inline-block; font-size:14px; vertical-align: top; padding-top: 8px;}
-.product_detail .tab_box .ask_box input{width:30%; min-width:300px; height:36px; padding:0 5px;}
-.product_detail .tab_box .ask_box textarea{width:calc(100% - 86px); height:150px; overflow-y:auto; padding:10px 5px; resize: none;}
-.product_detail .tab_box .ask_box .m-btn{margin-top:30px}
-
-.product_detail .tab_box .notice_box{border-top:3px solid #222;}
-.product_detail .tab_box .notice_box .tit{font-size:16px; padding-top:30px;}
-.product_detail .tab_box .notice_box .sub_txt{font-size:14px; line-height:24px}
-
-
-/******** 이용약관 개인정보처리방침 ********/
-.userterms_box>.tit{font-size:24px; font-weight:bold; padding:60px 0 30px 0}
-.userterms_box pre{white-space: pre-line;}
-.userterms_box pre strong{font-size:16px; padding-top: 30px;  display: inline-block;}
-.userterms_box pre span{font-size:16px; line-height:28px;}
-
-.mob_ver{display:none}
-.web_ver{display:block}
-
-
-/* media 720 */
-@media only screen and (max-width:720px){
-.mob_ver{display:block}
-.web_ver{display:none}
-.product_detail{margin-top:0;}
-.productwrap .product{margin-top:60px;}
-.productwrap .product .product_txt p:not(:last-child){font-size:16px; line-height:22px;}
-.productwrap .product .product_txt p:last-child{font-size:21px; line-height:40px;}
-
-/********productdetail********/
-.product_detail .product_top>div{width:100%; margin-right:0;}
-.product_detail .product_top>div:first-child{margin-right:0; width: calc(100% + 30px); margin-left:-15px}
-.product_detail .product_top .thumb_s{display:none}
-.product_detail .product_top .thumb_l .slick-dots{display:block !important; bottom:2%}
-.product_detail .product_top .thumb_l .slick-dots li{width: calc(80% / 12); margin:0; height:10px}
-.product_detail .product_top .thumb_l .slick-dots li button:before{display:none;}
-.product_detail .product_top .thumb_l .slick-dots li button{width:100%; height:5px; opacity: .25; background: #000; padding:0;}
-.product_detail .product_top .thumb_l .slick-dots li.slick-active button{opacity: .75;}
-
-.drop-down01 .select-list li span{min-width:100%;}
-
-.product_detail .tab_box{padding-top:60px;}
-.product_detail .tab_box.tab_box01{width: calc(100% + 30px); margin-left: -15px;}
-.product_detail .tab_box .ask_box{padding:10px 20px 90px 20px; width: calc(100% + 30px); margin-left: -15px;}
-.product_detail .tab_box .ask_box label{display:none}
-.product_detail .tab_box .ask_box input{width:100%; min-width: 100%;}
-.product_detail .tab_box .ask_box textarea{width:100%}
-.product_detail .tab_box .ask_box .m-btn{margin-top:15px;}
-.product_detail .content {margin-top: 10px; border-top: 1px solid #eee;}
-/*.product_detail .product_option{position: fixed; bottom: 0; width: 100%; background: #fff; left: 0; padding: 15px 15px 0 15px; min-height:auto;}*/
-.product_detail .product_option{min-height: auto; height: 59%; position: fixed; width: 100%; bottom: 0; overflow: visible; left: 0;}
-.product_detail .product_option .btn_box {margin-top: 0;position: fixed; left: 0; bottom: 0;}
-.product_detail .product_option .product_option_box{display:none; position: fixed; bottom: 56px; width: 100%; left: 0; padding: 55px 0 0 0; min-height:40%; overflow-y: auto; max-height:65%;}
-.drop-down01 .select-list{max-height: 125px; overflow-y: auto;}
-.product_detail .product_option .price{padding-top:10px}
-.option_bg{background:url(../image/shop/main_bottom_scroll_bg_down.png) no-repeat center center; background-size:contain; width:100%; height:100px;position: absolute; top: -28px; left: 0;}
-.mob_close {width: 37px; height: 36px; top: 0; position: absolute; cursor: pointer; left: 46%;}
-.product_option_bg{display:none; position:absolute; padding: 0 15px; top: 10px; width: 100%; height: 50px;}
-.product_detail .product_option .product_option_box .product_option_box_in{background: #fff; padding: 0 15px 67px 15px;}
-}
-
-@media only screen and (max-width:480px){
-.productwrap .product{width:100%; margin-right:0}
-.product_detail .tab_list ul li{font-size:14px; letter-spacing:-1px}
-.product_detail .product_info strong{width:60px;}
-.product_detail .product_info span{width:calc(100% - 65px);}
-.drop-down01 .select-list li span{font-size:14px; letter-spacing:-1px;}
-.product_detail .tab_box .ask_box input{font-size: 13px; letter-spacing: -1px;}
-.product_detail .tab_box .ask_box textarea{letter-spacing: -1px;}
-.price_rows .close_btn{width:30px; height:30px; background-size:50%; top:5px;}
-/*.mob_ver.close_btn{display:none; width:30px; height:30px; position:absolute; top: -33px; left: 46%; }*/
-.price_rows .price_unit{bottom:15px;}
-.mob_ver.close_btn.active{display:block}
-.product_detail .product_option .btn_box{margin:0;}
-.price_rows{padding:13px 0}
-
-
-}
-	</style>
+		
+		</script>
+		
     </head>
     <!-- End Head -->
 <!-- 삭제만들어야함 -->
@@ -274,12 +55,13 @@ blockquote, q {quotes: "" "";}
 
 		<div class="container product_detail"><!--container S-->
 			<div class="in_box"><!--in_box S-->
-				<div class="product_top">
-					<div class="product_box">						
+				<div class="product_top" style="display: inline-flex; width: 100%;">
+				<div style="margin: 100px 0 0 150px;"><img alt="" th:src="${dto.image_Url}" style="width: 250px; height: 300px;"> </div>
+					<div class="product_box">				
 						<div class="product_txt">
-							<p class="tit">[육아연차권]</p>
-							<p class="sub_txt">3만원/5만원/10만원 모바일 상품권</p>
-							<p class="price"><strong>30,000</strong>원~</p>
+							<p class="tit">[[${dto.publisher_Nm}]]</p>
+							<p class="sub_txt">[[${dto.title_Nm}]]</p>
+							<p class="price"><strong>[[${dto.prc_Value}]]</strong>원</p>
 						</div>
 
 					
@@ -297,27 +79,15 @@ blockquote, q {quotes: "" "";}
 							  <div class="product_option_box_in">
 								<div class="drop-down01">
 									<select class="productname" name="nameoption">
-										<option value="00" style="background-image:url('../image/shop/detail_thumb_s_01.jpg');">상품명</option>
-										<option value="01" style="background-image:url('../image/shop/detail_thumb_s_01.jpg');">01_남편과의 데이트</option>
-										<option value="02" style="background-image:url('../image/shop/detail_thumb_s_02.jpg');">02_아내와의 데이트</option>
-										<option value="03" style="background-image:url('../image/shop/detail_thumb_s_03.jpg');">03_영화관데이트</option>
-										<option value="04" style="background-image:url('../image/shop/detail_thumb_s_04.jpg');">04_커피 한잔의 여유</option>
-										<option value="05" style="background-image:url('../image/shop/detail_thumb_s_05.jpg');">05_나를 보살필 시간</option>
-										<option value="06" style="background-image:url('../image/shop/detail_thumb_s_06.jpg');">06_회식, 오늘은 나도</option>
-										<option value="07" style="background-image:url('../image/shop/detail_thumb_s_07.jpg');">07_승진은 나의 것</option>
-										<option value="08" style="background-image:url('../image/shop/detail_thumb_s_08.jpg');">08_등하원 프리패스권</option>
-										<option value="09" style="background-image:url('../image/shop/detail_thumb_s_09.jpg');">09_옛다생일선물</option>
-										<option value="10" style="background-image:url('../image/shop/detail_thumb_s_10.jpg');">10_보고싶다 친구야</option>
-										<option value="11" style="background-image:url('../image/shop/detail_thumb_s_11.jpg');">11_인생은 나의 것</option>
-										<option value="12" style="background-image:url('../image/shop/detail_thumb_s_12.jpg');">12_시간을 선물합니다</option>
+										<option value="00">상품명</option>
+										<option value="01">[[${dto.title_Nm}]]</option>
+										
 									</select>
 								</div>
 								<div class="drop-down02">
-									<p>상품권 가격</p>
+									<p>가격</p>
 									<ul class="productprice" name="priceoption">									
-										<li>3만원 모바일 상품권 : <span>30000원</span></li>
-										<li>5만원 모바일 상품권 : <span>50000원</span></li>
-										<li>10만원 모바일 상품권 : <span>100000원</span></li>
+										<li><span>[[${dto.prc_Value}]]원</span></li>
 									</ul>
 								</div>
 								<div class="option_btm">
@@ -326,13 +96,16 @@ blockquote, q {quotes: "" "";}
 										<strong>합계</strong>
 										<span><strong class="price_total">0</strong>원</span>
 									</div>
-
+<button th:onclick="@{|location.href='/BookUpdate.action?seq_No=${dto.seq_No}&${params}'|}">수정</button><br/>
+<button th:onclick="@{|location.href='/BookDelete.action?seq_No=${dto.seq_No}&${params}&image_Url=${dto.image_Url}'|}">삭제</button><br/>
+<button th:onclick="@{|location.href='/BookList.action?${params}'|}">목록으로</button><br/>
 
 								</div>
 							</div>					
 						</div>
 						<div class="btn_box">
-							<button class="black-btn btn order_btn">바로 구매</button>
+							<button class="black-btn btn order_btn" th:if="${session.user==null}" onclick="javascript:alert('로그인 후 이용가능합니다')">바로 구매</button>
+							<button class="black-btn btn order_btn" th:unless="${session.user==null}" onclick="javascript:location.href='/bag.action'">바로 구매</button>
 						</div>
 					</div>
 				</div>				
@@ -342,31 +115,45 @@ blockquote, q {quotes: "" "";}
 					<div class="tab_list">
 						<ul>
 							<li class="active">상품설명</li>
-							<li>상품문의</li>
+							<li>상품 Review</li>
 							<li>배송/반품/교환</li>
 						</ul>
 					</div>
 
 					<div class="tab_content">
 						<div class="tab_box tab_box01">
-							<img src="../image/shop/detail_info_w.png" class="web_ver">
-							<img src="../image/shop/detail_info_m.png" class="mob_ver">
-						</div>
+						
+							<span th:utext="${dto.book_Intrcn_Cn}"></span>
 
+						</div>
 						<div class="tab_box">
-							<p class="tit">상품문의</p>
+						<form action="ReviewCreated.action" method="POST">
+							<p class="tit">상품 Review</p>
+							
+							<span id="reviewListData" style="display: block;"></span>
 							
 							<div class="ask_box">
-								<p><label>이메일주소</label> <input type="text" placeholder="답변메일을 받을 이메일주소를 입력해주세요."> </p>
-								<p><label>문의내용</label> <textarea placeholder="문의내용을 입력해주세요."></textarea> </p>
-								
-								<div class="btn_box">
-									<button class="black-btn float-r m-btn">문의 보내기</button>
+								<p>
+								<input type="radio" name="reviewStar" value="5" id="rate1">★
+								<input type="radio" name="reviewStar" value="4" id="rate2">★
+								<input type="radio" name="reviewStar" value="3" id="rate3">★
+								<input type="radio" name="reviewStar" value="2" id="rate4">★
+								<input type="radio" name="reviewStar" value="1" id="rate5">★
+								</p>
+								<!-- disabled적용하면 form으로 안 날라감 -->
+								<p th:if="${session.user==null}"><label>UserID</label> <input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
+								<p th:unless="${session.user==null}"><label>UserID</label> <input type="text" th:value="${session.user.userId}" name="userId" readonly="readonly"></p>
+								<p th:if="${session.user==null}"><label>내용</label> <textarea disabled="disabled"></textarea></p>
+								<p th:unless="${session.user==null}"><label>내용</label> <textarea name="content" placeholder="문의내용을 입력해주세요."></textarea></p>
+								<input type="hidden" name="seq_No" th:value="${dto.seq_No}">
+								<div class="btn_box" th:if="${session.user!=null}">
+									<button class="black-btn float-r m-btn" id="sendReview">문의 보내기</button>
 								</div>
 							
 							</div>
-							
+						</form>
 						</div>
+
 						
 						<div class="tab_box">
 							<p class="tit">배송/반품/교환</p>
@@ -374,15 +161,15 @@ blockquote, q {quotes: "" "";}
 							<div class="notice_box">
 								<p class="tit">구매 시 주의사항</p>
 								<div class="sub_txt">
-									<p>- 본 구매상품은 째깍악어 앱에서 등록하여 사용이 가능합니다.</p>
+									<p>- 본 구매상품은 문학이조 앱에서 등록하여 사용이 가능합니다.</p>
 									<p>- 수신자정보를 잘못 입력하여 타인이 코드를 기사용한 경우, 소비자 과실로 간주되어 환불이 불가합니다.</p>
 									<p>- 구매한 상품권에 대한 기타 문의는 고객센터로 문의 바랍니다.</p>
 								</div>
 
 								<p class="tit">주문 이후 예상되는 배송기간</p>
 								<div class="sub_txt">
-									<p>- 실물카드(10만원권)의 경우 대금 지급일로부터 3일 이내 발송, 7일 이내 배송완료</p>
-									<p>- 모바일 이용권(3만원, 5만원, 10만원권)의 경우 결제 완료 후 1일 이내 문자메시지로 발송완료</p>
+									<p>- 대금 지급일로부터 3일 이내 발송, 7일 이내 배송완료</p>
+									<p>- 결제 완료 후 1일 이내 문자메시지로 발송완료</p>
 								</div>
 
 								<p class="tit">반품/교환 사유에 따른 요청 가능 기간</p>
@@ -596,4 +383,5 @@ blockquote, q {quotes: "" "";}
 
     </body>
     <!-- End Body -->
+    </div>
 </html>

@@ -5,15 +5,17 @@ import lombok.Data;
 @Data
 public class ReviewDTO {		
 	
-	private int num;
+	private int reviewId;
 	private int seq_No;	
-	private String userName;
-	private String userPwd;
+	private int reviewStar;
+	
+	private String userId;
 	private String content;	
 	
 	private String ipAddr;
 	
 	private String created;	
 	private String fix_created;	
+	
 	
 }

@@ -1,27 +1,29 @@
-<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8" http-equiv="Content-Type" ><!-- http-equiv="Content-Type" 한글나오게함 -->
+<meta charset="UTF-8" http-equiv="Content-Type"  ><!-- http-equiv="Content-Type" 한글나오게함 -->
 <title>대댓글</title>
 </head>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 <body>
 
   </br></br></br></br>
 
-  <table th:if="${DataCount != 0}" width="700" border="0" cellpadding="0" cellspacing="0" style="margin: auto;">
+  <table width="700" border="0" cellpadding="0" cellspacing="0" style="margin: auto;"
+   th:each="dto:${lists}" th:if="${#lists.size(lists)}>0">
 
-    <div th:each="dto: ${lists}" th:if="${#lists.size(lists) > 0}">
+   
       <tr>
         <td colspan="2" bgcolor="#999999" height="1"></td>
       </tr>
       <tr height="30" bgcolor="#dbdbdb">
         <td width="300" style="padding-left: 10px;">
-          <b>No. [[${dto.listNum}]]&nbsp;&nbsp;[[${dto.name}]]</b>
+          <b>No.&nbsp;[[${dto.name}]]</b>
         </td>
         <td width="300" align="right" style="padding-right: 10px;">
           [[${dto.created}]]&nbsp;
-          <a th:href="@{|location.href='/CommentDeleted.action?${dto.commentNum }&${pageNum }'|}">삭제</a>
+        <a th:href="'javascript:deleteData(\'' + ${dto.commentNum} + '\', \'' + ${pageNum} + '\')'">삭제</a>
+        <!-- "@{|location.href='/CommentDeleted.action?num=${dto.boardNum }&${params }'|}" -->		
         </td>
       </tr>
       <tr>
@@ -29,22 +31,21 @@
           [[${dto.content}]]
         </td>
       </tr>
-    </div>
+  
 
     <tr>
       <td colspan="2" bgcolor="#dbdbdb" height="2">
       </td>
     </tr>
-    <tr height="30">
-      <td align="center" colspan="2">
-        [[${pageIndexList}]]
-      </td>
-    </tr>
+    
   </table>
-  
+  	</br>
+	<div style="text-align: center;">
+		<a th:if="${pageIndexList != null}" th:utext="${pageIndexList}"></a>
+		<a th:if="${pageIndexList == null or pageIndexList == ''}">등록된 게시물이 없습니다.</a>
+  	</div>
 
-
-
+	</br></br>
 
 </body>
 </html>

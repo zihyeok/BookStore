@@ -1,6 +1,10 @@
 package com.book.store.controller;
 
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -16,7 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+<<<<<<< HEAD
 import com.book.store.service.BagService;
+=======
+import com.book.store.dto.BookDTO;
+import com.book.store.service.BagService;
+import com.book.store.service.BookItemService;
+>>>>>>> main
 import com.book.store.service.UserService;
 import com.book.store.user.UserCreateForm;
 import com.book.store.user.UserData;
@@ -32,6 +42,10 @@ public class UserController {
 	private final PasswordEncoder passwordEncoder;
 	private final HttpSession httpSession;
 	private final BagService bagservice;
+<<<<<<< HEAD
+=======
+	private final BookItemService bookitemservice;
+>>>>>>> main
 
 	//회원가입 페이지로 이동
 		@GetMapping("/member")
@@ -275,7 +289,24 @@ public class UserController {
 		return mav;
 	}
 	
-	
+	@GetMapping("/test")
+	public ModelAndView test123() throws Exception {
+		ModelAndView mav = new ModelAndView();
+		List<BookDTO> list = new ArrayList<BookDTO>();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일");
+        String date = format.format(new Date());
+		
+		list.add(bookitemservice.getReadData(11111));
+		list.add(bookitemservice.getReadData(11112));
+		list.add(bookitemservice.getReadData(11113));
+		mav.addObject("lists", list);
+		mav.addObject("user", (userService.findUserName("zzz123")).get());
+		mav.addObject("vip", Integer.parseInt((userService.findUserName("zzz123")).get().getUserVip()));
+		mav.addObject("date", date);
+		mav.setViewName("payment");
+		return mav;
+	}
+		
 	
 	
 }
