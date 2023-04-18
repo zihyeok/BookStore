@@ -1,11 +1,24 @@
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-</head>
-<body>
 
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<<<<<<< HEAD
+=======
+<script th:inline="javascript">
+
+if([[${checkId}]]!=null){
+	
+	alert("이미 리뷰를 작성하셨습니다");
+	
+}
+
+</script>
+
+>>>>>>> b4c75e9e83a3e339ffddd93f6ae5a2a8c5cb083d
+<body>
+<p th:if="${#lists.size(lists)}<=0">등록된 리뷰가 없습니다</p>
 <table width="700" border="0" cellpadding="0" cellspacing="0" style="margin: auto;" 
-th:if="${#lists.size(lists)}>0" th:each="dto: ${lists}">
+th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
 
 <tr>
 	<td colspan="2" bgcolor="#999999" height="1"></td>
@@ -13,12 +26,23 @@ th:if="${#lists.size(lists)}>0" th:each="dto: ${lists}">
 
 <tr height="30" bgcolor="#dbdbdb">
 	<td width="300" style="padding-left: 10px;">
-	<b>[[${dto.userId}]]</b>
+<<<<<<< HEAD
+	<b>[[${dto.userId}]]</b>&nbsp;&nbsp;<b>[[${dto.reviewStar}]]</b>
 	</td>
-	
 	<td width="300" align="right" style="padding-right: 10px;">
 		[[${dto.created}]]&nbsp;
-		<a href="javascript:deleteData('${dto.reviewId}','${pageNum }')">삭제</a>
+		<a th:href="'javascript:deleteReview(\'' + ${dto.reviewId} + '\', \'' + ${pageNum} + '\')'"
+		th:if="${dto.userId == session.user.userId}">삭제</a>
+=======
+	<b>[[${dto.userId}]]</b>&nbsp;&nbsp;<b th:each="i : ${#numbers.sequence(0,dto.reviewStar-1)}">★</b>
+	</td>
+	<td width="300" align="right" style="padding-right: 10px;">
+		[[${dto.created}]]&nbsp;
+
+		<a th:href="'javascript:deleteReview(\'' + ${dto.reviewId} + '\', \'' + ${pageNum} + '\')'"
+		th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">삭제</a>
+		<!-- session.user로 먼저 비교하고 이후 session.user.userId로 비교 -->
+>>>>>>> b4c75e9e83a3e339ffddd93f6ae5a2a8c5cb083d
 	</td>
 </tr>
 
@@ -33,12 +57,6 @@ th:if="${#lists.size(lists)}>0" th:each="dto: ${lists}">
 	</td>
 </tr>
 
-<tr height="30">
-	<td align="center" colspan="2">
-	<a th:utext="${pageIndexList}"></a>
-	</td>
-</tr>
 </table>
 
-</body>
-</html>
+<p th:utext="${pageIndexList}" style="text-align: center;"></p>

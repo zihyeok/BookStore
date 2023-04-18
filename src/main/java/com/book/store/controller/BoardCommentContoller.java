@@ -1,14 +1,15 @@
 package com.book.store.controller;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -54,7 +55,7 @@ public class BoardCommentContoller {
 		
 		//int boardNum = Integer.parseInt(request.getParameter("boardNum"));
 		int boardNum = dto.getBoardNum();
-		
+
 		String pageNum = request.getParameter("pageNum");//문자만 따온건가?
 		
 		int currentPage = 1;
@@ -93,7 +94,7 @@ public class BoardCommentContoller {
 		//포워딩할 데이터
 		mav.addObject("lists", lists);
 		mav.addObject("pageIndexList", pageIndexList);
-		//mav.addObject("dataCount", dataCount);
+		mav.addObject("boardNum", boardNum);
 		mav.addObject("pageNum", currentPage);
 		
 		//mav.addObject("pageNum", currentPage);//3번째 방법시 같이넘겨야함
@@ -110,15 +111,73 @@ public class BoardCommentContoller {
 	public ModelAndView CommentDeleted(BoardCommentDTO dto,HttpServletRequest request) throws Exception{
 		
 		int commentNum = Integer.parseInt(request.getParameter("commentNum"));
-	
+		
+		int boardNum = dto.getBoardNum();
+		
 		boardCommentService.deleteData(commentNum);
 		
 		ModelAndView mav = new ModelAndView();
 		
+		mav.addObject("boardNum", boardNum);
 		mav.setViewName("redirect:/CommentList.action");
 		
 		return mav;
 		
 	}
+	
+	@GetMapping("/CommentUpdated.action")
+	public ModelAndView updated(HttpServletRequest request) throws Exception{
+		
+		ModelAndView mav = new ModelAndView();
+		
+		int commentNum = Integer.parseInt(request.getParameter("commentNum"));
+		String pageNum = request.getParameter("pageNum");
+		
+		int boardNum = Integer.parseInt(request.getParameter("num"));
+		
+	
+		BoardCommentDTO dto = boardCommentService.getReadData(commentNum);
+		
+		if(dto==null) {
+			
+			mav.setViewName("redirect:BoardList.action?pageNum=" + pageNum + "&num=" + boardNum);
+			
+			return mav;
+		}
+		
+		String param =  "pageNum=" + pageNum + "&num=" + boardNum ;
+		// "boardNum=" + boardNum
+	
+		mav.addObject("dto", dto);
+		mav.addObject("pageNum", pageNum);
+		mav.addObject("params", param);
+		mav.addObject("boardNum", boardNum);
+		
+		mav.setViewName("commentUpdated");
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/CommentUpdated_ok.action",method = {RequestMethod.GET,RequestMethod.POST})
+	public ModelAndView updated_ok(BoardCommentDTO dto,HttpServletRequest request) throws Exception{
+	
+		String pageNum = request.getParameter("pageNum");
+		int boardNum = Integer.parseInt(request.getParameter("boardNum"));
+		
+	
+		boardCommentService.updateData(dto);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		
+		String param =  "pageNum=" + pageNum + "&num=" + boardNum ;
+		
+		
+		mav.setViewName("redirect:/BoardArticle.action?" + param);
+							
+		return mav;
+		
+	}
+	
 	
 }

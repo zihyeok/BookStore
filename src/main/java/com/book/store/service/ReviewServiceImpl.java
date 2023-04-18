@@ -51,15 +51,21 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public int deleteData(int num) throws Exception {
+	public int deleteData(int reviewId) throws Exception {
 		
-		return reviewMapper.deleteData(num);
+		return reviewMapper.deleteData(reviewId);
 	}
 
 	@Override
-	public ReviewDTO getAvgStar(String searchKey, String searchValue) throws Exception {
+	public ReviewDTO getAvgStar(int seq_No) throws Exception {
 		
-		return reviewMapper.getAvgStar(searchKey, searchValue);
+		return reviewMapper.getAvgStar(seq_No);
+	}
+
+	@Override
+	public ReviewDTO checkUserId(int seq_No, String userId) throws Exception {
+		
+		return reviewMapper.checkUserId(seq_No, userId);
 	}
 
 
