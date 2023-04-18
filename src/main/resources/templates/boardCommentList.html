@@ -22,8 +22,12 @@
         </td>
         <td width="300" align="right" style="padding-right: 10px;">
           [[${dto.created}]]&nbsp;
+        <a th:onclick="@{|location='/CommentUpdated.action?commentNum=${dto.commentNum }&pageNum=${pageNum }&num=${boardNum}'|}">수정</a>
         <a th:href="'javascript:deleteData(\'' + ${dto.commentNum} + '\', \'' + ${pageNum} + '\')'">삭제</a>
-        <!-- "@{|location.href='/CommentDeleted.action?num=${dto.boardNum }&${params }'|}" -->		
+        <!-- "@{|location.href='/CommentDeleted.action?num=${dto.boardNum }&${params }'|}"  &num=${boardNum}-->		
+        
+         
+        
         </td>
       </tr>
       <tr>

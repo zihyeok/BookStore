@@ -3,6 +3,8 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
+<<<<<<< HEAD
+=======
 <script th:inline="javascript">
 
 if([[${checkId}]]!=null){
@@ -13,6 +15,7 @@ if([[${checkId}]]!=null){
 
 </script>
 
+>>>>>>> b4c75e9e83a3e339ffddd93f6ae5a2a8c5cb083d
 <body>
 <p th:if="${#lists.size(lists)}<=0">등록된 리뷰가 없습니다</p>
 =======
@@ -40,6 +43,14 @@ th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
 
 <tr height="30" bgcolor="#dbdbdb">
 	<td width="300" style="padding-left: 10px;">
+<<<<<<< HEAD
+	<b>[[${dto.userId}]]</b>&nbsp;&nbsp;<b>[[${dto.reviewStar}]]</b>
+	</td>
+	<td width="300" align="right" style="padding-right: 10px;">
+		[[${dto.created}]]&nbsp;
+		<a th:href="'javascript:deleteReview(\'' + ${dto.reviewId} + '\', \'' + ${pageNum} + '\')'"
+		th:if="${dto.userId == session.user.userId}">삭제</a>
+=======
 	<b>[[${dto.userId}]]</b>&nbsp;&nbsp;<b th:each="i : ${#numbers.sequence(0,dto.reviewStar-1)}">★</b>
 	</td>
 	<td width="300" align="right" style="padding-right: 10px;">
@@ -48,6 +59,7 @@ th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
 		<a th:href="'javascript:deleteReview(\'' + ${dto.reviewId} + '\', \'' + ${pageNum} + '\')'"
 		th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">삭제</a>
 		<!-- session.user로 먼저 비교하고 이후 session.user.userId로 비교 -->
+>>>>>>> b4c75e9e83a3e339ffddd93f6ae5a2a8c5cb083d
 	</td>
 </tr>
 
