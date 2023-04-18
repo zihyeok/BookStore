@@ -60,7 +60,7 @@
   </article>
 
   <article class="slider">
-    <h2>NEW BOOK</h2>
+    <h2>New</h2>
      <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide" th:each="i : ${#numbers.sequence(0,3)}" th:if="${#lists.size(recentLists)}>0">
@@ -113,7 +113,7 @@
   </article>
 
   <article class="big">
-    <h2>요즘 이 책</h2>
+    <h2>Best</h2>
     <div>
       <section th:if="${#lists.size(topSalLists)}>0" th:each="topLists:${topSalLists}">
         <div class="image-container">
@@ -142,7 +142,7 @@
 
     <div>
       <div>
-        <h2>문학이조 수상작</h2>
+        <h2>Award</h2>
       </div>
 
     </div>
