@@ -44,7 +44,11 @@
 			
 		}
 		
+<<<<<<< HEAD
+		function deleteReview(reviewId,pageNum){
+=======
 		function deleteReview(reviewId,pageNum,userId){
+>>>>>>> b4c75e9e83a3e339ffddd93f6ae5a2a8c5cb083d
 			
 			var params = "seq_No=" + [[${dto.seq_No}]] + "&reviewId=" + reviewId + "&pageNum=" + pageNum;
 			
@@ -67,7 +71,12 @@
 			
 			var userId = $('input[name=userId]').val();
 			var content = $('textarea[name=content]').val();
+<<<<<<< HEAD
+			var reviewStar = $('input[name=reviewStar]').val();
+			
+=======
 			var reviewStar = $('input:radio[name=reviewStar]:checked').val();//여기 에러있음 계속 5점만 줌
+>>>>>>> b4c75e9e83a3e339ffddd93f6ae5a2a8c5cb083d
 			var params = "seq_No=" + [[${dto.seq_No}]] + "&userId=" + userId + "&content=" + content + "&reviewStar=" + reviewStar;
 			
 			$.ajax({
@@ -184,14 +193,28 @@
 								<input type="radio" name="reviewStar" value="1"><label for="rate5">★</label>
 								</p>
 								<!-- disabled적용하면 form으로 안 날라감 -->
+<<<<<<< HEAD
+								<p th:if="${session.user==null}"><label>UserID</label> <input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
+								<p th:unless="${session.user==null}"><label>UserID</label> <input type="text" th:value="${session.user.userId}" name="userId" readonly="readonly"></p>
+								<p th:if="${session.user==null}"><label>내용</label> <textarea disabled="disabled"></textarea></p>
+								<p th:unless="${session.user==null}"><label>내용</label> <textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
+								<input type="hidden" name="seq_No" th:value="${dto.seq_No}">
+								<div class="btn_box" th:if="${session.user!=null}">
+									<button class="black-btn float-r m-btn" onclick="sendReview();" type="button">리뷰 작성</button>
+=======
 								<p th:if="${session.user==null}"><label>UserID</label><input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
 								<p th:unless="${session.user==null}"><label>UserID</label><input type="text" th:value="${session.user.userId}" name="userId" readonly="readonly"></p>
 								<p th:if="${session.user==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
 								<p th:unless="${session.user==null}"><label>내용</label><textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
 								<input type="hidden" name="seq_No" th:value="${dto.seq_No}">
 								<div class="btn_box" th:if="${session.user!=null}">
+<<<<<<< HEAD
+									<button class="black-btn float-r m-btn" onclick="sendReview();" type="button">리뷰 작성</button>
+=======
 									<button class="btn-555 float-r m-btn" onclick="sendReview();" type="button">리뷰 작성</button>
+>>>>>>> kwon
 									<!-- button은 기본type이 submit 그래서 바로 폼 주소로 가지만 이걸 벗어나려면 type button -->
+>>>>>>> b4c75e9e83a3e339ffddd93f6ae5a2a8c5cb083d
 								</div>
 							
 							</div>

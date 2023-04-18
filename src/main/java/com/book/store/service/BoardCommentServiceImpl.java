@@ -45,6 +45,17 @@ public class BoardCommentServiceImpl implements BoardCommentService{
 		return boardCommentMapper.getDataCount(commentNum);
 	}
 
+	@Override
+	public void updateData(BoardCommentDTO dto) throws Exception {
+		boardCommentMapper.updateData(dto);
+		
+	}
+
+	@Override
+	public BoardCommentDTO getReadData(int commentNum) throws Exception {
+		return boardCommentMapper.getReadData(commentNum);
+	}
+
 
 	
 	

@@ -20,9 +20,9 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	where seq_No = #{seq_No}
 </select>
 
-<select id="getAvgStar" parameterType="map" resultType="int">
+<select id="getAvgStar" parameterType="int" resultType="int">
 	select nvl(avg(reviewStar),0) from review 
-	where ${searchKey} like '%' || #{searchValue} || '%'
+	where seq_No = #{seq_No}
 </select>
 
 <select id="getLists" parameterType="map" resultType="com.book.store.dto.ReviewDTO">
@@ -37,13 +37,21 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 ]]>
 </select>
 
+<select id="checkUserId" parameterType="map" resultType="com.book.store.dto.ReviewDTO">
+
+	select reviewId,seq_No,reviewStar,userId,content,to_char(created,'YYYY-MM-DD') created,
+	to_char(fix_created,'YYYY-MM-DD') fix_created 
+	from review where seq_No = #{seq_No} and userId = #{userId}
+
+</select>
+
 <select id="getReadData" parameterType="int" resultType="com.book.store.dto.ReviewDTO">
 	select reviewId,seq_No,userId,content,created from review 
 	where reviewId=#{reviewId}
 </select>
 
 <update id="updateData" parameterType="com.book.store.dto.ReviewDTO">
-	update review set content=#{content} 
+	update review set content=#{content} fix_created=sysdate
 	where reviewId=#{reviewId}
 </update>
 

@@ -35,8 +35,15 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	delete from boardComment where commentNum=#{commentNum} 
 </delete>
 
+<select id="getReadData" parameterType="int" resultType="com.book.store.dto.BoardCommentDTO">
+	select commentNum,boardNum,name,content,created from boardComment 
+	where commentNum = #{commentNum}
+</select>
 
-
+<update id="updateData" parameterType="com.book.store.dto.BoardCommentDTO">
+	update boardComment set commentNum=#{commentNum},boardNum=#{boardNum},name=#{name},content=#{content} 
+	where commentNum = #{commentNum}
+</update>
 
 
 

@@ -1,0 +1,61 @@
+<html layout:decorate="~{layout}">
+<meta charset="UTF-8">
+
+<div layout:fragment="content" >
+<link rel="stylesheet" type="text/css" href="/css/BoardCreated.css">
+
+
+<div class="container product_detail">
+	<div class="in_box"><!--in_box S-->
+			
+		<div class="content">
+		
+			<div class="tab_content">
+
+				<div class="tab_box">
+					<p class="tit" style="text-align: center;">Q&A 게시판 수정</p>
+					</br></br>
+					<form th:action="@{CommentUpdated_ok.action}" method="post" name="myForm">
+					
+					<div class="ask_box">
+						
+						<p>
+						<label>작성자</label> 
+						<input type="text"  name="name" th:value="${dto.name }"> 
+						</p>
+						
+						<p>
+						<label>내용</label> 
+						<textarea name="content" th:text="${dto.content }"></textarea> 
+						</p>
+						
+						<div class="btn_box">
+							<button class="black-btn float-r m-btn" type="submit">수정하기</button>
+						</div>
+						<input type="hidden" name="commentNum" th:value="${dto.commentNum }"/>
+						<input type="hidden" name="pageNum" th:value="${pageNum }"/>
+						<input type="hidden" name="boardNum" th:value="${boardNum }"/>
+						
+						<div class="btn_box">
+							<button class="black-btn float-r m-btn" th:onclick="@{|location='/BoardArticle.action?pageNum=${pageNum }&num=${dto.boardNum }'|}" type="button">수정취소</button>
+						</div>
+						
+					</div>
+					
+					</form>
+					</div>
+					
+				</div>
+				
+			</div>
+		</div>
+
+	</div><!--in_box E-->
+
+</br></br>
+
+
+</div>
+
+
+</html>
