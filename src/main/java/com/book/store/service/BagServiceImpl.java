@@ -51,6 +51,11 @@ public class BagServiceImpl implements BagService{
 		bagMapper.insertOrderData(orderId, userId, seq_No, orderGroup);
 	}
 
+	@Override
+	public int findOrderCount(String userId) throws Exception {
+		return bagMapper.findOrderCount(userId);
+	}
+
 	
 
 	
