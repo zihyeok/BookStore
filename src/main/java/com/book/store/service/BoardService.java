@@ -16,16 +16,16 @@ public interface BoardService {
 	
 	public List<BoardDTO> getLists(int start,int end,String searchKey,String searchValue) throws Exception;
 	
-	public BoardDTO getReadData(int boardNum) throws Exception;
+	public BoardDTO getReadData(int boardId) throws Exception;
 	
-	public void updateHitCount(int boardNum) throws Exception;
+	public void updateHitCount(int boardId) throws Exception;
 	
 	public void updateData(BoardDTO dto) throws Exception;
 	
-	public void deleteData(int boardNum) throws Exception;
+	public void deleteData(int boardId) throws Exception;
 	
-	public BoardDTO preReadData(int boardNum,String subject,String searchKey,String searchValue) throws Exception;
+	public BoardDTO preReadData(int boardId,String subject,String searchKey,String searchValue) throws Exception;
 	
-	public BoardDTO nextReadData(int boardNum,String subject,String searchKey,String searchValue) throws Exception;
+	public BoardDTO nextReadData(int boardId,String subject,String searchKey,String searchValue) throws Exception;
 	
 }
