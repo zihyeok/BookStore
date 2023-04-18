@@ -2,6 +2,7 @@ package com.book.store.controller;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -68,9 +69,9 @@ public class BookController {
 	}
 
 	@PostMapping("/BookCreated.action")
-	public ModelAndView itemCreated_ok(BookDTO dto,@RequestParam(value = "upload",required = false) MultipartFile[] upload,
+	public ModelAndView itemCreated_ok(BookDTO dto,@RequestParam(value = "upload",required = false) List<MultipartFile> upload,
 			HttpServletRequest request) throws Exception{
-		//새로운 책을 등록하고자 할때		//requestparam(value="html에서의 name", required 는 해당 매개변수가 필수면 true 아니면 false
+		//requestparam(value="html에서의 name", required 는 해당 매개변수가 필수면 true 아니면 false
 
 		ModelAndView mav = new ModelAndView();
 
@@ -303,22 +304,38 @@ public class BookController {
 
 	@PostMapping("/BookUpdate.action")
 	public ModelAndView updated_ok(HttpServletRequest request,BookDTO dto,
-			@RequestParam(value = "upload",required = false) MultipartFile[] upload) throws Exception{
-
+			@RequestParam(value = "upload",required = false) List<MultipartFile> upload) throws Exception{
+		//MultipartFile는 받을 때 List 형식으로 받아줘야함
+		
 		String pageNum = request.getParameter("pageNum");
 		String searchKey = request.getParameter("searchKey");
 		String searchValue = request.getParameter("searchValue");
 		String image_Url = request.getParameter("image_Url");
-
+		
 		//upload된게 없으면 그대로 두고 있으면 지워야됨
-		if(upload.length!=0) {
-
-			FileManager.doFileDelete(image_Url);
-
+		//multipart는 list에서 하나씩 꺼내서 null값을 체크해줘야 함
+		int checkEmpty = 1;
+		
+		for(MultipartFile image:upload){
+			
+			if(image.isEmpty()) {
+				
+				checkEmpty = 0;
+				
+			}
 		}
-
-		FileManager.doFileUpload(dto, upload); //수정버튼 기존의 img_url을 새로 올리는 걸로 교체해야함
-
+		
+		if(checkEmpty != 0) {
+			
+			FileManager.doFileDelete(image_Url);
+			FileManager.doFileUpload(dto, upload);
+			
+		}else {
+			
+			dto.setImage_Url(image_Url);
+			
+		}
+		
 		bookItemService.updateData(dto);
 
 		String param = "pageNum=" + pageNum;

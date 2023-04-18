@@ -1,5 +1,7 @@
 package com.book.store.user;
 
+import java.io.Serializable;
+
 import com.book.store.service.UserService;
 
 import lombok.Builder;
@@ -10,7 +12,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @RequiredArgsConstructor
-public class UserData {
+public class UserData implements Serializable{
 	
 	private UserService userService;
 	
