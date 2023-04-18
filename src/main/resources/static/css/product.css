@@ -135,7 +135,8 @@ blockquote, q {quotes: "" "";}
     position: absolute;}
 .productname ul li:hover, .productname ul li:focus{background-color:#f5f5f5;}
 
-/**/.drop-down01 {position: relative; display: block; width: 100%; height: 50px; line-height: 50px; border: 1px solid #ccc;}      
+/**/
+.drop-down01 {position: relative; display: block; width: 100%; height: 50px; line-height: 50px; border: 1px solid #ccc;}      
 .drop-down01 select {display: none;}
 .drop-down01 .select-list-link{font-size: 0; position: absolute; top: 0; width: 100%; display: block; left: 0;}
 .drop-down01 .select-list-link:after{content: ""; width: 0px; height: 0px; border-top: 7px solid transparent; border-right: 7px solid #ccc; transform: rotate(45deg); bottom: 45%; right: 13px;
@@ -397,9 +398,27 @@ blockquote, q {quotes: "" "";}
   align-items: center;
 }
 
-.see-comments textarea {
+/* .see-comments textarea {
   
 }
+ */
+/* .see-comments section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+   width: 100%;
+}
+
+.see-comments section b {
+  float: left;
+  margin-right: 0.2rem;
+} */
+
+.see-comments section span {
+  float: right;
+  margin-right: 1rem;
+}
+
 
 .btn-555 {
   width: 120px;
@@ -442,7 +461,7 @@ blockquote, q {quotes: "" "";}
 }
 
 .btn-111 {
-  width: 150px;
+  width: 32.5%;
   height: 50px;
   font-family: 'Noto Sans Kr', sans-serif;
   font-size: 1rem;
