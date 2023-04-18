@@ -2,6 +2,7 @@ package com.book.store.util;
 
 import java.io.File;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,9 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.book.store.dto.BookDTO;
 
 public class FileManager {
-
+//MultipartFile[]
 	public static void doFileUpload(BookDTO dto,
-			@RequestParam(value = "upload",required = false) MultipartFile[] upload) throws Exception{
+			@RequestParam(value = "upload",required = false) List<MultipartFile> upload) throws Exception{
 		
 		for (MultipartFile file : upload) {
 				
