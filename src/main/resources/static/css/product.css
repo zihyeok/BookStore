@@ -249,3 +249,28 @@ blockquote, q {quotes: "" "";}
 
 
 }
+/*park이 만듬 */
+#after { 
+    width:  250px;
+    height: 200px;
+    position: absolute;
+    top : 18%;
+    left:   14%;
+}
+
+#before { 
+    width:  250px;
+    height: 200px;
+    position: absolute;
+    top : 18%;
+    left:   14%;
+    
+    opacity: 1;
+  	transition: opacity 1.5s;
+}
+
+#before:hover{
+	
+	opacity: 0;
+	 
+}

@@ -191,10 +191,14 @@ public class BookController {
 
 		mav.addObject("lists", lists); 
 		mav.addObject("pageIndexList", pageIndexList);
-		mav.addObject("dataCount", dataCount); 
 		mav.addObject("articleUrl",articleUrl); 
 		mav.addObject("pageNum", currentPage);
+		
+		//통합검색 결과 갯수 확인
+		mav.addObject("dataCount", dataCount); 
+		mav.addObject("searchValue", searchValue); 
 
+		
 		mav.setViewName("BookList");
 		//진짜 주소로 가서 이걸 뿌려줘야 함
 

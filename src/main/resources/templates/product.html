@@ -97,7 +97,14 @@
 		<div class="container product_detail"><!--container S-->
 			<div class="in_box"><!--in_box S-->
 				<div class="product_top" style="display: inline-flex; width: 100%;">
-				<div style="margin: 100px 0 0 150px;"><img alt="" th:src="${dto.image_Url}" style="width: 250px; height: 300px;"> </div>
+				<div style="margin: 100px 0 0 150px;">
+				<img alt="" th:src="${dto.image_Url}" style="width: 250px; height: 300px;">
+				<span>
+				<img alt="" src="image/test1.jpg" id="after">
+				<img alt="" src="image/test2.jpeg" id="before">
+				</span>
+				</div>
+				
 					<div class="product_box">				
 						<div class="product_txt">
 							<p class="tit">[[${dto.publisher_Nm}]]</p>
