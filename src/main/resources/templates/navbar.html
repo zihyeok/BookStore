@@ -186,7 +186,7 @@ window.onload = function () {
 		</form>
   		</div>  
 
-  	<i class="fas fa-user"></i>
+  	<a href="/user/mypage"><i class="fas fa-user"></i></a>
     <a href="/bag.action" th:if="${session.user}!=null"><i class="fas fa-shopping-cart"></i></a>
     <a href="/user/login" th:unless="${session.user}!=null" onclick="javascript:alert('로그인 후 이용해주세요')"><i class="fas fa-shopping-cart"></i></a>
       </section>

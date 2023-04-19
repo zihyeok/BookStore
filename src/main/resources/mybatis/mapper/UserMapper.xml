@@ -45,4 +45,10 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	WHERE userid = #{userId}
 </update>
 
+<update id="updateUserData" parameterType="map">
+	update userdata set userpwd = #{userPwd}, useraddr = #{userAddr},
+	useremail = #{userEmail}, userbirth = #{userBirth}, usertel = #{userTel}, realpwd = #{realPwd}
+	where userid = #{userId}
+</update>
+
 </mapper>
