@@ -35,79 +35,28 @@
 				data:params,
 				dataType:"text",
 				success:function(args){
-				//html 통째로 받으려면 dataType text여야함
+	
 					$("#reviewListData").html(args);
 					
 				}
 			
 			});
-			
-		}
-		
-		function deleteReview(reviewId,pageNum,userId){
-			
-			var params = "seq_No=" + [[${dto.seq_No}]] + "&reviewId=" + reviewId + "&pageNum=" + pageNum;
-			
-			$.ajax({
-				type:"POST",
-				url:"/ReviewDelte.action",
-				data:params,
-				dataType:"text",
-				success:function(args){
-				//html 통째로 받으려면 dataType text여야함
-					$("#reviewListData").html(args);
-					
-				}
-			
-			});
-			
-		}
-		
-		function sendReview() {
-			
-			var userId = $('input[name=userId]').val();
-			var content = $('textarea[name=content]').val();
-			var reviewStar = $('input:radio[name=reviewStar]:checked').val();//여기 에러있음 계속 5점만 줌
-			var params = "seq_No=" + [[${dto.seq_No}]] + "&userId=" + userId + "&content=" + content + "&reviewStar=" + reviewStar;
-			
-			$.ajax({
-				type:"POST",
-				url:"/ReviewCreated.action",
-				data:params,
-				dataType:"text",
-				success:function(args){
-				//html 통째로 받으려면 dataType text여야함
-					$("#reviewListData").html(args);
-					
-				}
-			
-			});
-			
 			
 		}
 
+		
 		</script>
 		
     </head>
     <!-- End Head -->
 <!-- 삭제만들어야함 -->
     <!-- Body -->
-    <body>
+    <body class="BookArticle">
 
 		<div class="container product_detail"><!--container S-->
 			<div class="in_box"><!--in_box S-->
 				<div class="product_top" style="display: inline-flex; width: 100%;">
-				<div style="margin: 100px 0 0 150px;">
-				<img alt="" th:src="${dto.image_Url}" style="width: 250px; height: 300px;">
-				<span>
-				<img alt="" src="image/test1.jpg" id="after">
-				<img alt="" src="image/test2.jpeg" id="before">
-				</span>
-				</div>
-<<<<<<< HEAD
-				
-=======
->>>>>>> a809dfd9120df92fd85bf2a04bc55e054bcf774d
+				<div style="margin: 100px 0 0 150px;"><img alt="" th:src="${dto.image_Url}" style="width: 250px; height: 300px;"> </div>
 					<div class="product_box">				
 						<div class="product_txt">
 							<p class="tit">[[${dto.publisher_Nm}]]</p>
@@ -148,11 +97,10 @@
 										<span><strong class="price_total">0</strong>원</span>
 									</div>
 									<div style="text-align: center; white-space: nowrap;">
-										<button class="btn-111" th:onclick="@{|location.href='/BookUpdate.action?seq_No=${dto.seq_No}&${params}'|}">수정</button>
-										<button class="btn-111" th:onclick="@{|location.href='/BookDelete.action?seq_No=${dto.seq_No}&${params}&image_Url=${dto.image_Url}'|}">삭제</button>
-										<button class="btn-111" th:onclick="@{|location.href='/BookList.action?${params}'|}">목록으로</button>
+									    <button class="btn-111" th:onclick="@{|location.href='/BookUpdate.action?seq_No=${dto.seq_No}&${params}'|}">수정</button>
+									    <button class="btn-111" th:onclick="@{|location.href='/BookDelete.action?seq_No=${dto.seq_No}&${params}&image_Url=${dto.image_Url}'|}">삭제</button>
+									    <button class="btn-111"  th:onclick="@{|location.href='/BookList.action?${params}'|}">목록으로</button>
 									</div>
-								
 								</div>
 							</div>					
 						</div>
@@ -179,34 +127,41 @@
 							<span th:utext="${dto.book_Intrcn_Cn}"></span>
 
 						</div>
+						
+		
 						<div class="tab_box">
-						<form action="ReviewCreated.action" method="POST" id="reviewForm">
-							<p class="tit">책 Review</p>
+						<form action="ReviewCreated.action" method="POST">
+							<p class="tit">상품 Review</p>
 							
 							<span id="reviewListData" style="display: block;"></span>
 							
-							<div class="ask_box">
-								<p>
-								<input type="radio" name="reviewStar" value="5"><label for="rate1">★★★★★</label> 
-								<input type="radio" name="reviewStar" value="4"><label for="rate2">★★★★</label>
-								<input type="radio" name="reviewStar" value="3"><label for="rate3">★★★</label>
-								<input type="radio" name="reviewStar" value="2"><label for="rate4">★★</label>
-								<input type="radio" name="reviewStar" value="1"><label for="rate5">★</label>
+							<div class="ask_box" style="white-space: nowrap;">
+								<p style="margin-right: 500px;">
+								<input type="radio" name="reviewStar" value="5" id="rate1">★
+								<input type="radio" name="reviewStar" value="4" id="rate2">★★
+								<input type="radio" name="reviewStar" value="3" id="rate3">★★★
+								<input type="radio" name="reviewStar" value="2" id="rate4">★★★★
+								<input type="radio" name="reviewStar" value="1" id="rate5">★★★★★
 								</p>
 								<!-- disabled적용하면 form으로 안 날라감 -->
-								<p th:if="${session.user==null}"><label>UserID</label><input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
-								<p th:unless="${session.user==null}"><label>UserID</label><input type="text" th:value="${session.user.userId}" name="userId" readonly="readonly"></p>
-								<p th:if="${session.user==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
-								<p th:unless="${session.user==null}"><label>내용</label><textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
+								<p th:if="${session.user==null}"><label>UserID</label> <input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
+								<p th:unless="${session.user==null}"><label>UserID</label> <input type="text" th:value="${session.user.userId}" name="userId" readonly="readonly"></p>
+								<p th:if="${session.user==null}"><label>내용</label> <textarea disabled="disabled"></textarea></p>
+								<p th:unless="${session.user==null}"><label>내용</label> <textarea name="content" placeholder="후기를 입력해주세요."></textarea></p>
 								<input type="hidden" name="seq_No" th:value="${dto.seq_No}">
 								<div class="btn_box" th:if="${session.user!=null}">
-									<button class="btn-555 float-r m-btn" onclick="sendReview();" type="button">리뷰 작성</button>
-									<!-- button은 기본type이 submit 그래서 바로 폼 주소로 가지만 이걸 벗어나려면 type button -->
+									<button class="btn-555 float-r m-btn" id="sendReview">등록하기</button>
 								</div>
+							
 							
 							</div>
 						</form>
 						</div>
+						
+						
+						
+	
+	
 
 						
 						<div class="tab_box">
@@ -422,7 +377,7 @@
                
                     num = num + "";  
                     point = num.length % 3 ;
-                    len = num.length;  S
+                    len = num.length;  
    
                     str = num.substring(0, point);  
                     while (point < len) {  

@@ -1,0 +1,7 @@
+
+#YAML AIN't Markup Language의 약자
+
+spring:
+  session:
+    store-type: jdbc
+    jdbc.initialize-schema: always

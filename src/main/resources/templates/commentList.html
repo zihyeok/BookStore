@@ -1,5 +1,3 @@
-
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <script th:inline="javascript">
@@ -13,38 +11,57 @@ if([[${checkId}]]!=null){
 </script>
 
 <body>
+
 <p th:if="${#lists.size(lists)}<=0">등록된 리뷰가 없습니다</p>
+
+<p>후기 [[${#lists.size(lists)}]]개</p>
+
 <table width="700" border="0" cellpadding="0" cellspacing="0" style="margin: auto;" 
 th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
 
-<tr>
-	<td colspan="2" bgcolor="#999999" height="1"></td>
-</tr>
+	<!-- <div class="see-comments">		
 
-<tr height="30" bgcolor="#dbdbdb">
-	<td width="300" style="padding-left: 10px;">
-	<b>[[${dto.userId}]]</b>&nbsp;&nbsp;<b th:each="i : ${#numbers.sequence(0,dto.reviewStar-1)}">★</b>
-	</td>
-	<td width="300" align="right" style="padding-right: 10px;">
-		[[${dto.created}]]&nbsp;
+		<section>
+			<div> <img src="https://user-images.githubusercontent.com/112612653/189023768-c2387f31-2463-4198-9078-3e3eaa56f7a0.png" alt=""></div>
+			<div>
+				<p><b th:each="i : ${#numbers.sequence(0,dto.reviewStar-1)}">★</b>
+				 [[${dto.created}]] | [[${dto.userId}]] | 
+				<a th:href="'javascript:deleteReview(\'' + ${dto.reviewId} + '\', \'' + ${pageNum} + '\')'"
+		th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">삭제</a></p>
+				
+				<p>[[${dto.content}]]</p>
+		session.user로 먼저 비교하고 이후 session.user.userId로 비교
+			</div>
+			<div><img src="https://user-images.githubusercontent.com/112612653/189023767-c8fd2d91-9928-41bd-a758-b94befaafe23.png"></div>
+		</section>		
+	</div> -->
 
-		<a th:href="'javascript:deleteReview(\'' + ${dto.reviewId} + '\', \'' + ${pageNum} + '\')'"
-		th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">삭제</a>
-		<!-- session.user로 먼저 비교하고 이후 session.user.userId로 비교 -->
-	</td>
-</tr>
-
-<tr>
-	<td height="50" style="padding-left: 10px;" colspan="2">
-		[[${dto.content}]]
-	</td>
-</tr>
-
-<tr>
-	<td colspan="2" bgcolor="#dbdbdb" height="2">
-	</td>
-</tr>
+	<div class="see-comments">
+	  <section>
+	    <div> <img src="https://user-images.githubusercontent.com/112612653/189023768-c2387f31-2463-4198-9078-3e3eaa56f7a0.png" alt=""></div>
+	    <div>
+	      <p>
+	        <b th:each="i : ${#numbers.sequence(0,dto.reviewStar-1)}">★</b>
+	        <span>[[${dto.created}]] | [[${dto.userId}]] </span>
+	       </p>
+	       <p>
+	        <span><a th:href="'javascript:deleteReview(\'' + ${dto.reviewId} + '\', \'' + ${pageNum} + '\')'" th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">삭제</a></span>
+	      </p>
+	      <p>[[${dto.content}]]</p>
+	    </div>
+	    <div><img src="https://user-images.githubusercontent.com/112612653/189023767-c8fd2d91-9928-41bd-a758-b94befaafe23.png"></div>
+	  </section>
+	</div> 
 
 </table>
 
-<p th:utext="${pageIndexList}" style="text-align: center;"></p>
+<br/>
+
+<div height="30" style="text-align: center;">
+	<a th:utext="${pageIndexList}"></a>
+</div>
+
+<br/>
+
+</body>
+</html>

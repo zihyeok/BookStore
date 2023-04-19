@@ -41,10 +41,10 @@
 			<span>가격:[[${#numbers.formatInteger(dto.prc_Value, 1,'COMMA')}]]원</span><br/>
 			
 			<div th:id="${dto.seq_No}">
-			<a th:onclick="|javascript:sendBag('${dto.seq_No}')|"><button type="button">🤍</button></a>
+			<a th:onclick="|javascript:sendBag('${dto.seq_No}')|"><button style="background-color: #fff;" type="button">🤍</button></a>
 			</div>
 			<div th:id="'delete' + ${dto.seq_No}" style="display: none;">
-			<a th:onclick="|javascript:sendDeleteBag('${dto.seq_No}')|"><button type="button">❤️</button></a>
+			<a th:onclick="|javascript:sendDeleteBag('${dto.seq_No}')|"><button style="background-color: #fff;" type="button">❤️</button></a>
 			</div>
 			
 		</div>
@@ -57,7 +57,7 @@
 </br></br></br>
 
 <div style="text-align: right; margin-right: 200px;">
-	<button th:onclick="|location.href='@{BookCreated.action}'|">등록하기</button>
+	<button class="btn-555 float-r" th:onclick="|location.href='@{BookCreated.action}'|">등록하기</button>
 </div>
 
 <br/>

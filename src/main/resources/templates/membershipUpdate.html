@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+
+
+<html lang="ko">
+
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>회원가입</title>
+
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<!-- 내가넣은거 -->
+<link rel="stylesheet" href="/css/membershipUpdate.css">
+
+</head>
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+<script type="text/javascript">
+
+//아이디체크 ajax
+$(function(){
+
+	
+	//전화번호칸 숫자만 입력
+	$("#usertel").on("keyup", function() {
+        $(this).val($(this).val().replace(/[^0-9]/g,""));
+    });
+	
+	//이메일 형식만 입력, 아이디가 중복된다면 서밋불가
+	$('form').submit(function(event) {
+        var email = $('#userEmail').val();
+        var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+        
+        if(!emailReg.test(email)) {
+            alert('이메일 형식이 올바르지 않습니다.');
+            event.preventDefault();
+        }
+        
+        if(!confirm("수정하시겠습니까?")){
+         	event.preventDefault();
+        }
+        
+    });
+	
+});
+
+//주소api 호출
+$(function(){
+	
+	$("#addr").click(function(){
+		
+		new daum.Postcode({
+			
+			oncomplete:function(data){
+				
+				$("#addr").val(data.address);
+				$("#addr_detail").focus();
+			}
+		
+		}).open();
+	});
+});
+
+//비밀번호 데이터검사
+function checkoutPwd(){
+	
+	if ($('#pwd1').val() != $('#pwd2').val()) {
+		  alert('비밀번호가 일치하지 않습니다.');
+		  $("#pwd1").focus();
+		}
+}
+</script>
+<body>
+
+  <form action="" name="myForm" method="post">
+
+    <div class="membership">
+
+      <div>
+        <label>아이디</label>
+        <div>
+          <input type="text" placeholder="예 : youngms12" required readonly name="userId" th:value="${user.userId}">
+        </div>
+        <div id="answerId"></div>
+      </div>
+	 
+		<div>
+	        <label>이름</label>
+	        <input type="text" placeholder="이름을 입력해주세요" required readonly name="userName" th:value="${user.userName}">
+	     </div>
+	     
+<!-- 	<div th:unless="${user.userPwd == 'kakao' or user.userPwd == 'naver' or user.userPwd == 'google'}"> -->
+      <div th:unless="${user.userPwd == 'kakao' or user.userPwd == 'naver' or user.userPwd == 'google'}">
+        <label class="imp">비밀번호</label>
+        <input type="password" placeholder="비밀번호를 입력해주세요." required id="pwd1" name="password1">
+      </div>
+
+      <div th:unless="${user.userPwd == 'kakao' or user.userPwd == 'naver' or user.userPwd == 'google'}">
+        <label class="imp">비밀번호 확인</label>
+        <input type="password" placeholder="비밀번호를 한번 더 입력해주세요." 
+        required id="pwd2" onblur="checkoutPwd()" name="password2">
+      </div>
+<!-- 	</div> -->
+	<input type="hidden" th:if="${user.userPwd == 'kakao' or user.userPwd == 'naver' or user.userPwd == 'google'}" th:value="${user.userPwd}" name="password1">
+	<input type="hidden" th:if="${user.userPwd == 'kakao' or user.userPwd == 'naver' or user.userPwd == 'google'}" th:value="${user.realPwd}" name="realPwd">
+	
+      <div>
+        <label class="imp">휴대폰</label>
+        <div>
+          <input type="tel" placeholder="숫자만 입력해주세요" id="usertel" name="userTel" required th:value="${user.userTel}">
+        </div>
+      </div>
+      
+
+      <div class="add">
+        <label class="imp">주소</label>
+        <div>
+          <input type="text" placeholder="도로명, 지번, 건물명 검색" required id="addr" name="userAddr">
+          <img src="https://res.kurly.com/kurly/ico/2021/search_20_20_333.svg" alt="search">
+        </div>
+        <p>상세 주소</p>
+        	<input type="text" required name="addr_detail" id="addr_detail">
+      </div>
+
+      <div>
+        <label class="imp">생년월일</label>
+        <div class="birth">
+          <input type="text" name="birth_year" id="birth_year" pattern="[0-9]*" value label="생년월일" size="4" maxlength="4"
+            placeholder="YYYY" required th:value="${year}">
+          <span>/</span>
+          <input type="text" name="birth_month" id="birth_month" pattern="[0-9]*" value label="생년월일" size="2" maxlength="2"
+            placeholder="MM" required th:value="${month}">
+          <span>/</span>
+          <input type="text" name="birth_day" id="birth_day" pattern="[0-9]*" value label="생년월일" size="2" maxlength="2"
+            placeholder="DD" required th:value="${day}">
+        </div>
+      </div>
+      
+      <div>
+        <label>이메일</label><br/>
+        <input type="text" placeholder="예 : bookstore@gmail.com" name="userEmail" id="userEmail" th:value="${user.userEmail}">
+      </div>
+      
+    </div>
+
+    <button type="submit">수정하기</button>
+    
+  </form> 
+
+  
+</body>
+
+
+</html>

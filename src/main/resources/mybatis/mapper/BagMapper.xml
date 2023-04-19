@@ -41,5 +41,8 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	values (#{orderId},#{userId},#{seq_No},sysdate,#{orderGroup})
 </insert>
 
+<select id="findOrderCount" parameterType="String" resultType="int">
+	select count(distinct ordergroup) from orderbag where userid = #{userId}
+</select>
 
 </mapper>

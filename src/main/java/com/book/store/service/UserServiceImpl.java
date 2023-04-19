@@ -77,6 +77,13 @@ public class UserServiceImpl implements UserService{
 		userMapper.updateVip(userId);
 	}
 
+	@Override
+	public void updateUserData(String userId, String userPwd, String userAddr, String userEmail, String userBirth,
+			String userTel, String realPwd) throws Exception {
+		userMapper.updateUserData(userId, userPwd, userAddr, userEmail, userBirth, userTel, realPwd);
+		
+	}
+
 	
 
 	

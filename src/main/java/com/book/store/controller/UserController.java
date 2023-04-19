@@ -274,10 +274,68 @@ public class UserController {
 		
 		mav.addObject("user", user);
 		mav.addObject("bagitem_length", bagitem_length);
+		mav.addObject("vip", Integer.parseInt(user.getUserVip()));
+		mav.addObject("order_Count", bagservice.findOrderCount(user.getUserId()));
 		
 		mav.setViewName("mypage");
 		
 		
+		
+		return mav;
+	}
+	
+	@GetMapping("/update")
+	public ModelAndView update() throws Exception {
+		ModelAndView mav = new ModelAndView();
+	
+		UserData user = null;
+		if(httpSession.getAttribute("user") != null) {
+			user = (UserData) httpSession.getAttribute("user");
+		}else if(httpSession.getAttribute("OauthUser") != null) {
+			user = (UserData) httpSession.getAttribute("OauthUser");
+		}
+		
+		if(user==null) {
+			mav.addObject("alert", "로그인 후 이용해주세요.");
+			mav.setViewName("alert");
+			return mav;
+		}
+		
+		String[] birth = user.getUserBirth().split("-");
+		System.out.println(birth[0]+birth[1]+birth[2]);
+		
+		mav.addObject("user", user);
+		mav.addObject("year", birth[0]);
+		mav.addObject("month", birth[1]);
+		mav.addObject("day", birth[2]);
+		
+		
+		mav.setViewName("membershipUpdate");
+		
+		return mav;
+	}
+		
+	@PostMapping("/update") 
+	public ModelAndView update_ok(HttpServletRequest req) throws Exception {
+		ModelAndView mav = new ModelAndView();
+	
+		String userId = req.getParameter("userId");
+		String pwd = req.getParameter("password1");
+		String tel = req.getParameter("userTel");
+		String addr = req.getParameter("userAddr") + " " + req.getParameter("addr_detail");
+		String birth = req.getParameter("birth_year") +"-"+ req.getParameter("birth_month")+"-"+req.getParameter("birth_day");
+		String email = null;
+		if(req.getParameter("userEmail")!=null) {
+			email = req.getParameter("userEmail");
+		}
+		
+		if(pwd.equals("kakao") || pwd.equals("naver") || pwd.equals("google")) {
+			userService.updateUserData(userId, pwd, addr, email, birth, tel, req.getParameter("realPwd"));
+		}else {
+			userService.updateUserData(userId, passwordEncoder.encode(pwd), addr, email, birth, tel, pwd);
+		}
+		
+		mav.setViewName("redirect:/user/logout");
 		
 		return mav;
 	}
@@ -296,7 +354,7 @@ public class UserController {
 		mav.addObject("user", (userService.findUserName("zzz123")).get());
 		mav.addObject("vip", Integer.parseInt((userService.findUserName("zzz123")).get().getUserVip()));
 		mav.addObject("date", date);
-		mav.setViewName("payment");
+		mav.setViewName("paymentlist");
 		return mav;
 	}
 		

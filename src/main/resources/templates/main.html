@@ -60,22 +60,21 @@
   </article>
 
   <article class="slider">
-    <h2>NEW BOOK</h2>
+    <h2>New</h2>
      <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide" th:each="i : ${#numbers.sequence(0,3)}" th:if="${#lists.size(recentLists)}>0">
      <a th:href="'/BookArticle.action?seq_No=' + @{${recentLists[4*i].seq_No}}">
-     <img th:src="${recentLists[4*i].image_Url}" style="width: 200px; height: 250px; margin-right: 50px;"></a>
+     <img th:src="${recentLists[4*i].image_Url}" style="width: 150px; height: 200px; margin-right: 50px;"></a>
      
      <a th:href="'/BookArticle.action?seq_No=' + @{${recentLists[4*i+1].seq_No}}">
-     <img th:src="${recentLists[4*i+1].image_Url}" style="width: 200px; height: 250px; margin-right: 50px;"></a>
+     <img th:src="${recentLists[4*i+1].image_Url}" style="width: 150px; height: 200px; margin-right: 50px;"></a>
      
      <a th:href="'/BookArticle.action?seq_No=' + @{${recentLists[4*i+2].seq_No}}">
-     <img th:src="${recentLists[4*i+2].image_Url}" style="width: 200px; height: 250px; margin-right: 50px;"></a>
+     <img th:src="${recentLists[4*i+2].image_Url}" style="width: 150px; height: 200px; margin-right: 50px;"></a>
      <a th:href="'/BookArticle.action?seq_No=' + @{${recentLists[4*i+3].seq_No}}">
      
-     <img th:src="${recentLists[4*i+3].image_Url}" style="width: 200px; height: 250px; margin-right: 50px;"></a>
-
+     <img th:src="${recentLists[4*i+3].image_Url}" style="width: 150px; height: 200px; margin-right: 20px;"></a>
         </div>
       </div>
 
@@ -113,7 +112,7 @@
   </article>
 
   <article class="big">
-    <h2>요즘 이 책</h2>
+    <h2>Best</h2>
     <div>
       <section th:if="${#lists.size(topSalLists)}>0" th:each="topLists:${topSalLists}">
         <div class="image-container">
@@ -141,7 +140,7 @@
 
     <div>
       <div>
-        <h2>문학이조 수상작</h2>
+        <h2>Award</h2>
       </div>
 
     </div>
@@ -225,7 +224,7 @@ if ( cookiedata.indexOf("maindiv=done") < 0 ){
 }
 </script>
 
-</div> 
+</div>
 
 </body>
 

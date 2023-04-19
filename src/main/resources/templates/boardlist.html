@@ -7,36 +7,27 @@
 <link rel="stylesheet" href="/css/board.css">
 <link rel="stylesheet" type="text/css" href="/css/BoardCreated.css">
 
-<script type="text/javascript">
-	
-	function sendIt(){		
-		var f = document.searchForm;
-		
-		f.action = "/BoardList.action";
-		f.submit();
-	}
 
-</script>
 
   <article class="search2">
 
     <h2>Q & A 게시판</h2>
     
     <div>
-      <form action="" method="get" name="searchForm" style="">
-      <h4>Search</h4>
-      <select name="searchKey" >
-        <option value="subject">제목</option>
-        <option value="name">작성자</option>
-        <option value="content">내용</option>
-      </select>
+      <form action="" method="post" name="searchForm">
+	  <h4>Search</h4>
+	  <select name="searchKey" >
+	    <option value="subject">제목</option>
+	    <option value="userId">작성자</option>
+	    <option value="content">내용</option>
+	  </select>
 
-      <input type="text" name="searchValue">
-      </form>
-      
-      <img style=" margin-left: 820px" src="https://cdn.pixabay.com/photo/2016/03/31/19/14/magnifying-glass-1294834_1280.png"
-      onclick="sendIt();">
-      
+	  <input type="text" name="searchValue">
+	   <img onclick="submit();" src="https://cdn.pixabay.com/photo/2016/03/31/19/14/magnifying-glass-1294834_1280.png" >
+	  </form>
+<!-- <img src="https://cdn.pixabay.com/photo/2016/03/31/19/14/magnifying-glass-1294834_1280.png" style="margin-left: 820px" onclick="sendIt();"> -->
+
+       
       <button style="margin-top: 10px; " class="black-btn float-r m-btn" onclick="location='/Board.action'">
       등록</button>
       </div>
@@ -55,17 +46,23 @@
     
       <summary>
         <div class="city-list-header" th:if="${#lists.size(lists)}>0" th:each="dto:${lists}" >
-          <span style="margin-left: 20px;" class="weather-header-details">[[${dto.boardNum}]]</span>
-          <span style="margin-left: 30px;" class="weather-header-details" th:text="${dto.name}">작성자</span>
-          <span style="margin-right: 80px;" class="weather-header-details" th:text="${dto.created}">작성일</span>
+          <span style="margin-left: 20px;" class="weather-header-details">[[${dto.boardId}]]</span>
+          <span style="margin-left: 30px;" class="weather-header-details" th:text="${dto.userId}">작성자</span>
+          <span style="margin-right: 80px;" class="weather-header-details" th:text="${dto.created}" 
+          th:if="${dto.fix_created} == ${dto.created} ">작성일</span>
+          <span style="margin-right: 80px;" class="weather-header-details" th:text="${dto.fix_created}" 
+          th:if="${dto.fix_created} != ${dto.created} ">수정일</span>
           <span style="margin-right: 10px;" class="weather-header-details" th:text="${dto.hitCount}">조회수</span>
-          <a th:href="@{|${articleUrl}&num=@{${dto.boardNum}}|}" style="margin-bottom: 30px;">
+          <a th:href="@{|${articleUrl}&num=@{${dto.boardId}}|}" style="margin-bottom: 30px;">
 	          <span style="margin-right: 110px;" class="weather-header-details" 
-	          th:text="${dto.subject}" th:href="@{|${articleUrl}&num=@{${dto.boardNum}}|}">
-	          <!-- &searchValue=${searchValue } -->
+	          th:text="${dto.subject}" th:href="@{|${articleUrl}&num=@{${dto.boardId}}|}">
 	          제목                    
 	          </span>
-	         
+		<!--  <span style="margin-right: 110px;" class="weather-header-details" 
+				    th:text="${#strings.length(dto.subject) > 20 ? #strings.substring(dto.subject, 0, 20) + '...' : dto.subject}" 
+				    th:href="@{|${articleUrl}&num=@{${dto.boardId}}|}">
+				    제목                    
+			  </span> -->
 	          
 		  </a>
 		  
@@ -74,41 +71,13 @@
         
       </summary>
       
-    
-    <!-- <details>
-      <summary>
-        <div class="city-list-header">
-          <span class="weather-header-details">배송/시공</span>
-          <span class="weather-header-details">2017.03.13</span>
-          <span class="weather-header-details">배송설치비가 따로 청구되나요?</span>
-        </div>
-      </summary>
-      <div>
-        <p>그렇지 않습니다.<br>
-          <br>
-          현재 일룸 제품에 표시된 모든 가격은 일체의 배송 설치비가 포함된 것입니다.<br>
-          (그러나 제주도, 울릉도 등 산간지역은 배송비가 추가발생할수 있습니다.)<br>
-          <br>
-          저희 일룸은 퍼시스 그룹의 물류 시스템을 같이 사용하고 있어 <br>
-          <br>
-          고객님들께 타사에 비해 훨씬 경쟁력 있는 배송 설치 서비스가 가능합니다.</p>
-      </div>
-    </details> -->
-
-		
-	
   </div>
 
-<!-- 페이징 --><!-- <a th:utext="${pageIndexList}"></a>  <span th:text="${pageIndexList}"></span>-->
-  
   <div style="text-align: center;">
 	<a th:if="${pageIndexList != null}" th:utext="${pageIndexList}"></a>
 	<a th:if="${pageIndexList == null or pageIndexList == ''}">등록된 게시물이 없습니다.</a>
   </div>
   
-
-		
-
 
 <div class="container product_detail">
 	<div class="in_box"><!--in_box S-->
