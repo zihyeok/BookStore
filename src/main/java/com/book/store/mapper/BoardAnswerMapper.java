@@ -15,9 +15,9 @@ public interface BoardAnswerMapper {
 	
 	public void insertData(BoardAnswerDTO dto) throws Exception;
 	
-	public int getDataCount(@Param("boardNum")int boardId) throws Exception;
+	public int getDataCount(@Param("boardId")int boardId) throws Exception;
 	
-	public List<BoardAnswerDTO> getLists(@Param("start")int start,@Param("end")int end,@Param("boardNum")int boardId) throws Exception;
+	public List<BoardAnswerDTO> getLists(@Param("start")int start,@Param("end")int end,@Param("boardId")int boardId) throws Exception;
 	
 	public void deleteData(int answerNum) throws Exception;
 	

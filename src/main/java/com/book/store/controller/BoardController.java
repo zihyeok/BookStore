@@ -2,10 +2,7 @@ package com.book.store.controller;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +22,6 @@ import com.book.store.service.BoardAnswerServiceImpl;
 import com.book.store.service.BoardService;
 import com.book.store.util.BoardUtil;
 import com.book.store.util.MyUtil;
-import com.sun.xml.bind.v2.runtime.reflect.ListIterator;
 
 //@RequestMapping("/board") 나중에 쓸꺼
 @RestController// Json 형태로 객체 데이터를 반환
@@ -87,7 +83,7 @@ public class BoardController {
 	      }
 		
 	
-		@GetMapping("/BoardList.action")
+		@RequestMapping("/BoardList.action")
 		public ModelAndView list(BoardDTO dto,HttpServletRequest request) throws Exception{
 			
 			
@@ -100,7 +96,7 @@ public class BoardController {
 			
 			String searchKey = request.getParameter("searchKey");
 		    String searchValue = request.getParameter("searchValue");
-
+		    
 			
 			if (searchValue == null) {
 		        searchKey = "subject";
@@ -112,7 +108,8 @@ public class BoardController {
 		    }
 			
 			int dataCount = boardService.getDataCount(searchKey, searchValue);
-
+			//System.out.println(dataCount); 4
+			
 			int numPerPage = 3;
 		    int totalPage = 0;
 
@@ -160,6 +157,7 @@ public class BoardController {
 			mav.addObject("pageIndexList", pageIndexList);
 			mav.addObject("dataCount", dataCount);
 			mav.addObject("articleUrl", articleUrl);
+			//System.out.println(lists+"김치");
 			
 			//mav.addObject("pageNum", currentPage);//3번째 방법시 같이넘겨야함
 			
@@ -482,10 +480,11 @@ public class BoardController {
 		
 		@RequestMapping(value = "/AnswerUpdated_ok.action",method = {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView AnswerUpdated_ok(BoardAnswerDTO dto,HttpServletRequest request) throws Exception{
-		
+			
+			
 			String pageNum = request.getParameter("pageNum");
 			int boardId = Integer.parseInt(request.getParameter("boardId"));
-			
+			//int boardId = dto.getBoardId();
 		
 			BoardAnswerService.updateData(dto);
 			

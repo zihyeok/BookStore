@@ -121,9 +121,6 @@ function listPage(page) {
 
 </script>
 
-
-
-</br></br></br></br>
 </br></br></br></br>
 </br></br></br></br>
 </br></br></br></br>
@@ -150,9 +147,13 @@ function listPage(page) {
       </tr>
       <tr>
         <th>작성자 :</th>
-        <td>[[${dto.userId}]]</td><!-- [[${session.user.userId}]] -->
-        <th>작성일 :</th>
-        <td>[[${dto.created}]]</td>
+        <td>[[${dto.userId}]]</td>
+        <!-- [[${session.user.userId}]] -->
+        <th th:if="${dto.fix_created} == ${dto.created} ">작성일 :</th>
+        <td th:if="${dto.fix_created} == ${dto.created} ">[[${dto.created}]]</td>
+        <th th:if="${dto.fix_created} != ${dto.created} ">수정일 :</th>
+        <td th:if="${dto.fix_created} != ${dto.created} ">[[${dto.fix_created}]]</td>
+
       </tr>
       <tr>
         <th>제목 :</th>
@@ -169,15 +170,17 @@ function listPage(page) {
   
   <div style="margin-top: 20px; margin-right: 100px;">
 	  <button  class="black-btn float-r m-btn" 
-	  th:onclick="@{|location='/BoardUpdated.action?num=${dto.boardId }&${params }'|}">
+	  th:onclick="@{|location='/BoardUpdated.action?num=${dto.boardId }&${params }'|}"
+	  th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">
 	  수정</button>
-	  <button class="black-btn float-r m-btn" 
-	  th:onclick="'location.href=\'BoardDeleted_ok.action?num=' + @{${dto.boardId}} + '&' + @{${params}} + '\''">
+	  <button class="black-btn float-r m-btn"
+	  th:onclick="'location.href=\'BoardDeleted_ok.action?num=' + @{${dto.boardId}} + '&' + @{${params}} + '\''"
+	  th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">
 	  삭제</button>
 	  <button class="black-btn float-r m-btn" 
 	  th:onclick="@{|location.href='/BoardList.action?${params }'|}">
 	  리스트</button>
-	 <!--  <input type="hidden" name="boardNum" value="${dto.boardNum }"/> -->
+	 
   </div>
   
 	<!-- 이전글 다음글 -->
@@ -211,7 +214,7 @@ function listPage(page) {
 <tr>
 	<td width="60" height="30" bgcolor="#eeeeee" align="center">작성자</td>
 	<td width="240" height="30" style="padding-left: 10px;">
-	<input type="text" id="userId" size="35" maxlength="20" class="boxTF" readonly="readonly"  th:value="${dto.userId }"/>
+	<input type="text" id="userId" size="35" maxlength="20" class="boxTF" readonly="readonly"  th:value="${session.user.userId }"/>
 	</td>
 </tr>
 

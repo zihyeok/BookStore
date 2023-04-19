@@ -11,8 +11,8 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <insert id="insertData" parameterType="com.book.store.dto.BoardDTO">
-	insert into board (boardId,userId,pwd,subject,content,hitCount,created) 
-	values(#{boardId},#{userId},#{pwd},#{subject},#{content},0,sysdate)
+	insert into board (boardId,userId,pwd,subject,content,hitCount,created,fix_created) 
+	values(#{boardId},#{userId},#{pwd},#{subject},#{content},0,sysdate,sysdate)
 </insert>
 
 <select id="getDataCount" parameterType="map" resultType="int">
@@ -22,8 +22,11 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 
 <select id="getLists" parameterType="map" resultType="com.book.store.dto.BoardDTO">
 	select * from (
-	select rownum rnum,data.* from (
-	select boardId,userId,pwd,subject,content,hitCount,to_char(created,'YYYY-MM-DD') fix_created,to_char(created,'YYYY-MM-DD') created 
+	select rownum rnum,data.* 
+	from (
+		select boardId,userId,pwd,subject,content,hitCount,
+		to_char(created,'YYYY-MM-DD') created,
+    	to_char(fix_created,'YYYY-MM-DD') fix_created 
 	from board where ${searchKey} like '%' || #{searchValue} || '%' 
 	order by boardId desc) data) 
 <![CDATA[
@@ -41,7 +44,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <update id="updateData" parameterType="com.book.store.dto.BoardDTO">
-	update board set pwd=#{pwd},content=#{content},subject=#{subject},fix_created=sysdate
+	update board set pwd=#{pwd},content=#{content},subject=#{subject},fix_Created=sysdate 
 	where boardId=#{boardId}
 </update>
 
@@ -68,7 +71,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	where ${searchKey} like '%' || #{searchValue} || '%' 
 <![CDATA[
 	and (boardId>#{boardId})
-	order by boardId asc)data 
+	order by boardId asc)data
 	where rownum=1
 ]]> 
 </select> 
