@@ -25,8 +25,8 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	select rownum rnum,data.* 
 	from (
 		select boardId,userId,pwd,subject,content,hitCount,
-		to_char(created,'YYYY-MM-DD') created,
-    	to_char(fix_created,'YYYY-MM-DD') fix_created 
+		to_char(created,'YYYY-MM-DD HH24:MI:SS') created,
+    	to_char(fix_created,'YYYY-MM-DD HH24:MI:SS') fix_created 
 	from board where ${searchKey} like '%' || #{searchValue} || '%' 
 	order by boardId desc) data) 
 <![CDATA[
