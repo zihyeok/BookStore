@@ -21,9 +21,9 @@
           <b>No.&nbsp;[[${dto.boardId}]]</b>
         </td>
         <td width="300" align="right" style="padding-right: 10px;">
-        <a th:if="${dto.fix_created} == ${dto.created} ">작성일: [[${dto.created}]]</a>
-		<a th:if="${dto.fix_created} != ${dto.created} ">수정일: [[${dto.fix_created}]]</a>
-        
+        <a th:if="${dto.fix_created} == ${dto.created}" >등록일: [[${dto.created}]]</a>
+		<a th:if="${dto.fix_created} != ${dto.created}" >수정일: [[${dto.fix_created}]]</a>
+		
         <a th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}"
          th:onclick="@{|location='/AnswerUpdated.action?answerNum=${dto.answerNum }&pageNum=${pageNum }&num=${boardId }'|}">수정</a>
         
