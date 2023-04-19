@@ -4,6 +4,19 @@
 <div layout:fragment="content">
 
 <link rel="stylesheet" type="text/css" href="css/BookList.css">
+<style>
+
+.searchResult_box{
+
+	text-align: center;
+	margin-bottom: 100px;
+	font-size: 25px;
+	font-weight: bold;
+	color: blue;
+
+}
+
+</style>
 
 <script type="text/javascript" src="/js/ajaxUtil.js"></script>
 
@@ -11,18 +24,21 @@
 </br></br></br></br>
 </br></br></br></br>
 
+<div th:if="${searchValue != ''}" class="searchResult_box">[[${searchValue}]]로 검색한 결과 [[${dataCount}]]개가 검색되었습니다. </div>
+
 <div class="BookList-container" th:each="i : ${#numbers.sequence(0,2)}" th:if="${#lists.size(lists)}>0">
 	<div class="BookList-row" th:each="j : ${#numbers.sequence(0,2)}">
 		
 		<div class="BookList-img-box" th:each="dto: ${lists[3*i+j]}"> 
 			
 			<a th:href="@{${articleUrl}} + '&seq_No=' + @{${dto.seq_No}}">
-			<img alt="" th:src="@{${dto.image_Url}}"></a><br/>
+			<img alt="상품 준비중" th:src="@{${dto.image_Url}}"></a><br/><br/>
 			
-			<span>[[${dto.title_Nm}]]</span><br/>
-			<span>[[${dto.authr_Nm}]]</span><br/>
+			<span th:if="${#strings.length(dto.title_Nm) < 20}">[[${dto.title_Nm}]]</span>
+			<span th:unless="${#strings.length(dto.title_Nm) < 20}">[[${#strings.substring(dto.title_Nm,0,19)}]]...</span>
+			<br/><span>[[${dto.authr_Nm}]]</span><br/>
 			<span>출판사:[[${dto.publisher_Nm}]]</span><br/>
-			<span>가격:[[${dto.prc_Value}]]원</span><br/>
+			<span>가격:[[${#numbers.formatInteger(dto.prc_Value, 1,'COMMA')}]]원</span><br/>
 			
 			<div th:id="${dto.seq_No}">
 			<a th:onclick="|javascript:sendBag('${dto.seq_No}')|"><button style="background-color: #fff;" type="button">🤍</button></a>
