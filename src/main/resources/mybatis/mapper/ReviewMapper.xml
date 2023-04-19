@@ -6,13 +6,25 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="com.book.store.mapper.ReviewMapper">
 
+<!-- 책 아이디(bookId)에 해당하는 한줄평 목록 조회 -->
+<!-- <select id="getReviewsByBookId" parameterType="int" resultType="com.example.bookstore.domain.Review">
+  SELECT id, book_id, user_id, contents, rating, created_at, updated_at
+  FROM review
+  WHERE book_id = #{bookId}
+</select> -->
+
 <select id="maxNum" resultType="int">
 	select nvl(max(reviewId),0) from review
 </select>
 
 <insert id="insertData" parameterType="com.book.store.dto.ReviewDTO">
+<<<<<<< HEAD
 	insert into review (reviewId,seq_No,reviewStar,userId,content,created) 
 	values(#{reviewId},#{seq_No},#{reviewStar},#{userId},#{content},sysdate) 
+=======
+	insert into review (reviewId,seq_No,userName,content,created) 
+	values(#{reviewId},#{seq_No},#{userName},#{content},sysdate)
+>>>>>>> 05c698529a9eaf2e9e1ae2024591b9a32f13f822
 </insert>
 
 <select id="getDataCount" parameterType="int" resultType="int">
@@ -28,10 +40,16 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 <select id="getLists" parameterType="map" resultType="com.book.store.dto.ReviewDTO">
 	select * from (
 	select rownum rnum,data.* from (
+<<<<<<< HEAD
 	select reviewId,seq_No,reviewStar,userId,content,to_char(created,'YYYY-MM-DD') created,
 	to_char(fix_created,'YYYY-MM-DD') fix_created 
 	from review where seq_No = #{seq_No} 
 	order by reviewId desc) data) 
+=======
+	select reviewId,seq_No,userName,content,to_char(created,'YYYY-MM-DD') created 
+	from review where ${searchKey} like '%' || #{searchValue} || '%' 
+	order by num desc) data) 
+>>>>>>> 05c698529a9eaf2e9e1ae2024591b9a32f13f822
 <![CDATA[
 	where rnum>=#{start} and rnum<=#{end}
 ]]>
@@ -46,12 +64,20 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <select id="getReadData" parameterType="int" resultType="com.book.store.dto.ReviewDTO">
+<<<<<<< HEAD
 	select reviewId,seq_No,userId,content,created from review 
+=======
+	select reviewId,seq_No,userName,userPwd,content,created from review 
+>>>>>>> 05c698529a9eaf2e9e1ae2024591b9a32f13f822
 	where reviewId=#{reviewId}
 </select>
 
 <update id="updateData" parameterType="com.book.store.dto.ReviewDTO">
+<<<<<<< HEAD
 	update review set content=#{content} fix_created=sysdate
+=======
+	update review set content=#{content} 
+>>>>>>> 05c698529a9eaf2e9e1ae2024591b9a32f13f822
 	where reviewId=#{reviewId}
 </update>
 
