@@ -1,12 +1,17 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<!-- <html layout:decorate="~{layout}"> -->
+
 
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3.0">
-	<title>lee-sangho</title>
-	<link rel="stylesheet" href="style.css">
-	<script src="script.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+	<!-- <meta charset="UTF-8"> -->
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3.0"> -->
+	<title>review</title>
+	<link rel="stylesheet" href="/css/review.css">
+	<script src="/js/review.js"></script>
 	<!-- AOS Download-->
 	<link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
 	<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -21,402 +26,113 @@
 
 <body>
 
-	<article class="bd-text">
+<!-- <div layout:fragment="content2" > -->
 
+<div layout:fragment="content2" >
+
+<br/><br/><br/><br/><br/>
+
+<!-- <h5 th:text="|${#lists.size(lists)}개의 답변이 있습니다.|"></h5> -->
+<!-- <h5 th:text="| 0 개의 답변이 있습니다.|">리뷰 내용</h5> -->
+
+	<h2>Review</h2>
 	
+	<div class="see-comments">
 
-	<article class="bd-see">
-		<h3>게시글 보기</h3>
+		<p>댓글 2개</p>
+		<p>[[${dto.num}]]</p>
 
-		<div class="see-title">
-			<h2>비비고 인기 제품 4종 비교</h2>
-			<small>에디터가 엄선한 최애 만두는?</small>
-		</div>
-
-		<div class="see-main">
+		<section>
+			<div> <img src="https://user-images.githubusercontent.com/112612653/189023768-c2387f31-2463-4198-9078-3e3eaa56f7a0.png" alt=""></div>
 			<div>
-				<p>2022.09.09</p>
-				<div>
-					<p>좋아요</p><span>24</span>
-					<p>조회수</p><span>312</span>
-				</div>
+				<p>cjlover</p>
+				<p>정말 맛있고 건강한 재료들이 들어가서 좋아요.</p>
+				<p>1시간 전</p>
 			</div>
-
+			<div><img src="https://user-images.githubusercontent.com/112612653/189023767-c8fd2d91-9928-41bd-a758-b94befaafe23.png"></div>
+		</section>
+		<section>
 			<div>
-				<section>
-					<div><img src="https://user-images.githubusercontent.com/112612653/189023724-8e1f25a4-010b-4138-a03f-efd230e83dee.jpg"></div>
-					<p>세계 1위 만두 비비고 왕교자</p>
-				</section>
-				<section>
-					<div><img src="https://user-images.githubusercontent.com/112612653/189023728-a2d594d0-791b-4b75-adea-7fd8ff4786d9.jpg"></div>
-					<p>뜨끈뜨끈한 전골에 딱! 비비고 새우 왕교자</p>
-				</section>
-				<section>
-					<div><img src="https://user-images.githubusercontent.com/112612653/189023731-7dad5cad-ca8d-49f8-a25e-cec92a002e78.jpg"></div>
-					<p>건강한 재료를 듬뿍 비비고 왕만두</p>
-				</section>
-				<section>
-					<div><img src="https://user-images.githubusercontent.com/112612653/189023732-a34a17eb-a8bd-4d12-8597-66c5e93456da.png"></div>
-					<p>육즙이 가득 비비고 소고기 한섬만두</p>
-				</section>
-			</div>
-
-			<div class="see-sharing">
-				<button><img src="https://user-images.githubusercontent.com/112612653/189023735-4db2f0fb-7f53-4600-8e6b-ab0c27badfd2.png"></button>
-				<button><img src="https://user-images.githubusercontent.com/112612653/189023736-760c8c59-ad26-459a-b051-176591a6b754.png"></button>
-
-			</div>
-		</div>
-
-		<div class="see-comments">
-
-			<p>댓글 2개</p>
-
-			<section>
-				<div> <img src="https://user-images.githubusercontent.com/112612653/189023768-c2387f31-2463-4198-9078-3e3eaa56f7a0.png" alt=""></div>
-				<div>
-					<p>cjlover</p>
-					<p>정말 맛있고 건강한 재료들이 들어가서 좋아요.</p>
-					<p>1시간 전</p>
-				</div>
-				<div><img src="https://user-images.githubusercontent.com/112612653/189023767-c8fd2d91-9928-41bd-a758-b94befaafe23.png"></div>
-			</section>
-			<section>
-				<div>
-					<img src="https://user-images.githubusercontent.com/112612653/189023768-c2387f31-2463-4198-9078-3e3eaa56f7a0.png" alt="">
-				</div>
-				<div>
-					<p>shrimpmania</p>
-					<p>새우살이 탱글탱글하게 씹혀요!</p>
-					<p>1시간 전</p>
-				</div>
-				<div><img src="https://user-images.githubusercontent.com/112612653/189023767-c8fd2d91-9928-41bd-a758-b94befaafe23.png">
-				</div>
-			</section>
-			<textarea placeholder="댓글을 입력하세요"></textarea>
-			<div>
-				<div><input type="checkbox" class="input-chek" id="secret-check"><label for="secret-check" class="form-chek">비밀글</label></div>
-				<div><button class="btn-555">등록하기</button></div>
-			</div>
-		</div>
-
-	
-
-	<article class="faq">
-
-		<ul class="listtap">
-			<li class="tapsee">제품<span>(1509)</span></li>
-			<li>레시피<span>(3)</span></li>
-			<li>회원정보<span>(4)</span></li>
-			<li>기타<span>(19)</span></li>
-		</ul>
-		<section id="list1">
-			<div>
-				<div class="listq faq-q">
-					<div>제품</div>
-					<div>
-						<p>[쁘띠첼 요거젤리] 쁘띠첼 요거젤리에 하얀 비닐(실) 같은 게 들어있어요.</p>
-					</div>
-				</div>
-				<div>
-					<div>답변</div>
-					<div>
-						<p>
-							요거젤리에 들어있는 나타드 코코의 섬유질입니다. 나타드 코코는 코코넛 워터를 일정기간 발효시켜 만들며, 99%가 수분이고 1%는 발효과정에서 미생물이 만들어 내는 섬유질입니다. 나타드 코코를 절단하는 과정 중 얇게 잘린 부분이 비닐이나 실처럼 제품 내에서 보일 수 있으며, 나타드 코코를 삼키지 않고 장시간 씹게 되면 수분이 밖으로 빠져나와 남은 섬유질 부분이 비닐이나 실과 같이 보여질 수 있습니다. 이는 인체에는
-							무해하니 안심하고 드셔도 됩니다.</p>
-					</div>
-				</div>
+				<img src="https://user-images.githubusercontent.com/112612653/189023768-c2387f31-2463-4198-9078-3e3eaa56f7a0.png" alt="">
 			</div>
 			<div>
-				<div class="listq">
-					<div>제품</div>
-					<div>
-						<p>
-							[비비고 사골 컵만둣국] 야채블럭이 잘 풀리지 않아요.</p>
-					</div>
-				</div>
-				<div>
-					<div>답변</div>
-					<div>
-						<p>
-
-							전자레인지 조리 후, 야채블럭을 수저로 살살 풀어주시면 손쉽게 푸실 수 있습니다.</p>
-					</div>
-				</div>
+				<p>shrimpmania</p>
+				<p>새우살이 탱글탱글하게 씹혀요!</p>
+				<p>1시간 전</p>
 			</div>
-			<div>
-				<div class="listq">
-					<div>제품</div>
-					<div>
-						<p>
-							[햇반 솥반] 제품의 윗부분에만 원물이 있어요.</p>
-					</div>
-				</div>
-				<div>
-					<div>답변</div>
-					<div>
-						<p>
-
-							실제 전문점 솥밥도 밥위에 원물을 올려서 밥을 짓듯이 햇반 솥반도 밥 위에 원물을 올리고 밥을 지었습니다. 위아래 골고루 섞어서 드시면 더욱 맛있게 드실 수 있습니다.</p>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="listq">
-					<div>제품</div>
-					<div>
-						<p>
-							[햇반 솥반] 제품의 식이섬유 함량이 어떻게 되나요?</p>
-					</div>
-				</div>
-				<div>
-					<div>답변</div>
-					<div>
-						<p>
-							통곡물밥 5g, 그 외 제품 2.5g의 식이섬유가 함유되어 있습니다. 통곡물밥 한 그릇의 식이섬유는 사과 한 개와 동일합니다. (사과 한 개 270g 기준, 출처: 국가표준식품성분표)</p>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="listq">
-					<div>제품</div>
-					<div>
-						<p>
-							[햇반 솥반 통곡물밥] 같은 제품인데도 제품의 색상 차이가 있습니다.</p>
-					</div>
-				</div>
-				<div>
-					<div>답변</div>
-					<div>
-						<p>
-							재료로 들어간 흑미를 불리는 과정에서 흑미 물 빠짐으로 인해 제품 간, 상하 위치별 차이가 발생할 수 있습니다. 재료로 인해 발생하는 자연스러운 현상으로 안심하고 드셔도 됩니다.</p>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="listq">
-					<div>제품</div>
-					<div>
-						<p>
-							[햇반 솥반 꿀약밥] 중간중간 밥의 색이 검은색을 띱니다.</p>
-					</div>
-				</div>
-				<div>
-					<div>답변</div>
-					<div>
-						<p>
-							재료로 들어간 건포도가 밥을 물들게 할 수 있으나, 제품의 맛과 품질에는 문제가 없으니 안심하고 드셔도 됩니다.</p>
-					</div>
-				</div>
+			<div><img src="https://user-images.githubusercontent.com/112612653/189023767-c8fd2d91-9928-41bd-a758-b94befaafe23.png">
 			</div>
 		</section>
-
-		<section id="list2">
-			<div>
-				<div class="listq">
-					<div>레시피</div>
-					<div>
-						<p>
-							[레시피] 내게 필요한 레시피를 찾고 싶어요.</p>
-					</div>
-				</div>
-				<div>
-					<div>답변</div>
-					<div>
-						<p>
-
-							레시피 > 전체 레시피 메뉴에서 국/탕, 찌개/전골 등 "조리법 별 레시피"와 파티요리, 어린이요리, 명절요리, 캠핑요리 등 "테마 별 레시피"를 확인하실 수 있습니다. 그 외 다양한 옵션에 따라 필요한 레시피를 찾고 싶으시다면 전체 레시피 페이지 상단의 검색박스에 검색어를 입력하신 후 검색해 보세요. 검색 버튼 오른쪽의 "브랜드로 레시피 찾기"를 클릭하시면 해당 브랜드 제품이 사용된 레시피를 검색하실 수 있습니다.
-							레시피 검색 시 검색박스 하단의 "추천 키워드"와 "많이 검색한 키워드"도 참고하세요!</p>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="listq">
-					<div>레시피</div>
-					<div>
-						<p>
-							[레시피] 레시피에 쓰인 제품이 궁금해요!</p>
-					</div>
-				</div>
-				<div>
-					<div>답변</div>
-					<div>
-						<p>
-							CJ제일제당 레시피 상세 페이지 하단 [연관 제품] 영역에서 해당 레시피에서 사용된 제품들을 확인하실 수 있습니다.</p>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="listq">
-					<div>레시피</div>
-					<div>
-						<p>
-							[레시피] 마음에 드는 레시피를 이웃들과 공유하고 싶어요.</p>
-					</div>
-				</div>
-				<div>
-					<div>답변</div>
-					<div>
-						<p>
-							홈페이지 화면 상단의 공유 아이콘을 선택하여 페이스북, 트위터, URL 중 원하는 공유 방식을 선택하세요. 나의 SNS 계정으로 로그인하시면 레시피를 이웃들과 공유하실 수 있습니다. 모바일웹은 화면 상단의 메뉴에서 공유 방식을 선택할 수 있습니다.</p>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section id="list3">
-			<div>
-				<div class="listq">
-					<div>회원정보</div>
-					<div>
-						<p>
-							[회원정보] 주소와 연락처를 최신 정보로 수정하고 싶어요.</p>
-					</div>
-				</div>
-				<div>
-					<div>답변</div>
-					<div>
-						<p>
-							로그인 하신 후 마이 페이지 상단의 [회원정보 변경] 버튼을 클릭하시면 회원정보를 변경하실 수 있습니다.</p>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="listq">
-					<div>회원정보</div>
-					<div>
-						<p>
-							[회원정보] 아이디/비밀번호를 잊어버렸어요.</p>
-					</div>
-				</div>
-				<div>
-					<div>답변</div>
-					<div>
-						<p>
-							회원 ID 및 웹사이트 비밀번호를 잊어 버렸을 경우 아래의 방식으로 아이디와 비밀번호를 알려드립니다.
-							로그인 화면에 있는 [아이디 찾기] 또는 [비밀번호 찾기] 버튼을 클릭해 주세요.
-							1. 고객명과 간편인증(법정생년월일 6자리 + 휴대전화번호 뒤 8자리)을 입력하신 후 [확인] 버튼을 클릭하시면 회원 가입여부 및 ID를 확인할 수 있습니다.
-							2. 회원정보에 기재된 이메일 혹은 휴대전화번호로 임시비밀번호를 전송해 드립니다.
-							3. 기존에 입력하신 이메일이나 휴대전화번호를 모를 경우 고객센터로 문의하시면 본인 인증 후 이메일 또는 휴대전화번호를 변경해 드립니다.</p>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="listq">
-					<div>회원정보</div>
-					<div>
-						<p>
-							[회원정보] 회원 가입은 어떻게 하나요?</p>
-					</div>
-				</div>
-				<div>
-					<div>답변</div>
-					<div>
-						<p>
-							로그인 화면 상단의 회원가입 안내 배너를 선택하시면 CJ ONE 통합 회원가입 페이지로 이동합니다.</p>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section id="list4">
-			<div>
-				<div class="listq">
-					<div>기타</div>
-					<div>
-						<p>
-							[기타] [수화상담] 일반전화기 영상통화로 수화상담을 받을 수 있나요?</p>
-					</div>
-				</div>
-				<div>
-					<div>답변</div>
-					<div>
-						<p>
-							수화 상담 번호는 일반전화기로 발신된 정보는 수신되지 않으며, 씨토크 서비스에 가입된 전화기나 앱(Iseetalk/아이씨톡)을 통해 발신된 번호만 수신됩니다. 가입과 관련된 상세한 내용은 씨토크 홈페이지(www.iseetalk.co.kr)에서 확인 가능합니다.</p>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="listq">
-					<div>기타</div>
-					<div>
-						<p>
-							[기타] [프로세스] 제품 불편사항 응대 프로세스</p>
-					</div>
-				</div>
-				<div>
-					<div>답변</div>
-					<div>
-						<p>
-							고객님, 불편을 드리게 되어 죄송합니다. 불편하신 내용은, 전화/문자/게시판 등을 통해 접수해 주시면, 신속히 응대 해 드리도록 하겠습니다. 고객센터 운영 외 시간에 접수하신 내용은 근무시간 중에 응대 해 드림을 양해 부탁 드립니다.
-							※ 불편사항 접수 및 피해보상기구 : 고객행복센터</p>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="listq">
-					<div>기타</div>
-					<div>
-						<p>
-							[기타] 이벤트 당첨 경품은 언제 받을 수 있나요?</p>
-					</div>
-				</div>
-				<div>
-					<div>답변</div>
-					<div>
-						<p>
-
-							쿠킹클래스, 이벤트 등 당첨자 경품은 당첨자 발표일로 부터 3일 안에 배송되며 거주하시는 지역에 따라 차이가 있으나 1주일 이내 수령이 가능하십니다. 예정된 기간 중 수령하지 못하신 경우 고객행복센터로 문의주시면 친절히 안내해 드리겠습니다.
-							고객행복센터
-							- 일반식품 : 080-850-1200
-							- 건강식품 : 080-310-1010</p>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="listq">
-					<div>기타</div>
-					<div>
-						<p>
-							[기타] 이벤트 당첨자 확인은 어디서 하나요?</p>
-					</div>
-				</div>
-				<div>
-					<div>답변</div>
-					<div>
-						<p>
-							이벤트 당첨자는 이벤트 메뉴에서 확인하실 수 있습니다.</p>
-					</div>
-				</div>
-			</div>
-			<div>
-				<div class="listq">
-					<div>기타</div>
-					<div>
-						<p>
-							[기타] CJ제일제당에는 어떤 브랜드가 있나요?</p>
-					</div>
-				</div>
-				<div>
-					<div>답변</div>
-					<div>
-						<p>
-							설탕 생산으로 시작한 기업 CJ제일제당은 식품 뿐만 아니라 소재식품/ 건강식품/ 제약/ 바이오/ 사료 등으로 분야를 넓혀가고 있습니다. CJ제일제당을 대표하는 브랜드를 브랜드 페이지에서 한 눈에 확인하세요!</p>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<div class="faq-page">
-			<p class="faq-checkpage">1</p>
-			<p>2</p>
-			<p>3</p>
-			<p>4</p>
-			<p>5</p>
+		<textarea placeholder="댓글을 입력하세요"></textarea>
+		<div>
+			<div><input type="checkbox" class="input-chek" id="secret-check"><label for="secret-check" class="form-chek">비밀글</label></div>
+			<div><button class="btn-555" type="submit">등록하기</button></div>
 		</div>
+	</div>
 
-	</article>
 
+    <h3>Review</h3>
+    <div id="review" class="review">     
+	    <p class="content">[[review.content]]</p>
+	    <p class="name">[[review.userId]]</p>
+	    <p class="created">{{review.created}}</p>
+	</div>
+        <br/><br/><br/><br/><br/><br/>
+        
+    <hr>
+    
+    <form id="review-form">
+        <h3>Review 쓰기</h3>
+        <label for="name">Name:</label>
+        <input type="text" name="name" id="name"><br>
+        <label for="content">Content:</label>
+        <textarea name="content" id="content"></textarea><br>
+        <button class="btn-555" type="submit">등록하기</button>
+    </form>
+    
+    
+    <script>
+        $(document).ready(function() {
+            // 페이지 로드 시 리뷰를 가져와서 보여줌
+            $.ajax({
+                url: "/review",
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var review = data[i];
+                        var reviewDiv = $("<div>").addClass("review");
+                        $("<p>").text(review.name).appendTo(reviewDiv);
+                        $("<p>").text(review.content).appendTo(reviewDiv);
+                        $("<hr>").appendTo(reviewDiv);
+                        $("#review").append(reviewDiv);
+                    }
+                }
+            });
+
+            // 리뷰 폼 제출 시 AJAX를 이용해 서버에 저장
+            $("#review-form").submit(function(event) {
+                event.preventDefault();
+                var name = $("#name").val();
+                var content = $("#content").val();
+                $.ajax({
+                    url: "/review",
+                    type: "POST",
+                    contentType: "application/json",
+                    data: JSON.stringify({
+                        name: name,
+                        content: content
+                    }),
+                    success: function() {
+                        // 리뷰가 성공적으로 등록되면 페이지 새로고침
+                        location.reload();
+                    }
+                });
+            });
+        });
+    </script>
+    
+    </div>
+    
 </body>
-
 </html>

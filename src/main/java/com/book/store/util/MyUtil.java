@@ -74,7 +74,7 @@ public class MyUtil {//Page처리
 			
 			if(page == currentPage) {
 				
-				sb.append("<font color=\"Fuchsia\">" + page + "</font>&nbsp;");
+				sb.append("<font color=\"Black\">" + page + "</font>&nbsp;");
 				
 			}else {
 				
