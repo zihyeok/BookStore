@@ -274,6 +274,8 @@ public class UserController {
 		
 		mav.addObject("user", user);
 		mav.addObject("bagitem_length", bagitem_length);
+		mav.addObject("vip", Integer.parseInt(user.getUserVip()));
+		mav.addObject("order_Count", bagservice.findOrderCount(user.getUserId()));
 		
 		mav.setViewName("mypage");
 		
@@ -282,6 +284,37 @@ public class UserController {
 		return mav;
 	}
 	
+	@GetMapping("/update")
+	public ModelAndView updae() throws Exception {
+		ModelAndView mav = new ModelAndView();
+	
+		UserData user = null;
+		if(httpSession.getAttribute("user") != null) {
+			user = (UserData) httpSession.getAttribute("user");
+		}else if(httpSession.getAttribute("OauthUser") != null) {
+			user = (UserData) httpSession.getAttribute("OauthUser");
+		}
+		
+		if(user==null) {
+			mav.addObject("alert", "로그인 후 이용해주세요.");
+			mav.setViewName("alert");
+			return mav;
+		}
+		
+		String[] birth = user.getUserBirth().split("-");
+		System.out.println(birth[0]+birth[1]+birth[2]);
+		
+		mav.addObject("user", user);
+		mav.addObject("year", birth[0]);
+		mav.addObject("month", birth[1]);
+		mav.addObject("day", birth[2]);
+		
+		
+		mav.setViewName("membershipUpdate");
+		
+		return mav;
+	}
+		
 	@GetMapping("/test")
 	public ModelAndView test123() throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -296,7 +329,7 @@ public class UserController {
 		mav.addObject("user", (userService.findUserName("zzz123")).get());
 		mav.addObject("vip", Integer.parseInt((userService.findUserName("zzz123")).get().getUserVip()));
 		mav.addObject("date", date);
-		mav.setViewName("payment");
+		mav.setViewName("paymentlist");
 		return mav;
 	}
 		

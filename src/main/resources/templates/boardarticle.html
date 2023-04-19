@@ -29,20 +29,19 @@ $(document).ready(function() {
 	
 	$("#sendButton").click(function(){
 		
-		var param = "name=" + $("#name").val()
-					+ "&boardNum=" + [[${dto.boardNum}]]
+		var param = "userId=" + $("#userId").val()
+					+ "&boardId=" + [[${dto.boardId}]]
 					+ "&content=" + $("#content").val();
 						
 		$.ajax({
 		    type: "POST",
-		    url: "/CommentCreated.action",
+		    url: "/AnswerCreated.action",
 		    data: param,
 		    dataType:"text",
 		    success:function(args){
 		      
-		      $("#name").val("");
 		      $("#content").val("");
-		      $("#name").focus();
+		      
 		      listPage(1);
 		    },
 		    beforeSend:showRequest,
@@ -58,9 +57,9 @@ $(document).ready(function() {
 
 function listPage(page) {
 	
-	var url = "/CommentList.action";
+	var url = "/AnswerList.action";
 		
-	var params = "boardNum=" + [[${dto.boardNum}]] + "&pageNum=" + page;
+	var params = "boardId=" + [[${dto.boardId}]] + "&pageNum=" + page;
 	
 	$.ajax({
 		url: url,
@@ -80,15 +79,7 @@ function listPage(page) {
 
  function showRequest() {
 	
-	var name = $.trim($("#name").val());
 	var content = $.trim($("#content").val());
-	
-	if(!name){
-		alert("\n이름을 입력하세요");
-		
-		$("#name").focus();
-		return false;
-	}
 
 	if(!content){
 		alert("\n내용을 입력하세요");
@@ -109,10 +100,10 @@ function listPage(page) {
  
  function deleteData(num,page) {
 		
-	var params = "commentNum=" + num + "&boardNum=" + [[${dto.boardNum}]] + "&pageNum=" + page;
+	var params = "answerNum=" + num + "&boardId=" + [[${dto.boardId}]] + "&pageNum=" + page;
 		
 		$.ajax({
-			url:"/CommentDeleted.action",
+			url:"/AnswerDeleted.action",
 			type: "POST",
 			dataType:"text",
 			data:params,
@@ -137,10 +128,8 @@ function listPage(page) {
 </br></br></br></br>
 </br></br></br></br>
 </br></br></br></br>
-<!-- http://192.168.16.16:8080/boardlist.action -->
 <h2  style="text-align: center;">게시글 상세내용</h2>
 </br></br>
-<!-- th:text="${dto.num}" 값이안들어감 -->
 
 <article>
 <section id="detail-wrap">
@@ -155,13 +144,13 @@ function listPage(page) {
     <tbody>
       <tr>
         <th>글 번호 :</th>
-        <td>[[${dto.boardNum}]]</td>
+        <td>[[${dto.boardId}]]</td>
         <th>조회수 :</th>
         <td>[[${dto.hitCount}]]</td>
       </tr>
       <tr>
         <th>작성자 :</th>
-        <td>[[${dto.name}]]</td>
+        <td>[[${dto.userId}]]</td><!-- [[${session.user.userId}]] -->
         <th>작성일 :</th>
         <td>[[${dto.created}]]</td>
       </tr>
@@ -180,10 +169,10 @@ function listPage(page) {
   
   <div style="margin-top: 20px; margin-right: 100px;">
 	  <button  class="black-btn float-r m-btn" 
-	  th:onclick="@{|location='/BoardUpdated.action?num=${dto.boardNum }&${params }'|}">
+	  th:onclick="@{|location='/BoardUpdated.action?num=${dto.boardId }&${params }'|}">
 	  수정</button>
 	  <button class="black-btn float-r m-btn" 
-	  th:onclick="'location.href=\'BoardDeleted_ok.action?num=' + @{${dto.boardNum}} + '&' + @{${params}} + '\''">
+	  th:onclick="'location.href=\'BoardDeleted_ok.action?num=' + @{${dto.boardId}} + '&' + @{${params}} + '\''">
 	  삭제</button>
 	  <button class="black-btn float-r m-btn" 
 	  th:onclick="@{|location.href='/BoardList.action?${params }'|}">
@@ -202,7 +191,7 @@ function listPage(page) {
 	<div style="text-align: center;"> 
 	다음글 : 
 	<a th:if="${nextSubject != null and nextSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${nextNum}|}">
-	  <span th:text="${nextSubject}"></span> 
+	  <span th:text="${nextSubject}"></span>
 	</a>
 	</div>
 	
@@ -222,7 +211,7 @@ function listPage(page) {
 <tr>
 	<td width="60" height="30" bgcolor="#eeeeee" align="center">작성자</td>
 	<td width="240" height="30" style="padding-left: 10px;">
-	<input type="text" id="name" size="35" maxlength="20" class="boxTF"/>
+	<input type="text" id="userId" size="35" maxlength="20" class="boxTF" readonly="readonly"  th:value="${dto.userId }"/>
 	</td>
 </tr>
 
