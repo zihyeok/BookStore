@@ -285,7 +285,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/update")
-	public ModelAndView updae() throws Exception {
+	public ModelAndView update() throws Exception {
 		ModelAndView mav = new ModelAndView();
 	
 		UserData user = null;
@@ -315,6 +315,31 @@ public class UserController {
 		return mav;
 	}
 		
+	@PostMapping("/update") 
+	public ModelAndView update_ok(HttpServletRequest req) throws Exception {
+		ModelAndView mav = new ModelAndView();
+	
+		String userId = req.getParameter("userId");
+		String pwd = req.getParameter("password1");
+		String tel = req.getParameter("userTel");
+		String addr = req.getParameter("userAddr") + " " + req.getParameter("addr_detail");
+		String birth = req.getParameter("birth_year") +"-"+ req.getParameter("birth_month")+"-"+req.getParameter("birth_day");
+		String email = null;
+		if(req.getParameter("userEmail")!=null) {
+			email = req.getParameter("userEmail");
+		}
+		
+		if(pwd.equals("kakao") || pwd.equals("naver") || pwd.equals("google")) {
+			userService.updateUserData(userId, pwd, addr, email, birth, tel, req.getParameter("realPwd"));
+		}else {
+			userService.updateUserData(userId, passwordEncoder.encode(pwd), addr, email, birth, tel, pwd);
+		}
+		
+		mav.setViewName("redirect:/user/logout");
+		
+		return mav;
+	}
+	
 	@GetMapping("/test")
 	public ModelAndView test123() throws Exception {
 		ModelAndView mav = new ModelAndView();
