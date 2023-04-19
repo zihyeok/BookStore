@@ -1,4 +1,4 @@
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout}" xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
 
 <div layout:fragment="content" >
@@ -21,7 +21,7 @@
 						
 						<p>
 						<label>작성자</label> 
-						<input type="text"  name="name" readonly="readonly" th:value="${dto.boardId }"> 
+						<input type="text"  name="userId" readonly="readonly" th:value="${dto.userId }"> 
 						</p>
 						
 						<p>
@@ -34,10 +34,12 @@
 						</div>
 						<input type="hidden" name="answerNum" th:value="${dto.answerNum }"/>
 						<input type="hidden" name="pageNum" th:value="${pageNum }"/>
-						<input type="hidden" name="boardId" th:value="{boardId }"/>
+						<input type="hidden" name="boardId" th:value="${dto.boardId }"/>
 						
 						<div class="btn_box">
-							<button class="black-btn float-r m-btn" th:onclick="@{|location='/BoardArticle.action?pageNum=${pageNum }&num=${dto.boardId }'|}" type="button">수정취소</button>
+							<button class="black-btn float-r m-btn" type="button" 
+							th:onclick="@{|location='/BoardArticle.action?pageNum=${pageNum }&num=${dto.boardId }'|}" >
+							수정취소</button>
 						</div>
 						
 					</div>

@@ -1,7 +1,8 @@
 package com.book.store.dto;
 
 import lombok.Data;
-
+import lombok.Setter;
+@Setter
 @Data
 public class BoardAnswerDTO {
 
