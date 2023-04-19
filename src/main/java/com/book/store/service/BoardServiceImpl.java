@@ -42,13 +42,13 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public BoardDTO getReadData(int boardNum) throws Exception {
-		return boardMapper.getReadData(boardNum);
+	public BoardDTO getReadData(int boardId) throws Exception {
+		return boardMapper.getReadData(boardId);
 	}
 
 	@Override
-	public void updateHitCount(int boardNum) throws Exception {
-		boardMapper.updateHitCount(boardNum);
+	public void updateHitCount(int boardId) throws Exception {
+		boardMapper.updateHitCount(boardId);
 		
 	}
 
@@ -59,20 +59,20 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void deleteData(int boardNum) throws Exception {
-		boardMapper.deleteData(boardNum);
+	public void deleteData(int boardId) throws Exception {
+		boardMapper.deleteData(boardId);
 		
 	}
 
 	@Override
-	public BoardDTO preReadData(int boardNum, String subject, String searchKey, String searchValue)
+	public BoardDTO preReadData(int boardId, String subject, String searchKey, String searchValue)
 			throws Exception {
-		return boardMapper.preReadData(boardNum, subject, searchKey, searchValue);
+		return boardMapper.preReadData(boardId, subject, searchKey, searchValue);
 	}
 
 	@Override
-	public BoardDTO nextReadData(int boardNum, String subject, String searchKey, String searchValue) throws Exception {
-		return boardMapper.nextReadData(boardNum, subject, searchKey, searchValue);
+	public BoardDTO nextReadData(int boardId, String subject, String searchKey, String searchValue) throws Exception {
+		return boardMapper.nextReadData(boardId, subject, searchKey, searchValue);
 	}
 
 	

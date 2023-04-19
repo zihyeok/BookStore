@@ -26,4 +26,6 @@ public interface BagMapper {
 	public int findOG(String userId) throws Exception;
 	
 	public void insertOrderData(@Param("orderId")int orderId,@Param("userId")String userId,@Param("seq_No")int seq_No,@Param("orderGroup")int orderGroup) throws Exception;
+	
+	public int findOrderCount(String userId) throws Exception;
 }
