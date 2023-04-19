@@ -8,7 +8,6 @@ import com.book.store.dto.ReviewDTO;
 
 
 public interface ReviewService {
-<<<<<<< HEAD
 
 	public int maxNum() throws Exception;
 	
@@ -29,43 +28,13 @@ public interface ReviewService {
 	//리뷰 1개만 쓸 수 있게 id 체크할거임
 	public ReviewDTO checkUserId(@Param("seq_No")int seq_No,@Param("userId")String userId) throws Exception;
 	
-=======
-	
-	// 댓글 작성
-    void insertReview(ReviewDTO review);
-    // 댓글 목록 조회
-    List<ReviewDTO> selectReviewBySeqNo(int seq_No);
->>>>>>> 05c698529a9eaf2e9e1ae2024591b9a32f13f822
     // 댓글 수정
-    void updateReview(ReviewDTO review);
+    public int updateData(ReviewDTO dto) throws Exception;
+ 
     // 댓글 삭제
-<<<<<<< HEAD
     public int deleteData(int reviewId) throws Exception;
-=======
-    void deleteReview(int num);
->>>>>>> 05c698529a9eaf2e9e1ae2024591b9a32f13f822
 
-	/*
-	 * public int maxNum() throws Exception;
-	 * 
-	 * //댓글 작성 public void insertData(ReviewDTO dto) throws Exception;
-	 * 
-	 * //댓글 개수 public int getDataCount(@Param("searchKey")String
-	 * searchKey,@Param("searchValue")String searchValue) throws Exception;
-	 * 
-	 * public List<ReviewDTO> getLists(@Param("start")int start,@Param("end")int
-	 * end,@Param("searchKey")String searchKey,@Param("searchValue")String
-	 * searchValue) throws Exception;
-	 * 
-	 * //댓글 목록 public ReviewDTO getReadData(int num) throws Exception;
-	 * 
-	 * // 댓글 수정 public int updateData(ReviewDTO dto) throws Exception;
-	 * 
-	 * // 댓글 삭제 public int deleteData(int num) throws Exception;
-	 * 
-	 * public List<ReviewDTO> reviewBySeqNo(int seq_No);
-	 */
-    
-        
-    
+ 
+
+	
 }

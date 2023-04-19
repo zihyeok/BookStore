@@ -10,7 +10,6 @@ import com.book.store.dto.ReviewDTO;
 @Mapper
 public interface ReviewMapper {
 
-<<<<<<< HEAD
 	public int maxNum() throws Exception;
 	
 	//댓글 작성
@@ -30,20 +29,11 @@ public interface ReviewMapper {
 	//리뷰 1개만 쓸 수 있게 id 체크할거임
 	public ReviewDTO checkUserId(@Param("seq_No")int seq_No,@Param("userId")String userId) throws Exception;
 	
-=======
-	// 댓글 작성
-    void insertReview(ReviewDTO review);
-    // 댓글 목록 조회
-    List<ReviewDTO> selectReviewBySeqNo(int seq_No);
->>>>>>> 05c698529a9eaf2e9e1ae2024591b9a32f13f822
     // 댓글 수정
-    void updateReview(ReviewDTO review);
+    public int updateData(ReviewDTO dto) throws Exception;
+ 
     // 댓글 삭제
-<<<<<<< HEAD
     public int deleteData(int reviewId) throws Exception;
 
-=======
-    void deleteReview(int reviewId);
->>>>>>> 05c698529a9eaf2e9e1ae2024591b9a32f13f822
 
 }

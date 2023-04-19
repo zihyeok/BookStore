@@ -9,12 +9,14 @@ import com.book.store.dto.ReviewDTO;
 import com.book.store.mapper.ReviewMapper;
 
 @Service
-public class ReviewServiceImpl implements ReviewService {
+public class ReviewServiceImpl implements ReviewService{
+	
+	@Autowired
+	private ReviewMapper reviewMapper;
 
-    @Autowired
-    private ReviewMapper reviewMapper;
+	@Override
+	public int maxNum() throws Exception {
 
-<<<<<<< HEAD
 		return reviewMapper.maxNum();
 	}
 
@@ -65,25 +67,7 @@ public class ReviewServiceImpl implements ReviewService {
 		
 		return reviewMapper.checkUserId(seq_No, userId);
 	}
-=======
-    @Override
-    public void insertReview(ReviewDTO review) {
-        reviewMapper.insertReview(review);
-    }
->>>>>>> 05c698529a9eaf2e9e1ae2024591b9a32f13f822
 
-    @Override
-    public List<ReviewDTO> selectReviewBySeqNo(int seq_No) {
-        return reviewMapper.selectReviewBySeqNo(seq_No);
-    }
 
-    @Override
-    public void updateReview(ReviewDTO review) {
-        reviewMapper.updateReview(review);
-    }
 
-    @Override
-    public void deleteReview(int num) {
-        reviewMapper.deleteReview(num);
-    }
 }
