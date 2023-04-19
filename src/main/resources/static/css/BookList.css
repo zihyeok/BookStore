@@ -29,6 +29,8 @@ div.BookList-container .BookList-row .BookList-img-box span {
 	
 	font-size: 10px;
 
+}
 
-
+.BookList button {
+	background-color: #fff;
 }

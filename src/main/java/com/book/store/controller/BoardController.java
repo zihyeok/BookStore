@@ -70,7 +70,7 @@ public class BoardController {
 		}
 		
 		@PostMapping("/BoardCreated.action")
-		public ModelAndView created_ok(BoardDTO dto,HttpServletRequest request) throws Exception{
+	      public ModelAndView created_ok(BoardDTO dto,HttpServletRequest request) throws Exception{
 
 			ModelAndView mav = new ModelAndView();
 			
@@ -80,11 +80,11 @@ public class BoardController {
 			
 			boardService.insertData(dto);
 
-			mav.setViewName("redirect:/BoardList.action");
+	         mav.setViewName("redirect:/BoardList.action");
 
-			return mav;
+	         return mav;
 
-		}
+	      }
 		
 	
 		@GetMapping("/BoardList.action")
