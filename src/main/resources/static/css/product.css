@@ -305,6 +305,9 @@ blockquote, q {quotes: "" "";}
 
 
 }
+<<<<<<< HEAD
+/*park이 만듬 */
+=======
 
 
 
@@ -483,6 +486,7 @@ blockquote, q {quotes: "" "";}
 }
 
 
+>>>>>>> a809dfd9120df92fd85bf2a04bc55e054bcf774d
 #after { 
     width:  250px;
     height: 200px;
@@ -507,4 +511,7 @@ blockquote, q {quotes: "" "";}
 	opacity: 0;
 	 
 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> a809dfd9120df92fd85bf2a04bc55e054bcf774d
