@@ -305,12 +305,8 @@ blockquote, q {quotes: "" "";}
 
 
 }
-<<<<<<< HEAD
-/*park이 만듬 */
-=======
 
-
-
+/*park,kwon이 만듬 */
 
 .see-comments>p:nth-child(1) {
   margin-bottom: 20px;
@@ -485,8 +481,6 @@ blockquote, q {quotes: "" "";}
   color: #333;
 }
 
-
->>>>>>> a809dfd9120df92fd85bf2a04bc55e054bcf774d
 #after { 
     width:  250px;
     height: 200px;
@@ -511,7 +505,3 @@ blockquote, q {quotes: "" "";}
 	opacity: 0;
 	 
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> a809dfd9120df92fd85bf2a04bc55e054bcf774d

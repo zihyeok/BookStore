@@ -14,6 +14,8 @@ public interface BookItemService {
 
 	public List<BookDTO> getLists(int start,int end,String searchKey,String searchValue) throws Exception;
 	
+	public List<BookDTO> categoryLists(int start,int end,String searchKey,String searchValue) throws Exception;
+	
 	public List<BookDTO> recentLists(int start,int end) throws Exception;
 	
 	public List<BookDTO> topSalLists(int start,int end) throws Exception;
