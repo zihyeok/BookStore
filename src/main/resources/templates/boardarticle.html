@@ -7,6 +7,7 @@
 <!-- 버튼용 -->
 <link rel="stylesheet" type="text/css" href="/css/BoardCreated.css">
 
+
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 <!-- 댓글창 합쳐보기 -->
@@ -115,22 +116,21 @@ function listPage(page) {
  
 </script>
 
-</br></br></br></br>
-</br></br></br></br>
-</br></br></br></br>
-</br></br></br></br>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
 <h2  style="text-align: center;">게시글 상세내용</h2>
-</br></br>
+<br/><br/>
 
 <article>
 <section id="detail-wrap">
   <table id="board-detail">
-<!--     <colgroup>
+  <colgroup>
       <col width="15%"/>
       <col width="35%"/>
       <col width="15%"/>
       <col width="35%"/>
-    </colgroup> -->
+    </colgroup>
    
     <tbody>
       <tr>
@@ -147,7 +147,7 @@ function listPage(page) {
         <td th:if="${dto.fix_created} == ${dto.created} ">[[${dto.created}]]</td>
         <th th:if="${dto.fix_created} != ${dto.created} ">수정일 :</th>
         <td th:if="${dto.fix_created} != ${dto.created} ">[[${dto.fix_created}]]</td>
-
+		
       </tr>
       <tr>
         <th>제목 :</th>
@@ -194,14 +194,14 @@ function listPage(page) {
 		</div>
 	
 	</div>
-	
+<div style="max-width: 50%; margin-left: 25%;">	
 <span id="listData" style="display: block;"></span>
-
+</div>
 <div class="container product_detail"><!--container S-->
 	<div class="in_box"><!--in_box S-->
 		<div class="tab_box">
 		
-			<p class="tit">책 Review</p>
+			<p class="tit">Q&A 댓글</p>
 			
 			<div class="ask_box">
 				<!-- disabled적용하면 form으로 안 날라감 -->
