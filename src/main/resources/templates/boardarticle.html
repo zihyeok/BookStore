@@ -51,14 +51,16 @@
       </tr>
       <tr>
       	<th>내용 :</th>
+      	
         <td colspan="4">[[${dto.content}]]</td>
+        
       </tr>
 
     </tbody>
     
   </table>
   
-  <div style="margin-top: 20px; margin-right: 100px;">
+  <div style="margin-top: 20px; margin-right: 250px;">
 	  <button  class="black-btn float-r m-btn" 
 	  th:onclick="@{|location='/BoardUpdated.action?num=${dto.boardId }&${params }'|}"
 	  th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">
@@ -75,14 +77,14 @@
   	
 	<!-- 이전글 다음글 -->
 	<div style="font-family: 'NEXON Lv1 Gothic OTF';">
-		<div style="margin-left: 15%; position: absolute;">
+		<div style="margin-left: 18%; position: absolute;">
 		
 		<a th:if="${preSubject != null and preSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${preNum}|}">
 		 이전글 :  <span th:text="${preNum}"></span>
 		</a>
 		</div>
 		
-		<div style="margin-left: 20%; position: absolute;"> <!-- style="text-align: center;" -->
+		<div style="margin-left: 27%; position: absolute;"> <!-- style="text-align: center;" -->
 		
 		<a th:if="${nextSubject != null and nextSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${nextNum}|}">
 		 다음글 :  <span th:text="${nextNum}"></span>
@@ -129,8 +131,8 @@
 
 
 
-</br></br></br></br>
-</br></br></br></br>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
 <!-- 댓글창 합쳐보기 -->
 <!-- <script th:inline="javascript"> -->
 <script th:inline="javascript">
@@ -148,7 +150,7 @@ $(document).ready(function() {
 		var param = "userId=" + $("#userId").val()
 					+ "&boardId=" + [[${dto.boardId}]]
 					+ "&content=" + $("#content").val();
-						
+					
 		$.ajax({
 		    type: "POST",
 		    url: "/AnswerCreated.action",

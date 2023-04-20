@@ -45,7 +45,7 @@
 						<input type="hidden" name="searchValue" th:value="${searchValue }"/>
 	
 						<div class="btn_box">
-							<button class="black-btn float-r m-btn" th:onclick="@{|location='/BoardList.action?${params }'|}">수정취소</button>
+							<button class="black-btn float-r m-btn" type="button" th:onclick="@{|location='/BoardList.action?${params }'|}">수정취소</button>
 						</div>
 					
 					</form>
