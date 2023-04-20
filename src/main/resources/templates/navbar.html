@@ -2,8 +2,8 @@
 
 <nav th:fragment="navbarFragment" class="navbar">
 
-<script type="text/javascript"></script>
 <script type="text/javascript" src="/js/ajaxUtil.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <script type="text/javascript">
 
@@ -98,6 +98,32 @@ window.onload = function () {
 	
 }
 
+function alertLogin(){
+
+	Swal.fire({
+		  title: '로그인 후 이용해주세요',
+		  icon: 'error',
+		  iconHtml: 'X',
+		  confirmButtonText: '확인',
+		  cancelButtonText: '취소',
+		  showCancelButton: true,
+		  showCloseButton: true
+		}).then((result)=>{
+			
+			if(result.value){
+				
+				window.location.href='/user/login';
+				
+			}else{
+				
+				 location.reload();
+				
+			}
+			
+		});
+
+}
+
 
 </script>
 
@@ -131,19 +157,30 @@ window.onload = function () {
                 <li>자료실</li>
               </ul>
             </li>
-            <li><a>북클럽</a>
-              <ul>
-                <li>이달의 책</li>
-                <li>커뮤니티</li>
-              	<li>아지트</li>
+<!--             <li><a>북클럽</a> -->
+<!--               <ul> -->
+<!--                 <li>이달의 책</li> -->
+<!--                 <li>커뮤니티</li> -->
+<!--               	<li>아지트</li> -->
+<!--               </ul> -->
+<!--             </li> -->
+            <li style="width: 12rem;"><a>카테고리</a>
+            <div style="display: inline-flex;">
+              <ul style="width: 6rem; height: 50%;">
+     			<a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm"><li>전체</li></a>
+     			<a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=100"><li>철학</li></a>
+     			<a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=200"><li>종교</li></a>
+     			<a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=300"><li>사회과학</li></a>
+     			<a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=400"><li>자연과학</li></a>
               </ul>
-            </li>
-            <li><a>브랜드</a>
-              <ul>
-                <li>문학동네</li>
-                <li>연혁</li>
-                <li>제휴문의</li>
+              <ul style="width: 6rem; height: 50%;">
+                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=500"><li>기술과학</li></a>
+                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=600"><li>예술</li></a>
+                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=700"><li>언어(어학)</li></a>
+                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=800"><li>문학</li></a>
+                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=900"><li>역사</li></a>
               </ul>
+            </div>
             </li>
             <li><a>도서</a>
               <ul>
@@ -188,7 +225,7 @@ window.onload = function () {
 
   	<a href="/user/mypage"><i class="fas fa-user"></i></a>
     <a href="/bag.action" th:if="${session.user}!=null"><i class="fas fa-shopping-cart"></i></a>
-    <a href="/user/login" th:unless="${session.user}!=null" onclick="javascript:alert('로그인 후 이용해주세요')"><i class="fas fa-shopping-cart"></i></a>
+    <a href= "#" th:unless="${session.user}!=null"><i class="fas fa-shopping-cart" onclick="alertLogin();"></i></a>
       </section>
       
     </article>
