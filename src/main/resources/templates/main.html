@@ -4,7 +4,6 @@
 
 <meta charset="UTF-8">
 
-
   <!-- Layer popup start -->
       <script language="JavaScript">
   <!--
@@ -23,7 +22,6 @@
   //-->  
   
   </script>
-
 <body>
 
 <div layout:fragment="content1" >
@@ -88,7 +86,9 @@
 
   <article class="video">
     <div>
-      <iframe width="100%" height="500px" src="https://www.youtube.com/embed/foaQu71esOE" frameborder="0" allowfullscreen></iframe>
+    <iframe width="100%;" height="500px;" src="https://www.youtube.com/embed/JSJ-7C6ltEw" title="제 딸을 살해한 놈들을 15년 후에 죽여주세요" frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      <!--  <iframe width="100%" height="500px" src="https://www.youtube.com/embed/foaQu71esOE" frameborder="0" allowfullscreen></iframe>	-->
     </div> 
 
     <div class="bg">
@@ -130,8 +130,8 @@
             Top
           </div> -->
         </div>
-
-        <p>[[${topLists.title_Nm}]]</p>
+			<p th:if="${#strings.length(topLists.title_Nm) < 20}" >[[${topLists.title_Nm}]]</p>
+			<p th:unless="${#strings.length(topLists.title_Nm) < 20}">[[${#strings.substring(topLists.title_Nm,0,19)}]]...</p>
       </section>
 	</div>
   </article>

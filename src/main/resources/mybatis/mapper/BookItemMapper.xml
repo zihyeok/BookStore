@@ -20,7 +20,19 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	select rownum rnum,data.* from (
 	select seq_No,isbn_Thirteen_No,authr_Nm,publisher_Nm,title_Nm,
 	prc_Value,image_Url,book_Intrcn_Cn,kdc_Nm,pblicte_De,sal_Count
-	from BookItem where ${searchKey} like '%' || #{searchValue} || '%' 
+	from BookItem where ${searchKey} like '%' || #{searchValue} || '%'
+	order by seq_No desc) data) 
+<![CDATA[
+	where rnum>=#{start} and rnum<=#{end}
+]]>
+</select>
+
+<select id="categoryLists" parameterType="map" resultType="com.book.store.dto.BookDTO">
+	select * from (
+	select rownum rnum,data.* from (
+	select seq_No,isbn_Thirteen_No,authr_Nm,publisher_Nm,title_Nm,
+	prc_Value,image_Url,book_Intrcn_Cn,kdc_Nm,pblicte_De,sal_Count
+	from BookItem where ${searchKey} like #{searchValue} || '%' 
 	order by seq_No desc) data) 
 <![CDATA[
 	where rnum>=#{start} and rnum<=#{end}
@@ -33,7 +45,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	select rownum rnum,data.* from (
 	select seq_No,isbn_Thirteen_No,authr_Nm,publisher_Nm,title_Nm,
 	prc_Value,image_Url,book_Intrcn_Cn,kdc_Nm,pblicte_De,sal_Count
-	from BookItem order by seq_No desc) data) 
+	from BookItem order by pblicte_De desc) data) 
 <![CDATA[
 	where rnum>=#{start} and rnum<=#{end}
 ]]>
@@ -87,7 +99,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 <insert id="insertData" parameterType="com.book.store.dto.BookDTO">
 	insert into BookItem (seq_No,isbn_Thirteen_No,title_Nm,authr_Nm,publisher_Nm,prc_Value,image_Url,
 	book_Intrcn_Cn,kdc_Nm,pblicte_De,sal_Count) values (#{seq_No},#{isbn_Thirteen_No},#{title_Nm},#{authr_Nm},
-	#{publisher_Nm},#{prc_Value},#{image_Url},#{book_Intrcn_Cn},#{kdc_Nm},sysdate,0)
+	#{publisher_Nm},#{prc_Value},#{image_Url},#{book_Intrcn_Cn},#{kdc_Nm},#{pblicte_De},0)
 </insert>
 
 

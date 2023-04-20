@@ -23,7 +23,7 @@
 
 <h3>책 등록하기</h3>
 
-<div style="width: 50%; margin-left: 450px;">
+<div style="padding-left: 23%; width: 60%;">
 
 <form action="" name="myBookItem" method="POST" enctype="multipart/form-data">
 <!-- form의 기본 method는 get이다 post로 할꺼면 post라고 적어야됨 -->
@@ -40,7 +40,7 @@
 <div id="publisher_alert" class="alert_box"></div><br/>
 
 카테고리
-<input type="text" name="kdc_Nm" id="kdc_Nm" class="value_box" placeholder="kdc_Nm 입력하세요.">
+<input type="text" name="kdc_Nm" id="kdc_Nm" class="value_box" placeholder="카테고리 번호를 입력하세요.">
 <div id="kdc_alert" class="alert_box"></div><br/>
 
 가격
@@ -48,11 +48,14 @@
 <div id="prc_alert" class="alert_box"></div><br/>
 
 일련번호
-<input type="text" name="isbn_Thirteen_No" id="isbn_Thirteen_No" class="value_box" placeholder="isbn_Thirteen_No 입력하세요.">
+<input type="text" name="isbn_Thirteen_No" id="isbn_Thirteen_No" class="value_box" placeholder="일련번호를 입력하세요.">
 <div id="isbn_alert" class="alert_box"></div><br/>
 
+출판일자<br/><br/>
+<input type="date" name="pblicte_De" id="pblicte_De" class="value_box" placeholder="출판일자를 입력하세요.">
+<div id="pblicte_alert" class="alert_box"></div><br/>
 
-<textarea name="book_Intrcn_Cn" id="book_Intrcn_Cn"  placeholder="책 설명을 입력하세요."></textarea>
+<textarea name="book_Intrcn_Cn" id="book_Intrcn_Cn"  placeholder="책 설명을 입력하세요." style="margin-top: 20px;"></textarea>
 <div id="Intrcn_alert" class="alert_box"></div><br/>
 
 <div style="margin-bottom: 15px;">
@@ -70,6 +73,7 @@
 
 </body>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 <script type="text/javascript">
 
@@ -161,6 +165,20 @@ $("#sendBookItem").click(function(){
 		
 	}
 	
+	if($("#pblicte_De").val()==""){
+		
+		pblicte_alert = document.getElementById("pblicte_alert");
+		
+		pblicte_alert.innerHTML = "출판일자를 입력해주세요";
+		
+		pblicte_alert.style.display = "block";
+		
+		$("#pblicte_De").focus();
+		
+		return;
+
+	}
+	
 	if($("#book_Intrcn_Cn").val()==""){
 		
 		Intrcn_alert = document.getElementById("Intrcn_alert");
@@ -201,11 +219,13 @@ $("#sendBookItem").click(function(){
 		
 	}
 	
-	f.action = "/BookCreated.action";
+	alertSubmit();
+	
+	/* f.action = "/BookCreated.action";
 	
 	alert("책이 등록되었습니다");
 	
-	f.submit();
+	f.submit(); */
 
 });
 
@@ -247,6 +267,12 @@ $("#isbn_Thirteen_No").change(function(){
 
 });
 
+$("#pblicte_De").change(function(){
+	
+	pblicte_alert.style.display = "none";
+
+});
+
 $("#book_Intrcn_Cn").change(function(){
 	
 	Intrcn_alert.style.display = "none";
@@ -258,6 +284,32 @@ $("#upload").change(function(){
 	upload_alert.style.display = "none";
 
 });
+
+//등록하시겠습니까? 디자인
+		
+function alertSubmit(){
+
+	Swal.fire({
+		  title: '등록하시겠습니까?',
+		  icon: 'question',
+		  iconHtml: '?',
+		  confirmButtonText: '확인',
+		  cancelButtonText: '취소',
+		  showCancelButton: true,
+		  showCloseButton: true
+		}).then((result)=>{
+			
+			if(result.value){
+				
+				f.action = "/BookCreated.action";
+				
+				f.submit();
+				
+			}
+			
+		});
+
+}
 
 </script>
 
