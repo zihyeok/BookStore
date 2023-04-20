@@ -15,8 +15,16 @@
   
  
 <<<<<<< HEAD
+=======
+
+<<<<<<< HEAD
+<p style="font-family: 'NEXON Lv1 Gothic OTF'; font-size: 15px;">댓글 [[${#lists.size(lists)}]]개</p>
+=======
+>>>>>>> main
+<<<<<<< HEAD
 <p th:if="${#lists.size(lists)}<=0">등록된 리뷰가 없습니다</p>
 <p>후기 [[${#lists.size(lists)}]]개</p>
+<<<<<<< HEAD
 <table width="700" style="margin: auto;" 
 	th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
 
@@ -54,6 +62,9 @@
 =======
 
 <p style="font-family: 'NEXON Lv1 Gothic OTF'; font-size: 15px;">댓글 [[${#lists.size(lists)}]]개</p>
+=======
+>>>>>>> facf44db71883f57c8fe93188329af683c679f02
+>>>>>>> main
 
 <table  th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
 
@@ -93,12 +104,36 @@
   
   	<br/>
   	
+<<<<<<< HEAD
 	<div style="text-align: center; font-family: 'NEXON Lv1 Gothic OTF'; font-size: 18px;">
+=======
+<<<<<<< HEAD
+	<div style="text-align: center; font-family: 'NEXON Lv1 Gothic OTF'; font-size: 18px;">
+=======
+>>>>>>> main
+	<div style="text-align: center;">
+>>>>>>> facf44db71883f57c8fe93188329af683c679f02
+>>>>>>> main
 		<a th:if="${pageIndexList != null}" th:utext="${pageIndexList}"></a>
 		<a th:if="${pageIndexList == null or pageIndexList == ''}">등록된 게시물이 없습니다.</a>
   	</div>
 
+<<<<<<< HEAD
 	<br/>
+>>>>>>> main
+=======
+<<<<<<< HEAD
+	<br/>
+=======
+<<<<<<< HEAD
+<p th:if="${#lists.size(lists)}<=0">등록된 리뷰가 없습니다</p>
+<p>후기 [[${#lists.size(lists)}]]개</p>
+<table width="700" style="margin: auto;" 
+	th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
+=======
+	<br/><br/>
+>>>>>>> main
+>>>>>>> facf44db71883f57c8fe93188329af683c679f02
 >>>>>>> main
 
 </body>

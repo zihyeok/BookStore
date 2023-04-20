@@ -392,8 +392,14 @@ public class BoardController {
 			int dataCount = BoardAnswerService.getDataCount(boardId);
 			//DataCount가 boardNum을 받았기 때문에  
 <<<<<<< HEAD
+<<<<<<< HEAD
 			//일련번호는 각 boardNum마다 다르게 출력됨
 =======
+>>>>>>> main
+=======
+=======
+			//일련번호는 각 boardNum마다 다르게 출력됨
+>>>>>>> facf44db71883f57c8fe93188329af683c679f02
 >>>>>>> main
 		
 			

@@ -228,6 +228,17 @@ public class BookController {
 	@GetMapping("/BookArticle.action")
 	public ModelAndView article(HttpServletRequest request) throws Exception{
 
+		ModelAndView mav = new ModelAndView();
+		
+		UserData user = null;
+		if(httpSession.getAttribute("user") != null) {
+			user = (UserData) httpSession.getAttribute("user");
+			mav.addObject("userId", user.getUserId());
+		}else if(httpSession.getAttribute("OauthUser") != null) {
+			user = (UserData) httpSession.getAttribute("OauthUser");
+			mav.addObject("userId", user.getUserId());
+		}
+		
 		int seq_No = Integer.parseInt(request.getParameter("seq_No"));
 
 		String pageNum = request.getParameter("pageNum");
@@ -255,8 +266,6 @@ public class BookController {
 
 		if(dto==null) {
 
-			ModelAndView mav = new ModelAndView();
-
 			mav.setViewName("redirect:BookList.action?pageNum=" + pageNum 
 					+ "&searchKey=" + searchKey + "&searchValue=" + searchValue);
 
@@ -271,12 +280,11 @@ public class BookController {
 			param += "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");
 		}
 
-		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("dto", dto);
 		mav.addObject("params", param);
 		mav.addObject("pageNum", pageNum);
-
+		
 		mav.setViewName("product");
 
 		return mav;
