@@ -46,7 +46,7 @@ public class BoardController {
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("paymentlist");
+		mav.setViewName("#");
 		//jsp(html)로 갈때는 setViewName /class로 갈때는 setView
 		
 		return mav;
@@ -378,9 +378,12 @@ public class BoardController {
 		@RequestMapping("/AnswerList.action")
 		public ModelAndView AnswerList(BoardAnswerDTO dto,HttpServletRequest request) throws Exception{
 			
-			int boardId = dto.getBoardId();
+			int boardId = Integer.parseInt(request.getParameter("boardId"));
 
 			String pageNum = request.getParameter("pageNum");//문자만 따온건가?
+			
+			//System.out.println(pageNum);
+			//System.out.println(boardId);
 			
 			int currentPage = 1;
 			int numPerPage = 3;
@@ -393,6 +396,7 @@ public class BoardController {
 			int dataCount = BoardAnswerService.getDataCount(boardId);
 			//DataCount가 boardNum을 받았기 때문에  
 			//일련번호는 각 boardNum마다 다르게 출력됨
+		
 			
 			int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 
@@ -400,10 +404,14 @@ public class BoardController {
 				currentPage=totalPage;
 			}
 			
+			
 			int start = (currentPage-1)*numPerPage+1;
 			int end = currentPage*numPerPage;	
 			
 			List<BoardAnswerDTO> lists = BoardAnswerService.getLists(start, end, boardId);
+			
+			
+			//System.out.println(lists);
 			
 			
 		
@@ -419,7 +427,10 @@ public class BoardController {
 			mav.addObject("boardId", boardId);
 			mav.addObject("pageNum", currentPage);
 			
-			
+			System.out.println(lists);
+			//System.out.println(pageIndexList+"2");
+			//System.out.println(boardId+"3");
+			//System.out.println(currentPage+"4");
 			
 			
 			mav.setViewName("boardAnswerList");
