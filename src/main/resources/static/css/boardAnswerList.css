@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+.see-comments>p:nth-child(1) {
+	
+  margin-bottom: 20px;
+}
+
+.see-comments section {
+  
+  display: flex;
+  padding: 20px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.see-comments section>div:nth-child(1) {
+  width: 17%;
+  max-width: 50px;
+}
+
+.see-comments section>div:nth-child(1)>img {
+  width: 30px;
+  height: 30px;
+}
+
+.see-comments section>div:nth-child(2) {
+  width: 100%;
+}
+
+.see-comments section>div:nth-child(2)>p:not(:last-child) {
+  margin-bottom: 8px;
+}
+
+.see-comments section>div:nth-child(2)>p:nth-child(2) {
+  font-weight: 300;
+}
+
+.see-comments section>div:nth-child(2)>p:nth-child(3) {
+  font-size: 13px;
+  color: #aaa;
+}
+
+.see-comments section>div:nth-child(3) {
+  width: 18px;
+  height: 50px;
+  padding-top: 10px;
+}
+
+.see-comments section>div:nth-child(3)>img {
+  width: 18px;
+}
+
+.see-comments textarea {
+  font-size: 15px;
+  margin-top: 40px;
+  height: 80px;
+  resize: none;
+  
+  
+  font-family: 'Noto Sans KR', sans-serif;
+/*   font-size: 1rem; */
+  line-height: 1.2rem;
+  width: 100%;
+/*   height: 300px; */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  padding: 12px;
+  resize: none;
+}
+
+.see-comments textarea::placeholder {
+  font-size: 15px;
+}
+
+.see-comments input[type="checkbox"] {
+  margin-right: 6px;
+}
+
+.see-comments>div:nth-child(5) {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 100px;
+}
+
+.see-comments button {
+  width: 120px;
+}
+
+.see-comments>div>div {
+  display: flex;
+  align-items: center;
+}
+.see-comments section span {
+  float: right;
+  margin-right: 1rem;
+}
+
