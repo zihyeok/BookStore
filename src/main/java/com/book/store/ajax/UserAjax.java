@@ -129,13 +129,13 @@ public class UserAjax {
 	public ModelAndView success(HttpServletRequest request) throws NumberFormatException, Exception {
 		
 		UserData user = null;
-
-		if(httpsession.getAttribute("user")!="") {
+		// == "" 은 안됌  .equals("") 이렇게 써야될듯 아니면 == null
+		if(httpsession.getAttribute("user")!=null) {
 
 			user = (UserData) httpsession.getAttribute("user");
 
 
-		}else if(httpsession.getAttribute("OauthUser")!="") {
+		}else if(httpsession.getAttribute("OauthUser")!=null) {
 
 			user = (UserData) httpsession.getAttribute("OauthUser");
 

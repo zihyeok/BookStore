@@ -23,8 +23,51 @@
 		<script th:inline="javascript">
 		
 		$(function () {
-			listPage(1);			
+			listPage(1);	
 		});
+		
+		function one_order(){
+			
+			//확인 클릭시 ajax로 
+			 if(confirm([[${dto.title_Nm}]] + '을 구매하시겠습니까?')){
+				 
+				var orderId = Math.floor(Math.random() * 10000000);
+				 
+				 $.ajax({
+						url:"https://kapi.kakao.com/v1/payment/ready",
+						type:'POST',
+						data:{
+							'cid' : 'TC0ONETIME',
+							'partner_order_id' : orderId,
+							'partner_user_id' : [[${userId}]],
+							'item_name' : [[${dto.title_Nm}]],
+							'quantity' : 1,
+							'total_amount' : [[${dto.prc_Value}]],
+							'tax_free_amount' : 0,
+							'approval_url' : 'http://localhost:8080/success',
+							'cancel_url' : 'http://localhost:8080/cancel',
+							'fail_url' : 'http://localhost:8080/fail'
+						},
+						headers:{
+							'Authorization' : 'KakaoAK 051b33bdbbe0ba43924808b0a780bb6c',
+							'Content-type' : 'application/x-www-form-urlencoded;charset=utf-8'
+						},
+						dataType:"json",
+						success:function(data){
+							
+							var url = data.next_redirect_pc_url;
+							var tid = data.tid;
+							
+							window.location.href = 'ready?url='+url+'&tid='+tid+'&orderId='+orderId+'&bookNum='+[[${dto.seq_No}]];
+						},
+						error:function(error){
+							
+							alert(error);
+						}
+				 });
+				 
+			 }
+		}
 		
 		function listPage(page){
 			
@@ -194,8 +237,8 @@
 							</div>					
 						</div>
 						<div class="btn_box">
-							<button class="btn-order" th:if="${session.user==null}" onclick="javascript:alert('로그인 후 이용가능합니다')">바로 구매</button>
-							<button class="btn-order" th:unless="${session.user==null}" onclick="javascript:location.href='/bag.action'">바로 구매</button>
+							<button class="btn-order" th:if="${session.user==null and session.OauthUser==null}" onclick="javascript:alert('로그인 후 이용가능합니다')">바로 구매</button>
+							<button class="btn-order" th:unless="${session.user==null and session.OauthUser == null}" name="one_Order" type="button" onclick="one_order()">바로 구매</button>
 						</div>
 					</div>
 				</div>				
@@ -232,11 +275,13 @@
 								<input type="radio" name="reviewStar" value="1"><label for="rate5">★</label>
 								</p>
 								<!-- disabled적용하면 form으로 안 날라감 -->
-								<p th:if="${session.user==null}"><label>UserID</label><input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
+								<p th:if="${session.user==null and session.OauthUser==null}"><label>UserID</label><input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
 								<p th:unless="${session.user==null}"><label>UserID</label><input type="text" th:value="${session.user.userId}" name="userId" readonly="readonly"></p>
-								<p th:if="${session.user==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
+								<p th:unless="${session.OauthUser==null}"><label>UserID</label><input type="text" th:value="${session.OauthUser.userId}" name="userId" readonly="readonly"></p>
+								<p th:if="${session.user==null and session.OauthUser==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
 								<p th:unless="${session.user==null}"><label>내용</label><textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
-								<div class="btn_box" th:if="${session.user!=null}">
+								<p th:unless="${session.OauthUser==null}"><label>내용</label><textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
+								<div class="btn_box" th:if="${session.user!=null or session.OauthUser !=null}">
 									<button class="btn-555 float-r m-btn" onclick="sendReview();" type="button">리뷰 작성</button>
 									<!-- button은 기본type이 submit 그래서 바로 폼 주소로 가지만 이걸 벗어나려면 type button -->
 								</div>

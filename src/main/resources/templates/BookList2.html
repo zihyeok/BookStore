@@ -79,10 +79,10 @@ function sendBag(seq_No){
 		alertLogin();
 
 		
-	}else if([[${session.OauthUser != null or session.user != null}]]){
-		
+	}else if([[${session.OauthUser != null or session.user != null}]] ){
+		alert("오냐");
 		var params = "seq_No=" + seq_No;
-
+		
 		sendRequest("/insertItem.action",params,returnBag,"POST");
 		//주의 : callback함수가 있으면 json형태로 값을 무조건 반환해주기 때문에 중간에 redirect같은 것이 안 됨
 		
@@ -95,7 +95,7 @@ function returnBag(){
 	if(httpRequest.readyState==4){
 		
 		if(httpRequest.status==200){
-
+			
 			var text = httpRequest.responseText;
 			var resultText = JSON.parse(text);
 			var count = Object.keys(resultText.lists).length;
@@ -120,13 +120,13 @@ function sendDeleteBag(seq_No){
 		
 	}
 	
-	if([[${session.OauthUser == null and session.user == null}]]){
+	if([[${session.user}]] == null){
 		
 		alert("로그인이 만료되었습니다");
 		
-		window.location.href="/main";
+		window.location.href="/deleteItem.action?seq_No=" + seq_No;
 		
-	}else if([[${session.OauthUser != null or session.user != null}]]){
+	}else if([[${session.user}]] != null){
 		
 		var params = "seq_No=" + seq_No;
 		
@@ -155,7 +155,7 @@ function returnDeleteBag(){
 
 function sendAllItem(){
 	
-	if([[${session.OauthUser != null or session.user != null}]]){
+	if([[${session.user}]] != null){
 		
 		var params = null;
 		
