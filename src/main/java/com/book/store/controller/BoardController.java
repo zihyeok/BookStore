@@ -108,8 +108,7 @@ public class BoardController {
 		    }
 			
 			int dataCount = boardService.getDataCount(searchKey, searchValue);
-			//System.out.println(dataCount); 4
-			
+	
 			int numPerPage = 3;
 		    int totalPage = 0;
 
@@ -157,10 +156,7 @@ public class BoardController {
 			mav.addObject("pageIndexList", pageIndexList);
 			mav.addObject("dataCount", dataCount);
 			mav.addObject("articleUrl", articleUrl);
-			//System.out.println(lists+"김치");
-			
-			//mav.addObject("pageNum", currentPage);//3번째 방법시 같이넘겨야함
-			
+
 			
 			mav.setViewName("boardlist");
 
@@ -203,7 +199,7 @@ public class BoardController {
 			}
 			
 			
-			//dto.setContent(dto.getContent().replaceAll("\r\n", "<br/>"));
+			dto.setContent(dto.getContent().replaceAll("\r\n", "<br/>"));
 			
 			
 			//이전글
@@ -395,7 +391,10 @@ public class BoardController {
 			
 			int dataCount = BoardAnswerService.getDataCount(boardId);
 			//DataCount가 boardNum을 받았기 때문에  
+<<<<<<< HEAD
 			//일련번호는 각 boardNum마다 다르게 출력됨
+=======
+>>>>>>> main
 		
 			
 			int totalPage = myUtil.getPageCount(numPerPage, dataCount);
@@ -495,7 +494,7 @@ public class BoardController {
 			
 			String pageNum = request.getParameter("pageNum");
 			int boardId = Integer.parseInt(request.getParameter("boardId"));
-			//int boardId = dto.getBoardId();
+	
 		
 			BoardAnswerService.updateData(dto);
 			

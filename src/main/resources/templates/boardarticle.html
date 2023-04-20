@@ -155,14 +155,16 @@ function listPage(page) {
       </tr>
       <tr>
       	<th>내용 :</th>
+      	
         <td colspan="4">[[${dto.content}]]</td>
+        
       </tr>
 
     </tbody>
     
   </table>
   
-  <div style="margin-top: 20px; margin-right: 100px;">
+  <div style="margin-top: 20px; margin-right: 250px;">
 	  <button  class="black-btn float-r m-btn" 
 	  th:onclick="@{|location='/BoardUpdated.action?num=${dto.boardId }&${params }'|}"
 	  th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">
@@ -179,14 +181,22 @@ function listPage(page) {
   	
 	<!-- 이전글 다음글 -->
 	<div style="font-family: 'NEXON Lv1 Gothic OTF';">
+<<<<<<< HEAD
 		<div style="margin-left: 17%; position: absolute;">
+=======
+		<div style="margin-left: 18%; position: absolute;">
+>>>>>>> main
 		
 		<a th:if="${preSubject != null and preSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${preNum}|}">
 		 이전글 :  <span th:text="${preNum}"></span>
 		</a>
 		</div>
 		
+<<<<<<< HEAD
 		<div style="margin-left: 23%; position: absolute;"> <!-- style="text-align: center;" -->
+=======
+		<div style="margin-left: 27%; position: absolute;"> <!-- style="text-align: center;" -->
+>>>>>>> main
 		
 		<a th:if="${nextSubject != null and nextSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${nextNum}|}">
 		 다음글 :  <span th:text="${nextNum}"></span>
@@ -233,9 +243,118 @@ function listPage(page) {
 
 
 
+<<<<<<< HEAD
 </br></br></br></br>
 </br></br></br></br>
 
+=======
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<!-- 댓글창 합쳐보기 -->
+<!-- <script th:inline="javascript"> -->
+<script th:inline="javascript">
+
+$(function () {
+	
+	listPage(1);
+	
+});
+
+$(document).ready(function() {
+	
+	$("#sendButton").click(function(){
+		
+		var param = "userId=" + $("#userId").val()
+					+ "&boardId=" + [[${dto.boardId}]]
+					+ "&content=" + $("#content").val();
+					
+		$.ajax({
+		    type: "POST",
+		    url: "/AnswerCreated.action",
+		    data: param,
+		    dataType:"text",
+		    success:function(args){
+		      
+		      $("#content").val("");
+		      
+		      listPage(1);
+		    },
+		    beforeSend:showRequest,
+			error:function(e){
+				alert(e.responsetext);
+		    }
+		});
+		
+	});
+	
+});
+
+
+function listPage(page) {
+	
+	var url = "/AnswerList.action";
+		
+	var params = "boardId=" + [[${dto.boardId}]] + "&pageNum=" + page;
+	
+	$.ajax({
+		url: url,
+		type: "POST",
+		dataType:"text",
+		data:params,
+		success: function(args) {
+			$("#listData").html(args);
+			$("#listData").show();
+		},
+		error:function(e){
+			alert(e.responsetext);
+		}
+	});
+}
+
+
+ function showRequest() {
+	
+	var content = $.trim($("#content").val());
+
+	if(!content){
+		alert("\n내용을 입력하세요");
+		$("#content").focus();
+		return false;
+	}
+	
+	if(content.length>200){
+		alert("\n내용은 200자까지 가능합니다");
+		$("#content").focus();
+		return false;
+	}
+	
+	return true;
+	
+} 
+
+ 
+ function deleteData(num,page) {
+		
+	var params = "answerNum=" + num + "&boardId=" + [[${dto.boardId}]] + "&pageNum=" + page;
+		
+		$.ajax({
+			url:"/AnswerDeleted.action",
+			type: "POST",
+			dataType:"text",
+			data:params,
+			success: function(args) {
+				listPage(page);
+				
+			},
+			error:function(e){
+				alert(e.responsetext);
+			}
+		});
+		
+	}
+ 
+</script>
+>>>>>>> main
 
 </div>
 
