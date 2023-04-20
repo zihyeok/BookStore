@@ -36,19 +36,19 @@ public class BagController {
 		
 		UserData user = null;
 
-		if(httpSession.getAttribute("user")!="") {
-
+		if(httpSession.getAttribute("user")!=null) {
+			System.out.println("sendbag의 user");
 			user = (UserData) httpSession.getAttribute("user");
 
 
-		}else if(httpSession.getAttribute("OauthUser")!="") {
-
+		}else if(httpSession.getAttribute("OauthUser")!=null) {
+			System.out.println("sendbag의 oauth");
 			user = (UserData) httpSession.getAttribute("OauthUser");
 
 		}
 		
 		if(user==null) {
-		
+			System.out.println("sendbag의 null");
 			ModelAndView mav = new ModelAndView();
 			
 			mav.setViewName("redirect:/user/login");
@@ -75,18 +75,18 @@ public class BagController {
 	@RequestMapping("/insertItem.action")
 	public ModelAndView insertItem(HttpServletRequest request,BagDTO dto) throws Exception{
 				//여기에 request 말고도 매개변수로 bagdto dto를 받게되면 ajax로 넘어올때 bagdto정보도 같이 넘어옴
-
+		
 		UserData user = null;
 
 		int seq_No = Integer.parseInt(request.getParameter("seq_No"));
 
-		if(httpSession.getAttribute("user")!="") {
-
+		if(httpSession.getAttribute("user")!=null) {
+			
 			user = (UserData) httpSession.getAttribute("user");
 
 
-		}else if(httpSession.getAttribute("OauthUser")!="") {
-
+		}else if(httpSession.getAttribute("OauthUser")!=null) {
+			
 			user = (UserData) httpSession.getAttribute("OauthUser");
 
 		}
@@ -94,7 +94,7 @@ public class BagController {
 		if(user==null) {
 		//else if는 안되고 if는 됨
 			ModelAndView mav = new ModelAndView();
-			
+			System.out.println("값 없음");
 			mav.setViewName("redirect:/user/login");
 
 			return mav;
@@ -126,12 +126,12 @@ public class BagController {
 		
 		UserData user = null;
 
-		if(httpSession.getAttribute("user")!="") {
+		if(httpSession.getAttribute("user")!=null) {
 
 			user = (UserData) httpSession.getAttribute("user");
 
 
-		}else if(httpSession.getAttribute("OauthUser")!="") {
+		}else if(httpSession.getAttribute("OauthUser")!=null) {
 
 			user = (UserData) httpSession.getAttribute("OauthUser");
 
@@ -171,12 +171,12 @@ public class BagController {
 
 		int seq_No = Integer.parseInt(request.getParameter("seq_No"));
 
-		if(httpSession.getAttribute("user")!="") {
+		if(httpSession.getAttribute("user")!=null) {
 
 			user = (UserData) httpSession.getAttribute("user");
 
 
-		}else if(httpSession.getAttribute("OauthUser")!="") {
+		}else if(httpSession.getAttribute("OauthUser")!=null) {
 
 			user = (UserData) httpSession.getAttribute("OauthUser");
 
@@ -214,12 +214,12 @@ public class BagController {
 		ModelAndView mav = new ModelAndView();
 		UserData user = null;
 		
-		if(httpSession.getAttribute("user")!="") {
+		if(httpSession.getAttribute("user")!=null) {
 
 			user = (UserData) httpSession.getAttribute("user");
 
 
-		}else if(httpSession.getAttribute("OauthUser")!="") {
+		}else if(httpSession.getAttribute("OauthUser")!=null) {
 
 			user = (UserData) httpSession.getAttribute("OauthUser");
 

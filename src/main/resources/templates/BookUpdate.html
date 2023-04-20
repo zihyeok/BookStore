@@ -5,8 +5,37 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" type="text/css" href="css/BookCreated.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+<script type="text/javascript">
 
+function alertUpdate(){
+
+	var f = document.myBookItem;
+	
+	Swal.fire({
+		  title: '수정하시겠습니까?',
+		  icon: 'question',
+		  iconHtml: '?',
+		  confirmButtonText: '확인',
+		  cancelButtonText: '취소',
+		  showCancelButton: true,
+		  showCloseButton: true
+		}).then((result)=>{
+			
+			if(result.value){
+				
+				f.action = '/BookUpdate.action';
+				
+				f.submit();
+				
+			}
+			
+		});
+
+}
+
+</script>
 
 </head>
 <body>
@@ -17,7 +46,7 @@
 
 <div style="padding-left: 23%; width: 60%;">
 
-<form th:action="@{BookUpdate.action}" method="post" enctype="multipart/form-data" name="myBookItem">
+<form action="" method="POST" enctype="multipart/form-data" name="myBookItem">
 
 제목
 <input type="text" name="title_Nm" placeholder="title_Nm 입력하세요." th:value="${dto.title_Nm}" required>
@@ -39,7 +68,7 @@
 </div>
 
 <div>
-	<button class="btn-555">등록하기</button>
+	<button class="btn-555" onclick="alertUpdate();" type="button">등록하기</button>
 </div>
 
 <input type="hidden" name="seq_No" th:value="${dto.seq_No}"/>
