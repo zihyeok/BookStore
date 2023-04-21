@@ -21,7 +21,10 @@ dl, dt, dd, ol, ul, li, fieldset, form, label, legend
      margin: 0; 
      border: 0;
      text-decoration: none; 
-     box-sizing: border-box;}
+     box-sizing: border-box;
+     color: #000;
+     
+     }
 
 ul, ol, li {list-style: none; }
 
@@ -307,6 +310,10 @@ blockquote, q {quotes: "" "";}
 }
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f3afa9328b52b3667040104be7a66c31ef24ea5d
 /*park,kwon이 만듬 */
 
 .see-comments>p:nth-child(1) {
@@ -398,21 +405,7 @@ blockquote, q {quotes: "" "";}
   align-items: center;
 }
 
-/* .see-comments textarea {
-  
-}
- */
-/* .see-comments section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-   width: 100%;
-}
 
-.see-comments section b {
-  float: left;
-  margin-right: 0.2rem;
-} */
 
 .see-comments section span {
   float: right;
@@ -482,6 +475,10 @@ blockquote, q {quotes: "" "";}
   color: #333;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> f3afa9328b52b3667040104be7a66c31ef24ea5d
 #after { 
     width:  250px;
     height: 200px;
@@ -507,4 +504,7 @@ blockquote, q {quotes: "" "";}
 	 
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f3afa9328b52b3667040104be7a66c31ef24ea5d

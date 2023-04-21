@@ -36,11 +36,6 @@ div{
   color: #24855b;
 }
 
-.brown{
-  color: #6c500d;
-}
-
-
 .wrap{
   background-color: #F8F8F8;  
 }
@@ -54,6 +49,8 @@ div{
   padding: 16px;
 }
 
+<<<<<<< HEAD
+=======
 .diaContainer{  
   height: 132px;
   background-color: #b9f2ff;    
@@ -131,6 +128,64 @@ div{
   margin-left: auto;
 }
 
+
+.diaContainer{  
+  height: 132px;
+  background-color: #b9f2ff;    
+  
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+.plaContainer{  
+  height: 132px;
+  background-color: #DAF7A6;    
+  
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+.goldContainer{  
+  height: 132px;
+  background-color: #d7be69;    
+  
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+.silverContainer{  
+  height: 132px;
+  background-color: #C0C0C0;    
+  
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+.bronzeContainer{  
+  height: 132px;
+  background-color: #CD7F32;    
+  
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
+}
+
+.grade{
+	font-weight: bold;
+}
+.name{
+   font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+} 
+.modify{
+  margin-left: auto;
+}
 
 /* 단골상점 , 상품후기 , 적립금 박스 */
 .summaryContainer{
@@ -274,4 +329,4 @@ div{
 }
 .infoContainer .item:hover{
   background-color: #f8f8f8;
-}
+

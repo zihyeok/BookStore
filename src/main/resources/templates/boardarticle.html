@@ -10,6 +10,126 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
+
+
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<h2  style="text-align: center;">게시글 상세내용</h2>
+<br/><br/>
+
+<article>
+<section id="detail-wrap">
+  <table id="board-detail">
+  <colgroup>
+      <col width="15%"/>
+      <col width="35%"/>
+      <col width="15%"/>
+      <col width="35%"/>
+    </colgroup>
+   
+    <tbody>
+      <tr>
+        <th>글 번호 :</th>
+        <td>[[${dto.boardId}]]</td>
+        <th>조회수 :</th>
+        <td>[[${dto.hitCount}]]</td>
+      </tr>
+      <tr>
+        <th>작성자 :</th>
+        <td>[[${dto.userId}]]</td>
+        <!-- [[${session.user.userId}]] -->
+        <th th:if="${dto.fix_created} == ${dto.created} ">작성일 :</th>
+        <td th:if="${dto.fix_created} == ${dto.created} ">[[${dto.created}]]</td>
+        <th th:if="${dto.fix_created} != ${dto.created} ">수정일 :</th>
+        <td th:if="${dto.fix_created} != ${dto.created} ">[[${dto.fix_created}]]</td>
+		
+      </tr>
+      <tr>
+        <th>제목 :</th>
+        <td colspan="3">[[${dto.subject}]]</td>
+      </tr>
+      
+      <tr>
+      	<!-- 이전글 다음글 -->
+      	<td style="font-family: 'NEXON Lv1 Gothic OTF';">
+      		<h4 style="margin-left: 2%; position: absolute;">
+	      		<a th:if="${preSubject != null and preSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${preNum}|}">
+				 이전글 :  <span th:text="${preNum}"></span>
+				</a>
+			</h4>
+			
+			<h4 style="margin-left: 8%; position: absolute;"> 
+				<a th:if="${nextSubject != null and nextSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${nextNum}|}">
+				 다음글 :  <span th:text="${nextNum}"></span>
+				</a>
+			</h4>
+			<br/>
+      	</td>
+      </tr>
+
+    </tbody>
+    
+  </table>
+  <br/>
+  <!-- max-width: 1170px; -->
+  
+  
+  <br/><br/><br/><br/>
+  
+  <!-- 내용 -->
+  <div  style="word-wrap: break-word; margin-left: 30%; width: 40%;" colspan="4" th:utext="${dto.content}"></div>
+  	
+<br/><br/><div style="margin-left:25%;  border: 1px solid black; width: 50%; "></div><!-- 선 -->
+
+<div style="margin-top: 20px; margin-right: 17%;">
+	  <button  class="black-btn float-r m-btn" 
+	  th:onclick="@{|location='/BoardUpdated.action?num=${dto.boardId }&${params }'|}"
+	  th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">
+	  수정</button>
+	  <button class="black-btn float-r m-btn"
+	  th:onclick="'location.href=\'BoardDeleted_ok.action?num=' + @{${dto.boardId}} + '&' + @{${params}} + '\''"
+	  th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">
+	  삭제</button>
+	  <button class="black-btn float-r m-btn" 
+	  th:onclick="@{|location.href='/BoardList.action?${params }'|}">
+	  리스트</button>
+  </div>
+  
+<!-- 댓글 리스트 -->	
+<div style="max-width: 50%; margin-left: 25%;"><span id="listData" style="display: block;"></span></div>
+
+<div class="container product_detail"><!--container S-->
+	<div class="in_box"><!--in_box S-->
+		<div class="tab_box">
+		
+			<p class="tit">Q&A 댓글</p>
+			
+			<div class="ask_box">
+				<!-- disabled적용하면 form으로 안 날라감 -->
+				<p th:if="${session.user==null}"><label>작성자</label><input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
+				<p th:unless="${session.user==null}"><label>작성자</label><input type="text" th:value="${session.user.userId}" id="userId" name="userId" readonly="readonly"></p>
+				<p th:if="${session.user==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
+				<p th:unless="${session.user==null}"><label>내용</label><textarea name="content" id="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
+				
+				<div class="btn_box" th:if="${session.user!=null}">
+					<button class="btn-555 float-r m-btn" onclick="sendButton();" type="button" id="sendButton">리뷰 작성</button>
+					<!-- button은 기본type이 submit 그래서 바로 폼 주소로 가지만 이걸 벗어나려면 type button -->
+				</div>
+			
+			</div>
+	
+		</div>
+		
+	</div><!--in_box S-->
+</div><!--container S-->
+
+</section>  
+  
+</article>
+
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
 <!-- 댓글창 합쳐보기 -->
 <!-- <script th:inline="javascript"> -->
 <script th:inline="javascript">
@@ -27,7 +147,7 @@ $(document).ready(function() {
 		var param = "userId=" + $("#userId").val()
 					+ "&boardId=" + [[${dto.boardId}]]
 					+ "&content=" + $("#content").val();
-			alert(param);		
+					
 		$.ajax({
 		    type: "POST",
 		    url: "/AnswerCreated.action",
@@ -55,7 +175,6 @@ function listPage(page) {
 	var url = "/AnswerList.action";
 		
 	var params = "boardId=" + [[${dto.boardId}]] + "&pageNum=" + page;
-	//alert(params);
 	
 	$.ajax({
 		url: url,
@@ -115,127 +234,6 @@ function listPage(page) {
 	}
  
 </script>
-
-<br/><br/><br/><br/>
-<br/><br/><br/><br/>
-<br/><br/><br/><br/>
-<h2  style="text-align: center;">게시글 상세내용</h2>
-<br/><br/>
-
-<article>
-<section id="detail-wrap">
-  <table id="board-detail">
-  <colgroup>
-      <col width="15%"/>
-      <col width="35%"/>
-      <col width="15%"/>
-      <col width="35%"/>
-    </colgroup>
-   
-    <tbody>
-      <tr>
-        <th>글 번호 :</th>
-        <td>[[${dto.boardId}]]</td>
-        <th>조회수 :</th>
-        <td>[[${dto.hitCount}]]</td>
-      </tr>
-      <tr>
-        <th>작성자 :</th>
-        <td>[[${dto.userId}]]</td>
-        <!-- [[${session.user.userId}]] -->
-        <th th:if="${dto.fix_created} == ${dto.created} ">작성일 :</th>
-        <td th:if="${dto.fix_created} == ${dto.created} ">[[${dto.created}]]</td>
-        <th th:if="${dto.fix_created} != ${dto.created} ">수정일 :</th>
-        <td th:if="${dto.fix_created} != ${dto.created} ">[[${dto.fix_created}]]</td>
-		
-      </tr>
-      <tr>
-        <th>제목 :</th>
-        <td colspan="3">[[${dto.subject}]]</td>
-      </tr>
-      <tr>
-      	<th>내용 :</th>
-        <td colspan="4">[[${dto.content}]]</td>
-      </tr>
-
-    </tbody>
-    
-  </table>
-  
-  <div style="margin-top: 20px; margin-right: 100px;">
-	  <button  class="black-btn float-r m-btn" 
-	  th:onclick="@{|location='/BoardUpdated.action?num=${dto.boardId }&${params }'|}"
-	  th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">
-	  수정</button>
-	  <button class="black-btn float-r m-btn"
-	  th:onclick="'location.href=\'BoardDeleted_ok.action?num=' + @{${dto.boardId}} + '&' + @{${params}} + '\''"
-	  th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">
-	  삭제</button>
-	  <button class="black-btn float-r m-btn" 
-	  th:onclick="@{|location.href='/BoardList.action?${params }'|}">
-	  리스트</button>
-	 
-  </div>
-  	
-	<!-- 이전글 다음글 -->
-	<div style="font-family: 'NEXON Lv1 Gothic OTF';">
-		<div style="margin-left: 17%; position: absolute;">
-		
-		<a th:if="${preSubject != null and preSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${preNum}|}">
-		 이전글 :  <span th:text="${preNum}"></span>
-		</a>
-		</div>
-		
-		<div style="margin-left: 23%; position: absolute;"> <!-- style="text-align: center;" -->
-		
-		<a th:if="${nextSubject != null and nextSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${nextNum}|}">
-		 다음글 :  <span th:text="${nextNum}"></span>
-		</a>
-		</div>
-	
-	</div>
-<div style="max-width: 50%; margin-left: 25%;">	
-<span id="listData" style="display: block;"></span>
-</div>
-<div class="container product_detail"><!--container S-->
-	<div class="in_box"><!--in_box S-->
-		<div class="tab_box">
-		
-			<p class="tit">Q&A 댓글</p>
-			
-			<div class="ask_box">
-				<!-- disabled적용하면 form으로 안 날라감 -->
-				<p th:if="${session.user==null}"><label>작성자</label><input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
-				<p th:unless="${session.user==null}"><label>작성자</label><input type="text" th:value="${session.user.userId}" id="userId" name="userId" readonly="readonly"></p>
-				<p th:if="${session.user==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
-				<p th:unless="${session.user==null}"><label>내용</label><textarea name="content" id="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
-				
-				<div class="btn_box" th:if="${session.user!=null}">
-					<button class="btn-555 float-r m-btn" onclick="sendButton();" type="button" id="sendButton">리뷰 작성</button>
-					<!-- button은 기본type이 submit 그래서 바로 폼 주소로 가지만 이걸 벗어나려면 type button -->
-				</div>
-			
-			</div>
-	
-		</div>
-		
-	</div><!--in_box S-->
-</div><!--container S-->
-
-<!-- <span id="listData" style="display: block;"></span>  물어보기 2개쓴이유 -->  
-  
-  
-</section>  
-  
-  
-  
-</article>
-
-
-
-</br></br></br></br>
-</br></br></br></br>
-
 
 </div>
 
