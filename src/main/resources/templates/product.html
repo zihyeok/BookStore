@@ -19,18 +19,59 @@
 		<!-- product.css -->
 		<link rel="stylesheet" href="css/product.css">
 
-
 		<!-- js -->
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-
 		<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
 		<script type="text/javascript" src="/js/ajaxUtil.js"></script>
 		
 		<script th:inline="javascript">
 		
 		$(function () {
-			listPage(1);			
+			listPage(1);	
 		});
+		
+		function one_order(){
+			
+			//확인 클릭시 ajax로 
+			 if(confirm([[${dto.title_Nm}]] + '을 구매하시겠습니까?')){
+				 
+				var orderId = Math.floor(Math.random() * 10000000);
+				 
+				 $.ajax({
+						url:"https://kapi.kakao.com/v1/payment/ready",
+						type:'POST',
+						data:{
+							'cid' : 'TC0ONETIME',
+							'partner_order_id' : orderId,
+							'partner_user_id' : [[${userId}]],
+							'item_name' : [[${dto.title_Nm}]],
+							'quantity' : 1,
+							'total_amount' : [[${dto.prc_Value}]],
+							'tax_free_amount' : 0,
+							'approval_url' : 'http://localhost:8080/success',
+							'cancel_url' : 'http://localhost:8080/cancel',
+							'fail_url' : 'http://localhost:8080/fail'
+						},
+						headers:{
+							'Authorization' : 'KakaoAK 051b33bdbbe0ba43924808b0a780bb6c',
+							'Content-type' : 'application/x-www-form-urlencoded;charset=utf-8'
+						},
+						dataType:"json",
+						success:function(data){
+							
+							var url = data.next_redirect_pc_url;
+							var tid = data.tid;
+							
+							window.location.href = 'ready?url='+url+'&tid='+tid+'&orderId='+orderId+'&bookNum='+[[${dto.seq_No}]];
+						},
+						error:function(error){
+							
+							alert(error);
+						}
+				 });
+				 
+			 }
+		}
 		
 		function listPage(page){
 			
@@ -71,10 +112,27 @@
 		}
 		
 		function sendReview() {
-			
+
 			var userId = $('input[name=userId]').val();
 			var content = $('textarea[name=content]').val();
-			var reviewStar = $('input:radio[name=reviewStar]:checked').val();//여기 에러있음 계속 5점만 줌
+			var reviewStar = $('input:radio[name=reviewStar]:checked').val();
+			
+			if(reviewStar == null || reviewStar == ''){
+				
+				alert("별점을 선택해주세요");
+				
+				return;
+				
+			}
+			
+			if(content=='' || content==null){
+				
+				alert("내용을 입력해주세요");
+				
+				return;
+				
+			}
+			
 			var params = "seq_No=" + [[${dto.seq_No}]] + "&userId=" + userId + "&content=" + content + "&reviewStar=" + reviewStar;
 			
 			$.ajax({
@@ -91,6 +149,28 @@
 			});
 			
 			
+		}
+		
+		function alertDelete(){
+
+			Swal.fire({
+				  title: '삭제하시겠습니까?',
+				  icon: 'error',
+				  iconHtml: 'X',
+				  confirmButtonText: '확인',
+				  cancelButtonText: '취소',
+				  showCancelButton: true,
+				  showCloseButton: true
+				}).then((result)=>{
+					
+					if(result.value){
+						
+					location.href='/BookDelete.action?seq_No=' + [[${dto.seq_No}]] + '&' + [[${params}]] + '&image_Url=' + [[${dto.image_Url}]];
+						
+					}
+					
+				});
+
 		}
 
 		</script>
@@ -263,27 +343,28 @@
     <!-- End Head -->
 <!-- 삭제만들어야함 -->
     <!-- Body -->
-    <body class="BookArgicle">
+    <body>
 
 		<div class="container product_detail"><!--container S-->
 			<div class="in_box"><!--in_box S-->
 				<div class="product_top" style="display: inline-flex; width: 100%;">
-				<div style="margin: 100px 0 0 150px;"><img alt="" th:src="${dto.image_Url}" style="width: 250px; height: 300px;"> 
+				<div style="margin: 100px 0 0 150px;">
+				<img alt="" th:src="${dto.image_Url}" style="width: 250px; height: 300px;">
 				<span>
-					<img alt="" src="image/test1.jpg" id="after">
-					<img alt="" src="image/test2.jpeg" id="before">
+				<img alt="" src="image/test1.jpg" id="after">
+				<img alt="" src="image/test2.jpeg" id="before">
 				</span>
-				
 				</div>
+
 					<div class="product_box">				
 						<div class="product_txt">
-							<h5 class="tit">[[${dto.authr_Nm}]] | [[${dto.publisher_Nm}]]</h5>
-							<h3 class="sub_txt">[[${dto.title_Nm}]]</h3>
-							<p class="price"><strong>[[${dto.prc_Value}]]</strong>원</p>
+							<p class="tit">[[${dto.publisher_Nm}]]</p>
+							<p class="sub_txt">[[${dto.title_Nm}]]</p>
+							<p class="price"><strong>[[${#numbers.formatInteger(dto.prc_Value, 1,'COMMA')}]]</strong>원</p>
 						</div>
 
 						<div class="product_info">
-							<p><strong>적립혜택</strong><span>구매 시 교원포인트 50% 적립 (~5/30까지)</span></p>
+							<p><strong>적립혜택</strong><span>구매 시 교원포인트 50% 적립 (~10/30까지)</span></p>
 							<p><strong>판매수량</strong><span>1,243 구매</span></p>
 						</div>
 
@@ -315,7 +396,7 @@
 									</div>
 									<div style="text-align: center; white-space: nowrap;">
 										<button class="btn-111" th:onclick="@{|location.href='/BookUpdate.action?seq_No=${dto.seq_No}&${params}'|}">수정</button>
-										<button class="btn-111" th:onclick="@{|location.href='/BookDelete.action?seq_No=${dto.seq_No}&${params}&image_Url=${dto.image_Url}'|}">삭제</button>
+										<button class="btn-111" onclick="alertDelete();">삭제</button>
 										<button class="btn-111" th:onclick="@{|location.href='/BookList.action?${params}'|}">목록으로</button>
 									</div>
 								
@@ -334,15 +415,10 @@
 						<!-- 장바구니버튼 test 끝 -->
 
 						<div class="btn_box">
-
 							<button class="btn-order" th:if="${session.user==null and session.OauthUser==null}" 
 							onclick="javascript:alert('로그인 후 이용가능합니다')">바로 구매</button>
 							<button class="btn-order" th:unless="${session.user==null and session.OauthUser == null}" name="one_Order" type="button" 
 							onclick="one_order()">바로 구매</button>
-
-							<button class="btn-order" th:if="${session.user==null}" onclick="javascript:alert('로그인 후 이용가능합니다')">바로 구매</button>
-							<button class="btn-order" th:unless="${session.user==null}" onclick="javascript:location.href='/bag.action'">바로 구매</button>
-
 						</div>
 					</div>
 				</div>				
@@ -364,6 +440,7 @@
 
 						</div>
 						<div class="tab_box">
+						<!-- form은 기능에 영향 안줌 디자인 때문에 남겨놓음 -->
 						<form action="ReviewCreated.action" method="POST" id="reviewForm">
 							<p class="tit">책 Review</p>
 							
@@ -378,12 +455,13 @@
 								<input type="radio" name="reviewStar" value="1"><label for="rate5">★</label>
 								</p>
 								<!-- disabled적용하면 form으로 안 날라감 -->
-								<p th:if="${session.user==null}"><label>UserID</label><input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
+								<p th:if="${session.user==null and session.OauthUser==null}"><label>UserID</label><input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
 								<p th:unless="${session.user==null}"><label>UserID</label><input type="text" th:value="${session.user.userId}" name="userId" readonly="readonly"></p>
-								<p th:if="${session.user==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
+								<p th:unless="${session.OauthUser==null}"><label>UserID</label><input type="text" th:value="${session.OauthUser.userId}" name="userId" readonly="readonly"></p>
+								<p th:if="${session.user==null and session.OauthUser==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
 								<p th:unless="${session.user==null}"><label>내용</label><textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
-								<input type="hidden" name="seq_No" th:value="${dto.seq_No}">
-								<div class="btn_box" th:if="${session.user!=null}">
+								<p th:unless="${session.OauthUser==null}"><label>내용</label><textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
+								<div class="btn_box" th:if="${session.user!=null or session.OauthUser !=null}">
 									<button class="btn-555 float-r m-btn" onclick="sendReview();" type="button">리뷰 작성</button>
 									<!-- button은 기본type이 submit 그래서 바로 폼 주소로 가지만 이걸 벗어나려면 type button -->
 								</div>
@@ -519,7 +597,7 @@
 				});
 
 
-				// 가격
+				//상품권 가격
 				$('.drop-down02 p').click(function(){
 					$('.productprice').slideToggle();
 					$('.drop-down01 ul li').slideUp();
@@ -606,7 +684,7 @@
                
                     num = num + "";  
                     point = num.length % 3 ;
-                    len = num.length;  
+                    len = num.length;  S
    
                     str = num.substring(0, point);  
                     while (point < len) {  

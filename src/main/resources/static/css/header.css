@@ -37,6 +37,8 @@ b89c87
 /*<body style="overflow-x:hidden; overflow-y:auto;">*/
 
 /*  start */
+
+
 #header {
   width: 100%;
   min-width: 1200px;
@@ -99,8 +101,8 @@ b89c87
 
 .lap-nav>ul>li {
   float: right;
-  width: 9rem;
-/*   height: 23rem; */
+  width: 6rem;
+  height: 23rem;
   line-height: 3rem;
   font-size: 0.9rem;
   text-align: center;
@@ -139,13 +141,6 @@ b89c87
 .lap-nav>ul>li>a:hover,
 .lap-nav>ul>li>ul>li:hover {
   color: #c80a1e;
-}
-
-
-.lap-nav>ul>li.category ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
 }
 
 

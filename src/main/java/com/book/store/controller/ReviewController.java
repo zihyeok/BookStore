@@ -69,7 +69,7 @@ public class ReviewController {
 				
 		String checkId = request.getParameter("checkId");
 		
-		String pageNum = request.getParameter("pageNum");		
+		String pageNum = request.getParameter("pageNum");
 
 		int currentPage = 1; //첫화면은 1페이지 
 
