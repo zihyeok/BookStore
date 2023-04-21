@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:"http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>이벤트 게시판</title>
+
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/created.css"/>
+
+<script type="text/javascript" src="js/util.js"></script>
+<script type="text/javascript">
+
+	//function sendIt() {
+	const sendIt = () => { //화살표함수
+		
+		var f = document.myForm;
+	
+	alert("aaa");
+		
+		str = f.subject.value;
+		str = str.trim();
+		
+		if(!str) { //양 쪽의 공백을 지웠더니, str이 없으면(value값이 없으면)
+			alert("\n제목을 입력하세요!");
+			f.subject.focus();
+			return;
+		}
+		f.subject.value = str;
+		
+		str = f.userId.value;
+		str = str.trim();
+		if(!str) { //양 쪽의 공백을 지웠더니, str이 없으면(이름이 없으면)
+			alert("\n아이디를 입력하세요!");
+			f.userId.focus();
+			return;
+		}
+		
+		/*
+		if(!isValidKorean(str)) { //이름이 한글인지 아닌지 판단하는 조건문(util.js파일에 있음)
+			alert("\n이름을 정확히 입력하세요");
+			f.name.focus();
+			return;
+		}
+		*/
+		
+		f.userId.value = str;
+		
+		
+		str = f.content.value;
+		str = str.trim();
+		
+		if(!str) {
+			alert("\n내용을 입력하세요!");
+			f.content.focus();
+			return;
+		}
+		f.content.value = str;
+		
+		str = f.pwd.value;
+		str = str.trim();
+		
+		if(!str) { //
+			alert("\n패스워드를 입력하세요!");
+			f.pwd.focus();
+			return;
+		}
+		f.pwd.value = str;
+		
+		f.action = "/eventCreated.action"; 
+		f.submit();
+		
+		
+	}
+
+</script>
+
+</head>
+<body>
+
+
+<div id="bbs" >
+	<div id="bbs_title">
+		(´▽`ʃ♡ƪ)게 시 판(´▽`ʃ♡ƪ)
+	</div>
+
+
+
+	<form action="" name="myForm" method="post">
+	<div id="bbsCreated">
+		<div class="bbsCreated_bottomLine">
+			<dl>
+				<dt>제목</dt>
+				<dd>
+					<input type="text" name="subject" size="60" maxlength="100"
+					class="boxTF"/>
+				</dd>	
+			</dl>
+		</div>
+		
+		
+		<div class="bbsCreated_bottomLine">
+			<dl>
+				<dt>아이디</dt>
+				<dd>
+					<input type="text" name="userId" size="35" maxlength="20"
+					class="boxTF"/>
+				</dd>	
+			</dl>
+		</div>
+		
+		
+		<div id="bbsCreated_content">
+			<dl>
+				<dt>내용</dt>
+				<dd>
+					<textarea rows="12" cols="63" name="content" class="boxTA"
+					style="resize: none; background-color: #ffffff"></textarea>
+				</dd>	
+			</dl>
+		</div>
+		
+		
+		<div class="bbsCreated_noLine">
+			<dl>
+				<dt>패스워드</dt>
+				<dd>
+					<input type="text" name="pwd" size="35" maxlength="7"
+					class="boxTF"/>&nbsp;(게시물 수정 및 삭제시 필요!)
+				</dd>	
+			</dl>
+		</div>
+	</div>
+	
+	
+	<div id="bbsCreated_footer">
+	<input type="button" value=" 등록하기 " class="btn2" onclick="sendIt();"/>
+	<input type="reset" value=" 다시입력 " class="btn2" onclick="document.myForm.subject.focus();"/>
+	<input type="button" value=" 작성취소 " class="btn2" onclick="javascript:location.href='/eventList.action';"/>
+	</div>
+	
+	</form>
+	
+</div>
+
+
+
+
+</body>
+</html>

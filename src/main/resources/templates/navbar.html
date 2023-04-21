@@ -133,8 +133,8 @@ window.onload = function () {
             </li>
              <li class="category"><a>카테고리</a>
 			  <ul>
-			    <li>카테고리1</li>
-			    <li>카테고리2</li>
+			    <a href="/NewBook.action"><li>카테고리1</li></a>
+			    <li><a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm">카테고리2</a></li>
 			    <li>카테고리3</li>			    
 			    <li>카테고리4</li>
 			    <li>카테고리5</li>
@@ -143,12 +143,20 @@ window.onload = function () {
 			    <li>카테고리8</li>
 			    <li>카테고리9</li>
 			    <li>카테고리10</li>
+			    
+<!-- 			    <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm"><li>전체</li></a>
+              <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=100"><li>철학</li></a>
+              <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=200"><li>종교</li></a>
+              <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=300"><li>사회과학</li></a>
+              <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=400"><li>자연과학</li></a>
+			  
+			     -->
 			  </ul>
 			</li>            
             <li><a>도서</a>
               <ul>
-                <li>새로나온 책</li>
-                <li>베스트</li>
+                <li><a href="/NewBook.action">새로나온 책</a></li>
+                <a href="/BestBook.action"><li>베스트</li></a>
                 <li>수상도서</li>
                 <li>매거진</li>
               </ul>
