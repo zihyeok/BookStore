@@ -102,5 +102,15 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	#{publisher_Nm},#{prc_Value},#{image_Url},#{book_Intrcn_Cn},#{kdc_Nm},#{pblicte_De},0)
 </insert>
 
+<insert id="insertBackUp" parameterType="com.book.store.dto.BookDTO">
+	insert into BackUpItem (seq_No,isbn_Thirteen_No,title_Nm,authr_Nm,publisher_Nm,prc_Value,image_Url,
+	book_Intrcn_Cn,kdc_Nm,pblicte_De,seq_Max) values (#{seq_No},#{isbn_Thirteen_No},#{title_Nm},#{authr_Nm},
+	#{publisher_Nm},#{prc_Value},#{image_Url},#{book_Intrcn_Cn},#{kdc_Nm},#{pblicte_De},#{seq_Max})
+</insert>
+
+<select id="backUpMaxNum" resultType="int">
+	select nvl(max(SEQ_Max),0) from BackUpItem	
+</select>
+
 
 </mapper>

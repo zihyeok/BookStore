@@ -1,5 +1,6 @@
 package com.book.store.controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -51,7 +52,7 @@ public class ReviewController {
 
 		dto.setReviewId(maxNum+1);
 		dto.setIpAddr(request.getRemoteAddr());
-
+		
 		reviewService.insertData(dto);
 
 		ModelAndView mav = new ModelAndView();
@@ -92,6 +93,8 @@ public class ReviewController {
 		int end = currentPage*numPerPage;
 
 		List<ReviewDTO> lists = reviewService.getLists(start, end, seq_No);
+		
+		Iterator<ReviewDTO> it = lists.iterator();
 
 		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage);
 

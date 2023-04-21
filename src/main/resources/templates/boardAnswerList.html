@@ -12,98 +12,14 @@
 <body>
 
   <br/><br/><br/><br/>
- 
-<p th:if="${#lists.size(lists)}<=0">등록된 리뷰가 없습니다</p>
 
-<<<<<<< HEAD
-  <!-- <table width="700" border="0" cellpadding="0" cellspacing="0" style="margin: auto;"
-   th:each="dto:${lists}" th:if="${#lists.size(lists)}>0">
-
-      <tr>
-        <td colspan="2" bgcolor="#999999" height="1"></td>
-      </tr>
-      <tr height="30" bgcolor="#dbdbdb">
-        <td width="300" style="padding-left: 10px;">
-          <b>No.&nbsp;[[${dto.boardId}]]</b>
-        </td>
-        <td width="300" align="right" style="padding-right: 10px;">
-        <a th:if="${dto.fix_created} == ${dto.created}" >등록일: [[${dto.created}]]</a>
-		<a th:if="${dto.fix_created} != ${dto.created}" >수정일: [[${dto.fix_created}]]</a>
-		
-        <a th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}"
-         th:onclick="@{|location='/AnswerUpdated.action?answerNum=${dto.answerNum }&pageNum=${pageNum }&num=${boardId }'|}">수정</a>
-        
-        <a th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}" 
-        th:href="'javascript:deleteData(\'' + ${dto.answerNum} + '\', \'' + ${pageNum} + '\')'">삭제</a>  
-               
-        </td>
-      </tr>
-      <tr>
-        <td height="50" style="padding-left: 10px;" colspan="2">
-          [[${dto.content}]]
-        </td>
-      </tr>
-  
-    <tr>
-      <td colspan="2" bgcolor="#dbdbdb" height="2">
-      </td>
-    </tr>
-    
-  </table>
-  	</br>
-=======
-<p>후기 [[${#lists.size(lists)}]]개</p>
-
-<table style="margin: auto;" th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
-
-	<div class="see-comments">
-	  <section>
-	    <div> <img src="https://user-images.githubusercontent.com/112612653/189023768-c2387f31-2463-4198-9078-3e3eaa56f7a0.png" alt=""></div>
-	    <div>
-	    	<b>No.&nbsp;[[${dto.answerNum}]]</b>
-	      <p>
-	       
-	        <a th:if="${dto.fix_created} == ${dto.created}" >등록일: [[${dto.created}]]</a>
-			<a th:if="${dto.fix_created} != ${dto.created}" >수정일: [[${dto.fix_created}]]</a>
-	     
-	        <span>
-	         [[${dto.userId}]] 
-	        </span>
-	       </p>
-	       <p>
-	        <span>
-	        <a th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}"
-         		th:onclick="@{|location='/AnswerUpdated.action?answerNum=${dto.answerNum }&pageNum=${pageNum }&num=${boardId }'|}">수정</a>
-        
-	        <a th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}" 
-	        th:href="'javascript:deleteData(\'' + ${dto.answerNum} + '\', \'' + ${pageNum} + '\')'">삭제</a>  
-	        </span>
-	      </p>
-	      <p>[[${dto.content}]]</p>
-	    </div>
-	    <div><img src="https://user-images.githubusercontent.com/112612653/189023767-c8fd2d91-9928-41bd-a758-b94befaafe23.png"></div>
-	  </section>
-	</div> 
-
-</table>  
-  
-  	<br/>
-  	
->>>>>>> main
-	<div style="text-align: center;">
-		<a th:if="${pageIndexList != null}" th:utext="${pageIndexList}"></a>
-		<a th:if="${pageIndexList == null or pageIndexList == ''}">등록된 게시물이 없습니다.</a>
-  	</div> -->
-<!-- ---------------------------------------- -->
-
-<<<<<<< HEAD
 <p th:if="${#lists.size(lists)}<=0">등록된 리뷰가 없습니다</p>
 <p>후기 [[${#lists.size(lists)}]]개</p>
 <table width="700" style="margin: auto;" 
 	th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
-=======
+
 	<br/><br/>
->>>>>>> main
+
 
   <section>
     <div><img src="https://user-images.githubusercontent.com/112612653/189023768-c2387f31-2463-4198-9078-3e3eaa56f7a0.png" alt=""></div>
@@ -136,7 +52,6 @@
 
 <br/>
 
-<!-- ---------------------------------------- -->
 
 	
 </body>
