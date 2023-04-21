@@ -18,7 +18,8 @@
 	
 		<!-- product.css -->
 		<link rel="stylesheet" href="css/product.css">
-
+		<!-- js -->
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 		<!-- js -->
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 		<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
@@ -419,6 +420,9 @@
 							onclick="javascript:alert('로그인 후 이용가능합니다')">바로 구매</button>
 							<button class="btn-order" th:unless="${session.user==null and session.OauthUser == null}" name="one_Order" type="button" 
 							onclick="one_order()">바로 구매</button>
+							<button class="btn-order" th:if="${session.user==null}" onclick="javascript:alert('로그인 후 이용가능합니다')">바로 구매</button>
+							<button class="btn-order" th:unless="${session.user==null}" onclick="javascript:location.href='/bag.action'">바로 구매</button>
+
 						</div>
 					</div>
 				</div>				

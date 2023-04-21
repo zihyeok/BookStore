@@ -230,6 +230,9 @@ function alertLogin(){
     <a href= "#" th:unless="${session.OauthUser !=null or session.user != null}"><i class="fas fa-shopping-cart" onclick="alertLogin();"></i></a>
     <a href="/logout" th:if="${session.OauthUser !=null or session.user != null}"><i class="fas fa-sign-out-alt"></i></a><!-- 로그아웃 -->
     <a href="/user/login" th:unless="${session.OauthUser !=null or session.user != null}"><i class="fas fa-sign-in-alt"></i></a><!-- 로그인 -->
+    <a href="/bag.action" th:if="${session.user}!=null"><i class="fas fa-shopping-cart"></i></a>
+    <a href="/user/login" th:unless="${session.user}!=null" onclick="javascript:alert('로그인 후 이용해주세요')"><i class="fas fa-shopping-cart"></i></a>
+
       </section>
       
     </article>

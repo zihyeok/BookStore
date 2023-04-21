@@ -12,6 +12,18 @@
 
 
 <body>
+<<<<<<< HEAD
+
+  <br/><br/><br/><br/>
+
+<p th:if="${#lists.size(lists)}<=0">등록된 리뷰가 없습니다</p>
+<p>후기 [[${#lists.size(lists)}]]개</p>
+<table width="700" style="margin: auto;" 
+	th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
+
+	<br/><br/>
+
+=======
 <br/><br/><br/><br/>
 <br/><br/><br/><br/>
   
@@ -71,9 +83,15 @@
   	</div>
 
 	<br/>
+>>>>>>> f3afa9328b52b3667040104be7a66c31ef24ea5d
 
 
 
 
+<<<<<<< HEAD
+
+	
+=======
+>>>>>>> f3afa9328b52b3667040104be7a66c31ef24ea5d
 </body>
 </html>
