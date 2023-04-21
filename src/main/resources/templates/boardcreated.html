@@ -4,6 +4,17 @@
 <div layout:fragment="content" >
 <link rel="stylesheet" type="text/css" href="/css/BoardCreated.css">
 
+<script type="text/javascript">
+  function sendContent() {
+    const content = event.target.value;
+    if (content.length >= 80) {
+      const lastChar = content.substr(content.length - 2);
+      if (lastChar !== '\r\n') {
+        event.target.value += '\r\n';
+      }
+    }
+  }
+</script>
 
 <div class="container product_detail">
   <div class="in_box">
@@ -18,7 +29,7 @@
             
               <p>
                 <label>제목</label>
-                <input type="text" name="subject" placeholder="제목를 입력해주세요." required/>
+                <input type="text" name="subject" placeholder="제목를 입력해주세요." required pattern=".{10,}" title="10자 이상 입력하세요."/>
               </p>
               <p>
                 <label>작성자</label>
@@ -32,7 +43,7 @@
 
               <p>
                 <label>내용</label>
-                <textarea name="content" placeholder="내용을 입력해주세요." required></textarea>
+				<textarea name="content" placeholder="내용을 입력해주세요." id="content" onkeyup="sendContent();" required></textarea>
               </p>
 
               <div class="btn_box">
@@ -58,13 +69,7 @@
   </div>
 </div><!--in_box E-->
 
-</br></br>
-
-
-
-
-
-
+<br/><br/>
 
 
 </html>

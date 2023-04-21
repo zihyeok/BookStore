@@ -21,12 +21,32 @@ $(function(){
 <body>
 	
 	<div class="wrap">
+<<<<<<< HEAD
 	  <div class="brownContainer">
+=======
+	  <div th:class="${vip > 50} ? 'diaContainer' : 
+	  (${vip > 40} ? 'plaContainer' : 
+	  (${vip > 30} ? 'goldContainer' : 
+	  (${vip > 20} ? 'silverContainer' : 
+	  (${vip > 10} ? 'bronzeContainer' : 'greenContainer'))))">
+>>>>>>> kwon
 	    <div>
 	      <div class="grade">GOLD</div>
 	      <div class="name">[[${user.userName}]]</div>
+<<<<<<< HEAD
 	    </div>    
 	    <div class="modify">i</div>    
+=======
+	    </div> 
+	    <div class="cross">
+<<<<<<< HEAD
+	    <a href="/user/hi"><img class="img" alt="x" th:src="@{/image/cancel-button.png}"/></a>
+=======
+	    <a href="/main"><img class="img" alt="x" th:src="@{/image/cancel-button.png}"/></a>
+>>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
+		 </div>
+	    <div class="modify">i</div>
+>>>>>>> kwon
 	  </div>
 	  <div class="summaryContainer">
 	    <div class="item">
@@ -50,13 +70,14 @@ $(function(){
 	      
 	      <div class="item">
 	        <div>
-	          <div class="brown number">[[${bagitem_length}]]</div>
+	          <div class="green number">[[${bagitem_length}]]</div>
 	          <div class="text">장바구니</div>
 	        </div>
 	        <div class="icon"> > </div>
 	      </div>     
 	      <div class="item">
 	        <div>
+<<<<<<< HEAD
 	          <div class="brown number">0</div>
 	          <div class="text">결제완료</div>
 	        </div>
@@ -65,14 +86,22 @@ $(function(){
 	      <div class="item">
 	        <div>
 	          <div class="brown number">1</div>
+=======
+	          <div class="green number">0</div>
+>>>>>>> kwon
 	          <div class="text">배송중</div>
 	        </div>
 	        <div class="icon"> > </div>
 	      </div>     
 	      <div class="item">
 	        <div>
+<<<<<<< HEAD
 	          <div class="brown number">3</div>
 	          <div class="text">구매확정</div>
+=======
+	          <div class="green number">[[${order_Count}]]</div>
+	          <div class="text">구매완료</div>
+>>>>>>> kwon
 	        </div>
 	      </div>     
 	      

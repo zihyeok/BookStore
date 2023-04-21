@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
 
@@ -6,20 +7,16 @@
       padding: 0;
       box-sizing: border-box;
       border: 0px solid silver;
-      
-      /* 
-	  position: fixed;
-	  z-index: 1; 
-	  */
     }
 
-   body {
+    body {
       font-family: 'Roboto', sans-serif;
       font-size: 0.9rem;
-      /* color: #999; */
+      color: #999;
       line-height: 1rem;
       letter-spacing: 0.1px;
     }
+
 
 
     h1,
@@ -61,16 +58,15 @@
     }
 
     a:hover {
-      color: #6c500d;
-      /* color: #3967ED; */
+      color: #3967ED;
     }
 
     a:active {
-      color:#6c500d;
-    /* #3967ED; */
+      color:
+    #3967ED;
     }
-  
-  	main button {
+
+    button {
        font-size: 0.7rem;
        text-transform: uppercase;
        padding: 10px 30px;
@@ -81,24 +77,26 @@
        border-radius: 50px;
      }
 
-    main button:hover {
+     button:hover {
        background: ;
        box-shadow: 200px 0 0 0 rgba(57,103,237,1) inset;
        color: white;
        cursor: pointer;
-
      }
-     
-
 
     /* start */
 
+header {
+  width: 1000px;
+  margin: 0 auto;
+  background: #fff;
+}
 
-/* header img {
+header img {
   width: 100px;
   margin: 14px 0 7px 0;
 }
- */
+
     ul,
     ol,
     li {
@@ -123,7 +121,7 @@
     }
 
     ul.myMenu>li:hover {
-      background: #6c500d;
+      background: #3967ED;
       color:#fff;
     }
 
@@ -145,24 +143,22 @@
       padding: 1.66rem 10px;
       color: #888;
       background: #eee;
-      border-bottom: 1px solid #6c500d;
+      border-bottom: 1px solid #3967ED;
       text-align: center;
         transition:0.7s;
     }
 
     ul.myMenu>li ul.submenu>li:hover {
-      background: #6c500d;
+      background: #3967ED;
       color: #fff;
     }
 
     main {
       height: 700px;
-      background: url('https://cdn.shopify.com/s/files/1/0070/7032/files/Author-preneurs_resized_Getty_1341415617.jpg?v=1642714705&width=1024') no-repeat;
-     /*  background: url('https://www.themanual.com/wp-content/uploads/sites/9/2021/05/best-history-books-to-read-2021.jpg?p=1') no-repeat; */
+      background: url('https://i.postimg.cc/pWT94zPM/photo-1510917087081-51e33cdcc51b.jpg') no-repeat;
       background-position: center;
       background-size: cover;
       position: relative;
-      
     }
 
 
@@ -183,12 +179,7 @@ main span {
 }
 
 
-main button:hover {
-       background: ;
-       box-shadow: 200px 0 0 0 rgba(57,103,237,1) inset;
-       color: white;
-       cursor: pointer;
-     }
+
 
 main button {
   margin-top: 1.3rem;
@@ -214,7 +205,7 @@ main button {
 
     .imgs section>:last-child img {
       width: 484px;
-      /* height: 215px; */
+      height: 215px;
       margin-left: 1rem;
     }
 
@@ -234,11 +225,11 @@ main button {
     .swiper-slide {
       text-align: center;
       display: flex;
-      /* ³»¿ëÀ» Áß¾ÓÁ¤·Ä ÇÏ±âÀ§ÇØ flex »ç¿ë */
+      /* ë‚´ìš©ì„ ì¤‘ì•™ì •ë ¬ í•˜ê¸°ìœ„í•´ flex ì‚¬ìš© */
       align-items: center;
-      /* À§¾Æ·¡ ±âÁØ Áß¾ÓÁ¤·Ä */
+      /* ìœ„ì•„ë˜ ê¸°ì¤€ ì¤‘ì•™ì •ë ¬ */
       justify-content: center;
-      /* ÁÂ¿ì ±âÁØ Áß¾ÓÁ¤·Ä */
+      /* ì¢Œìš° ê¸°ì¤€ ì¤‘ì•™ì •ë ¬ */
     }
 
     .swiper-slide img {
@@ -290,25 +281,10 @@ main button {
       line-height: 3rem;
       margin-bottom: 1.8rem;
     }
-    
-    .video button {
-      margin-top: 2rem;      
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      padding: 10px 30px;
-      border: 1px solid #ccc;
-      background: white;
-      transition: 1s;
-      margin-top: 1rem;
-      border-radius: 50px;
-     }
 
-    .video button:hover {
-       background: ;
-       box-shadow: 200px 0 0 0 rgba(57,103,237,1) inset;
-       color: white;
-       cursor: pointer;
-     }
+    .video button {
+      margin-top: 2rem;
+    }
 
 
     .big {
@@ -317,7 +293,6 @@ main button {
       margin: 0 auto;
       text-align: center;
       padding: 70px 0;
-      color: #999;
     }
 
     .big h2{
@@ -361,7 +336,7 @@ main button {
       color: white;
       border-radius: 50%;
       line-height: 3.2rem;
-      background: #6c500d;
+      background: #3967ED;
       position: absolute;
       left: 50%;
       transform: translate(-50%, -550%);
@@ -432,7 +407,7 @@ main button {
     }
 
     .products section div {
-      background: #6c500d;
+      background: #3967ED;
       width: 220px;
       height: 30px;
       color: white;
@@ -458,14 +433,14 @@ main button {
     }
 
     .products img:hover {
-      border: 8px solid #6c500d;
+      border: 8px solid #3967ED;
     }
 
 
 
     .form {
       padding: 5rem 0;
-      background: #6c500d;
+      background: #9FB5ED;
       margin: 0 auto;
       text-align: center;
     }
@@ -490,9 +465,8 @@ main button {
 
     footer {
       padding: 3rem 0;
-      margin: 0 auto;
-      text-align: center;
-      color: #999;
+        margin: 0 auto;
+        text-align: center;
     }
 
     footer div {
@@ -502,7 +476,7 @@ main button {
     }
 
 
-    footer ul {
+    footer nav ul {
       width: 800px;
       list-style: none;
       display: flex;
@@ -518,25 +492,5 @@ main button {
         margin: 0 auto;
     }
 
-
-.btn-555 {
-  width: 120px;
-  height: 50px;
-  font-family: 'Noto Sans Kr', sans-serif;
-  font-size: 1rem;
-  font-weight: 500;
-  background: transparent;
-  border-radius: 4px;
-  transition: 0.3s;
-  outline: none;
-  cursor: pointer;
-	
-  background: #555;
-  color: #fff;
-}
-
-.btn-555:hover {
-  background: #000;
-}
 
 

@@ -2,10 +2,7 @@ package com.book.store.controller;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +22,6 @@ import com.book.store.service.BoardAnswerServiceImpl;
 import com.book.store.service.BoardService;
 import com.book.store.util.BoardUtil;
 import com.book.store.util.MyUtil;
-import com.sun.xml.bind.v2.runtime.reflect.ListIterator;
 
 //@RequestMapping("/board") 나중에 쓸꺼
 @RestController// Json 형태로 객체 데이터를 반환
@@ -50,7 +46,7 @@ public class BoardController {
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("paymentlist");
+		mav.setViewName("#");
 		//jsp(html)로 갈때는 setViewName /class로 갈때는 setView
 		
 		return mav;
@@ -70,7 +66,7 @@ public class BoardController {
 		}
 		
 		@PostMapping("/BoardCreated.action")
-		public ModelAndView created_ok(BoardDTO dto,HttpServletRequest request) throws Exception{
+	      public ModelAndView created_ok(BoardDTO dto,HttpServletRequest request) throws Exception{
 
 			ModelAndView mav = new ModelAndView();
 			
@@ -80,14 +76,14 @@ public class BoardController {
 			
 			boardService.insertData(dto);
 
-			mav.setViewName("redirect:/BoardList.action");
+	         mav.setViewName("redirect:/BoardList.action");
 
-			return mav;
+	         return mav;
 
-		}
+	      }
 		
 	
-		@GetMapping("/BoardList.action")
+		@RequestMapping("/BoardList.action")
 		public ModelAndView list(BoardDTO dto,HttpServletRequest request) throws Exception{
 			
 			
@@ -100,7 +96,7 @@ public class BoardController {
 			
 			String searchKey = request.getParameter("searchKey");
 		    String searchValue = request.getParameter("searchValue");
-
+		    
 			
 			if (searchValue == null) {
 		        searchKey = "subject";
@@ -112,7 +108,7 @@ public class BoardController {
 		    }
 			
 			int dataCount = boardService.getDataCount(searchKey, searchValue);
-
+	
 			int numPerPage = 3;
 		    int totalPage = 0;
 
@@ -160,9 +156,7 @@ public class BoardController {
 			mav.addObject("pageIndexList", pageIndexList);
 			mav.addObject("dataCount", dataCount);
 			mav.addObject("articleUrl", articleUrl);
-			
-			//mav.addObject("pageNum", currentPage);//3번째 방법시 같이넘겨야함
-			
+
 			
 			mav.setViewName("boardlist");
 
@@ -205,7 +199,7 @@ public class BoardController {
 			}
 			
 			
-			//dto.setContent(dto.getContent().replaceAll("\r\n", "<br/>"));
+			dto.setContent(dto.getContent().replaceAll("\r\n", "<br/>"));
 			
 			
 			//이전글
@@ -380,9 +374,12 @@ public class BoardController {
 		@RequestMapping("/AnswerList.action")
 		public ModelAndView AnswerList(BoardAnswerDTO dto,HttpServletRequest request) throws Exception{
 			
-			int boardId = dto.getBoardId();
+			int boardId = Integer.parseInt(request.getParameter("boardId"));
 
 			String pageNum = request.getParameter("pageNum");//문자만 따온건가?
+			
+			//System.out.println(pageNum);
+			//System.out.println(boardId);
 			
 			int currentPage = 1;
 			int numPerPage = 3;
@@ -394,7 +391,10 @@ public class BoardController {
 			
 			int dataCount = BoardAnswerService.getDataCount(boardId);
 			//DataCount가 boardNum을 받았기 때문에  
+
 			//일련번호는 각 boardNum마다 다르게 출력됨
+
+
 			
 			int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 
@@ -402,10 +402,14 @@ public class BoardController {
 				currentPage=totalPage;
 			}
 			
+			
 			int start = (currentPage-1)*numPerPage+1;
 			int end = currentPage*numPerPage;	
 			
 			List<BoardAnswerDTO> lists = BoardAnswerService.getLists(start, end, boardId);
+			
+			
+			//System.out.println(lists);
 			
 			
 		
@@ -421,7 +425,10 @@ public class BoardController {
 			mav.addObject("boardId", boardId);
 			mav.addObject("pageNum", currentPage);
 			
-			
+			System.out.println(lists);
+			//System.out.println(pageIndexList+"2");
+			//System.out.println(boardId+"3");
+			//System.out.println(currentPage+"4");
 			
 			
 			mav.setViewName("boardAnswerList");
@@ -482,10 +489,11 @@ public class BoardController {
 		
 		@RequestMapping(value = "/AnswerUpdated_ok.action",method = {RequestMethod.GET,RequestMethod.POST})
 		public ModelAndView AnswerUpdated_ok(BoardAnswerDTO dto,HttpServletRequest request) throws Exception{
-		
+			
+			
 			String pageNum = request.getParameter("pageNum");
 			int boardId = Integer.parseInt(request.getParameter("boardId"));
-			
+	
 		
 			BoardAnswerService.updateData(dto);
 			

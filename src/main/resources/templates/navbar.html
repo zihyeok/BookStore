@@ -131,23 +131,32 @@ window.onload = function () {
                 <li>자료실</li>
               </ul>
             </li>
-            <li><a>북클럽</a>
-              <ul>
-                <li>이달의 책</li>
-                <li>커뮤니티</li>
-              	<li>아지트</li>
-              </ul>
-            </li>
-            <li><a>브랜드</a>
-              <ul>
-                <li>문학동네</li>
-                <li>연혁</li>
-                <li>제휴문의</li>
-              </ul>
-            </li>
+             <li class="category"><a>카테고리</a>
+			  <ul>
+			    <a href="/NewBook.action"><li>카테고리1</li></a>
+			    <li><a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm">카테고리2</a></li>
+			    <li>카테고리3</li>			    
+			    <li>카테고리4</li>
+			    <li>카테고리5</li>
+			    <li>카테고리6</li>
+			    <li>카테고리7</li>
+			    <li>카테고리8</li>
+			    <li>카테고리9</li>
+			    <li>카테고리10</li>
+			    
+<!-- 			    <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm"><li>전체</li></a>
+              <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=100"><li>철학</li></a>
+              <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=200"><li>종교</li></a>
+              <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=300"><li>사회과학</li></a>
+              <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=400"><li>자연과학</li></a>
+			  
+			     -->
+			  </ul>
+			</li>            
             <li><a>도서</a>
               <ul>
-                <li>새로나온 책</li>
+                <li><a href="/NewBook.action">새로나온 책</a></li>
+                <a href="/BestBook.action"><li>베스트</li></a>
                 <li>수상도서</li>
                 <li>매거진</li>
               </ul>
@@ -156,8 +165,7 @@ window.onload = function () {
         </nav>
         
         <div class="sample two" id="search-input">
-        <form action="" name="searchForm" method="GET"> 		
- 		
+        <form action="" name="searchForm" method="GET"> 
  		
           <ul class="clearfix-2">          
             <li>

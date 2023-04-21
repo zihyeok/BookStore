@@ -6,6 +6,7 @@
 
 
 <head>
+
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 	<!-- <meta charset="UTF-8"> -->
 	<!-- <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3.0"> -->
@@ -32,14 +33,54 @@
 
 <br/><br/><br/><br/><br/>
 
+<button th:onclick="@{|location.href='/BookUpdate.action?seq_No=${dto.seq_No}&${params}'|}">수정</button><br/>
+<button th:onclick="@{|location.href='/BookDelete.action?seq_No=${dto.seq_No}&${params}&image_Url=${dto.image_Url}'|}">삭제</button><br/>
+<button th:onclick="@{|location.href='/BookList.action?${params}'|}">목록으로</button><br/>
+<div class="BookArticle-container" style="background-color: green; width: 100%; text-align: center;">
+	<!-- container안에 이 row div를 block처럼 만들어주겠다 -->
+	<div class="BookArticle-container-left" style="display: inline-block; background-color: yellow; width: 30%;">
+	<span>[[${dto.authr_Nm}]]</span><br/>
+	<span>출판사 : [[${dto.publisher_Nm}]]</span><br/>
+	<div>
+	리뷰
+	</div>
+	</div>
+	<div class="BookArticle-container-center" style="display: inline-block; background-color: yellow; width: 30%;">
+		<span>[[${dto.title_Nm}]]</span>
+		<img alt="" th:src="${dto.image_Url}" th:onclick="|location.href='@{${dto.image_Url}}'|">
+	</div>
+	<div class="BookArticle-container-right" style="display: inline-block; background-color: yellow ; width: 30%;">
+		<div>[[${dto.prc_Value}]]원</div><br/>
+		<div>배송안내	도서포함 15,000원 이상 무료배송</div><br/>
+		<div>주소</div><br/>
+	</div>
+	
+</div>
+
+<div class="BookArticle-container-bottom" style="margin-top: 50px; text-align: center; margin-bottom: 50px;">
+	<div class="BookArticle-container-bottom-tab">
+	<span>리뷰</span>
+	<span>교환/반품/품절</span>
+	</div>
+	
+	<div class="BookArticle-container-bottom-review">
+	리뷰
+	</div>
+</div>
+
+</div>
+
+
+
 <!-- <h5 th:text="|${#lists.size(lists)}개의 답변이 있습니다.|"></h5> -->
- <h5 th:text="| |">리뷰 내용</h5> 
+<!-- <h5 th:text="| 0 개의 답변이 있습니다.|">리뷰 내용</h5> -->
 
 	<h2>Review</h2>
 	
 	<div class="see-comments">
 
 		<p>댓글 2개</p>
+		
 
 		<section>
 			<div> <img src="https://user-images.githubusercontent.com/112612653/189023768-c2387f31-2463-4198-9078-3e3eaa56f7a0.png" alt=""></div>
@@ -87,7 +128,6 @@
         <label for="content">Content:</label>
         <textarea name="content" id="content"></textarea><br>
         <button class="btn-555" type="submit">등록하기</button>
-        <div><button class="btn-555" type="submit">등록하기</button></div>
     </form>
     
     

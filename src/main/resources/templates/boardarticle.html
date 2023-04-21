@@ -12,12 +12,7 @@
 
 <!-- 댓글창 합쳐보기 -->
 <!-- <script th:inline="javascript"> -->
-
-
 <script th:inline="javascript">
-
-
-
 
 $(function () {
 	
@@ -32,7 +27,264 @@ $(document).ready(function() {
 		var param = "userId=" + $("#userId").val()
 					+ "&boardId=" + [[${dto.boardId}]]
 					+ "&content=" + $("#content").val();
-						
+			alert(param);		
+		$.ajax({
+		    type: "POST",
+		    url: "/AnswerCreated.action",
+		    data: param,
+		    dataType:"text",
+		    success:function(args){
+		      
+		      $("#content").val("");
+		      
+		      listPage(1);
+		    },
+		    beforeSend:showRequest,
+			error:function(e){
+				alert(e.responsetext);
+		    }
+		});
+		
+	});
+	
+});
+
+
+function listPage(page) {
+	
+	var url = "/AnswerList.action";
+		
+	var params = "boardId=" + [[${dto.boardId}]] + "&pageNum=" + page;
+	//alert(params);
+	
+	$.ajax({
+		url: url,
+		type: "POST",
+		dataType:"text",
+		data:params,
+		success: function(args) {
+			$("#listData").html(args);
+			$("#listData").show();
+		},
+		error:function(e){
+			alert(e.responsetext);
+		}
+	});
+}
+
+
+ function showRequest() {
+	
+	var content = $.trim($("#content").val());
+
+	if(!content){
+		alert("\n내용을 입력하세요");
+		$("#content").focus();
+		return false;
+	}
+	
+	if(content.length>200){
+		alert("\n내용은 200자까지 가능합니다");
+		$("#content").focus();
+		return false;
+	}
+	
+	return true;
+	
+} 
+
+ 
+ function deleteData(num,page) {
+		
+	var params = "answerNum=" + num + "&boardId=" + [[${dto.boardId}]] + "&pageNum=" + page;
+		
+		$.ajax({
+			url:"/AnswerDeleted.action",
+			type: "POST",
+			dataType:"text",
+			data:params,
+			success: function(args) {
+				listPage(page);
+				
+			},
+			error:function(e){
+				alert(e.responsetext);
+			}
+		});
+		
+	}
+ 
+</script>
+
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<h2  style="text-align: center;">게시글 상세내용</h2>
+<br/><br/>
+
+<article>
+<section id="detail-wrap">
+  <table id="board-detail">
+  <colgroup>
+      <col width="15%"/>
+      <col width="35%"/>
+      <col width="15%"/>
+      <col width="35%"/>
+    </colgroup>
+   
+    <tbody>
+      <tr>
+        <th>글 번호 :</th>
+        <td>[[${dto.boardId}]]</td>
+        <th>조회수 :</th>
+        <td>[[${dto.hitCount}]]</td>
+      </tr>
+      <tr>
+        <th>작성자 :</th>
+        <td>[[${dto.userId}]]</td>
+        <!-- [[${session.user.userId}]] -->
+        <th th:if="${dto.fix_created} == ${dto.created} ">작성일 :</th>
+        <td th:if="${dto.fix_created} == ${dto.created} ">[[${dto.created}]]</td>
+        <th th:if="${dto.fix_created} != ${dto.created} ">수정일 :</th>
+        <td th:if="${dto.fix_created} != ${dto.created} ">[[${dto.fix_created}]]</td>
+		
+      </tr>
+      <tr>
+        <th>제목 :</th>
+        <td colspan="3">[[${dto.subject}]]</td>
+      </tr>
+      <tr>
+      	<th>내용 :</th>
+      	
+        <td colspan="4">[[${dto.content}]]</td>
+        
+      </tr>
+
+    </tbody>
+    
+  </table>
+  
+  <div style="margin-top: 20px; margin-right: 250px;">
+	  <button  class="black-btn float-r m-btn" 
+	  th:onclick="@{|location='/BoardUpdated.action?num=${dto.boardId }&${params }'|}"
+	  th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">
+	  수정</button>
+	  <button class="black-btn float-r m-btn"
+	  th:onclick="'location.href=\'BoardDeleted_ok.action?num=' + @{${dto.boardId}} + '&' + @{${params}} + '\''"
+	  th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">
+	  삭제</button>
+	  <button class="black-btn float-r m-btn" 
+	  th:onclick="@{|location.href='/BoardList.action?${params }'|}">
+	  리스트</button>
+	 
+  </div>
+  	
+	<!-- 이전글 다음글 -->
+	<div style="font-family: 'NEXON Lv1 Gothic OTF';">
+<<<<<<< HEAD
+<<<<<<< HEAD
+		<div style="margin-left: 17%; position: absolute;">
+=======
+		<div style="margin-left: 18%; position: absolute;">
+>>>>>>> main
+=======
+		<div style="margin-left: 18%; position: absolute;">
+=======
+		<div style="margin-left: 17%; position: absolute;">
+>>>>>>> facf44db71883f57c8fe93188329af683c679f02
+>>>>>>> main
+		
+		<a th:if="${preSubject != null and preSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${preNum}|}">
+		 이전글 :  <span th:text="${preNum}"></span>
+		</a>
+		</div>
+		
+<<<<<<< HEAD
+<<<<<<< HEAD
+		<div style="margin-left: 23%; position: absolute;"> <!-- style="text-align: center;" -->
+=======
+		<div style="margin-left: 27%; position: absolute;"> <!-- style="text-align: center;" -->
+>>>>>>> main
+=======
+		<div style="margin-left: 27%; position: absolute;"> <!-- style="text-align: center;" -->
+=======
+		<div style="margin-left: 23%; position: absolute;"> <!-- style="text-align: center;" -->
+>>>>>>> facf44db71883f57c8fe93188329af683c679f02
+>>>>>>> main
+		
+		<a th:if="${nextSubject != null and nextSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${nextNum}|}">
+		 다음글 :  <span th:text="${nextNum}"></span>
+		</a>
+		</div>
+	
+	</div>
+<div style="max-width: 50%; margin-left: 25%;">	
+<span id="listData" style="display: block;"></span>
+</div>
+<div class="container product_detail"><!--container S-->
+	<div class="in_box"><!--in_box S-->
+		<div class="tab_box">
+		
+			<p class="tit">Q&A 댓글</p>
+			
+			<div class="ask_box">
+				<!-- disabled적용하면 form으로 안 날라감 -->
+				<p th:if="${session.user==null}"><label>작성자</label><input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
+				<p th:unless="${session.user==null}"><label>작성자</label><input type="text" th:value="${session.user.userId}" id="userId" name="userId" readonly="readonly"></p>
+				<p th:if="${session.user==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
+				<p th:unless="${session.user==null}"><label>내용</label><textarea name="content" id="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
+				
+				<div class="btn_box" th:if="${session.user!=null}">
+					<button class="btn-555 float-r m-btn" onclick="sendButton();" type="button" id="sendButton">리뷰 작성</button>
+					<!-- button은 기본type이 submit 그래서 바로 폼 주소로 가지만 이걸 벗어나려면 type button -->
+				</div>
+			
+			</div>
+	
+		</div>
+		
+	</div><!--in_box S-->
+</div><!--container S-->
+
+<!-- <span id="listData" style="display: block;"></span>  물어보기 2개쓴이유 -->  
+  
+  
+</section>  
+  
+  
+  
+</article>
+
+
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+</br></br></br></br>
+</br></br></br></br>
+
+=======
+=======
+>>>>>>> main
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<!-- 댓글창 합쳐보기 -->
+<!-- <script th:inline="javascript"> -->
+<script th:inline="javascript">
+
+$(function () {
+	
+	listPage(1);
+	
+});
+
+$(document).ready(function() {
+	
+	$("#sendButton").click(function(){
+		
+		var param = "userId=" + $("#userId").val()
+					+ "&boardId=" + [[${dto.boardId}]]
+					+ "&content=" + $("#content").val();
+					
 		$.ajax({
 		    type: "POST",
 		    url: "/AnswerCreated.action",
@@ -118,129 +370,16 @@ function listPage(page) {
 		
 	}
  
-
 </script>
-
-
-
+<<<<<<< HEAD
+>>>>>>> main
+=======
+=======
 </br></br></br></br>
 </br></br></br></br>
-</br></br></br></br>
-</br></br></br></br>
-</br></br></br></br>
-<h2  style="text-align: center;">게시글 상세내용</h2>
-</br></br>
 
-<article>
-<section id="detail-wrap">
-  <table id="board-detail">
-    <colgroup>
-      <col width="15%"/>
-      <col width="35%"/>
-      <col width="15%"/>
-      <col width="35%"/>
-    </colgroup>
-   
-    <tbody>
-      <tr>
-        <th>글 번호 :</th>
-        <td>[[${dto.boardId}]]</td>
-        <th>조회수 :</th>
-        <td>[[${dto.hitCount}]]</td>
-      </tr>
-      <tr>
-        <th>작성자 :</th>
-        <td>[[${dto.userId}]]</td><!-- [[${session.user.userId}]] -->
-        <th>작성일 :</th>
-        <td>[[${dto.created}]]</td>
-      </tr>
-      <tr>
-        <th>제목 :</th>
-        <td colspan="3">[[${dto.subject}]]</td>
-      </tr>
-      <tr>
-      	<th>내용 :</th>
-        <td colspan="4">[[${dto.content}]]</td>
-      </tr>
-
-    </tbody>
-    
-  </table>
-  
-  <div style="margin-top: 20px; margin-right: 100px;">
-	  <button  class="black-btn float-r m-btn" 
-	  th:onclick="@{|location='/BoardUpdated.action?num=${dto.boardId }&${params }'|}">
-	  수정</button>
-	  <button class="black-btn float-r m-btn" 
-	  th:onclick="'location.href=\'BoardDeleted_ok.action?num=' + @{${dto.boardId}} + '&' + @{${params}} + '\''">
-	  삭제</button>
-	  <button class="black-btn float-r m-btn" 
-	  th:onclick="@{|location.href='/BoardList.action?${params }'|}">
-	  리스트</button>
-	 <!--  <input type="hidden" name="boardNum" value="${dto.boardNum }"/> -->
-  </div>
-  
-	<!-- 이전글 다음글 -->
-	<div style="text-align: center;">
-	이전글 : 
-	<a th:if="${preSubject != null and preSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${preNum}|}">
-	  <span th:text="${preSubject}"></span>
-	</a>
-	</div>
-	
-	<div style="text-align: center;"> 
-	다음글 : 
-	<a th:if="${nextSubject != null and nextSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${nextNum}|}">
-	  <span th:text="${nextSubject}"></span>
-	</a>
-	</div>
-	
-	
-  
-</section>  
-  
-</article>
-
-<span id="listData" style="display: block;"></span>
-
-<table width="700" border="0" cellpadding="0" cellspacing="0" style="margin: auto;">
-<tr>
-	<td width="600" colspan="4" height="3" bgcolor="#e6d4a6"></td>
-</tr>
-
-<tr>
-	<td width="60" height="30" bgcolor="#eeeeee" align="center">작성자</td>
-	<td width="240" height="30" style="padding-left: 10px;">
-	<input type="text" id="userId" size="35" maxlength="20" class="boxTF" readonly="readonly"  th:value="${dto.userId }"/>
-	</td>
-</tr>
-
-<tr>
-	<td width="600" colspan="4" height="1" bgcolor="#e6d4a6"></td>
-</tr>
-
-<tr>
-	<td width="60" height="30" bgcolor="#eeeeee" align="center">내용</td>
-	<td width="540" colspan="3" style="padding-left: 10px;">
-		<textarea rows="3" cols="85" class="boxTA" style="height: 50px; resize: none;" id="content"></textarea>
-	</td>
-	
-<tr>
-	<td width="600" colspan="4" height="3" bgcolor="#e6d4a6"></td>
-</tr>
-
-<tr>
-	<td width="600" colspan="4" height="30" align="right" style="padding-right: 15px;">
-		<input type="button" value="등록하기" class="btn2" id="sendButton"/>
-	</td>
-</tr>
-
-</table>
-
-<span id="listData" style="display: block;"></span> 
-
-
-
+>>>>>>> facf44db71883f57c8fe93188329af683c679f02
+>>>>>>> main
 
 </div>
 

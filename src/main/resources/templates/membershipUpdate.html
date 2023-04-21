@@ -43,6 +43,10 @@ $(function(){
             event.preventDefault();
         }
         
+        if(!confirm("수정하시겠습니까?")){
+         	event.preventDefault();
+        }
+        
     });
 	
 });
@@ -91,18 +95,21 @@ function checkoutPwd(){
 	        <label>이름</label>
 	        <input type="text" placeholder="이름을 입력해주세요" required readonly name="userName" th:value="${user.userName}">
 	     </div>
-	<div th:unless="${user.userPwd == 'kakao' or user.userPwd == 'naver' or user.userPwd == 'google'}">
-      <div>
+	     
+<!-- 	<div th:unless="${user.userPwd == 'kakao' or user.userPwd == 'naver' or user.userPwd == 'google'}"> -->
+      <div th:unless="${user.userPwd == 'kakao' or user.userPwd == 'naver' or user.userPwd == 'google'}">
         <label class="imp">비밀번호</label>
         <input type="password" placeholder="비밀번호를 입력해주세요." required id="pwd1" name="password1">
       </div>
 
-      <div>
+      <div th:unless="${user.userPwd == 'kakao' or user.userPwd == 'naver' or user.userPwd == 'google'}">
         <label class="imp">비밀번호 확인</label>
         <input type="password" placeholder="비밀번호를 한번 더 입력해주세요." 
         required id="pwd2" onblur="checkoutPwd()" name="password2">
       </div>
-	</div>
+<!-- 	</div> -->
+	<input type="hidden" th:if="${user.userPwd == 'kakao' or user.userPwd == 'naver' or user.userPwd == 'google'}" th:value="${user.userPwd}" name="password1">
+	<input type="hidden" th:if="${user.userPwd == 'kakao' or user.userPwd == 'naver' or user.userPwd == 'google'}" th:value="${user.realPwd}" name="realPwd">
 	
       <div>
         <label class="imp">휴대폰</label>
@@ -138,15 +145,13 @@ function checkoutPwd(){
       
       <div>
         <label>이메일</label><br/>
-        <input type="text" placeholder="예 : bookstore@gmail.com" name="userEmail" id="userEmail">
+        <input type="text" placeholder="예 : bookstore@gmail.com" name="userEmail" id="userEmail" th:value="${user.userEmail}">
       </div>
       
     </div>
 
     <button type="submit">수정하기</button>
     
-    <input type="hidden" id="ok" value="false">
-
   </form> 
 
   

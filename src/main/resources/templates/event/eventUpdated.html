@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>게 시 판</title>
+
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<link rel="stylesheet" type="text/css" href="css/created.css"/>
+
+<script type="text/javascript" src="js/util.js"></script>
+<script type="text/javascript">
+
+
+	const sendIt = () => {
+
+	//function sendIt(){
+		
+		var f = document.myForm;
+		
+		str = f.subject.value;
+		str = str.trim();
+		if(!str){
+			alert("\n제목을 입력하세요.");
+			f.subject.focus();
+			return;
+		}
+		f.subject.value = str;
+		
+		str = f.userId.value;
+		str = str.trim();
+		if(!str){
+			alert("\n아이디를 입력하세요.");
+			f.name.focus();
+			return;
+		}
+				
+		/* 
+		if(!isValidKorean(str)){
+			alert("\n이름을 정확히 입력하세요.");
+			f.name.focus();
+			return;
+		} 
+		*/		
+		f.userId.value = str;
+		
+		str = f.content.value;
+		str = str.trim();
+		if(!str){
+			alert("\n내용을 입력하세요.");
+			f.content.focus();
+			return;
+		}
+		f.content.value = str;
+		
+		
+		str = f.pwd.value;
+		str = str.trim();
+		if(!str){
+			alert("\n패스워드를 입력하세요.");
+			f.pwd.focus();
+			return;
+		}
+		f.pwd.value = str;
+		
+		
+		f.action = "/eventUpdated_ok.action";
+		f.submit();
+		
+	}
+
+</script>
+
+</head>
+<body>
+
+<div id="bbs">
+	<div id="bbs_title">
+	게 시 판
+	</div>
+	
+	<form action="" method="post" name="myForm">
+	<div id="bbsCreated">
+	
+		<div class="bbsCreated_bottomLine">
+			<dl>
+				<dt>제목</dt>
+				<dd>
+				<input type="text" name="subject" size="60" maxlength="100"
+				class="boxTF" th:value="${dto.subject }"/>
+				</dd>
+			</dl>		
+		</div>
+		
+		<div class="bbsCreated_bottomLine">
+			<dl>
+				<dt>작성자</dt>
+				<dd>
+				<input type="text" name="userId" size="35" maxlength="20"
+				class="boxTF" th:value="${dto.userId }" />
+				</dd>
+			</dl>		
+		</div>
+		
+		
+		<div id="bbsCreated_content">
+			<dl>
+				<dt>내용</dt>
+				<dd>
+				<textarea rows="12" cols="63" name="content" class="boxTA"
+				th:text="${dto.content }"></textarea>
+				</dd>
+			</dl>		
+		</div>
+		
+		<div class="bbsCreated_noLine">
+			<dl>
+				<dt>패스워드</dt>
+				<dd>
+				<input type="password" name="pwd" size="35" maxlength="7"
+				class="boxTF" th:value="${dto.pwd }"/>&nbsp;(게시물 수정 및 삭제시 필요!!!)
+				</dd>
+			</dl>		
+		</div>
+		
+	</div>
+	
+	<div id="bbsCreated_footer">
+	
+	<input type="hidden" name="boardId" th:value="${dto.boardId }"/>
+	<input type="hidden" name="pageNum" th:value="${pageNum }"/>
+	<input type="hidden" name="searchKey" th:value="${searchKey }"/>
+	<input type="hidden" name="searchValue" th:value="${searchValue }"/>
+	
+	<input type="button" value=" 수정하기 " class="btn2" onclick="sendIt();"/>	
+	<input type="button" value=" 수정취소 " class="btn2" 
+	th:onclick="@{|location.href='/eventArticle.action?${params }&boardId=${dto.boardId}'|}"/>	
+	</div>
+		
+	</form>
+
+</div>
+
+
+
+
+
+</body>
+</html>
+
+
+
+

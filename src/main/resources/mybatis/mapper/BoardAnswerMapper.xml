@@ -10,20 +10,22 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	select nvl(max(answerNum),0) from Answer
 </select>
 
-<insert id="insertData" parameterType="com.book.store.dto.BoardAnswerDTO">
-	insert into Answer (answerNum,boardId,userId,content,created) 
-	values(#{answerNum},#{boardId},#{userId},#{content},sysdate)
+<insert id="insertData" parameterType="com.book.store.dto.BoardAnswerDTO"> 
+	insert into Answer (answerNum,boardId,userId,content,created,fix_Created) 
+	values(#{answerNum},#{boardId},#{userId},#{content},sysdate,sysdate)
 </insert>
 
 <select id="getDataCount" resultType="int" parameterType="int">
 	select nvl(count(*),0) from Answer 
-	where boardId = #{boardId} 
+	where boardId=#{boardId} 
 </select>
 
 <select id="getLists" parameterType="map" resultType="com.book.store.dto.BoardAnswerDTO">
 	select * from (
 	select rownum rnum, data.* from (
-	select answerNum,boardId,userId,content,to_char(created,'YYYY-MM-DD') created 
+	select answerNum,boardId,userId,content,
+	to_char(created,'YYYY-MM-DD HH24:MI:SS') created, 
+    to_char(fix_created,'YYYY-MM-DD HH24:MI:SS') fix_created 
 	from Answer where boardId = #{boardId} 
 	order by answerNum desc) data) 
 <![CDATA[
@@ -41,8 +43,8 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <update id="updateData" parameterType="com.book.store.dto.BoardAnswerDTO">
-	update Answer set answerNum=#{answerNum},boardId=#{boardId},name=#{name},content=#{content} 
-	where answerNum = #{answerNum}
+	UPDATE Answer SET answerNum=#{answerNum}, boardId=#{boardId}, userId=#{userId},content=#{content},fix_Created=sysdate
+	WHERE answerNum=#{answerNum}
 </update>
 
 
