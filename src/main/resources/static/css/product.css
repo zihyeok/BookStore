@@ -21,7 +21,10 @@ dl, dt, dd, ol, ul, li, fieldset, form, label, legend
      margin: 0; 
      border: 0;
      text-decoration: none; 
-     box-sizing: border-box;}
+     box-sizing: border-box;
+     color: #000;
+     
+     }
 
 ul, ol, li {list-style: none; }
 
@@ -398,21 +401,7 @@ blockquote, q {quotes: "" "";}
   align-items: center;
 }
 
-/* .see-comments textarea {
-  
-}
- */
-/* .see-comments section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-   width: 100%;
-}
 
-.see-comments section b {
-  float: left;
-  margin-right: 0.2rem;
-} */
 
 .see-comments section span {
   float: right;
@@ -482,6 +471,7 @@ blockquote, q {quotes: "" "";}
   color: #333;
 }
 
+
 #after { 
     width:  250px;
     height: 200px;
@@ -506,5 +496,4 @@ blockquote, q {quotes: "" "";}
 	opacity: 0;
 	 
 }
-
 

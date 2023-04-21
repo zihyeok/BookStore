@@ -16,11 +16,10 @@
    body {
       font-family: 'Roboto', sans-serif;
       font-size: 0.9rem;
-      color: #999;
+      /* color: #999; */
       line-height: 1rem;
       letter-spacing: 0.1px;
     }
-
 
 
     h1,
@@ -95,11 +94,11 @@
     /* start */
 
 
-header img {
+/* header img {
   width: 100px;
   margin: 14px 0 7px 0;
 }
-
+ */
     ul,
     ol,
     li {
@@ -215,7 +214,7 @@ main button {
 
     .imgs section>:last-child img {
       width: 484px;
-      height: 215px;
+      /* height: 215px; */
       margin-left: 1rem;
     }
 
@@ -318,6 +317,7 @@ main button {
       margin: 0 auto;
       text-align: center;
       padding: 70px 0;
+      color: #999;
     }
 
     .big h2{
@@ -490,8 +490,9 @@ main button {
 
     footer {
       padding: 3rem 0;
-        margin: 0 auto;
-        text-align: center;
+      margin: 0 auto;
+      text-align: center;
+      color: #999;
     }
 
     footer div {
