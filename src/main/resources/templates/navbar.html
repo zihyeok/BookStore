@@ -155,38 +155,35 @@ function alertLogin(){
                 <li>공지사항</li>
                 <li>FAQ</li>
                 <li>자료실</li>
-                <li>김치</li>
               </ul>
-              
             </li>
-<!--             <li><a>북클럽</a> -->
-<!--               <ul> -->
-<!--                 <li>이달의 책</li> -->
-<!--                 <li>커뮤니티</li> -->
-<!--               	<li>아지트</li> -->
-<!--               </ul> -->
-<!--             </li> -->
-            <li style="width: 12rem;"><a>카테고리</a>
-            <div style="display: inline-flex;">
-              <ul style="width: 6rem; height: 50%;">
-     			<a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm"><li>전체</li></a>
-     			<a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=100"><li>철학</li></a>
-     			<a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=200"><li>종교</li></a>
-     			<a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=300"><li>사회과학</li></a>
-     			<a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=400"><li>자연과학</li></a>
-              </ul>
-              <ul style="width: 6rem; height: 50%;">
-                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=500"><li>기술과학</li></a>
-                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=600"><li>예술</li></a>
+
+             <li class="category"><a>카테고리</a>
+			  <ul>
+			    <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm"><li>&nbsp;&nbsp;&nbsp;전체&nbsp;&nbsp;&nbsp;</li></a>
+			    <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=100"><li>&nbsp;&nbsp;&nbsp;철학&nbsp;&nbsp;&nbsp;</li></a>
+			    <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=200"><li>&nbsp;&nbsp;&nbsp;종교&nbsp;&nbsp;&nbsp;</li></a>			    
+			    <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=300"><li>사회과학</li></a>
+              	<a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=400"><li>자연과학</li></a>
+			    <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=500"><li>기술과학</li></a>
+                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=600"><li>&nbsp;&nbsp;&nbsp;예술&nbsp;&nbsp;&nbsp;</li></a>
                 <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=700"><li>언어(어학)</li></a>
-                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=800"><li>문학</li></a>
-                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=900"><li>역사</li></a>
-              </ul>
-            </div>
-            </li>
+                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=800"><li>&nbsp;&nbsp;&nbsp;문학&nbsp;&nbsp;&nbsp;</li></a>
+                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=900"><li>&nbsp;&nbsp;&nbsp;역사&nbsp;&nbsp;&nbsp;</li></a>
+			    
+<!-- 		  <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm"><li>전체</li></a>
+              <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=100"><li>철학</li></a>
+              <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=200"><li>종교</li></a>
+              <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=300"><li>사회과학</li></a>
+              <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=400"><li>자연과학</li></a>
+			  
+			     -->
+			  </ul>
+			</li>            
             <li><a>도서</a>
               <ul>
-                <li>새로나온 책</li>
+                <li><a href="/NewBook.action">새로나온 책</a></li>
+                <a href="/BestBook.action"><li>베스트</li></a>
                 <li>수상도서</li>
                 <li>매거진</li>
               </ul>
@@ -230,9 +227,6 @@ function alertLogin(){
     <a href= "#" th:unless="${session.OauthUser !=null or session.user != null}"><i class="fas fa-shopping-cart" onclick="alertLogin();"></i></a>
     <a href="/logout" th:if="${session.OauthUser !=null or session.user != null}"><i class="fas fa-sign-out-alt"></i></a><!-- 로그아웃 -->
     <a href="/user/login" th:unless="${session.OauthUser !=null or session.user != null}"><i class="fas fa-sign-in-alt"></i></a><!-- 로그인 -->
-    <a href="/bag.action" th:if="${session.user}!=null"><i class="fas fa-shopping-cart"></i></a>
-    <a href="/user/login" th:unless="${session.user}!=null" onclick="javascript:alert('로그인 후 이용해주세요')"><i class="fas fa-shopping-cart"></i></a>
-
       </section>
       
     </article>
