@@ -10,111 +10,7 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
-<!-- 댓글창 합쳐보기 -->
-<!-- <script th:inline="javascript"> -->
-<script th:inline="javascript">
 
-$(function () {
-	
-	listPage(1);
-	
-});
-
-$(document).ready(function() {
-	
-	$("#sendButton").click(function(){
-		
-		var param = "userId=" + $("#userId").val()
-					+ "&boardId=" + [[${dto.boardId}]]
-					+ "&content=" + $("#content").val();
-			alert(param);		
-		$.ajax({
-		    type: "POST",
-		    url: "/AnswerCreated.action",
-		    data: param,
-		    dataType:"text",
-		    success:function(args){
-		      
-		      $("#content").val("");
-		      
-		      listPage(1);
-		    },
-		    beforeSend:showRequest,
-			error:function(e){
-				alert(e.responsetext);
-		    }
-		});
-		
-	});
-	
-});
-
-
-function listPage(page) {
-	
-	var url = "/AnswerList.action";
-		
-	var params = "boardId=" + [[${dto.boardId}]] + "&pageNum=" + page;
-	//alert(params);
-	
-	$.ajax({
-		url: url,
-		type: "POST",
-		dataType:"text",
-		data:params,
-		success: function(args) {
-			$("#listData").html(args);
-			$("#listData").show();
-		},
-		error:function(e){
-			alert(e.responsetext);
-		}
-	});
-}
-
-
- function showRequest() {
-	
-	var content = $.trim($("#content").val());
-
-	if(!content){
-		alert("\n내용을 입력하세요");
-		$("#content").focus();
-		return false;
-	}
-	
-	if(content.length>200){
-		alert("\n내용은 200자까지 가능합니다");
-		$("#content").focus();
-		return false;
-	}
-	
-	return true;
-	
-} 
-
- 
- function deleteData(num,page) {
-		
-	var params = "answerNum=" + num + "&boardId=" + [[${dto.boardId}]] + "&pageNum=" + page;
-		
-		$.ajax({
-			url:"/AnswerDeleted.action",
-			type: "POST",
-			dataType:"text",
-			data:params,
-			success: function(args) {
-				listPage(page);
-				
-			},
-			error:function(e){
-				alert(e.responsetext);
-			}
-		});
-		
-	}
- 
-</script>
 
 <br/><br/><br/><br/>
 <br/><br/><br/><br/>
@@ -153,18 +49,42 @@ function listPage(page) {
         <th>제목 :</th>
         <td colspan="3">[[${dto.subject}]]</td>
       </tr>
+      
       <tr>
-      	<th>내용 :</th>
-      	
-        <td colspan="4">[[${dto.content}]]</td>
-        
+      	<!-- 이전글 다음글 -->
+      	<td style="font-family: 'NEXON Lv1 Gothic OTF';">
+      		<h4 style="margin-left: 2%; position: absolute;">
+	      		<a th:if="${preSubject != null and preSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${preNum}|}">
+				 이전글 :  <span th:text="${preNum}"></span>
+				</a>
+			</h4>
+			
+			<h4 style="margin-left: 8%; position: absolute;"> 
+				<a th:if="${nextSubject != null and nextSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${nextNum}|}">
+				 다음글 :  <span th:text="${nextNum}"></span>
+				</a>
+			</h4>
+			<br/>
+      	</td>
       </tr>
 
     </tbody>
     
   </table>
+  <br/>
+  <!-- max-width: 1170px; -->
   
-  <div style="margin-top: 20px; margin-right: 250px;">
+  
+  <br/><br/><br/><br/>
+  
+  <!-- 내용 -->
+  <div  style="word-wrap: break-word; margin-left: 30%; width: 40%;" th:utext="${dto.content}"></div>
+
+<!-- 선 -->  	
+<br/><br/><br/>
+<div style="margin-left:25%; border: 1px solid rgba(0, 0, 0, 0.5); width: 50%;"></div>
+
+<div style="margin-top: 20px; margin-right: 17%;">
 	  <button  class="black-btn float-r m-btn" 
 	  th:onclick="@{|location='/BoardUpdated.action?num=${dto.boardId }&${params }'|}"
 	  th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">
@@ -176,51 +96,11 @@ function listPage(page) {
 	  <button class="black-btn float-r m-btn" 
 	  th:onclick="@{|location.href='/BoardList.action?${params }'|}">
 	  리스트</button>
-	 
   </div>
-  	
-	<!-- 이전글 다음글 -->
-	<div style="font-family: 'NEXON Lv1 Gothic OTF';">
-<<<<<<< HEAD
-<<<<<<< HEAD
-		<div style="margin-left: 17%; position: absolute;">
-=======
-		<div style="margin-left: 18%; position: absolute;">
->>>>>>> main
-=======
-		<div style="margin-left: 18%; position: absolute;">
-=======
-		<div style="margin-left: 17%; position: absolute;">
->>>>>>> facf44db71883f57c8fe93188329af683c679f02
->>>>>>> main
-		
-		<a th:if="${preSubject != null and preSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${preNum}|}">
-		 이전글 :  <span th:text="${preNum}"></span>
-		</a>
-		</div>
-		
-<<<<<<< HEAD
-<<<<<<< HEAD
-		<div style="margin-left: 23%; position: absolute;"> <!-- style="text-align: center;" -->
-=======
-		<div style="margin-left: 27%; position: absolute;"> <!-- style="text-align: center;" -->
->>>>>>> main
-=======
-		<div style="margin-left: 27%; position: absolute;"> <!-- style="text-align: center;" -->
-=======
-		<div style="margin-left: 23%; position: absolute;"> <!-- style="text-align: center;" -->
->>>>>>> facf44db71883f57c8fe93188329af683c679f02
->>>>>>> main
-		
-		<a th:if="${nextSubject != null and nextSubject != ''}" th:href="@{|/BoardArticle.action?${params}&num=${nextNum}|}">
-		 다음글 :  <span th:text="${nextNum}"></span>
-		</a>
-		</div>
-	
-	</div>
-<div style="max-width: 50%; margin-left: 25%;">	
-<span id="listData" style="display: block;"></span>
-</div>
+
+<!-- 댓글 리스트 -->	
+<div style="max-width: 50%; margin-left: 25%;"><span id="listData" style="display: block;"></span></div>
+
 <div class="container product_detail"><!--container S-->
 	<div class="in_box"><!--in_box S-->
 		<div class="tab_box">
@@ -246,25 +126,12 @@ function listPage(page) {
 	</div><!--in_box S-->
 </div><!--container S-->
 
-<!-- <span id="listData" style="display: block;"></span>  물어보기 2개쓴이유 -->  
-  
-  
 </section>  
-  
-  
   
 </article>
 
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-</br></br></br></br>
-</br></br></br></br>
-
-=======
-=======
->>>>>>> main
 <br/><br/><br/><br/>
 <br/><br/><br/><br/>
 <!-- 댓글창 합쳐보기 -->
@@ -339,8 +206,8 @@ function listPage(page) {
 		return false;
 	}
 	
-	if(content.length>200){
-		alert("\n내용은 200자까지 가능합니다");
+	if(content.length>400){
+		alert("\n내용은 300자까지 가능합니다");
 		$("#content").focus();
 		return false;
 	}
@@ -371,15 +238,7 @@ function listPage(page) {
 	}
  
 </script>
-<<<<<<< HEAD
->>>>>>> main
-=======
-=======
-</br></br></br></br>
-</br></br></br></br>
 
->>>>>>> facf44db71883f57c8fe93188329af683c679f02
->>>>>>> main
 
 </div>
 

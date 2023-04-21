@@ -7,8 +7,12 @@ import com.book.store.dto.BookDTO;
 public interface BookItemService {
 
 	public int maxNum() throws Exception;
+	
+	public int backUpMaxNum() throws Exception;
 
 	public void insertData(BookDTO dto) throws Exception;
+	
+	public void insertBackUp(BookDTO dto) throws Exception;
 
 	public int getDataCount(String searchKey,String searchValue) throws Exception;
 

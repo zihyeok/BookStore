@@ -37,7 +37,7 @@ public class BagController {
 		UserData user = null;
 
 		if(httpSession.getAttribute("user")!=null) {
-			System.out.println("sendbag의 user");
+
 			user = (UserData) httpSession.getAttribute("user");
 
 

@@ -19,10 +19,6 @@ if([[${checkId}]]!=null){
 <table width="700" border="0" cellpadding="0" cellspacing="0" style="margin: auto;" 
 th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
 
-<<<<<<< HEAD
-
-=======
->>>>>>> kwon
 	<!-- <div class="see-comments">		
 
 		<section>
@@ -40,6 +36,19 @@ th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
 		</section>		
 	</div> -->
 
+	<!-- 댓글 줄바꿈 -->
+	<script th:inline="javascript">
+	//dto영역안에 자바스크립트 영역열면 dto를 인식함
+
+	var content = [[${dto.content}]];
+	
+	content = content.replace(/(\r\n|\r|\n)/g,'<br/>');
+	
+	$("#reviewContent").html(content);
+
+	</script>
+	<!-- 댓글 줄바꿈 끝	-->
+	
 	<div class="see-comments">
 	  <section>
 	    <div> <img src="https://user-images.githubusercontent.com/112612653/189023768-c2387f31-2463-4198-9078-3e3eaa56f7a0.png" alt=""></div>
@@ -52,7 +61,7 @@ th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
 	        <span><a th:href="'javascript:deleteReview(\'' + ${dto.reviewId} + '\', \'' + ${pageNum} + '\')'" 
 	        th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId} or ${session.OauthUser}!=null and ${session.OauthUser.userId} == ${dto.userId} ">삭제</a></span>
 	      </p>
-	      <p>[[${dto.content}]]</p>
+	      <p id="reviewContent"></p>
 	    </div>
 	    <div><img src="https://user-images.githubusercontent.com/112612653/189023767-c8fd2d91-9928-41bd-a758-b94befaafe23.png"></div>
 	  </section>
