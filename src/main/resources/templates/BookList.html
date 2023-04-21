@@ -4,28 +4,12 @@
 <div layout:fragment="content">
 
 <link rel="stylesheet" type="text/css" href="css/BookList.css">
-<style>
-
-.searchResult_box{
-
-	text-align: center;
-	margin-bottom: 100px;
-	font-size: 25px;
-	font-weight: bold;
-	color: blue;
-	
-}
-
-</style>
 
 <script type="text/javascript" src="/js/ajaxUtil.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 
 </br></br></br></br>
 </br></br></br></br>
-
-<div th:if="${searchValue != '' and searchKey != 'kdc_Nm'}" class="searchResult_box">'[[${searchValue}]]'로 검색한 결과 [[${dataCount}]]개가 검색되었습니다.</p></div>
 
 <div class="BookList-container" th:each="i : ${#numbers.sequence(0,2)}" th:if="${#lists.size(lists)}>0">
 	<div class="BookList-row" th:each="j : ${#numbers.sequence(0,2)}">
@@ -33,7 +17,6 @@
 		<div class="BookList-img-box" th:each="dto: ${lists[3*i+j]}"> 
 			<div>
 			<a th:href="@{${articleUrl}} + '&seq_No=' + @{${dto.seq_No}}">
-<<<<<<< HEAD
 			<img alt="" th:src="@{${dto.image_Url}}"></a><br/>
 			</div>
 			
@@ -41,15 +24,6 @@
 			<span>[[${dto.authr_Nm}]]</span><br/>
 			<span>[[${dto.publisher_Nm}]]</span><br/>
 			<span>[[${dto.prc_Value}]]원</span><br/>
-=======
-			<img alt="상품 준비중" th:src="@{${dto.image_Url}}"></a><br/><br/>
-			
-			<span th:if="${#strings.length(dto.title_Nm) < 20}">[[${dto.title_Nm}]]</span>
-			<span th:unless="${#strings.length(dto.title_Nm) < 20}">[[${#strings.substring(dto.title_Nm,0,19)}]]...</span>
-			<br/><span>[[${dto.authr_Nm}]]</span><br/>
-			<span>출판사:[[${dto.publisher_Nm}]]</span><br/>
-			<span>가격:[[${#numbers.formatInteger(dto.prc_Value, 1,'COMMA')}]]원</span><br/>
->>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
 			
 			<div th:id="${dto.seq_No}">
             
@@ -61,23 +35,19 @@
 			</div> 
 			
 		</div>
-<<<<<<< HEAD
-=======
-
->>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
 	</div>
 </div>
 
-</br>
+</br></br></br>
 
 <div style="text-align: right; margin-right: 200px;">
 	<button class="btn-555 float-r" th:onclick="|location.href='@{BookCreated.action}'|">등록하기</button>
 </div>
 
+<br/>
 <div style="text-align: center;">
 <a th:utext="${pageIndexList}"></a>
 </div>
-<br/><br/><br/><br/>
 
 <script th:inline="javascript">
 
@@ -87,17 +57,19 @@ function sendBag(seq_No){
 		
 		return;
 	}
-	if([[${session.OauthUser == null and session.user == null}]]){
+	
+	if([[${session.user}]] == null){
 		//session.user.userId 이건 비교할 수 없음 session.user는 비교가 됨
 		//user가 없으면 애시당초 userId를 찾을 수가 없어서 에러가 남 그래서 딱 session.user까지만 비교를 해야 함
 		
-		alertLogin();
-
+		alert("로그인 후 이용해주세요");
 		
-	}else if([[${session.OauthUser != null or session.user != null}]]){
+		window.location.href="/insertItem.action?seq_No=" + seq_No;
+		
+	}else if([[${session.user}]] != null){
 		
 		var params = "seq_No=" + seq_No;
-
+		
 		sendRequest("/insertItem.action",params,returnBag,"POST");
 		//주의 : callback함수가 있으면 json형태로 값을 무조건 반환해주기 때문에 중간에 redirect같은 것이 안 됨
 		
@@ -110,7 +82,7 @@ function returnBag(){
 	if(httpRequest.readyState==4){
 		
 		if(httpRequest.status==200){
-
+			
 			var text = httpRequest.responseText;
 			var resultText = JSON.parse(text);
 			var count = Object.keys(resultText.lists).length;
@@ -135,13 +107,13 @@ function sendDeleteBag(seq_No){
 		
 	}
 	
-	if([[${session.OauthUser == null and session.user == null}]]){
+	if([[${session.user}]] == null){
 		
 		alert("로그인이 만료되었습니다");
 		
-		window.location.href="/main";
+		window.location.href="/deleteItem.action?seq_No=" + seq_No;
 		
-	}else if([[${session.OauthUser != null or session.user != null}]]){
+	}else if([[${session.user}]] != null){
 		
 		var params = "seq_No=" + seq_No;
 		
@@ -170,7 +142,7 @@ function returnDeleteBag(){
 
 function sendAllItem(){
 	
-	if([[${session.OauthUser != null or session.user != null}]]){
+	if([[${session.user}]]!=null){
 		
 		var params = null;
 		
@@ -215,28 +187,6 @@ function hideLike(seq_No) {
 	var afterItem = document.getElementById(d_No);
 	afterItem.style.display = "none";
 	
-}
-
-function alertLogin(){
-	
-	Swal.fire({
-		  title: '로그인 후 이용해주세요',
-		  icon: 'error',
-		  iconHtml: 'X',
-		  confirmButtonText: '확인',
-		  cancelButtonText: '취소',
-		  showCancelButton: true,
-		  showCloseButton: true
-		}).then((result)=>{
-			
-			if(result.value){
-				
-				window.location.href='/user/login';
-				
-			}
-			
-		});
-
 }
 
 
