@@ -31,17 +31,8 @@
 	<div class="BookList-row" th:each="j : ${#numbers.sequence(0,2)}">
 		
 		<div class="BookList-img-box" th:each="dto: ${lists[3*i+j]}"> 
-			<div>
-			<a th:href="@{${articleUrl}} + '&seq_No=' + @{${dto.seq_No}}">
-<<<<<<< HEAD
-			<img alt="" th:src="@{${dto.image_Url}}"></a><br/>
-			</div>
 			
-			<h5>[[${dto.title_Nm}]]</h5>
-			<span>[[${dto.authr_Nm}]]</span><br/>
-			<span>[[${dto.publisher_Nm}]]</span><br/>
-			<span>[[${dto.prc_Value}]]원</span><br/>
-=======
+			<a th:href="@{${articleUrl}} + '&seq_No=' + @{${dto.seq_No}}">
 			<img alt="상품 준비중" th:src="@{${dto.image_Url}}"></a><br/><br/>
 			
 			<span th:if="${#strings.length(dto.title_Nm) < 20}">[[${dto.title_Nm}]]</span>
@@ -49,22 +40,16 @@
 			<br/><span>[[${dto.authr_Nm}]]</span><br/>
 			<span>출판사:[[${dto.publisher_Nm}]]</span><br/>
 			<span>가격:[[${#numbers.formatInteger(dto.prc_Value, 1,'COMMA')}]]원</span><br/>
->>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
 			
 			<div th:id="${dto.seq_No}">
-            
-			 <a th:onclick="|javascript:sendBag('${dto.seq_No}')|"><button style="background-color: #fff;" type="button">🤍</button></a>
+			<a th:onclick="|javascript:sendBag('${dto.seq_No}')|"><button style="background-color: #fff;" type="button">🤍</button></a>
 			</div>
 			<div th:id="'delete' + ${dto.seq_No}" style="display: none;">
-			
 			<a th:onclick="|javascript:sendDeleteBag('${dto.seq_No}')|"><button style="background-color: #fff;" type="button">❤️</button></a>
-			</div> 
+			</div>
 			
 		</div>
-<<<<<<< HEAD
-=======
 
->>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
 	</div>
 </div>
 
@@ -94,10 +79,10 @@ function sendBag(seq_No){
 		alertLogin();
 
 		
-	}else if([[${session.OauthUser != null or session.user != null}]]){
-		
+	}else if([[${session.OauthUser != null or session.user != null}]] ){
+		alert("오냐");
 		var params = "seq_No=" + seq_No;
-
+		
 		sendRequest("/insertItem.action",params,returnBag,"POST");
 		//주의 : callback함수가 있으면 json형태로 값을 무조건 반환해주기 때문에 중간에 redirect같은 것이 안 됨
 		
@@ -110,7 +95,7 @@ function returnBag(){
 	if(httpRequest.readyState==4){
 		
 		if(httpRequest.status==200){
-
+			
 			var text = httpRequest.responseText;
 			var resultText = JSON.parse(text);
 			var count = Object.keys(resultText.lists).length;
@@ -135,13 +120,13 @@ function sendDeleteBag(seq_No){
 		
 	}
 	
-	if([[${session.OauthUser == null and session.user == null}]]){
+	if([[${session.user}]] == null){
 		
 		alert("로그인이 만료되었습니다");
 		
-		window.location.href="/main";
+		window.location.href="/deleteItem.action?seq_No=" + seq_No;
 		
-	}else if([[${session.OauthUser != null or session.user != null}]]){
+	}else if([[${session.user}]] != null){
 		
 		var params = "seq_No=" + seq_No;
 		
@@ -170,7 +155,7 @@ function returnDeleteBag(){
 
 function sendAllItem(){
 	
-	if([[${session.OauthUser != null or session.user != null}]]){
+	if([[${session.user}]] != null){
 		
 		var params = null;
 		

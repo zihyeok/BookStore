@@ -1,66 +1,75 @@
-<html layout:decorate="~{layout}">
-<meta charset="UTF-8">
+<html xmlns:th="http://www.thymeleaf.org"  layout:decorate="~{layout}">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <div layout:fragment="content" >
 <link rel="stylesheet" type="text/css" href="/css/BoardCreated.css">
 
+<script type="text/javascript">
+  function sendContent() {
+    const content = event.target.value;
+    if (content.length >= 80) {
+      const lastChar = content.substr(content.length - 2);
+      if (lastChar !== '\r\n') {
+        event.target.value += '\r\n';
+      }
+    }
+  }
+</script>
 
 <div class="container product_detail">
   <div class="in_box">
     <div class="content">
       <div class="tab_content">
         <div class="tab_box">
-          <p class="tit" style="text-align: center;">Q&A 게시판 등록</p>
+          <p class="tit" style="text-align: center;">Q & A 게시판 등록</p>
           <br /><br />
           <!-- th:action="@{boardcreated.action}" /action="/submit-form"  -->
           <form th:action="@{BoardCreated.action}" method="post" name="myForm" >
             <div class="ask_box">
+            
               <p>
                 <label>제목</label>
-                <input type="text" name="subject" placeholder="제목를 입력해주세요." />
+                <input type="text" name="subject" placeholder="제목를 입력해주세요." required pattern=".{10,}" title="10자 이상 입력하세요."/>
               </p>
               <p>
                 <label>작성자</label>
-                <input type="text" name="name" placeholder="작성자를 입력해주세요." />
+                <input type="text" name="userId" readonly="readonly" th:value="${session.user.userId}"/>
+                <!--  readonly="readonly" th:value="${dto.userId }" --> 
               </p>
               <p>
-                <label>이메일</label>
-                <input type="text" name="email" placeholder="이메일주소를 입력해주세요." />
+                <label>패스워드</label>
+                <input type="password" name="pwd" placeholder="패스워드을 입력해주세요." required/>
               </p>
 
               <p>
                 <label>내용</label>
-                <textarea name="content" placeholder="내용을 입력해주세요."></textarea>
+				<textarea name="content" placeholder="내용을 입력해주세요." id="content" onkeyup="sendContent();" required></textarea>
               </p>
 
               <div class="btn_box">
                 <button class="black-btn float-r m-btn" type="submit">등록하기</button>
               </div>
+              
               <div class="btn_box">
                 <button class="black-btn float-r m-btn" type="reset">다시입력</button>
               </div>
               
+              <div class="btn_box" >
+                <button class="black-btn float-r m-btn" type="button" onclick="location.href='/BoardList.action'">
+                작성취소</button>
+			  </div>
+              
+              </div>
               </form>
             </div>
-            
-          	<div class="btn_box" style="margin-top: 20px;">
-                <button class="black-btn float-r m-btn" onclick="location.href='/BoardList.action'">
-                작성취소</button>
-			</div>
-			
+
         </div>
       </div>
     </div>
   </div>
 </div><!--in_box E-->
 
-</br></br>
-
-
-
-
-</div>
-
+<br/><br/>
 
 
 </html>

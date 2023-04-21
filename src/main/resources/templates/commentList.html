@@ -19,7 +19,6 @@ if([[${checkId}]]!=null){
 <table width="700" border="0" cellpadding="0" cellspacing="0" style="margin: auto;" 
 th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
 
-
 	<!-- <div class="see-comments">		
 
 		<section>
@@ -46,14 +45,14 @@ th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
 	        <span>[[${dto.created}]] | [[${dto.userId}]] </span>
 	       </p>
 	       <p>
-	        <span><a th:href="'javascript:deleteReview(\'' + ${dto.reviewId} + '\', \'' + ${pageNum} + '\')'" th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">삭제</a></span>
+	        <span><a th:href="'javascript:deleteReview(\'' + ${dto.reviewId} + '\', \'' + ${pageNum} + '\')'" 
+	        th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId} or ${session.OauthUser}!=null and ${session.OauthUser.userId} == ${dto.userId} ">삭제</a></span>
 	      </p>
 	      <p>[[${dto.content}]]</p>
 	    </div>
 	    <div><img src="https://user-images.githubusercontent.com/112612653/189023767-c8fd2d91-9928-41bd-a758-b94befaafe23.png"></div>
 	  </section>
 	</div> 
-
 
 </table>
 

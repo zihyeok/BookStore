@@ -1,0 +1,140 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" http-equiv="Content-Type"  ><!-- http-equiv="Content-Type" 한글나오게함 -->
+<title>대댓글</title>
+
+</head>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!-- Answer게시판 -->
+<link rel="stylesheet" href="/css/boardAnswerList.css">
+
+
+<body>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+  
+ 
+<<<<<<< HEAD
+=======
+
+<<<<<<< HEAD
+<p style="font-family: 'NEXON Lv1 Gothic OTF'; font-size: 15px;">댓글 [[${#lists.size(lists)}]]개</p>
+=======
+>>>>>>> main
+<<<<<<< HEAD
+<p th:if="${#lists.size(lists)}<=0">등록된 리뷰가 없습니다</p>
+<p>후기 [[${#lists.size(lists)}]]개</p>
+<<<<<<< HEAD
+<table width="700" style="margin: auto;" 
+	th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
+
+
+  <section>
+    <div><img src="https://user-images.githubusercontent.com/112612653/189023768-c2387f31-2463-4198-9078-3e3eaa56f7a0.png" alt=""></div>
+    <div> 
+      <p>
+        <b>No.&nbsp;[[${dto.answerNum}]]</b>
+        <a th:if="${dto.fix_created} == ${dto.created}">등록일: [[${dto.created}]]</a>
+        <a th:if="${dto.fix_created} != ${dto.created}">수정일: [[${dto.fix_created}]]</a>
+        <span>[[${dto.userId}]]</span>
+      </p> 
+      <p> 
+        <a>
+          <span th:if="${session.user != null and session.user.userId == dto.userId}" 
+          th:onclick="@{|location='/AnswerUpdated.action?answerNum=${dto.answerNum}&pageNum=${pageNum}&num=${boardId}'|}">수정</span>
+          <span th:if="${session.user != null and session.user.userId == dto.userId}" 
+          th:href="'javascript:deleteData(\'' + ${dto.answerNum} + '\', \'' + ${pageNum} + '\')'">삭제</span>  
+        </a>
+      </p> 
+      <p>[[${dto.content}]]</p>
+    </div> 
+    <div><img src="https://user-images.githubusercontent.com/112612653/189023767-c8fd2d91-9928-41bd-a758-b94befaafe23.png"></div> 
+  </section>
+   
+</table>
+
+<div style="text-align: center;">
+  <a th:if="${pageIndexList != null}" th:utext="${pageIndexList}"></a>
+  <a th:if="${pageIndexList == null or pageIndexList == ''}">등록된 게시물이 없습니다.</a>
+</div>
+
+<br/>
+=======
+
+<p style="font-family: 'NEXON Lv1 Gothic OTF'; font-size: 15px;">댓글 [[${#lists.size(lists)}]]개</p>
+=======
+>>>>>>> facf44db71883f57c8fe93188329af683c679f02
+>>>>>>> main
+
+<table  th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
+
+	<div class="see-comments" style="font-family: 'NEXON Lv1 Gothic OTF'; font-size: 15px;">
+	  <section>
+	    <div> <img src="https://user-images.githubusercontent.com/112612653/189023768-c2387f31-2463-4198-9078-3e3eaa56f7a0.png" alt=""></div>
+	    <div>
+	    	<b >No.&nbsp;[[${dto.answerNum}]]</b>
+	      <p style="margin-top: 8px;">
+	      
+	        <a th:if="${dto.fix_created} == ${dto.created}" >등록일: [[${dto.created}]]</a>
+			<a th:if="${dto.fix_created} != ${dto.created}" >수정일: [[${dto.fix_created}]]</a>
+	   
+	        <span>
+	         [[${dto.userId}]] 
+	        </span>
+	        
+	       </p>
+	       
+	       <p>
+	        <span >
+	        <a th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}"
+         		th:onclick="@{|location='/AnswerUpdated.action?answerNum=${dto.answerNum }&pageNum=${pageNum }&num=${boardId }'|}">수정</a>
+        	&nbsp;
+	        <a th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}" 
+	        th:href="'javascript:deleteData(\'' + ${dto.answerNum} + '\', \'' + ${pageNum} + '\')'">삭제</a>  
+	        </span>
+	      </p>
+	      <br/><br/>
+	      <p>[[${dto.content}]]</p>
+	    </div>
+	    <div><img src="https://user-images.githubusercontent.com/112612653/189023767-c8fd2d91-9928-41bd-a758-b94befaafe23.png"></div>
+	  </section>
+	</div> 
+
+</table>  
+  
+  	<br/>
+  	
+<<<<<<< HEAD
+	<div style="text-align: center; font-family: 'NEXON Lv1 Gothic OTF'; font-size: 18px;">
+=======
+<<<<<<< HEAD
+	<div style="text-align: center; font-family: 'NEXON Lv1 Gothic OTF'; font-size: 18px;">
+=======
+>>>>>>> main
+	<div style="text-align: center;">
+>>>>>>> facf44db71883f57c8fe93188329af683c679f02
+>>>>>>> main
+		<a th:if="${pageIndexList != null}" th:utext="${pageIndexList}"></a>
+		<a th:if="${pageIndexList == null or pageIndexList == ''}">등록된 게시물이 없습니다.</a>
+  	</div>
+
+<<<<<<< HEAD
+	<br/>
+>>>>>>> main
+=======
+<<<<<<< HEAD
+	<br/>
+=======
+<<<<<<< HEAD
+<p th:if="${#lists.size(lists)}<=0">등록된 리뷰가 없습니다</p>
+<p>후기 [[${#lists.size(lists)}]]개</p>
+<table width="700" style="margin: auto;" 
+	th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
+=======
+	<br/><br/>
+>>>>>>> main
+>>>>>>> facf44db71883f57c8fe93188329af683c679f02
+>>>>>>> main
+
+</body>
+</html>

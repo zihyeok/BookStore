@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.book.store.dto.BookDTO;
 import com.book.store.service.BookItemService;
 import com.book.store.service.BookItemServiceImpl;
+import com.book.store.user.UserData;
 import com.book.store.util.FileManager;
 import com.book.store.util.MyUtil;
 
@@ -32,6 +34,8 @@ public class BookController {
 
 	@Resource
 	BookItemService bookItemService;
+	@Resource
+	HttpSession httpSession;
 
 	@Autowired
 	private MyUtil myUtil;
@@ -39,6 +43,22 @@ public class BookController {
 	@RequestMapping("/main")
 	public ModelAndView home() throws Exception{
 		//메인화면으로 이동
+		ModelAndView mav = new ModelAndView();
+		
+		UserData user = null;
+		if(httpSession.getAttribute("user") != null) {
+			user = (UserData) httpSession.getAttribute("user");
+			
+		}else if(httpSession.getAttribute("OauthUser") != null) {
+			user = (UserData) httpSession.getAttribute("OauthUser");
+		}
+		
+		//OAuth로 첫 로그인시 기타 회원정보 추가를 위해 가입페이지로 이동
+		if(user!=null && user.getUserAddr()==null) {
+		
+			mav.setViewName("redirect:/user/oaumember");
+			return mav;
+		}
 		
 		int start = 1;
 		int end = 20;
@@ -46,8 +66,6 @@ public class BookController {
 		List<BookDTO> recentLists = bookItemService.recentLists(start, end);
 		List<BookDTO> topSalLists = bookItemService.topSalLists(start, end);
 		
-		ModelAndView mav = new ModelAndView();
-
 		mav.addObject("recentLists", recentLists);
 		mav.addObject("topSalLists", topSalLists);
 		
@@ -191,10 +209,16 @@ public class BookController {
 
 		mav.addObject("lists", lists); 
 		mav.addObject("pageIndexList", pageIndexList);
-		mav.addObject("dataCount", dataCount); 
 		mav.addObject("articleUrl",articleUrl); 
 		mav.addObject("pageNum", currentPage);
+		
+		//통합검색 결과 갯수 확인
+		mav.addObject("dataCount", dataCount); 
+		mav.addObject("searchValue", searchValue); 
+		//이걸로 통합검색 창 뜨게할지 안 할지 확인
+		mav.addObject("searchKey", searchKey); 
 
+		
 		mav.setViewName("BookList");
 		//진짜 주소로 가서 이걸 뿌려줘야 함
 
@@ -204,6 +228,17 @@ public class BookController {
 	@GetMapping("/BookArticle.action")
 	public ModelAndView article(HttpServletRequest request) throws Exception{
 
+		ModelAndView mav = new ModelAndView();
+		
+		UserData user = null;
+		if(httpSession.getAttribute("user") != null) {
+			user = (UserData) httpSession.getAttribute("user");
+			mav.addObject("userId", user.getUserId());
+		}else if(httpSession.getAttribute("OauthUser") != null) {
+			user = (UserData) httpSession.getAttribute("OauthUser");
+			mav.addObject("userId", user.getUserId());
+		}
+		
 		int seq_No = Integer.parseInt(request.getParameter("seq_No"));
 
 		String pageNum = request.getParameter("pageNum");
@@ -231,8 +266,6 @@ public class BookController {
 
 		if(dto==null) {
 
-			ModelAndView mav = new ModelAndView();
-
 			mav.setViewName("redirect:BookList.action?pageNum=" + pageNum 
 					+ "&searchKey=" + searchKey + "&searchValue=" + searchValue);
 
@@ -247,12 +280,11 @@ public class BookController {
 			param += "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");
 		}
 
-		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("dto", dto);
 		mav.addObject("params", param);
 		mav.addObject("pageNum", pageNum);
-
+		
 		mav.setViewName("product");
 
 		return mav;
@@ -383,10 +415,16 @@ public class BookController {
 
 	}
 	
+<<<<<<< HEAD
 	
 	//신작
 	@GetMapping("/NewBook.action")
 	public ModelAndView newlist(HttpServletRequest request) throws Exception{
+=======
+	@GetMapping("/BookCategoryList.action")
+	public ModelAndView categoryList(HttpServletRequest request) throws Exception{
+		
+>>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
 		String pageNum = request.getParameter("pageNum");
 
 		int currentPage = 1; //첫화면은 1페이지 
@@ -401,7 +439,11 @@ public class BookController {
 		//searchKey는 작가,제목,도서번호
 		String searchValue = request.getParameter("searchValue");
 
+<<<<<<< HEAD
 		if(searchValue==null) {
+=======
+		if(searchValue==null || searchValue.equals("") || searchValue == "") {
+>>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
 
 			searchKey = "title_Nm";
 			searchValue = "";
@@ -410,6 +452,13 @@ public class BookController {
 			if(request.getMethod().equalsIgnoreCase("GET")) {
 				searchValue = URLDecoder.decode(searchValue,"utf-8");
 			}
+<<<<<<< HEAD
+=======
+			
+			//kdc_Nm 첫 숫자를 뽑아 카테고리 구분
+			searchValue = searchValue.substring(0, 1);
+			
+>>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
 		}
 
 		int dataCount = bookItemService.getDataCount(searchKey, searchValue);
@@ -417,6 +466,7 @@ public class BookController {
 		int numPerPage = 9;
 		//한페이지에 9개의 아이템
 
+<<<<<<< HEAD
 		int totalPage = myUtil.getPageCount(numPerPage, 20);
 
 		if(currentPage>totalPage) {
@@ -505,6 +555,9 @@ public class BookController {
 		//한페이지에 9개의 아이템
 
 		int totalPage = myUtil.getPageCount(numPerPage, 20);
+=======
+		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+>>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
 
 		if(currentPage>totalPage) {
 			currentPage=totalPage;
@@ -513,12 +566,16 @@ public class BookController {
 		int start = (currentPage-1)*numPerPage+1;
 		int end = currentPage*numPerPage;
 
+<<<<<<< HEAD
 		if (end > 20) { // 마지막 페이지일 경우
 		  end = 20;
 		}
 
 		List<BookDTO> lists = bookItemService.topSalLists(start, end);
 		//Mapper.xml에서 TO_CHAR부분 에러발생 데이터 형식이 이미 2023-04-05형태여서 그런듯
+=======
+		List<BookDTO> lists = bookItemService.categoryLists(start, end, searchKey, searchValue);
+>>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
 
 		for (int i = lists.size(); i < numPerPage; i++) {
 
@@ -530,7 +587,11 @@ public class BookController {
 				"searchKey=" + searchKey; param+= "&searchValue=" +
 						URLEncoder.encode(searchValue,"utf-8"); }
 
+<<<<<<< HEAD
 		String listUrl = "/BestBook.action";
+=======
+		String listUrl = "/BookCategoryList.action";
+>>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
 
 		if(!param.equals("")) { listUrl += "?" + param; }
 
@@ -541,6 +602,7 @@ public class BookController {
 		if(!param.equals("")) { articleUrl += "&" + param; }
 
 		ModelAndView mav = new ModelAndView();
+<<<<<<< HEAD
 		
 		System.out.print(lists + "lists");
 		
@@ -551,12 +613,33 @@ public class BookController {
 		mav.addObject("articleUrl",articleUrl); 
 		mav.addObject("pageNum", currentPage);
 
+=======
+
+		mav.addObject("lists", lists); 
+		mav.addObject("pageIndexList", pageIndexList);
+		mav.addObject("articleUrl",articleUrl); 
+		mav.addObject("pageNum", currentPage);
+		
+		//통합검색 결과 갯수 확인
+		mav.addObject("dataCount", dataCount); 
+		mav.addObject("searchValue", searchValue); 
+		
+		//이걸로 통합검색 창 뜨게할지 안 할지 확인
+		mav.addObject("searchKey", searchKey); 
+
+		
+>>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
 		mav.setViewName("BookList");
 		//진짜 주소로 가서 이걸 뿌려줘야 함
 
 		return mav;
+<<<<<<< HEAD
 	
 	}
 	
+=======
+		
+	}
+>>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
 
 }

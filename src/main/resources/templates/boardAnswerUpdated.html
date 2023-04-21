@@ -1,4 +1,4 @@
-<html layout:decorate="~{layout}">
+<html layout:decorate="~{layout}" xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
 
 <div layout:fragment="content" >
@@ -15,13 +15,13 @@
 				<div class="tab_box">
 					<p class="tit" style="text-align: center;">Q&A 게시판 수정</p>
 					</br></br>
-					<form th:action="@{CommentUpdated_ok.action}" method="post" name="myForm">
+					<form th:action="@{AnswerUpdated_ok.action}" method="post" name="myForm">
 					
 					<div class="ask_box">
 						
 						<p>
 						<label>작성자</label> 
-						<input type="text"  name="name" th:value="${dto.name }"> 
+						<input type="text"  name="userId" readonly="readonly" th:value="${dto.userId }"> 
 						</p>
 						
 						<p>
@@ -32,12 +32,14 @@
 						<div class="btn_box">
 							<button class="black-btn float-r m-btn" type="submit">수정하기</button>
 						</div>
-						<input type="hidden" name="commentNum" th:value="${dto.commentNum }"/>
+						<input type="hidden" name="answerNum" th:value="${dto.answerNum }"/>
 						<input type="hidden" name="pageNum" th:value="${pageNum }"/>
-						<input type="hidden" name="boardNum" th:value="${boardNum }"/>
+						<input type="hidden" name="boardId" th:value="${dto.boardId }"/>
 						
 						<div class="btn_box">
-							<button class="black-btn float-r m-btn" th:onclick="@{|location='/BoardArticle.action?pageNum=${pageNum }&num=${dto.boardNum }'|}" type="button">수정취소</button>
+							<button class="black-btn float-r m-btn" type="button" 
+							th:onclick="@{|location='/BoardArticle.action?pageNum=${pageNum }&num=${dto.boardId }'|}" >
+							수정취소</button>
 						</div>
 						
 					</div>

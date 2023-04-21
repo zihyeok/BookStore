@@ -308,9 +308,14 @@ blockquote, q {quotes: "" "";}
 
 
 }
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 453739a1d40d5d0bc9b2fb7f11a5c39ef0de9d34
+
+/*park,kwon이 만듬 */
 
 .see-comments>p:nth-child(1) {
   margin-bottom: 20px;
@@ -485,7 +490,11 @@ blockquote, q {quotes: "" "";}
   color: #333;
 }
 
+<<<<<<< HEAD
 
+
+=======
+>>>>>>> 453739a1d40d5d0bc9b2fb7f11a5c39ef0de9d34
 #after { 
     width:  250px;
     height: 200px;
@@ -510,4 +519,7 @@ blockquote, q {quotes: "" "";}
 	opacity: 0;
 	 
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 453739a1d40d5d0bc9b2fb7f11a5c39ef0de9d34

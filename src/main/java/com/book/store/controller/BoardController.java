@@ -2,10 +2,7 @@ package com.book.store.controller;
 
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -18,13 +15,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.book.store.dto.BoardCommentDTO;
+import com.book.store.dto.BoardAnswerDTO;
 import com.book.store.dto.BoardDTO;
-import com.book.store.service.BoardCommentService;
-import com.book.store.service.BoardCommentServiceImpl;
+import com.book.store.service.BoardAnswerService;
+import com.book.store.service.BoardAnswerServiceImpl;
 import com.book.store.service.BoardService;
+import com.book.store.util.BoardUtil;
 import com.book.store.util.MyUtil;
-import com.sun.xml.bind.v2.runtime.reflect.ListIterator;
 
 //@RequestMapping("/board") 나중에 쓸꺼
 @RestController// Json 형태로 객체 데이터를 반환
@@ -34,7 +31,10 @@ public class BoardController {
 	private BoardService boardService;//호출하면 BoardServiceImpl이 딸려들어옴
 	
 	@Resource
-	BoardCommentService boardCommentService = new BoardCommentServiceImpl();
+	BoardAnswerService BoardAnswerService = new BoardAnswerServiceImpl();
+	
+	@Autowired
+	BoardUtil BoardUtil;
 	
 	
 	@Autowired
@@ -46,7 +46,7 @@ public class BoardController {
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("boardCommentList");
+		mav.setViewName("#");
 		//jsp(html)로 갈때는 setViewName /class로 갈때는 setView
 		
 		return mav;
@@ -54,12 +54,12 @@ public class BoardController {
 	}
 		
 		@GetMapping("/Board.action")
-		public ModelAndView created() throws Exception{
-
+		public ModelAndView created(BoardDTO dto,HttpServletRequest request) throws Exception{
+				
 			ModelAndView mav = new ModelAndView();
-
+			
 			mav.setViewName("boardcreated");
-			 //jsp(html)로 갈때는 setViewName /class로 갈때는 setView
+			 //(html)로 갈때는 setViewName /class로 갈때는 setView
 			
 			return mav;
 
@@ -68,13 +68,13 @@ public class BoardController {
 		@PostMapping("/BoardCreated.action")
 	      public ModelAndView created_ok(BoardDTO dto,HttpServletRequest request) throws Exception{
 
-	         ModelAndView mav = new ModelAndView();
-	         
-	         int maxNum = boardService.maxNum();
-	         
-	         dto.setBoardNum(maxNum+1);	         
-	         
-	         boardService.insertData(dto);
+			ModelAndView mav = new ModelAndView();
+			
+			int maxNum = boardService.maxNum();
+			
+			dto.setBoardId(maxNum+1);
+			
+			boardService.insertData(dto);
 
 	         mav.setViewName("redirect:/BoardList.action");
 
@@ -83,7 +83,7 @@ public class BoardController {
 	      }
 		
 	
-		@GetMapping("/BoardList.action")
+		@RequestMapping("/BoardList.action")
 		public ModelAndView list(BoardDTO dto,HttpServletRequest request) throws Exception{
 			
 			
@@ -96,7 +96,7 @@ public class BoardController {
 			
 			String searchKey = request.getParameter("searchKey");
 		    String searchValue = request.getParameter("searchValue");
-
+		    
 			
 			if (searchValue == null) {
 		        searchKey = "subject";
@@ -108,7 +108,7 @@ public class BoardController {
 		    }
 			
 			int dataCount = boardService.getDataCount(searchKey, searchValue);
-
+	
 			int numPerPage = 3;
 		    int totalPage = 0;
 
@@ -124,9 +124,8 @@ public class BoardController {
 		    int end = currentPage * numPerPage;
 
 		    List<BoardDTO> lists = boardService.getLists(start, end, searchKey, searchValue);
-		    //System.out.println(lists+"-----------------------------");
 		    
-			
+
 			String param = "";
 
 		    if (searchValue != null && !searchValue.equals("")) {
@@ -157,9 +156,7 @@ public class BoardController {
 			mav.addObject("pageIndexList", pageIndexList);
 			mav.addObject("dataCount", dataCount);
 			mav.addObject("articleUrl", articleUrl);
-			
-			//mav.addObject("pageNum", currentPage);//3번째 방법시 같이넘겨야함
-			
+
 			
 			mav.setViewName("boardlist");
 
@@ -173,7 +170,7 @@ public class BoardController {
 			
 			ModelAndView mav = new ModelAndView();
 			
-			int boardNum = Integer.parseInt(request.getParameter("num"));
+			int boardId = Integer.parseInt(request.getParameter("num"));
 			
 			String pageNum = request.getParameter("pageNum");
 			
@@ -189,9 +186,9 @@ public class BoardController {
 				}
 			}
 			
-			boardService.updateHitCount(boardNum);
+			boardService.updateHitCount(boardId);
 			
-			BoardDTO dto = boardService.getReadData(boardNum);
+			BoardDTO dto = boardService.getReadData(boardId);
 			
 			if(dto==null) {
 				
@@ -202,27 +199,27 @@ public class BoardController {
 			}
 			
 			
-			//dto.setContent(dto.getContent().replaceAll("\r\n", "<br/>"));
+			dto.setContent(dto.getContent().replaceAll("\r\n", "<br/>"));
 			
 			
 			//이전글
 			String subject = request.getParameter("subject");
 			
-			BoardDTO preDTO = boardService.preReadData(boardNum, subject, searchKey, searchValue);
+			BoardDTO preDTO = boardService.preReadData(boardId, subject, searchKey, searchValue);
 			
 			int preNum=0;
 			String preSubject = "";
 			if(preDTO!=null) {
-			    preNum = preDTO.getBoardNum();
+			    preNum = preDTO.getBoardId();
 			    preSubject=preDTO.getSubject();
 			}
 			
-			BoardDTO nextDTO = boardService.nextReadData(boardNum, subject, searchKey, searchValue);
+			BoardDTO nextDTO = boardService.nextReadData(boardId, subject, searchKey, searchValue);
 		
 			int nextNum=0;
 			String nextSubject = "";
 			if(nextDTO!=null) {
-				nextNum = nextDTO.getBoardNum();
+				nextNum = nextDTO.getBoardId();
 				nextSubject=nextDTO.getSubject();
 			}
 			
@@ -353,7 +350,171 @@ public class BoardController {
 		}
 		
 
+		@PostMapping("/AnswerCreated.action")
+		public ModelAndView AnswerCreated(BoardAnswerDTO dto,HttpServletRequest request) throws Exception{
+			
+			int boardId = Integer.parseInt(request.getParameter("boardId"));
+			
+			int maxNum = BoardAnswerService.maxNum();
+			
+			dto.setAnswerNum(maxNum+1);
+			dto.setBoardId(boardId);
+			
+			BoardAnswerService.insertData(dto);
+			
+			ModelAndView mav = new ModelAndView();
+			
+			
+			mav.setViewName("redirect:/AnswerList.action");
+
+			return mav;
+
+		}
 		
+		@RequestMapping("/AnswerList.action")
+		public ModelAndView AnswerList(BoardAnswerDTO dto,HttpServletRequest request) throws Exception{
+			
+			int boardId = Integer.parseInt(request.getParameter("boardId"));
+
+			String pageNum = request.getParameter("pageNum");//문자만 따온건가?
+			
+			//System.out.println(pageNum);
+			//System.out.println(boardId);
+			
+			int currentPage = 1;
+			int numPerPage = 3;
+			
+			if(pageNum!=null && !pageNum.equals("")) {
+				currentPage = Integer.parseInt(pageNum);
+				//1페이지가 아닌 get방식 주소로 받은 pageNum로 변경
+			}
+			
+			int dataCount = BoardAnswerService.getDataCount(boardId);
+			//DataCount가 boardNum을 받았기 때문에  
+<<<<<<< HEAD
+<<<<<<< HEAD
+			//일련번호는 각 boardNum마다 다르게 출력됨
+=======
+>>>>>>> main
+=======
+=======
+			//일련번호는 각 boardNum마다 다르게 출력됨
+>>>>>>> facf44db71883f57c8fe93188329af683c679f02
+>>>>>>> main
+		
+			
+			int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+
+			if(currentPage>totalPage) {
+				currentPage=totalPage;
+			}
+			
+			
+			int start = (currentPage-1)*numPerPage+1;
+			int end = currentPage*numPerPage;	
+			
+			List<BoardAnswerDTO> lists = BoardAnswerService.getLists(start, end, boardId);
+			
+			
+			//System.out.println(lists);
+			
+			
+		
+			String pageIndexList = BoardUtil.pageIndexList(currentPage, totalPage);
+			
+			//ModelAndView로 전송
+			ModelAndView mav = new ModelAndView();// "jsonView"
+			
+			
+			//포워딩할 데이터
+			mav.addObject("lists", lists);
+			mav.addObject("pageIndexList", pageIndexList);
+			mav.addObject("boardId", boardId);
+			mav.addObject("pageNum", currentPage);
+			
+			System.out.println(lists);
+			//System.out.println(pageIndexList+"2");
+			//System.out.println(boardId+"3");
+			//System.out.println(currentPage+"4");
+			
+			
+			mav.setViewName("boardAnswerList");
+
+			return mav;
+			
+		}
+		
+		@RequestMapping("/AnswerDeleted.action")
+		public ModelAndView AnswerDeleted(BoardAnswerDTO dto,HttpServletRequest request) throws Exception{
+			
+			int answerNum = Integer.parseInt(request.getParameter("answerNum"));
+			
+			int boardId = dto.getBoardId();
+			
+			BoardAnswerService.deleteData(answerNum);
+			
+			ModelAndView mav = new ModelAndView();
+			
+			mav.addObject("boardId", boardId);
+			mav.setViewName("redirect:/AnswerList.action");
+			
+			return mav;
+			
+		}
+		
+		@GetMapping("/AnswerUpdated.action")
+		public ModelAndView AnswerUpdated(HttpServletRequest request) throws Exception{
+			
+			ModelAndView mav = new ModelAndView();
+			
+			int answerNum = Integer.parseInt(request.getParameter("answerNum"));
+			String pageNum = request.getParameter("pageNum");
+			
+			int boardId = Integer.parseInt(request.getParameter("num"));
+			
+		
+			BoardAnswerDTO dto = BoardAnswerService.getReadData(answerNum);
+			
+			if(dto==null) {
+				
+				mav.setViewName("redirect:BoardList.action?pageNum=" + pageNum + "&num=" + boardId);
+				
+				return mav;
+			}
+			
+			String param =  "pageNum=" + pageNum + "&num=" + boardId ;
+		
+			mav.addObject("dto", dto);
+			mav.addObject("pageNum", pageNum);
+			mav.addObject("params", param);
+			mav.addObject("boardId", boardId);
+			
+			mav.setViewName("boardAnswerUpdated");
+			
+			return mav;
+		}
+		
+		@RequestMapping(value = "/AnswerUpdated_ok.action",method = {RequestMethod.GET,RequestMethod.POST})
+		public ModelAndView AnswerUpdated_ok(BoardAnswerDTO dto,HttpServletRequest request) throws Exception{
+			
+			
+			String pageNum = request.getParameter("pageNum");
+			int boardId = Integer.parseInt(request.getParameter("boardId"));
+	
+		
+			BoardAnswerService.updateData(dto);
+			
+			
+			ModelAndView mav = new ModelAndView();
+			
+			String param =  "pageNum=" + pageNum + "&num=" + boardId ;
+			
+			
+			mav.setViewName("redirect:/BoardArticle.action?" + param);
+								
+			return mav;
+			
+		}
 		
 		
 		

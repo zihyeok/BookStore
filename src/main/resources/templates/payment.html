@@ -7,13 +7,14 @@
 <link rel="stylesheet" href="/css/basket.css">
 </head>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <body>
 
 	<div class="container">
 	  <h1>주문하신 상품 결제가 완료되었습니다.</h1>
 	  <hr />
-	  <p>[[${user.userName}]] 고객님 안녕하세요? <br />저희 문학이조를 이용해 주셔서 대단히 감사드립니다.<br />고객님께서 <strong>[[${date}]]</strong> 구매하신 상품에 대한 금액 <strong>771,070원</strong>이 결제완료 되었습니다. </p>
+	  <p>[[${user.userName}]] 고객님 안녕하세요? <br />저희 문학이조를 이용해 주셔서 대단히 감사드립니다.<br />고객님께서 <strong>[[${date}]]</strong> 구매하신 상품에 대한 금액 <strong id="price1"></strong>이 결제완료 되었습니다. </p>
 	   <hr />
 	  
 	  <div class="panel panel-primary">
@@ -28,7 +29,7 @@
 	              <th>상품코드</th>
 	               <th class="text-center">제품명</th>
 	               <th class="text-center">수량</th>
-	               <th class="text-center">금액</th>
+	               <th class="text-center" width="180px">금액</th>
 	            </tr>
 	          </thead>
 	          <tbody>
@@ -43,7 +44,7 @@
 	              <td class="no-line"></td>
 	              <td class="no-line"></td>
 	              <td class="no-line text-center"><strong>최종금액</strong></td>
-	              <td class="no-line text-center">100,000원</td>
+	              <td class="no-line text-center" id="price2"></td>
 	            </tr>
 	          </tbody>
 	        </table>
@@ -61,19 +62,19 @@
 	          <tbody>
 	            <tr>
 	              <td class="text-center gr"><strong>주문번호</strong></td>
-	              <td>D1234556</td>
+	              <td>[[${orderId}]]</td>
 	              <td class="text-center gr"><strong>주문일</strong></td>
 	              <td>[[${date}]]</td>
 	            </tr>
 	            <tr>
 	              <td class="text-center gr"><strong>주문총액</strong></td>
-	              <td>771,080원</td>
-	              <td class="text-center gr"><strong>할인금액</strong></td>
-	              <td>0원</td>
+	              <td id="price3"></td>
+	              <td class="text-center gr"><strong>구매권수</strong></td>
+	              <td>[[${#lists.size(lists)}]]권</td>
 	            </tr>
 	            <tr>
 	              <td class="text-center gr"><strong>결제금액</strong></td>
-	              <td>771,080원</td>
+	              <td id="price4"></td>
 	              <td class="text-center gr"><strong>결제상태</strong></td>
 	              <td>결제완료</td>
 	            </tr>
@@ -120,8 +121,49 @@
 	      </div>
 	    </div>
 	  </div>
+	  
+	  <a href="/main"><button type="button" class="btn btn-default btn-lg btn-block">돌아가기</button></a>
 	</div>
 	
-	
+	<br/><br/><br/><br/><br/>
 </body>
+<script th:inline="javascript">
+
+$(function(){
+	
+	var urlParams = new URLSearchParams(window.location.search);
+	var pg_token = urlParams.get('pg_token');
+	var tid = [[${tid}]];
+	
+// 	$("body").hide();
+	 
+	$.ajax({
+		
+		url:"https://kapi.kakao.com/v1/payment/approve",
+		type:'POST',
+		data:{
+			'cid' : 'TC0ONETIME',
+			'tid' : tid,
+			'partner_order_id' : [[${orderId}]],
+			'partner_user_id' : [[${user.userId}]],
+			'pg_token' : pg_token
+		},
+		headers:{
+			'Authorization' : 'KakaoAK 051b33bdbbe0ba43924808b0a780bb6c',
+			'Content-type' : 'application/x-www-form-urlencoded;charset=utf-8'
+		},
+		dataType:"json",
+		success:function(data){
+			
+			$("#price1, #price2, #price3, #price4").html(data.amount.total + '원');
+			
+			$("body").show();
+		},
+		error:function(error){
+			
+			alert(error);
+		}
+	});
+});
+</script>
 </html>

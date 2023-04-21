@@ -4,14 +4,41 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script th:inline="javascript">
 
 	var message = [[${alert}]];
 	
 	window.onload = function(){
-		alert(message);
-		location.href='/user/login';
+		alertLogin();
 	}
+	
+	function alertLogin(){
+
+		Swal.fire({
+			  title: message,
+			  icon: 'error',
+			  iconHtml: 'X',
+			  confirmButtonText: '확인',
+			  cancelButtonText: '취소',
+			  showCancelButton: true,
+			  showCloseButton: true
+			}).then((result)=>{
+				
+				if(result.value){
+					
+					window.location.href='/user/login';
+					
+				}else{
+					
+					window.location.href='/main'
+					
+				}
+				
+			});
+
+	}
+
 </script>
 <body>
 </body>

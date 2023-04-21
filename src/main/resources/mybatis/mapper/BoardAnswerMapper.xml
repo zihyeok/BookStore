@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.book.store.mapper.BoardAnswerMapper">
+
+<select id="maxNum" resultType="int">
+	select nvl(max(answerNum),0) from Answer
+</select>
+
+<insert id="insertData" parameterType="com.book.store.dto.BoardAnswerDTO"> 
+	insert into Answer (answerNum,boardId,userId,content,created,fix_Created) 
+	values(#{answerNum},#{boardId},#{userId},#{content},sysdate,sysdate)
+</insert>
+
+<select id="getDataCount" resultType="int" parameterType="int">
+	select nvl(count(*),0) from Answer 
+	where boardId=#{boardId} 
+</select>
+
+<select id="getLists" parameterType="map" resultType="com.book.store.dto.BoardAnswerDTO">
+	select * from (
+	select rownum rnum, data.* from (
+	select answerNum,boardId,userId,content,
+	to_char(created,'YYYY-MM-DD HH24:MI:SS') created, 
+    to_char(fix_created,'YYYY-MM-DD HH24:MI:SS') fix_created 
+	from Answer where boardId = #{boardId} 
+	order by answerNum desc) data) 
+<![CDATA[
+	where rnum>=#{start} and rnum<=#{end}
+]]>
+</select>
+
+<delete id="deleteData" parameterType="int">
+	delete from Answer where answerNum=#{answerNum} 
+</delete>
+
+<select id="getReadData" parameterType="int" resultType="com.book.store.dto.BoardAnswerDTO">
+	select answerNum,boardId,userId,content,created,fix_Created from Answer 
+	where answerNum = #{answerNum}
+</select>
+
+<update id="updateData" parameterType="com.book.store.dto.BoardAnswerDTO">
+	UPDATE Answer SET answerNum=#{answerNum}, boardId=#{boardId}, userId=#{userId},content=#{content},fix_Created=sysdate
+	WHERE answerNum=#{answerNum}
+</update>
+
+
+
+</mapper>

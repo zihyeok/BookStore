@@ -9,7 +9,9 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -127,13 +129,13 @@ public class UserAjax {
 	public ModelAndView success(HttpServletRequest request) throws NumberFormatException, Exception {
 		
 		UserData user = null;
-
-		if(httpsession.getAttribute("user")!="") {
+		// == "" 은 안됌  .equals("") 이렇게 써야될듯 아니면 == null
+		if(httpsession.getAttribute("user")!=null) {
 
 			user = (UserData) httpsession.getAttribute("user");
 
 
-		}else if(httpsession.getAttribute("OauthUser")!="") {
+		}else if(httpsession.getAttribute("OauthUser")!=null) {
 
 			user = (UserData) httpsession.getAttribute("OauthUser");
 
@@ -148,6 +150,9 @@ public class UserAjax {
 			return mav;
 
 		}
+		
+		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일");
+        String date = format.format(new Date());
 		
 		String pg_token = request.getParameter("pg_token");
 		String tid = (String) httpsession.getAttribute("tid");
@@ -175,10 +180,12 @@ public class UserAjax {
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("tid", tid);
-		mav.addObject("user", user.getUserId());
+		mav.addObject("user", user);
 		mav.addObject("orderId", orderId);
 		mav.addObject("lists", lists);
-		mav.setViewName("kakaopay_success");
+		mav.addObject("date", date);
+		mav.addObject("vip",Integer.parseInt(user.getUserVip()));
+		mav.setViewName("payment");
 		
 //		try {
 //			URL url = new URL("https://kapi.kakao.com/v1/payment/approve");
