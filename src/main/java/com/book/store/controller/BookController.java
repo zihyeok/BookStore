@@ -415,231 +415,180 @@ public class BookController {
 
 	}
 	
-<<<<<<< HEAD
 	
 	//신작
-	@GetMapping("/NewBook.action")
-	public ModelAndView newlist(HttpServletRequest request) throws Exception{
-=======
-	@GetMapping("/BookCategoryList.action")
-	public ModelAndView categoryList(HttpServletRequest request) throws Exception{
-		
->>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
-		String pageNum = request.getParameter("pageNum");
+		@GetMapping("/NewBook.action")
+		public ModelAndView newlist(HttpServletRequest request) throws Exception{
+			String pageNum = request.getParameter("pageNum");
 
-		int currentPage = 1; //첫화면은 1페이지 
+			int currentPage = 1; //첫화면은 1페이지 
 
-		if(pageNum!=null) {
+			if(pageNum!=null) {
 
-			currentPage = Integer.parseInt(pageNum);
-			//1페이지가 아닌 get방식 주소로 받은 pageNum로 변경
-		}
-
-		String searchKey = request.getParameter("searchKey");
-		//searchKey는 작가,제목,도서번호
-		String searchValue = request.getParameter("searchValue");
-
-<<<<<<< HEAD
-		if(searchValue==null) {
-=======
-		if(searchValue==null || searchValue.equals("") || searchValue == "") {
->>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
-
-			searchKey = "title_Nm";
-			searchValue = "";
-
-		}else {//get방식으로 오는거 대소문자 상관없이 searchValue를 utf-8로 디코드
-			if(request.getMethod().equalsIgnoreCase("GET")) {
-				searchValue = URLDecoder.decode(searchValue,"utf-8");
+				currentPage = Integer.parseInt(pageNum);
+				//1페이지가 아닌 get방식 주소로 받은 pageNum로 변경
 			}
-<<<<<<< HEAD
-=======
-			
-			//kdc_Nm 첫 숫자를 뽑아 카테고리 구분
-			searchValue = searchValue.substring(0, 1);
-			
->>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
-		}
 
-		int dataCount = bookItemService.getDataCount(searchKey, searchValue);
-		//searchKey를 매개변수로 인식하지 못하는 현상 발행 - Mapper.java에 @Param을 붙여서 인식하게 만듬
-		int numPerPage = 9;
-		//한페이지에 9개의 아이템
+			String searchKey = request.getParameter("searchKey");
+			//searchKey는 작가,제목,도서번호
+			String searchValue = request.getParameter("searchValue");
 
-<<<<<<< HEAD
-		int totalPage = myUtil.getPageCount(numPerPage, 20);
+			if(searchValue==null) {
 
-		if(currentPage>totalPage) {
-			currentPage=totalPage;
-		}
+				searchKey = "title_Nm";
+				searchValue = "";
 
-		int start = (currentPage-1)*numPerPage + 1;
-		int end = currentPage * numPerPage;
-
-		if (end > 20) { // 마지막 페이지일 경우
-		  end = 20;
-		}
-
-		List<BookDTO> lists = bookItemService.recentLists(start, end);
-		//Mapper.xml에서 TO_CHAR부분 에러발생 데이터 형식이 이미 2023-04-05형태여서 그런듯
-
-		for (int i = lists.size(); i < numPerPage; i++) {
-
-			lists.add(null);
-			//list칸수 맞출려고 강제로 null값 주입
-		}
-
-		String param = ""; if(searchValue!=null&&!searchValue.equals("")) { param =
-				"searchKey=" + searchKey; param+= "&searchValue=" +
-						URLEncoder.encode(searchValue,"utf-8"); }
-
-		String listUrl = "/NewBook.action";
-
-		if(!param.equals("")) { listUrl += "?" + param; }
-
-		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
-
-		String articleUrl = "/BookArticle.action?pageNum=" + currentPage;
-
-		if(!param.equals("")) { articleUrl += "&" + param; }
-
-		ModelAndView mav = new ModelAndView();
-		
-		System.out.print(lists + "lists");
-		
-
-		mav.addObject("lists", lists); 
-		mav.addObject("pageIndexList", pageIndexList);
-		mav.addObject("dataCount", dataCount); 
-		mav.addObject("articleUrl",articleUrl); 
-		mav.addObject("pageNum", currentPage);
-
-		mav.setViewName("BookList");
-		//진짜 주소로 가서 이걸 뿌려줘야 함
-
-		return mav;
-	
-	}
-	
-	//베스트셀러
-	@GetMapping("/BestBook.action")
-	public ModelAndView bestlist(HttpServletRequest request) throws Exception{
-		String pageNum = request.getParameter("pageNum");
-
-		int currentPage = 1; //첫화면은 1페이지 
-
-		if(pageNum!=null) {
-
-			currentPage = Integer.parseInt(pageNum);
-			//1페이지가 아닌 get방식 주소로 받은 pageNum로 변경
-		}
-
-		String searchKey = request.getParameter("searchKey");
-		//searchKey는 작가,제목,도서번호
-		String searchValue = request.getParameter("searchValue");
-
-		if(searchValue==null) {
-
-			searchKey = "title_Nm";
-			searchValue = "";
-
-		}else {//get방식으로 오는거 대소문자 상관없이 searchValue를 utf-8로 디코드
-			if(request.getMethod().equalsIgnoreCase("GET")) {
-				searchValue = URLDecoder.decode(searchValue,"utf-8");
+			}else {//get방식으로 오는거 대소문자 상관없이 searchValue를 utf-8로 디코드
+				if(request.getMethod().equalsIgnoreCase("GET")) {
+					searchValue = URLDecoder.decode(searchValue,"utf-8");
+				}
 			}
+
+			int dataCount = bookItemService.getDataCount(searchKey, searchValue);
+			//searchKey를 매개변수로 인식하지 못하는 현상 발행 - Mapper.java에 @Param을 붙여서 인식하게 만듬
+			int numPerPage = 9;
+			//한페이지에 9개의 아이템
+
+			int totalPage = myUtil.getPageCount(numPerPage, 20);
+
+			if(currentPage>totalPage) {
+				currentPage=totalPage;
+			}
+
+			int start = (currentPage-1)*numPerPage + 1;
+			int end = currentPage * numPerPage;
+
+			if (end > 20) { // 마지막 페이지일 경우
+			  end = 20;
+			}
+
+			List<BookDTO> lists = bookItemService.recentLists(start, end);
+			//Mapper.xml에서 TO_CHAR부분 에러발생 데이터 형식이 이미 2023-04-05형태여서 그런듯
+
+			for (int i = lists.size(); i < numPerPage; i++) {
+
+				lists.add(null);
+				//list칸수 맞출려고 강제로 null값 주입
+			}
+
+			String param = ""; if(searchValue!=null&&!searchValue.equals("")) { param =
+					"searchKey=" + searchKey; param+= "&searchValue=" +
+							URLEncoder.encode(searchValue,"utf-8"); }
+
+			String listUrl = "/NewBook.action";
+
+			if(!param.equals("")) { listUrl += "?" + param; }
+
+			String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
+
+			String articleUrl = "/BookArticle.action?pageNum=" + currentPage;
+
+			if(!param.equals("")) { articleUrl += "&" + param; }
+
+			ModelAndView mav = new ModelAndView();
+			
+			System.out.print(lists + "lists");
+			
+
+			mav.addObject("lists", lists); 
+			mav.addObject("pageIndexList", pageIndexList);
+			mav.addObject("dataCount", dataCount); 
+			mav.addObject("articleUrl",articleUrl); 
+			mav.addObject("pageNum", currentPage);
+
+			mav.setViewName("BookList");
+			//진짜 주소로 가서 이걸 뿌려줘야 함
+
+			return mav;
+		
 		}
+		
+		//베스트셀러
+		@GetMapping("/BestBook.action")
+		public ModelAndView bestlist(HttpServletRequest request) throws Exception{
+			String pageNum = request.getParameter("pageNum");
 
-		int dataCount = bookItemService.getDataCount(searchKey, searchValue);
-		//searchKey를 매개변수로 인식하지 못하는 현상 발행 - Mapper.java에 @Param을 붙여서 인식하게 만듬
-		int numPerPage = 9;
-		//한페이지에 9개의 아이템
+			int currentPage = 1; //첫화면은 1페이지 
 
-		int totalPage = myUtil.getPageCount(numPerPage, 20);
-=======
-		int totalPage = myUtil.getPageCount(numPerPage, dataCount);
->>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
+			if(pageNum!=null) {
 
-		if(currentPage>totalPage) {
-			currentPage=totalPage;
+				currentPage = Integer.parseInt(pageNum);
+				//1페이지가 아닌 get방식 주소로 받은 pageNum로 변경
+			}
+
+			String searchKey = request.getParameter("searchKey");
+			//searchKey는 작가,제목,도서번호
+			String searchValue = request.getParameter("searchValue");
+
+			if(searchValue==null) {
+
+				searchKey = "title_Nm";
+				searchValue = "";
+
+			}else {//get방식으로 오는거 대소문자 상관없이 searchValue를 utf-8로 디코드
+				if(request.getMethod().equalsIgnoreCase("GET")) {
+					searchValue = URLDecoder.decode(searchValue,"utf-8");
+				}
+			}
+
+			int dataCount = bookItemService.getDataCount(searchKey, searchValue);
+			//searchKey를 매개변수로 인식하지 못하는 현상 발행 - Mapper.java에 @Param을 붙여서 인식하게 만듬
+			int numPerPage = 9;
+			//한페이지에 9개의 아이템
+
+			int totalPage = myUtil.getPageCount(numPerPage, 20);
+
+			if(currentPage>totalPage) {
+				currentPage=totalPage;
+			}
+
+			int start = (currentPage-1)*numPerPage+1;
+			int end = currentPage*numPerPage;
+
+			if (end > 20) { // 마지막 페이지일 경우
+			  end = 20;
+			}
+
+			List<BookDTO> lists = bookItemService.topSalLists(start, end);
+			//Mapper.xml에서 TO_CHAR부분 에러발생 데이터 형식이 이미 2023-04-05형태여서 그런듯
+
+			for (int i = lists.size(); i < numPerPage; i++) {
+
+				lists.add(null);
+				//list칸수 맞출려고 강제로 null값 주입
+			}
+
+			String param = ""; if(searchValue!=null&&!searchValue.equals("")) { param =
+					"searchKey=" + searchKey; param+= "&searchValue=" +
+							URLEncoder.encode(searchValue,"utf-8"); }
+
+			String listUrl = "/BestBook.action";
+
+			if(!param.equals("")) { listUrl += "?" + param; }
+
+			String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
+
+			String articleUrl = "/BookArticle.action?pageNum=" + currentPage;
+
+			if(!param.equals("")) { articleUrl += "&" + param; }
+
+			ModelAndView mav = new ModelAndView();
+			
+			System.out.print(lists + "lists");
+			
+
+			mav.addObject("lists", lists); 
+			mav.addObject("pageIndexList", pageIndexList);
+			mav.addObject("dataCount", dataCount); 
+			mav.addObject("articleUrl",articleUrl); 
+			mav.addObject("pageNum", currentPage);
+
+			mav.setViewName("BookList");
+			//진짜 주소로 가서 이걸 뿌려줘야 함
+
+			return mav;
+		
 		}
-
-		int start = (currentPage-1)*numPerPage+1;
-		int end = currentPage*numPerPage;
-
-<<<<<<< HEAD
-		if (end > 20) { // 마지막 페이지일 경우
-		  end = 20;
-		}
-
-		List<BookDTO> lists = bookItemService.topSalLists(start, end);
-		//Mapper.xml에서 TO_CHAR부분 에러발생 데이터 형식이 이미 2023-04-05형태여서 그런듯
-=======
-		List<BookDTO> lists = bookItemService.categoryLists(start, end, searchKey, searchValue);
->>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
-
-		for (int i = lists.size(); i < numPerPage; i++) {
-
-			lists.add(null);
-			//list칸수 맞출려고 강제로 null값 주입
-		}
-
-		String param = ""; if(searchValue!=null&&!searchValue.equals("")) { param =
-				"searchKey=" + searchKey; param+= "&searchValue=" +
-						URLEncoder.encode(searchValue,"utf-8"); }
-
-<<<<<<< HEAD
-		String listUrl = "/BestBook.action";
-=======
-		String listUrl = "/BookCategoryList.action";
->>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
-
-		if(!param.equals("")) { listUrl += "?" + param; }
-
-		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage, listUrl);
-
-		String articleUrl = "/BookArticle.action?pageNum=" + currentPage;
-
-		if(!param.equals("")) { articleUrl += "&" + param; }
-
-		ModelAndView mav = new ModelAndView();
-<<<<<<< HEAD
-		
-		System.out.print(lists + "lists");
-		
-
-		mav.addObject("lists", lists); 
-		mav.addObject("pageIndexList", pageIndexList);
-		mav.addObject("dataCount", dataCount); 
-		mav.addObject("articleUrl",articleUrl); 
-		mav.addObject("pageNum", currentPage);
-
-=======
-
-		mav.addObject("lists", lists); 
-		mav.addObject("pageIndexList", pageIndexList);
-		mav.addObject("articleUrl",articleUrl); 
-		mav.addObject("pageNum", currentPage);
-		
-		//통합검색 결과 갯수 확인
-		mav.addObject("dataCount", dataCount); 
-		mav.addObject("searchValue", searchValue); 
-		
-		//이걸로 통합검색 창 뜨게할지 안 할지 확인
-		mav.addObject("searchKey", searchKey); 
-
-		
->>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
-		mav.setViewName("BookList");
-		//진짜 주소로 가서 이걸 뿌려줘야 함
-
-		return mav;
-<<<<<<< HEAD
 	
-	}
-	
-=======
-		
-	}
->>>>>>> f4aa824e964c4fad9fcd2a6fffa8966b47ca1b3c
 
 }
