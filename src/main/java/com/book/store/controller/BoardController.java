@@ -389,14 +389,7 @@ public class BoardController {
 			
 			int dataCount = BoardAnswerService.getDataCount(boardId);
 			//DataCount가 boardNum을 받았기 때문에  
-<<<<<<< HEAD
 		
-=======
-
-			//일련번호는 각 boardNum마다 다르게 출력됨
-
-
->>>>>>> 7cf99fb6343d5cf17a6bd983714dab8e194d9eac
 			
 			int totalPage = myUtil.getPageCount(numPerPage, dataCount);
 
