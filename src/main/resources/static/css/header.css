@@ -301,6 +301,20 @@ button.btn-search, button.btn-reset {
   font-size: 1.3rem;
   cursor: pointer;
 }
+.fa-sign-out-alt{
+	position: absolute;
+    right: -3.3rem;
+    top: 1.3rem;
+    font-size: 1.7rem;
+    cursor: pointer;
+}
+.fa-sign-in-alt{
+	position: absolute;
+    right: -3.3rem;
+    top: 1.3rem;
+    font-size: 1.7rem;
+    cursor: pointer;
+}
 #side-menu{
     position: fixed;
     right: 20px;

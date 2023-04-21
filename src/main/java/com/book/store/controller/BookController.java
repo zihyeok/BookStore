@@ -92,10 +92,20 @@ public class BookController {
 		//requestparam(value="html에서의 name", required 는 해당 매개변수가 필수면 true 아니면 false
 
 		ModelAndView mav = new ModelAndView();
-
+		
 		int maxNum = bookItemService.maxNum();
-
-		dto.setSeq_No(maxNum+1);//일련번호 매기기
+		
+		int backUpMaxNum = bookItemService.backUpMaxNum();
+		
+		if(backUpMaxNum >= maxNum) {
+			
+			dto.setSeq_No(backUpMaxNum+1);
+			
+		}else {
+			
+			dto.setSeq_No(maxNum+1);//일련번호 매기기
+			
+		}
 
 		FileManager.doFileUpload(dto, upload);
 
@@ -396,6 +406,16 @@ public class BookController {
 		String searchValue = request.getParameter("searchValue");
 		String image_Url = request.getParameter("image_Url");
 
+		BookDTO dto = bookItemService.getReadData(seq_No);
+		
+		//백업테이블에 seq_No중 최대 번호 입력
+		int seq_Max = bookItemService.maxNum();
+		
+		dto.setSeq_Max(seq_Max);
+		
+		//백업테이블에 백업
+		bookItemService.insertBackUp(dto);
+		
 		bookItemService.deleteData(seq_No);
 
 		FileManager.doFileDelete(image_Url);

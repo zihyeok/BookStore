@@ -17,4 +17,7 @@ public class BookDTO {
 	private String pblicte_De;
 	private int sal_Count;
 	
+	//일련번호매기기
+	private int seq_Max;
+	
 }
