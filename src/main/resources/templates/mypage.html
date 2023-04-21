@@ -21,25 +21,36 @@ $(function(){
 <body>
 	
 	<div class="wrap">
-	  <div class="brownContainer">
+	  <div th:class="${vip > 50} ? 'diaContainer' : 
+	  (${vip > 40} ? 'plaContainer' : 
+	  (${vip > 30} ? 'goldContainer' : 
+	  (${vip > 20} ? 'silverContainer' : 
+	  (${vip > 10} ? 'bronzeContainer' : 'greenContainer'))))">
 	    <div>
-	      <div class="grade">GOLD</div>
+	      <div class="grade" th:text="${vip > 50} ? 'Diamond' : 
+	      (${vip > 40} ? 'Platinum' : 
+	      (${vip > 30} ? 'Gold' : 
+	      (${vip > 20} ? 'Silver' : 
+	      (${vip > 10} ? 'Bronze' : 'Welcome'))))"></div>
 	      <div class="name">[[${user.userName}]]</div>
-	    </div>    
-	    <div class="modify">i</div>    
+	    </div> 
+	    <div class="cross">
+	    <a href="/user/hi"><img class="img" alt="x" th:src="@{/image/cancel-button.png}"/></a>
+		 </div>
+	    <div class="modify">i</div>
 	  </div>
 	  <div class="summaryContainer">
 	    <div class="item">
-	        <div class="number">354</div>
-	        <div>단골상점</div>
+	        <div class="text">[[${user.userId}]]</div>
+	        <div>아이디</div>
 	      </div>
 	      <div class="item">
-	        <div class="number">354</div>
-	        <div>상품후기</div>
+	        <div class="text">[[${user.userBirth}]]</div>
+	        <div>생년월일</div>
 	      </div>
 	      <div class="item">
-	        <div class="number">354</div>
-	        <div>적립금(BLCT)</div>
+	        <div class="text">[[${user.userVip}]]</div>
+	        <div>총 구매권수</div>
 	      </div>
 	  </div>  
 	  <div class="shippingStatusContainer">
@@ -50,29 +61,29 @@ $(function(){
 	      
 	      <div class="item">
 	        <div>
-	          <div class="brown number">[[${bagitem_length}]]</div>
+	          <div class="green number">[[${bagitem_length}]]</div>
 	          <div class="text">장바구니</div>
 	        </div>
-	        <div class="icon"> > </div>
+<!-- 	        <div class="icon"> > </div> -->
 	      </div>     
+<!-- 	      <div class="item"> -->
+<!-- 	        <div> -->
+<!-- 	          <div class="number">0</div> -->
+<!-- 	          <div class="text">결제완료</div> -->
+<!-- 	        </div> -->
+<!-- 	        <div class="icon"> > </div> -->
+<!-- 	      </div>      -->
 	      <div class="item">
 	        <div>
-	          <div class="brown number">0</div>
-	          <div class="text">결제완료</div>
-	        </div>
-	        <div class="icon"> > </div>
-	      </div>     
-	      <div class="item">
-	        <div>
-	          <div class="brown number">1</div>
+	          <div class="green number">0</div>
 	          <div class="text">배송중</div>
 	        </div>
-	        <div class="icon"> > </div>
+<!-- 	        <div class="icon"> > </div> -->
 	      </div>     
 	      <div class="item">
 	        <div>
-	          <div class="brown number">3</div>
-	          <div class="text">구매확정</div>
+	          <div class="green number">[[${order_Count}]]</div>
+	          <div class="text">구매완료</div>
 	        </div>
 	      </div>     
 	      
@@ -80,9 +91,9 @@ $(function(){
 	    
 	  </div>  
 	  <div class="listContainer">
-	    <a href="#" class="item">
+	    <a href="/user/update" class="item">
 	        <div class="icon">ii</div>
-	        <div class="text">주문목록<span class="circle"></span></div>
+	        <div class="text">정보수정</div>
 	        <div class="right"> > </div>
 	    </a>
 	    <a href="#" class="item">
@@ -106,31 +117,7 @@ $(function(){
 	        <div class="right"> > </div>
 	    </a>
 	  </div>
-	  <div class="listContainer">
-	    <a href="#" class="item">
-	        <div class="icon">ii</div>
-	        <div class="text">
-	          <span>내지갑</span>
-	          <span class="smallLight">
-	            <span>|</span>
-	            <span>보유 적립금</span>
-	          </span>          
-	        </div>                
-	        <div class="right">
-	          <span class="blct">175 BLCT</span>
-	          > </div>
-	    </a>
-	    <a href="#" class="item">
-	        <div class="icon">ii</div>
-	        <div class="text">알림</div>
-	        <div class="right"> > </div>
-	    </a>
-	    <a href="#" class="item">
-	        <div class="icon">ii</div>
-	        <div class="text">설정</div>
-	        <div class="right"> > </div>
-	    </a>   
-	  </div>
+	  
 	  <div class="infoContainer">
 	    <a href="#" class="item">
 	      <div>icon</div>

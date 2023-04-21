@@ -92,7 +92,7 @@
     <!-- End Head -->
 <!-- 삭제만들어야함 -->
     <!-- Body -->
-    <body>
+    <body class="BookArgicle">
 
 		<div class="container product_detail"><!--container S-->
 			<div class="in_box"><!--in_box S-->
@@ -106,14 +106,14 @@
 				</div>
 					<div class="product_box">				
 						<div class="product_txt">
-							<p class="tit">[[${dto.publisher_Nm}]]</p>
-							<p class="sub_txt">[[${dto.title_Nm}]]</p>
+							<h5 class="tit">[[${dto.authr_Nm}]] | [[${dto.publisher_Nm}]]</h5>
+							<h3 class="sub_txt">[[${dto.title_Nm}]]</h3>
 							<p class="price"><strong>[[${dto.prc_Value}]]</strong>원</p>
 						</div>
 
 					
 						<div class="product_info">
-							<p><strong>적립혜택</strong><span>구매 시 교원포인트 50% 적립 (~10/30까지)</span></p>
+							<p><strong>적립혜택</strong><span>구매 시 교원포인트 50% 적립 (~5/30까지)</span></p>
 							<p><strong>판매수량</strong><span>1,243 구매</span></p>
 						</div>
 					
@@ -331,7 +331,7 @@
 				});
 
 
-				//상품권 가격
+				// 가격
 				$('.drop-down02 p').click(function(){
 					$('.productprice').slideToggle();
 					$('.drop-down01 ul li').slideUp();

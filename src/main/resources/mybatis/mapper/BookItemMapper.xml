@@ -33,7 +33,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	select rownum rnum,data.* from (
 	select seq_No,isbn_Thirteen_No,authr_Nm,publisher_Nm,title_Nm,
 	prc_Value,image_Url,book_Intrcn_Cn,kdc_Nm,pblicte_De,sal_Count
-	from BookItem order by seq_No desc) data) 
+	from BookItem order by pblicte_De desc) data) 
 <![CDATA[
 	where rnum>=#{start} and rnum<=#{end}
 ]]>

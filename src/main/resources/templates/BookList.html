@@ -15,26 +15,26 @@
 	<div class="BookList-row" th:each="j : ${#numbers.sequence(0,2)}">
 		
 		<div class="BookList-img-box" th:each="dto: ${lists[3*i+j]}"> 
-			
+			<div>
 			<a th:href="@{${articleUrl}} + '&seq_No=' + @{${dto.seq_No}}">
 			<img alt="" th:src="@{${dto.image_Url}}"></a><br/>
+			</div>
 			
-			<span>[[${dto.title_Nm}]]</span><br/>
+			<h5>[[${dto.title_Nm}]]</h5>
 			<span>[[${dto.authr_Nm}]]</span><br/>
-			<span>출판사:[[${dto.publisher_Nm}]]</span><br/>
-			<span>가격:[[${dto.prc_Value}]]원</span><br/>
+			<span>[[${dto.publisher_Nm}]]</span><br/>
+			<span>[[${dto.prc_Value}]]원</span><br/>
 			
 			<div th:id="${dto.seq_No}">
-			<a th:onclick="|javascript:sendBag('${dto.seq_No}')|"><button style="background-color: #fff;" type="button">🤍</button></a>
+            
+			 <a th:onclick="|javascript:sendBag('${dto.seq_No}')|"><button style="background-color: #fff;" type="button">🤍</button></a>
 			</div>
 			<div th:id="'delete' + ${dto.seq_No}" style="display: none;">
+			
 			<a th:onclick="|javascript:sendDeleteBag('${dto.seq_No}')|"><button style="background-color: #fff;" type="button">❤️</button></a>
-			</div>
+			</div> 
 			
 		</div>
-		
-		
-		
 	</div>
 </div>
 
