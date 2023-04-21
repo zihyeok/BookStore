@@ -33,15 +33,7 @@
 
 <table  th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
 
-<script th:inline="javascript">
 
-	var content = [[${dto.content}]];
-	
-	content = content.replace(/(\r\n|\r|\n)/g,'<br/>');
-	
-	$("#Content").html(content);
-
-</script>
 
 	<div class="see-comments" style="font-family: 'NEXON Lv1 Gothic OTF'; font-size: 15px;">
 	  <section>
@@ -68,12 +60,18 @@
 	        th:href="'javascript:deleteData(\'' + ${dto.answerNum} + '\', \'' + ${pageNum} + '\')'">삭제</a>  
 	        </span>
 	      </p>
-	      <br/><br/>
-	      <p id="Content">[[${dto.content}]]</p>
+	    
+	       <br/><br/>
+	       <p colspan="4" style="word-wrap: break-word;" th:utext="${dto.content.replaceAll('(\r\n|\r|\n)', '<br/>')}"></p>
+	      
+	     
+  
 	    </div>
-	    <div><img src="https://user-images.githubusercontent.com/112612653/189023767-c8fd2d91-9928-41bd-a758-b94befaafe23.png"></div>
 	  </section>
 	</div> 
+
+
+
 
 </table>  
   

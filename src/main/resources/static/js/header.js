@@ -25,7 +25,7 @@ $(function() {
 
           $firstMenu.mouseenter(function() {
               $header.stop().animate({
-                height: '360px'
+                height: '350px'
               });
             })
             .mouseleave(function() {

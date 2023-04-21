@@ -78,9 +78,11 @@
   <br/><br/><br/><br/>
   
   <!-- 내용 -->
-  <div  style="word-wrap: break-word; margin-left: 30%; width: 40%;" colspan="4" th:utext="${dto.content}"></div>
-  	
-<br/><br/><div style="margin-left:25%;  border: 1px solid black; width: 50%; "></div><!-- 선 -->
+  <div  style="word-wrap: break-word; margin-left: 30%; width: 40%;" th:utext="${dto.content}"></div>
+
+<!-- 선 -->  	
+<br/><br/><br/>
+<div style="margin-left:25%; border: 1px solid rgba(0, 0, 0, 0.5); width: 50%;"></div>
 
 <div style="margin-top: 20px; margin-right: 17%;">
 	  <button  class="black-btn float-r m-btn" 
@@ -95,7 +97,7 @@
 	  th:onclick="@{|location.href='/BoardList.action?${params }'|}">
 	  리스트</button>
   </div>
-  
+
 <!-- 댓글 리스트 -->	
 <div style="max-width: 50%; margin-left: 25%;"><span id="listData" style="display: block;"></span></div>
 
@@ -127,6 +129,8 @@
 </section>  
   
 </article>
+
+
 
 <br/><br/><br/><br/>
 <br/><br/><br/><br/>
@@ -202,8 +206,8 @@ function listPage(page) {
 		return false;
 	}
 	
-	if(content.length>200){
-		alert("\n내용은 200자까지 가능합니다");
+	if(content.length>400){
+		alert("\n내용은 300자까지 가능합니다");
 		$("#content").focus();
 		return false;
 	}
@@ -234,6 +238,7 @@ function listPage(page) {
 	}
  
 </script>
+
 
 </div>
 

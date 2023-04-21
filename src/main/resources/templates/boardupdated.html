@@ -1,5 +1,5 @@
-<html layout:decorate="~{layout}">
-<meta charset="UTF-8">
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <div layout:fragment="content" >
 <link rel="stylesheet" type="text/css" href="/css/BoardCreated.css">
@@ -13,14 +13,14 @@
 			<div class="tab_content">
 
 				<div class="tab_box">
-					<p class="tit" style="text-align: center;">Q&A 게시판 수정</p>
+					<p class="tit" style="text-align: center;">Q & A 게시판 수정</p>
 					</br></br>
 					<form th:action="@{BoardUpdated_ok.action}" method="post" name="myForm">
 					
 					<div class="ask_box">
 						<p>
 						<label>제&nbsp;목</label> 
-						<input type="text"  name="subject" th:value="${dto.subject }" required> 
+						<input type="text"  name="subject" th:value="${dto.subject }" pattern=".{10,}" title="10자 이상 입력하세요." required> 
 						</p>
 						<p>
 						<label>작성자</label> 
@@ -58,7 +58,7 @@
 
 	</div><!--in_box E-->
 
-</br></br>
+<br/><br/>
 
 </div>
 

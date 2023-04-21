@@ -2,8 +2,8 @@
 
 <nav th:fragment="navbarFragment" class="navbar">
 
-
 <script type="text/javascript" src="/js/ajaxUtil.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <script type="text/javascript">
 
@@ -98,6 +98,32 @@ window.onload = function () {
 	
 }
 
+function alertLogin(){
+
+	Swal.fire({
+		  title: '로그인 후 이용해주세요',
+		  icon: 'error',
+		  iconHtml: 'X',
+		  confirmButtonText: '확인',
+		  cancelButtonText: '취소',
+		  showCancelButton: true,
+		  showCloseButton: true
+		}).then((result)=>{
+			
+			if(result.value){
+				
+				window.location.href='/user/login';
+				
+			}else{
+				
+				 location.reload();
+				
+			}
+			
+		});
+
+}
+
 
 </script>
 
@@ -116,7 +142,7 @@ window.onload = function () {
 
         <nav class="lap-nav">
           <ul class="clearfix">
-      
+            
             <li><a>이벤트</a>
               <ul>
                 <li>진행/대기</li>
@@ -129,26 +155,38 @@ window.onload = function () {
                 <li>공지사항</li>
                 <li>FAQ</li>
                 <li>자료실</li>
+                <li>김치</li>
               </ul>
+              
             </li>
-             <li class="category"><a>카테고리</a>
-			  <ul>
-			    <li>카테고리1</li>
-			    <li>카테고리2</li>
-			    <li>카테고리3</li>			    
-			    <li>카테고리4</li>
-			    <li>카테고리5</li>
-			    <li>카테고리6</li>
-			    <li>카테고리7</li>
-			    <li>카테고리8</li>
-			    <li>카테고리9</li>
-			    <li>카테고리10</li>
-			  </ul>
-			</li>            
+<!--             <li><a>북클럽</a> -->
+<!--               <ul> -->
+<!--                 <li>이달의 책</li> -->
+<!--                 <li>커뮤니티</li> -->
+<!--               	<li>아지트</li> -->
+<!--               </ul> -->
+<!--             </li> -->
+            <li style="width: 12rem;"><a>카테고리</a>
+            <div style="display: inline-flex;">
+              <ul style="width: 6rem; height: 50%;">
+     			<a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm"><li>전체</li></a>
+     			<a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=100"><li>철학</li></a>
+     			<a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=200"><li>종교</li></a>
+     			<a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=300"><li>사회과학</li></a>
+     			<a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=400"><li>자연과학</li></a>
+              </ul>
+              <ul style="width: 6rem; height: 50%;">
+                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=500"><li>기술과학</li></a>
+                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=600"><li>예술</li></a>
+                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=700"><li>언어(어학)</li></a>
+                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=800"><li>문학</li></a>
+                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=900"><li>역사</li></a>
+              </ul>
+            </div>
+            </li>
             <li><a>도서</a>
               <ul>
                 <li>새로나온 책</li>
-                <li>베스트</li>
                 <li>수상도서</li>
                 <li>매거진</li>
               </ul>
@@ -157,7 +195,8 @@ window.onload = function () {
         </nav>
         
         <div class="sample two" id="search-input">
-        <form action="" name="searchForm" method="GET"> 
+        <form action="" name="searchForm" method="GET"> 		
+ 		
  		
           <ul class="clearfix-2">          
             <li>
@@ -187,15 +226,13 @@ window.onload = function () {
   		</div>  
 
   	<a href="/user/mypage"><i class="fas fa-user"></i></a>
-<<<<<<< HEAD
     <a href="/bag.action" th:if="${session.OauthUser !=null or session.user != null}"><i class="fas fa-shopping-cart"></i></a>
     <a href= "#" th:unless="${session.OauthUser !=null or session.user != null}"><i class="fas fa-shopping-cart" onclick="alertLogin();"></i></a>
     <a href="/logout" th:if="${session.OauthUser !=null or session.user != null}"><i class="fas fa-sign-out-alt"></i></a><!-- 로그아웃 -->
     <a href="/user/login" th:unless="${session.OauthUser !=null or session.user != null}"><i class="fas fa-sign-in-alt"></i></a><!-- 로그인 -->
-=======
     <a href="/bag.action" th:if="${session.user}!=null"><i class="fas fa-shopping-cart"></i></a>
     <a href="/user/login" th:unless="${session.user}!=null" onclick="javascript:alert('로그인 후 이용해주세요')"><i class="fas fa-shopping-cart"></i></a>
->>>>>>> f3afa9328b52b3667040104be7a66c31ef24ea5d
+
       </section>
       
     </article>
