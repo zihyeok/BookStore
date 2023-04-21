@@ -21,7 +21,10 @@ dl, dt, dd, ol, ul, li, fieldset, form, label, legend
      margin: 0; 
      border: 0;
      text-decoration: none; 
-     box-sizing: border-box;}
+     box-sizing: border-box;
+     color: #000;
+     
+     }
 
 ul, ol, li {list-style: none; }
 
@@ -307,7 +310,11 @@ blockquote, q {quotes: "" "";}
 }
 
 
+<<<<<<< HEAD
 /*park,kwon이 만듬 */
+=======
+
+>>>>>>> 7cf99fb6343d5cf17a6bd983714dab8e194d9eac
 
 .see-comments>p:nth-child(1) {
   margin-bottom: 20px;

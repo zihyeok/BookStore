@@ -1,36 +1,40 @@
 @charset "UTF-8";
 
 div.BookList-container {
-	
-	text-align: center;
-	font-family: "NanumGothicCoding";
-	font-weight: bold;
-	
+  text-align: center;
+  display: block;
+  width: 100%;
+  justify-content: space-between;
+}
+
+div.BookList-container h5 {
+  font-weight: bold;
 }
 
 div.BookList-container .BookList-row {
-	
-	display: inline-block;
-	margin-bottom: 20px;
-	width: 20%;
-	
+  display: inline-block;
+  margin: 0 1%;
+  margin-bottom: 20px;
+  width: 20%;
+  vertical-align: top;
+  text-align: center;
+
+  margin-right: 2%; 
+
 }
 
 div.BookList-container .BookList-row .BookList-img-box img {
-	
-	width: 120px;
-	height: 150px;
-	border-radius: 5px;
-	
-
+  width: 120px;
+  height: 150px;
+  border-radius: 5px;
+  margin-bottom: 20px;
 }
 
 div.BookList-container .BookList-row .BookList-img-box span {
-	
-	font-size: 10px;
-
+  font-size: 10px;
 }
 
 .BookList button {
-	background-color: #fff;
+  background-color: #fff;
 }
+

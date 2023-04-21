@@ -22,9 +22,10 @@
   //-->  
   
   </script>
-<body>
 
-<div layout:fragment="content1" >
+<body class="BookMain">
+
+<div layout:fragment="content1">
 
   <main>
     <div>
@@ -42,16 +43,20 @@
   <article class="imgs">
     <section>
       <div>
-        <img src="https://i.postimg.cc/7hqgG1BN/11.jpg">
+      	<a href="/BookArticle.action?seq_No=11601">
+        <img src="https://contents.kyobobook.co.kr/dtl/cardnews/9791168340947_02.jpg"></a>
       </div>
 
       <div>
-        <img src="https://i.postimg.cc/NFxkpCyV/22.jpg">
-        <img src="https://i.postimg.cc/9ftPKyH9/33.jpg">
+      	<a href="/BookArticle.action?seq_No=11584">
+        <img src="https://image.aladin.co.kr/img/bn/book/2023/02/m_230419_booker_p.jpg"></a>
+        <a href="/BookArticle.action?seq_No=11610">
+        <img src="https://image.aladin.co.kr/img/bn/book/2023/02/m_230419_dasan_bomnal_p.jpg"></a>
       </div>
 
       <div>
-        <img src="https://i.postimg.cc/7Z2BLC0s/33.jpg">
+      	<a href="/BookArticle.action?seq_No=11616">
+        <img src="https://image.aladin.co.kr/img/bn/book/2023/02/m_20230405_borntoread90_p.jpg"></a>
       </div>
     </section>
 
@@ -86,9 +91,8 @@
 
   <article class="video">
     <div>
-    <iframe width="100%;" height="500px;" src="https://www.youtube.com/embed/JSJ-7C6ltEw" title="제 딸을 살해한 놈들을 15년 후에 죽여주세요" frameborder="0" 
+      <iframe width="100%;" height="500px;" src="https://www.youtube.com/embed/JSJ-7C6ltEw" title="제 딸을 살해한 놈들을 15년 후에 죽여주세요" frameborder="0" 
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      <!--  <iframe width="100%" height="500px" src="https://www.youtube.com/embed/foaQu71esOE" frameborder="0" allowfullscreen></iframe>	-->
     </div> 
 
     <div class="bg">
@@ -123,6 +127,8 @@
 
         	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" 
         	th:onclick="|location.href='@{/BookArticle.action(seq_No=${topLists.seq_No})}'|">
+            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png"
+            th:onclick="">
 
           </div>
 
@@ -130,8 +136,8 @@
             Top
           </div> -->
         </div>
-			<p th:if="${#strings.length(topLists.title_Nm) < 20}" >[[${topLists.title_Nm}]]</p>
-			<p th:unless="${#strings.length(topLists.title_Nm) < 20}">[[${#strings.substring(topLists.title_Nm,0,19)}]]...</p>
+
+        <p>[[${topLists.title_Nm}]]</p>
       </section>
 	</div>
   </article>
@@ -148,27 +154,30 @@
     <div>
       <section>
         <div>
-          문학이조소설상
-        </div>
-        <img src="https://www.munhak.com/data/book/1794455158_cJq8L0No_c24aa68ccacd9e59384d21bd86c2482f277821a5.jpg">
-        <h5>최단경로</h5>
-        ₩ 12,000
+          청소년문학상
+        </div>        
+        <a href="/BookArticle.action?seq_No=11602">
+        <img src="https://image.aladin.co.kr/product/31113/80/cover500/s002831046_1.jpg"></a>
+        <h5>고요한 우연</h5>
+        ₩ 12,500
       </section>
       <section>
         <div>
           문학이조소설상
         </div>
-        <img src="https://www.munhak.com/data/book/img_201712079162882_b.jpg">
-        <h5>알제리의 유령들</h5>
-        ₩ 12,000
+        <a href="/BookArticle.action?seq_No=11586">
+        <img src="https://image.aladin.co.kr/product/31440/13/cover500/8954691749_2.jpg"></a>
+        <h5>2023 제14회 젊은작가상 수상작품집</h5>
+        ₩ 7,700
       </section>
       <section>
         <div>
           문학이조소설상
         </div>
-        <img src="https://www.munhak.com/data/book/img_201512213261733_b.jpg">
-        <h5>소각의 여왕</h5>
-        ₩ 12,000
+        <a href="/BookArticle.action?seq_No=11604">
+        <img src="https://image.aladin.co.kr/product/31374/18/cover500/8954698891_1.jpg"></a>
+        <h5>1미터는 없어</h5>
+        ₩ 14,000
       </section>
 
     </div>
@@ -227,7 +236,6 @@ if ( cookiedata.indexOf("maindiv=done") < 0 ){
 </div>
 
 </body>
-
 
 
 </html>
