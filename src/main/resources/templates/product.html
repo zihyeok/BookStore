@@ -446,7 +446,7 @@
 					<div class="tab_content">
 						<div class="tab_box tab_box01">
 						
-							<span id="book_Intrcn_Cn" style="line-height: 2rem;"></span>
+							<span id="book_Intrcn_Cn" style="line-height: 1.5rem;"></span>
 
 						</div>
 						<div class="tab_box">
@@ -457,26 +457,26 @@
 							<span id="reviewListData" style="display: block;"></span>
 							
 							<div class="ask_box">
-								<p>
-								<input type="radio" name="reviewStar" value="5"><label for="rate1">★★★★★</label> 
-								<input type="radio" name="reviewStar" value="4"><label for="rate2">★★★★</label>
-								<input type="radio" name="reviewStar" value="3"><label for="rate3">★★★</label>
-								<input type="radio" name="reviewStar" value="2"><label for="rate4">★★</label>
-								<input type="radio" name="reviewStar" value="1"><label for="rate5">★</label>
-								</p>
-								<!-- disabled적용하면 form으로 안 날라감 -->
-								<p th:if="${session.user==null and session.OauthUser==null}"><label>UserID</label><input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
-								<p th:unless="${session.user==null}"><label>UserID</label><input type="text" th:value="${session.user.userId}" name="userId" readonly="readonly"></p>
-								<p th:unless="${session.OauthUser==null}"><label>UserID</label><input type="text" th:value="${session.OauthUser.userId}" name="userId" readonly="readonly"></p>
-								<p th:if="${session.user==null and session.OauthUser==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
-								<p th:unless="${session.user==null}"><label>내용</label><textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
-								<p th:unless="${session.OauthUser==null}"><label>내용</label><textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
-								<div class="btn_box" th:if="${session.user!=null or session.OauthUser !=null}">
-									<button class="btn-555 float-r m-btn" onclick="sendReview();" type="button">리뷰 작성</button>
-									<!-- button은 기본type이 submit 그래서 바로 폼 주소로 가지만 이걸 벗어나려면 type button -->
-								</div>
-							
-							</div>
+                        <p>
+                        <input type="radio" name="reviewStar" value="5"><label for="rate1">★★★★★</label> 
+                        <input type="radio" name="reviewStar" value="4"><label for="rate2">★★★★</label>
+                        <input type="radio" name="reviewStar" value="3"><label for="rate3">★★★</label>
+                        <input type="radio" name="reviewStar" value="2"><label for="rate4">★★</label>
+                        <input type="radio" name="reviewStar" value="1"><label for="rate5">★</label>
+                        </p>
+                        <!-- disabled적용하면 form으로 안 날라감 -->
+                        <p th:if="${session.user==null and session.OauthUser==null}"><label>UserID</label><input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
+                        <p th:unless="${session.user==null}"><label>UserID</label><input type="text" th:value="${session.user.userId}" name="userId" readonly="readonly"></p>
+                        <p th:unless="${session.OauthUser==null}"><label>UserID</label><input type="text" th:value="${session.OauthUser.userId}" name="userId" readonly="readonly"></p>
+                        <p th:if="${session.user==null and session.OauthUser==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
+                        <p th:unless="${session.user==null}"><label>내용</label><textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
+                        <p th:unless="${session.OauthUser==null}"><label>내용</label><textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
+                        <div class="btn_box" th:if="${session.user!=null or session.OauthUser !=null}">
+                           <button class="btn-555 float-r m-btn" onclick="sendReview();" type="button">리뷰 작성</button>
+                           <!-- button은 기본type이 submit 그래서 바로 폼 주소로 가지만 이걸 벗어나려면 type button -->
+                        </div>
+                     
+                     </div>
 						</form>
 						</div>
 
@@ -694,7 +694,7 @@
                
                     num = num + "";  
                     point = num.length % 3 ;
-                    len = num.length;  S
+                    len = num.length;  
    
                     str = num.substring(0, point);  
                     while (point < len) {  
@@ -705,8 +705,6 @@
                     return str;
                 
                 }
-                
-        
 		</script>
 		
 	<!-- 댓글 줄바꿈 -->

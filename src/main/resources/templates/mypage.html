@@ -17,6 +17,13 @@ $(function(){
 	}
 	
 });
+
+//새창 만들기
+function Check(){
+  
+  window.open("/Notice.do", "win", "width=1200, height=800");
+  
+}
 </script>
 <body>
 	
@@ -35,7 +42,7 @@ $(function(){
 	      <div class="name">[[${user.userName}]]</div>
 	    </div> 
 	    <div class="cross">
-	    <a href="/user/hi"><img class="img" alt="x" th:src="@{/image/cancel-button.png}"/></a>
+	    <a href="/main"><img class="img" alt="x" th:src="@{/image/cancel-button.png}"/></a>
 		 </div>
 	    <div class="modify">i</div>
 	  </div>
@@ -73,12 +80,11 @@ $(function(){
 <!-- 	        </div> -->
 <!-- 	        <div class="icon"> > </div> -->
 <!-- 	      </div>      -->
-	      <div class="item">
+	      <div class="item" >
 	        <div>
-	          <div class="green number">0</div>
+	          <div class="green number" >0</div>
 	          <div class="text">배송중</div>
 	        </div>
-<!-- 	        <div class="icon"> > </div> -->
 	      </div>     
 	      <div class="item">
 	        <div>
@@ -119,7 +125,7 @@ $(function(){
 	  </div>
 	  
 	  <div class="infoContainer">
-	    <a href="#" class="item">
+	    <a href="#" class="item" onclick="Check();">
 	      <div>icon</div>
 	      <div>공지사항</div>
 	    </a>    

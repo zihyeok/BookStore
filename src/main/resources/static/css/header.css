@@ -37,8 +37,6 @@ b89c87
 /*<body style="overflow-x:hidden; overflow-y:auto;">*/
 
 /*  start */
-
-
 #header {
   width: 100%;
   min-width: 1200px;
@@ -101,8 +99,8 @@ b89c87
 
 .lap-nav>ul>li {
   float: right;
-  width: 6rem;
-  height: 23rem;
+  width: 9rem;
+/*   height: 23rem; */
   line-height: 3rem;
   font-size: 0.9rem;
   text-align: center;
@@ -141,6 +139,13 @@ b89c87
 .lap-nav>ul>li>a:hover,
 .lap-nav>ul>li>ul>li:hover {
   color: #c80a1e;
+}
+
+
+.lap-nav>ul>li.category ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 
@@ -301,20 +306,6 @@ button.btn-search, button.btn-reset {
   font-size: 1.3rem;
   cursor: pointer;
 }
-.fa-sign-out-alt{
-	position: absolute;
-    right: -3.3rem;
-    top: 1.3rem;
-    font-size: 1.7rem;
-    cursor: pointer;
-}
-.fa-sign-in-alt{
-	position: absolute;
-    right: -3.3rem;
-    top: 1.3rem;
-    font-size: 1.7rem;
-    cursor: pointer;
-}
 #side-menu{
     position: fixed;
     right: 20px;
@@ -329,3 +320,17 @@ button.btn-search, button.btn-reset {
     opacity: .6;
   }
 
+.fa-sign-out-alt{
+	position: absolute;
+    right: -3.3rem;
+    top: 1.3rem;
+    font-size: 1.7rem;
+    cursor: pointer;
+}
+.fa-sign-in-alt{
+	position: absolute;
+    right: -3.3rem;
+    top: 1.3rem;
+    font-size: 1.7rem;
+    cursor: pointer;
+}
