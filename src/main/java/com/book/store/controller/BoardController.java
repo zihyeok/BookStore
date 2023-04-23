@@ -41,12 +41,12 @@ public class BoardController {
 	MyUtil myUtil; //@Service로 구현된 MyUtil을 불러온것
 	
 	
-	@GetMapping("/")
+	@GetMapping("/Notice.do")
 	public ModelAndView index() throws Exception{
 
 		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("paymentlist");
+		mav.setViewName("Notice");
 		//jsp(html)로 갈때는 setViewName /class로 갈때는 setView
 		
 		return mav;

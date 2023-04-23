@@ -10,7 +10,7 @@ public class ReviewDTO {
 	private int seq_No;	
 	private int reviewStar;
 	
-	private String userId;
+	private String userId; 
 
 	private String userName;
 
