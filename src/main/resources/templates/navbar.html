@@ -160,7 +160,6 @@ function alertLogin(){
 
              <li class="category"><a>카테고리</a>
 			  <ul>
-<<<<<<< HEAD
 			    <a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm"><li>&nbsp;&nbsp;&nbsp;전체&nbsp;&nbsp;&nbsp;</li></a>
 			    <a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=100"><li>&nbsp;&nbsp;&nbsp;철학&nbsp;&nbsp;&nbsp;</li></a>
 			    <a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=200"><li>&nbsp;&nbsp;&nbsp;종교&nbsp;&nbsp;&nbsp;</li></a>			    
@@ -171,18 +170,6 @@ function alertLogin(){
                 <a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=700"><li>언어(어학)</li></a>
                 <a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=800"><li>&nbsp;&nbsp;&nbsp;문학&nbsp;&nbsp;&nbsp;</li></a>
                 <a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=900"><li>&nbsp;&nbsp;&nbsp;역사&nbsp;&nbsp;&nbsp;</li></a>
-=======
-			    <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm"><li>&nbsp;&nbsp;&nbsp;전체&nbsp;&nbsp;&nbsp;</li></a>
-			    <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=100"><li>&nbsp;&nbsp;&nbsp;철학&nbsp;&nbsp;&nbsp;</li></a>
-			    <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=200"><li>&nbsp;&nbsp;&nbsp;종교&nbsp;&nbsp;&nbsp;</li></a>			    
-			    <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=300"><li>사회과학</li></a>
-              	<a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=400"><li>자연과학</li></a>
-			    <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=500"><li>기술과학</li></a>
-                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=600"><li>&nbsp;&nbsp;&nbsp;예술&nbsp;&nbsp;&nbsp;</li></a>
-                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=700"><li>언어(어학)</li></a>
-                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=800"><li>&nbsp;&nbsp;&nbsp;문학&nbsp;&nbsp;&nbsp;</li></a>
-                <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=900"><li>&nbsp;&nbsp;&nbsp;역사&nbsp;&nbsp;&nbsp;</li></a>
->>>>>>> 9f4c89cb6b361708ef543831253d18d35f67fa8e
 			    
 <!-- 		  <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm"><li>전체</li></a>
               <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=100"><li>철학</li></a>
@@ -240,10 +227,7 @@ function alertLogin(){
     <a href= "#" th:unless="${session.OauthUser !=null or session.user != null}"><i class="fas fa-shopping-cart" onclick="alertLogin();"></i></a>
     <a href="/logout" th:if="${session.OauthUser !=null or session.user != null}"><i class="fas fa-sign-out-alt"></i></a><!-- 로그아웃 -->
     <a href="/user/login" th:unless="${session.OauthUser !=null or session.user != null}"><i class="fas fa-sign-in-alt"></i></a><!-- 로그인 -->
-<<<<<<< HEAD
 
-=======
->>>>>>> 9f4c89cb6b361708ef543831253d18d35f67fa8e
       </section>
       
     </article>

@@ -18,8 +18,12 @@
 	
 		<!-- product.css -->
 		<link rel="stylesheet" href="css/product.css">
+		
+		<!-- js -->
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 		<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+		<script type="text/javascript" src="/js/ajaxUtil.js"></script>
+		
 		<script th:inline="javascript">
 		
 		$(function () {
@@ -334,9 +338,7 @@
 
 	</script>
 	<!-- 장바구니js 끝 -->
-		
-		
-		
+
     </head>
     <!-- End Head -->
 <!-- 삭제만들어야함 -->
@@ -346,8 +348,10 @@
 		<div class="container product_detail"><!--container S-->
 			<div class="in_box"><!--in_box S-->
 				<div class="product_top" style="display: inline-flex; width: 100%;">
+
 				<div style="margin: 100px 0 0 150px;">
 				<img alt="" th:src="${dto.image_Url}" style="width: 250px; height: 300px;">
+
 				<span>
 				<img alt="" src="image/test1.jpg" id="after">
 				<img alt="" src="image/test2.jpeg" id="before">
@@ -358,15 +362,16 @@
 						<div class="product_txt">
 							<h5 class="tit">[[${dto.authr_Nm}]] | [[${dto.publisher_Nm}]]</h5>
 							<h3 class="sub_txt">[[${dto.title_Nm}]]</h3>
+
 							<p class="price"><strong>[[${#numbers.formatInteger(dto.prc_Value, 1,'COMMA')}]]</strong>원</p>
 						</div>
 
-					
 						<div class="product_info">
+						
 							<p><strong>적립혜택</strong><span>구매 시 교원포인트 50% 적립 (~5/31까지)</span></p>
 							<p><strong>판매수량</strong><span>1,243 구매</span></p>
 						</div>
-					
+
 						<div class="product_option">														
 							<div class="product_option_box">	
 								<div class="product_option_bg">
@@ -414,10 +419,16 @@
 						<!-- 장바구니버튼 test 끝 -->
 
 						<div class="btn_box">
+
+
 							<button class="btn-order" th:if="${session.user==null and session.OauthUser==null}" 
 							onclick="javascript:alert('로그인 후 이용가능합니다')">바로 구매</button>
+							
 							<button class="btn-order" th:unless="${session.user==null and session.OauthUser == null}" name="one_Order" type="button" 
 							onclick="one_order()">바로 구매</button>
+							
+							
+
 						</div>
 					</div>
 				</div>				
@@ -517,6 +528,7 @@
 
 			</div><!--in_box E-->
 		</div><!--container E-->
+
 		
 		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 		<script type="text/javascript">		
@@ -695,8 +707,7 @@
                 }
 		</script>
 		
-		
-		<!-- 댓글 줄바꿈 -->
+	<!-- 댓글 줄바꿈 -->
 	<script th:inline="javascript">
 	//dto영역안에 자바스크립트 영역열면 dto를 인식함
 	
