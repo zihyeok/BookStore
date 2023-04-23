@@ -35,11 +35,11 @@
 			<a th:href="@{${articleUrl}} + '&seq_No=' + @{${dto.seq_No}}">
 			<img alt="상품 준비중" th:src="@{${dto.image_Url}}"></a><br/><br/>
 			
-			<span th:if="${#strings.length(dto.title_Nm) < 20}">[[${dto.title_Nm}]]</span>
-			<span th:unless="${#strings.length(dto.title_Nm) < 20}">[[${#strings.substring(dto.title_Nm,0,19)}]]...</span>
-			<br/><span>[[${dto.authr_Nm}]]</span><br/>
-			<span>출판사:[[${dto.publisher_Nm}]]</span><br/>
-			<span>가격:[[${#numbers.formatInteger(dto.prc_Value, 1,'COMMA')}]]원</span><br/>
+			<h5>[[${dto.title_Nm}]]</h5>
+         <span>[[${dto.authr_Nm}]]</span><br/>
+         <span>[[${dto.publisher_Nm}]]</span><br/>
+         <span>가격:[[${#numbers.formatInteger(dto.prc_Value, 1,'COMMA')}]]원</span><br/>
+			
 			
 			<div th:id="${dto.seq_No}">
 			<a th:onclick="|javascript:sendBag('${dto.seq_No}')|"><button style="background-color: #fff;" type="button">🤍</button></a>

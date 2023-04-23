@@ -596,7 +596,7 @@ public class BookController {
 
 			ModelAndView mav = new ModelAndView();
 			
-			System.out.print(lists + "lists");
+			/**System.out.print(lists + "lists");*/
 			
 
 			mav.addObject("lists", lists); 
