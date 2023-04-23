@@ -22,9 +22,10 @@
   //-->  
   
   </script>
-<body>
 
-<div layout:fragment="content1" >
+<body class="BookMain">
+
+<div layout:fragment="content1">
 
   <main>
     <div>
@@ -129,7 +130,12 @@
 
   <article class="video">
     <div>
+<<<<<<< HEAD
       <iframe width="100%;" height="500px;" src="https://www.youtube.com/embed/JSJ-7C6ltEw" title="제 딸을 살해한 놈들을 15년 후에 죽여주세요" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+=======
+      <iframe width="100%;" height="500px;" src="https://www.youtube.com/embed/JSJ-7C6ltEw" title="제 딸을 살해한 놈들을 15년 후에 죽여주세요" frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+>>>>>>> 9f4c89cb6b361708ef543831253d18d35f67fa8e
     </div> 
 
     <div class="bg">
@@ -162,8 +168,15 @@
 
           <div class="after">
 
+<<<<<<< HEAD
         	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11592'">
             <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
+=======
+        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" 
+        	th:onclick="|location.href='@{/BookArticle.action(seq_No=${topLists.seq_No})}'|">
+            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png"
+            th:onclick="">
+>>>>>>> 9f4c89cb6b361708ef543831253d18d35f67fa8e
 
           </div>
 
@@ -172,6 +185,7 @@
           </div> -->
         </div>
 
+<<<<<<< HEAD
         <p>오만과 편견</p>
       </section>
       <section>
@@ -534,6 +548,9 @@
         </div>
 
         <p>채식주의자</p>
+=======
+        <p>[[${topLists.title_Nm}]]</p>
+>>>>>>> 9f4c89cb6b361708ef543831253d18d35f67fa8e
       </section>
 	</div>
   </article>
@@ -632,7 +649,6 @@ if ( cookiedata.indexOf("maindiv=done") < 0 ){
 </div>
 
 </body>
-
 
 
 </html>
