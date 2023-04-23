@@ -340,23 +340,40 @@ public class UserController {
 		return mav;
 	}
 	
-	@GetMapping("/test")
-	public ModelAndView test123() throws Exception {
+	@GetMapping("/delete")
+	public ModelAndView userDelete(HttpServletRequest request) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		List<BookDTO> list = new ArrayList<BookDTO>();
-		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일");
-        String date = format.format(new Date());
 		
-		list.add(bookitemservice.getReadData(11111));
-		list.add(bookitemservice.getReadData(11112));
-		list.add(bookitemservice.getReadData(11113));
-		mav.addObject("lists", list);
-		mav.addObject("user", (userService.findUserName("zzz123")).get());
-		mav.addObject("vip", Integer.parseInt((userService.findUserName("zzz123")).get().getUserVip()));
-		mav.addObject("date", date);
-		mav.setViewName("paymentlist");
+		String userId = request.getParameter("userId");
+		
+		httpSession.removeAttribute("user");
+		httpSession.removeAttribute("OauthUser");
+		
+		userService.deleteUserData(userId);
+		
+		mav.setViewName("redirect:/main");
 		return mav;
 	}
+	
+	
+	
+//	@GetMapping("/test")
+//	public ModelAndView test123() throws Exception {
+//		ModelAndView mav = new ModelAndView();
+//		List<BookDTO> list = new ArrayList<BookDTO>();
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일");
+//        String date = format.format(new Date());
+//		
+//		list.add(bookitemservice.getReadData(11111));
+//		list.add(bookitemservice.getReadData(11112));
+//		list.add(bookitemservice.getReadData(11113));
+//		mav.addObject("lists", list);
+//		mav.addObject("user", (userService.findUserName("zzz123")).get());
+//		mav.addObject("vip", Integer.parseInt((userService.findUserName("zzz123")).get().getUserVip()));
+//		mav.addObject("date", date);
+//		mav.setViewName("paymentlist");
+//		return mav;
+//	}
 		
 	
 	
