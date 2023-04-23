@@ -43,7 +43,7 @@ function Check(){
 	      <div class="name">[[${user.userName}]]</div>
 	    </div> 
 	    <div class="cross">
-	    <a href="/main"><img class="img" alt="x" th:src="@{/image/cancel-button.png}"/></a>
+	    <a href="/main"><img class="img" th:src="@{/image/cancel-button.png}"/></a>
 		 </div>
 	    <div class="modify">i</div>
 	  </div>
@@ -57,8 +57,8 @@ function Check(){
 	        <div>생년월일</div>
 	      </div>
 	      <div class="item">
-	        <div class="text">[[${user.userVip}]]</div>
-	        <div>총 구매권수</div>
+	        <div class="text">[[${user.userTel}]]</div>
+	        <div>연락처</div>
 	      </div>
 	  </div>  
 	  <div class="shippingStatusContainer">
@@ -72,35 +72,20 @@ function Check(){
 	          <div class="brown number">[[${bagitem_length}]]</div>
 	          <div class="text">장바구니</div>
 	        </div>
-<!-- 	        <div class="icon"> > </div> -->
 	      </div>     
+	      
 	      <div class="item">
-<!-- 	        <div> -->
-<!-- 	          <div class="number">0</div> -->
-<!-- 	          <div class="text">결제완료</div> -->
-<!-- 	        </div> -->
-<!-- 	        <div class="icon"> > </div> -->
-<<<<<<< HEAD
-<!-- 	      </div>      -->
-	      <div class="item" >
-	        <div>
-	          <div class="green number" >0</div>
-	          <div class="text">배송중</div>
-	        </div>
-=======
-	      </div>     
-	      <div class="item">
-<!-- 	        <div> -->
-<!-- 	          <div class="green number">0</div> -->
-<!-- 	          <div class="text">배송중</div> -->
-<!-- 	        </div> -->
-<!-- 	        <div class="icon"> > </div> -->
->>>>>>> 4fd6d546f3885eafb9f244f876987571de5ada26
-	      </div>     
-	      <div class="item">
+
 	        <div>
 	          <div class="green number">[[${order_Count}]]</div>
 	          <div class="text">구매완료</div>
+	        </div>
+
+	      </div>     
+	      <div class="item">
+	        <div>
+	          <div class="green number">[[${user.userVip}]]</div>
+	          <div class="text">총 구매권수</div>
 	        </div>
 	      </div>     
 	      
@@ -125,24 +110,21 @@ function Check(){
 	    </a>
 	    <a href="#" class="item">
 	        <div class="icon">ii</div>
-	        <div class="text">단골상점</div>
+	        <div class="text">찜한상품</div>
 	        <div class="right"> > </div>
 	    </a>
 	    <a href="/bag.action" class="item">
 	        <div class="icon">ii</div>
-	        <div class="text">찜한상품</div>
+	        <div class="text">뭐넣음?</div>
 	        <div class="right"> > </div>
 	    </a>
 	  </div>
 	  
 	  <div class="infoContainer">
-<<<<<<< HEAD
+
 	    <a href="#" class="item" onclick="Check();">
-	      <div>icon</div>
-=======
-	    <a href="#" class="item">
 	      <div><i class="fa-solid fa-flag"></i></div>
->>>>>>> 4fd6d546f3885eafb9f244f876987571de5ada26
+
 	      <div>공지사항</div>
 	    </a>    
 	    <a href="#" class="item">
