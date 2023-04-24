@@ -125,6 +125,13 @@ function alertLogin(){
 }
 
 
+function Check(){
+	  
+	  window.open("/Notice.do", "win", "width=1200, height=800");
+	  
+	}
+
+
 </script>
 
 
@@ -152,9 +159,9 @@ function alertLogin(){
             </li>
             <li><a>고객지원</a>
               <ul>
-                <li>공지사항</li>
-                <li>FAQ</li>
-                <li>자료실</li>
+                <li onclick="Check();">공지사항</li>
+                <li th:onclick="@{|location.href='/BoardList.action'|}">FAQ</li>
+               
               </ul>
             </li>
 

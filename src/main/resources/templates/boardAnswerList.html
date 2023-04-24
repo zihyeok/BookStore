@@ -9,24 +9,18 @@
 <link rel="stylesheet" href="/css/boardAnswerList.css">
 
 
-
-
 <body>
 
-  <br/><br/><br/><br/>
+<br/><br/><br/><br/>
 
 <p th:if="${#lists.size(lists)}<=0">등록된 리뷰가 없습니다</p>
 <p>후기 [[${#lists.size(lists)}]]개</p>
-<table width="700" style="margin: auto;" 
-	th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
 
-	<br/><br/>
 
 <br/><br/><br/><br/>
 <br/><br/><br/><br/>
   
  
-
 <p style="font-family: 'NEXON Lv1 Gothic OTF'; font-size: 15px;">댓글 [[${#lists.size(lists)}]]개</p>
 
 <table  th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
