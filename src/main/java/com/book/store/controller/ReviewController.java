@@ -18,6 +18,7 @@ import com.book.store.dto.BookDTO;
 import com.book.store.dto.ReviewDTO;
 import com.book.store.service.BookItemService;
 import com.book.store.service.ReviewService;
+import com.book.store.service.UserService;
 import com.book.store.user.UserData;
 import com.book.store.util.BoardUtil;
 import com.book.store.util.MyUtil;
@@ -35,6 +36,9 @@ public class ReviewController {
 
 	@Resource
 	private BookItemService bookItemService;
+	
+	@Resource
+	private UserService userService;
 
 	@Autowired
 	BoardUtil myUtil;//아작스 페이징
@@ -48,6 +52,31 @@ public class ReviewController {
 
 		int seq_No = Integer.parseInt(request.getParameter("seq_No"));
 		String userId = dto.getUserId();
+		
+		int vip = userService.findUserVip(userId);
+		String userVip = "";
+		
+		if(vip>=40) {
+			
+			userVip = "Diamond";
+			
+		}else if(vip>=30 && vip<40) {
+			
+			userVip = "Gold";
+			
+		}else if(vip>=20 && vip<30) {
+			
+			userVip = "Silver";
+			
+		}else if(vip>=10 && vip<20) {
+			
+			userVip = "Bronze";
+			
+		}else {
+			
+			userVip = "NewBie";
+			
+		}
 		
 		ReviewDTO checkId = reviewService.checkUserId(seq_No, userId);
 		//mapper에 review테이블에 userId가 있는지 확인
@@ -65,6 +94,7 @@ public class ReviewController {
 
 		dto.setReviewId(maxNum+1);
 		dto.setIpAddr(request.getRemoteAddr());
+		dto.setVip(userVip);
 		
 		reviewService.insertData(dto);
 
@@ -106,8 +136,6 @@ public class ReviewController {
 		int end = currentPage*numPerPage;
 
 		List<ReviewDTO> lists = reviewService.getLists(start, end, seq_No);
-		
-		Iterator<ReviewDTO> it = lists.iterator();
 
 		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage);
 

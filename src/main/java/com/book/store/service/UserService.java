@@ -25,6 +25,9 @@ public interface UserService {
 	
 	public int findUserBagItem(String userName) throws Exception;
 	
+	//uservip찾기
+	public int findUserVip(String userId) throws Exception;
+	
 	public void updateVip(String userId) throws Exception;
 	
 	public void updateUserData(@Param("userId")String userId,@Param("userPwd")String userPwd,

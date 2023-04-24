@@ -48,7 +48,7 @@ public class BagController {
 		}
 		
 		if(user==null) {
-			System.out.println("sendbag의 null");
+
 			ModelAndView mav = new ModelAndView();
 			
 			mav.setViewName("redirect:/user/login");

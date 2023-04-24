@@ -27,6 +27,8 @@ public interface UserMapper {
 	
 	public int findUserBagItem(String userId) throws Exception;
 	
+	public int findUserVip(String userId) throws Exception;
+	
 	public void updateVip(String userId) throws Exception;
 	
 	public void updateUserData(@Param("userId")String userId,@Param("userPwd")String userPwd,

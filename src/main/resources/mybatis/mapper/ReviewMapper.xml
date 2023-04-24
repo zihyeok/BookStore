@@ -11,8 +11,8 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <insert id="insertData" parameterType="com.book.store.dto.ReviewDTO">
-	insert into review (reviewId,seq_No,reviewStar,userId,content,created) 
-	values(#{reviewId},#{seq_No},#{reviewStar},#{userId},#{content},sysdate) 
+	insert into review (reviewId,seq_No,reviewStar,userId,content,created,vip) 
+	values(#{reviewId},#{seq_No},#{reviewStar},#{userId},#{content},sysdate,#{vip}) 
 </insert>
 
 <select id="getDataCount" parameterType="int" resultType="int">
@@ -34,7 +34,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	select * from (
 	select rownum rnum,data.* from (
 	select reviewId,seq_No,reviewStar,userId,content,to_char(created,'YYYY-MM-DD') created,
-	to_char(fix_created,'YYYY-MM-DD') fix_created 
+	to_char(fix_created,'YYYY-MM-DD') fix_created,vip  
 	from review where seq_No = #{seq_No} 
 	order by reviewId desc) data) 
 <![CDATA[

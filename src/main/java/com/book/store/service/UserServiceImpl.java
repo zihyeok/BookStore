@@ -89,6 +89,12 @@ public class UserServiceImpl implements UserService{
 		userMapper.deleteUserData(userId);
 	}
 
+	@Override
+	public int findUserVip(String userId) throws Exception {
+		
+		return userMapper.findUserVip(userId);
+	}
+
 	
 
 	
