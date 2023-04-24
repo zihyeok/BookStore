@@ -123,7 +123,7 @@ public class BookController {
 
 	@GetMapping("/BookList.action")
 	public ModelAndView list(HttpServletRequest request) throws Exception{
-
+		
 		String pageNum = request.getParameter("pageNum");
 
 		int currentPage = 1; //첫화면은 1페이지 
@@ -137,7 +137,7 @@ public class BookController {
 		String searchKey = request.getParameter("searchKey");
 		//searchKey는 작가,제목,도서번호
 		String searchValue = request.getParameter("searchValue");
-
+		
 		if(searchValue==null) {
 
 			searchKey = "title_Nm";
@@ -277,7 +277,7 @@ public class BookController {
 		}
 
 		BookDTO dto = bookItemService.getReadData(seq_No);
-
+		
 		if(dto==null) {
 
 			mav.setViewName("redirect:BookList.action?pageNum=" + pageNum 
@@ -599,9 +599,6 @@ public class BookController {
 			if(!param.equals("")) { articleUrl += "&" + param; }
 
 			ModelAndView mav = new ModelAndView();
-			
-			/**System.out.print(lists + "lists");*/
-			
 
 			mav.addObject("lists", lists); 
 			mav.addObject("pageIndexList", pageIndexList);

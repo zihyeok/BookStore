@@ -25,7 +25,10 @@
 </br></br></br></br>
 </br></br></br></br>
 
-<div th:if="${searchValue != '' and searchKey != 'kdc_Nm'}" class="searchResult_box">'[[${searchValue}]]'로 검색한 결과 [[${dataCount}]]개가 검색되었습니다.</p></div>
+<!-- 왜 string 타입의 null이라는 글자가 들어갔을까 -->
+<div th:if="${searchKey}=='null'" class="searchResult_box">해당 게시물은 존재하지 않습니다</div>
+
+<div th:if="${searchValue != '' and searchKey == 'title_Nm'}" class="searchResult_box">'[[${searchValue}]]'로 검색한 결과 [[${dataCount}]]개가 검색되었습니다.</p></div>
 
 <div class="BookList-container" th:each="i : ${#numbers.sequence(0,2)}" th:if="${#lists.size(lists)}>0">
 	<div class="BookList-row" th:each="j : ${#numbers.sequence(0,2)}">

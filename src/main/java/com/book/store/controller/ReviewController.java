@@ -5,21 +5,31 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.book.store.dto.BookDTO;
 import com.book.store.dto.ReviewDTO;
 import com.book.store.service.BookItemService;
 import com.book.store.service.ReviewService;
+import com.book.store.user.UserData;
 import com.book.store.util.BoardUtil;
+import com.book.store.util.MyUtil;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @RestController
 public class ReviewController {
 
+	private final HttpSession httpSession;
+	
 	@Resource
 	private ReviewService reviewService; //reviewServiceImpl 호출
 
@@ -27,7 +37,10 @@ public class ReviewController {
 	private BookItemService bookItemService;
 
 	@Autowired
-	BoardUtil myUtil;
+	BoardUtil myUtil;//아작스 페이징
+	
+	@Autowired
+	MyUtil myUtil2;//페이징
 
 
 	@PostMapping("/ReviewCreated.action")
@@ -141,6 +154,74 @@ public class ReviewController {
 
 		return mav;
 
+	}
+	
+	@RequestMapping("userReview.action")
+	public ModelAndView userReview(HttpServletRequest request) throws Exception{
+		
+		UserData user = null;
+
+		if(httpSession.getAttribute("user")!=null) {
+
+			user = (UserData) httpSession.getAttribute("user");
+
+
+		}else if(httpSession.getAttribute("OauthUser")!=null) {
+
+			user = (UserData) httpSession.getAttribute("OauthUser");
+
+		}
+		
+		if(user==null) {
+			
+			ModelAndView mav = new ModelAndView();
+			
+			mav.setViewName("redirect:/user/login");
+
+			return mav;
+
+		}
+		
+		String userId = user.getUserId();
+
+		String pageNum = request.getParameter("pageNum");
+
+		int currentPage = 1; //첫화면은 1페이지 
+
+		if(pageNum!=null) {
+
+			currentPage = Integer.parseInt(pageNum);
+			//1페이지가 아닌 get방식 주소로 받은 pageNum로 변경
+		}
+
+		int dataCount = reviewService.getReviewCount(userId);
+
+		int numPerPage = 3;
+
+		int totalPage = myUtil2.getPageCount(numPerPage, dataCount);
+
+		if(currentPage>totalPage) {
+			currentPage=totalPage;
+		}
+
+		int start = (currentPage-1)*numPerPage+1;
+		int end = currentPage*numPerPage;
+
+		List<ReviewDTO> lists = reviewService.userReview(start, end, userId);
+		
+		String listUrl = "/userReview.action";
+
+		String pageIndexList = myUtil2.pageIndexList(currentPage, totalPage, listUrl);
+
+		ModelAndView mav = new ModelAndView();
+
+		mav.addObject("lists", lists);
+		mav.addObject("pageNum", currentPage);
+		mav.addObject("pageIndexList", pageIndexList);
+
+		mav.setViewName("userReviewLists");
+
+		return mav;
 	}
 
 

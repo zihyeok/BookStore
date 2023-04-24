@@ -20,6 +20,11 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	where seq_No = #{seq_No}
 </select>
 
+<select id="getReviewCount" parameterType="String" resultType="int">
+	select nvl(count(*),0) from review 
+	where userId = #{userId}
+</select>
+
 <select id="getAvgStar" parameterType="int" resultType="int">
 	select nvl(avg(reviewStar),0) from review 
 	where seq_No = #{seq_No}
@@ -31,6 +36,19 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	select reviewId,seq_No,reviewStar,userId,content,to_char(created,'YYYY-MM-DD') created,
 	to_char(fix_created,'YYYY-MM-DD') fix_created 
 	from review where seq_No = #{seq_No} 
+	order by reviewId desc) data) 
+<![CDATA[
+	where rnum>=#{start} and rnum<=#{end}
+]]>
+</select>
+
+<select id="userReview" parameterType="map" resultType="com.book.store.dto.ReviewDTO">
+	select * from (
+	select rownum rnum,data.* from (
+	select a.reviewId,a.seq_No,a.reviewStar,a.userId,a.content,to_char(a.created,'YYYY-MM-DD') created,
+	to_char(a.fix_created,'YYYY-MM-DD') fix_created, b.title_Nm, b.authr_Nm, b.publisher_Nm, b.image_Url 
+	from review a LEFT OUTER JOIN BookItem b 
+    ON a.seq_No = b.seq_No where a.userId = #{userId} 
 	order by reviewId desc) data) 
 <![CDATA[
 	where rnum>=#{start} and rnum<=#{end}
