@@ -30,6 +30,9 @@ public class ReviewDTO {
 	private String image_Url;
 	
 	
+	//리뷰 vip 등급에 따라 다른 이미지 출력
+	private String vip;
+	
 	
 	
 }

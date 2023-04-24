@@ -353,8 +353,18 @@
 				<img alt="" th:src="${dto.image_Url}" style="width: 220px; height: 300px;">
 
 				<span>
-				<img alt="" src="image/test1.jpg" id="after">
-				<img alt="" src="image/test2.jpeg" id="before">
+				<th:block th:switch="${#strings.substring(dto.kdc_Nm, 0, 1)}">
+				    <img alt="" th:case="0" src="/image/총류.gif" id="before">
+				    <img alt="" th:case="1" src="/image/철학.gif" id="before">
+				    <img alt="" th:case="2" src="/image/종교.gif" id="before">
+				    <img alt="" th:case="3" src="/image/사회과학.gif" id="before">
+				    <img alt="" th:case="4" src="/image/자연과학.gif" id="before">
+				    <img alt="" th:case="5" src="/image/기술과학.gif" id="before">
+				    <img alt="" th:case="6" src="/image/예술.gif" id="before">
+				    <img alt="" th:case="7" src="/image/언어.gif" id="before">
+				    <img alt="" th:case="8" src="/image/문학.gif" id="before">
+				    <img alt="" th:case="9" src="/image/역사.gif" id="before">
+				</th:block>
 				</span>
 				</div>
 
@@ -446,7 +456,8 @@
 					<div class="tab_content">
 						<div class="tab_box tab_box01">
 						
-							<span id="book_Intrcn_Cn" style="line-height: 1.5rem;"></span>
+							<span id="book_Intrcn_Cn" 
+							th:utext="${dto.book_Intrcn_Cn.replaceAll('(\r\n|\r|\n)', '<br/>')}" style="line-height: 1.5rem;"></span>
 
 						</div>
 						<div class="tab_box">
@@ -706,19 +717,6 @@
                 
                 }
 		</script>
-		
-	<!-- 댓글 줄바꿈 -->
-	<script th:inline="javascript">
-	//dto영역안에 자바스크립트 영역열면 dto를 인식함
-	
-	var Intrcn_Cn = [[${dto.book_Intrcn_Cn}]];
-	
-	Intrcn_Cn = Intrcn_Cn.replace(/(\r\n|\r|\n)/g,'<br/>');
-	
-	$("#book_Intrcn_Cn").html(Intrcn_Cn);
-
-	</script>
-	<!-- 댓글 줄바꿈 끝	-->
 
     </body>
     <!-- End Body -->

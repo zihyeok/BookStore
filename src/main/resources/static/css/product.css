@@ -328,8 +328,8 @@ blockquote, q {quotes: "" "";}
 }
 
 .see-comments section>div:nth-child(1)>img {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
 }
 
 .see-comments section>div:nth-child(2) {
@@ -490,24 +490,26 @@ blockquote, q {quotes: "" "";}
     width:  250px;
     height: 200px;
     position: absolute;
-    top : 18%;
-    left:   14%;
+    top : 17%;
+    left:   13%;
 }
 
 #before { 
     width:  250px;
     height: 200px;
     position: absolute;
-    top : 18%;
-    left:   14%;
+    top : 17%;
+    left:   13%;
     
-    opacity: 1;
+    /* opacity: 1; 
   	transition: opacity 1.5s;
+  	*/
 }
 
 #before:hover{
-	
-	opacity: 0;
+	/* opacity: 0; */
+	width: 500px;
+	height: 450px;
 	 
 }
 
