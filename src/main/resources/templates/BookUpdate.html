@@ -3,40 +3,72 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
+<link rel="stylesheet" type="text/css" href="css/BookCreated.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+<script type="text/javascript">
+
+function alertUpdate(){
+
+	var f = document.myBookItem;
+	
+	Swal.fire({
+		  title: '수정하시겠습니까?',
+		  icon: 'question',
+		  iconHtml: '?',
+		  confirmButtonText: '확인',
+		  cancelButtonText: '취소',
+		  showCancelButton: true,
+		  showCloseButton: true
+		}).then((result)=>{
+			
+			if(result.value){
+				
+				f.action = '/BookUpdate.action';
+				
+				f.submit();
+				
+			}
+			
+		});
+
+}
+
+</script>
+
 </head>
 <body>
 
-<link rel="stylesheet" type="text/css" href="css/BookCreated.css">
-
 <h1>Board</h1>
 
-<h3>책 등록하기</h3>
+<h3>책 수정하기</h3>
 
-<div style="width: 50%; margin-left: 450px;">
+<div style="padding-left: 23%; width: 60%;">
 
-<form th:action="@{BookUpdate.action}" method="post" enctype="multipart/form-data">
+<form action="" method="POST" enctype="multipart/form-data" name="myBookItem">
 
 제목
-<input type="text" name="title_Nm" placeholder="title_Nm 입력하세요." th:value="${dto.title_Nm}">
+<input type="text" name="title_Nm" placeholder="title_Nm 입력하세요." th:value="${dto.title_Nm}" required>
 저자
-<input type="text" name="authr_Nm" placeholder="authr_Nm 입력하세요." th:value="${dto.authr_Nm}">
+<input type="text" name="authr_Nm" placeholder="authr_Nm 입력하세요." th:value="${dto.authr_Nm}" required>
 출판사명
-<input type="text" name="publisher_Nm" placeholder="publisher_Nm 입력하세요." th:value="${dto.publisher_Nm}">
+<input type="text" name="publisher_Nm" placeholder="publisher_Nm 입력하세요." th:value="${dto.publisher_Nm}" required>
 카테고리
-<input type="text" name="kdc_Nm" placeholder="kdc_Nm 입력하세요." th:value="${dto.kdc_Nm}">
+<input type="text" name="kdc_Nm" placeholder="kdc_Nm 입력하세요." th:value="${dto.kdc_Nm}" required>
 가격
-<input type="text" name="prc_Value" placeholder="prc_Value 입력하세요." th:value="${dto.prc_Value}">
+<input type="text" name="prc_Value" placeholder="prc_Value 입력하세요." th:value="${dto.prc_Value}" required> 
 일련번호
-<input type="text" name="isbn_Thirteen_No" placeholder="isbn_Thirteen_No 입력하세요." th:value="${dto.isbn_Thirteen_No}">
+<input type="text" name="isbn_Thirteen_No" placeholder="isbn_Thirteen_No 입력하세요." th:value="${dto.isbn_Thirteen_No}" required>
 
-<textarea name="book_Intrcn_Cn"  placeholder="book_Intrcn_Cn 입력하세요." th:utext="${dto.book_Intrcn_Cn}"></textarea>
+<textarea name="book_Intrcn_Cn"  placeholder="book_Intrcn_Cn 입력하세요." th:utext="${dto.book_Intrcn_Cn}" required></textarea>
 
 <div style="margin-bottom: 15px;">
 <input type="file" name="upload">
 </div>
 
 <div>
-	<button class="btn-555">등록하기</button>
+	<button class="btn-555" onclick="alertUpdate();" type="button">등록하기</button>
 </div>
 
 <input type="hidden" name="seq_No" th:value="${dto.seq_No}"/>
@@ -52,4 +84,5 @@
 
 
 </body>
+
 </html>

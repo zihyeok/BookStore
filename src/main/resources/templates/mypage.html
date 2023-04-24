@@ -17,7 +17,15 @@ $(function(){
 	}
 	
 });
+
+//새창 만들기
+function Check(){
+  
+  window.open("/Notice.do", "win", "width=1200, height=800");
+  
+}
 </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <body>
 	
 	<div class="wrap">
@@ -35,7 +43,7 @@ $(function(){
 	      <div class="name">[[${user.userName}]]</div>
 	    </div> 
 	    <div class="cross">
-	    <a href="/user/hi"><img class="img" alt="x" th:src="@{/image/cancel-button.png}"/></a>
+	    <a href="/main"><img class="img" th:src="@{/image/cancel-button.png}"/></a>
 		 </div>
 	    <div class="modify">i</div>
 	  </div>
@@ -49,8 +57,8 @@ $(function(){
 	        <div>생년월일</div>
 	      </div>
 	      <div class="item">
-	        <div class="text">[[${user.userVip}]]</div>
-	        <div>총 구매권수</div>
+	        <div class="text">[[${user.userTel}]]</div>
+	        <div>연락처</div>
 	      </div>
 	  </div>  
 	  <div class="shippingStatusContainer">
@@ -64,26 +72,20 @@ $(function(){
 	          <div class="brown number">[[${bagitem_length}]]</div>
 	          <div class="text">장바구니</div>
 	        </div>
-<!-- 	        <div class="icon"> > </div> -->
 	      </div>     
-<!-- 	      <div class="item"> -->
-<!-- 	        <div> -->
-<!-- 	          <div class="number">0</div> -->
-<!-- 	          <div class="text">결제완료</div> -->
-<!-- 	        </div> -->
-<!-- 	        <div class="icon"> > </div> -->
-<!-- 	      </div>      -->
+	      
 	      <div class="item">
-	        <div>
-	          <div class="green number">0</div>
-	          <div class="text">배송중</div>
-	        </div>
-<!-- 	        <div class="icon"> > </div> -->
-	      </div>     
-	      <div class="item">
+
 	        <div>
 	          <div class="green number">[[${order_Count}]]</div>
 	          <div class="text">구매완료</div>
+	        </div>
+
+	      </div>     
+	      <div class="item">
+	        <div>
+	          <div class="green number">[[${user.userVip}]]</div>
+	          <div class="text">총 구매권수</div>
 	        </div>
 	      </div>     
 	      
@@ -108,27 +110,29 @@ $(function(){
 	    </a>
 	    <a href="#" class="item">
 	        <div class="icon">ii</div>
-	        <div class="text">단골상점</div>
+	        <div class="text">찜한상품</div>
 	        <div class="right"> > </div>
 	    </a>
-	    <a href="#" class="item">
+	    <a href="/bag.action" class="item">
 	        <div class="icon">ii</div>
-	        <div class="text">찜한상품</div>
+	        <div class="text">뭐넣음?</div>
 	        <div class="right"> > </div>
 	    </a>
 	  </div>
 	  
 	  <div class="infoContainer">
-	    <a href="#" class="item">
-	      <div>icon</div>
+
+	    <a href="#" class="item" onclick="Check();">
+	      <div><i class="fa-solid fa-flag"></i></div>
+
 	      <div>공지사항</div>
 	    </a>    
 	    <a href="#" class="item">
-	      <div>icos</div>
+	      <div><i class="fa-solid fa-bullhorn"></i></div>
 	      <div>이용안내</div>
 	    </a>    
-	    <a href="#" class="item">
-	      <div>icon</div>
+	    <a th:href="@{/user/delete(userId=${user.userId})}" class="item">
+	      <div><i class="fa-solid fa-headset"></i></div>
 	      <div>고객센터</div>
 	    </a>
 	  </div>

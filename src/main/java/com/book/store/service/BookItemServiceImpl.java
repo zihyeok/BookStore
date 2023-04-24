@@ -78,4 +78,23 @@ public class BookItemServiceImpl implements BookItemService{
 		return bookItemMapper.topSalLists(start, end);
 	}
 
+	@Override
+	public List<BookDTO> categoryLists(int start, int end, String searchKey, String searchValue) throws Exception {
+	
+		return bookItemMapper.categoryLists(start, end, searchKey, searchValue);
+	}
+
+	@Override
+	public int backUpMaxNum() throws Exception {
+		
+		return bookItemMapper.backUpMaxNum();
+	}
+
+	@Override
+	public void insertBackUp(BookDTO dto) throws Exception {
+		
+		bookItemMapper.insertBackUp(dto);
+		
+	}
+
 }

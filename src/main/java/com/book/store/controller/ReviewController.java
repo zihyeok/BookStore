@@ -1,5 +1,6 @@
 package com.book.store.controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -51,7 +52,7 @@ public class ReviewController {
 
 		dto.setReviewId(maxNum+1);
 		dto.setIpAddr(request.getRemoteAddr());
-
+		
 		reviewService.insertData(dto);
 
 		ModelAndView mav = new ModelAndView();
@@ -64,8 +65,8 @@ public class ReviewController {
 	@RequestMapping("/ReviewList.action")
 	public ModelAndView list(HttpServletRequest request,ReviewDTO dto) throws Exception{
 
-		int seq_No = dto.getSeq_No();
-		
+		int seq_No = Integer.parseInt(request.getParameter("seq_No"));
+				
 		String checkId = request.getParameter("checkId");
 		
 		String pageNum = request.getParameter("pageNum");
@@ -92,6 +93,8 @@ public class ReviewController {
 		int end = currentPage*numPerPage;
 
 		List<ReviewDTO> lists = reviewService.getLists(start, end, seq_No);
+		
+		Iterator<ReviewDTO> it = lists.iterator();
 
 		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage);
 

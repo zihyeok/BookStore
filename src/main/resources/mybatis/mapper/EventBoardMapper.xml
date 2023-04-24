@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.book.store.mapper.EventBoardMapper">
+
+<select id="maxNum" resultType="int">
+	select nvl(max(boardId),0) from event_board
+</select>
+
+<insert id="insertData" parameterType="com.book.store.dto.EventBoardDTO">
+	insert into event_board (boardId,userId,pwd,subject,content,image,ipAddr,hitCount,created) 
+	values(#{boardId},#{userId},#{pwd},#{subject},#{content},#{image},#{ipAddr},0,sysdate)
+</insert>
+
+<select id="getDataCount" parameterType="map" resultType="int">
+	select nvl(count(*),0) from event_board 
+	where ${searchKey} like '%' || #{searchValue} || '%'
+</select>
+
+<select id="getLists" parameterType="map" resultType="com.book.store.dto.EventBoardDTO">
+	select * from (
+	select rownum rnum,data.* from (
+	select boardId,userId,subject,content,image,ipAddr,hitCount,to_char(created,'YYYY-MM-DD') created 
+	from event_board where ${searchKey} like '%' || #{searchValue} || '%' 
+	order by boardId desc) data) 
+<![CDATA[
+	where rnum>=#{start} and rnum<=#{end}
+]]>
+</select>
+
+<update id="updateHitCount" parameterType="int">
+	update event_board set hitCount=hitCount+1 where boardId=#{boardId}
+</update>
+
+<select id="getReadData" parameterType="int" resultType="com.book.store.dto.EventBoardDTO">
+	select boardId,userId,pwd,subject,content,image,ipAddr,hitCount,created from event_board 
+	where boardId=#{boardId}
+</select>
+
+<update id="updateData" parameterType="com.book.store.dto.EventBoardDTO">
+	update event_board set 
+	userId=#{userId},
+	pwd=#{pwd},
+	subject=#{subject},
+	content=#{content},
+	image=#{image} 
+	where boardId=#{boardId}
+</update>
+
+<delete id="deleteData" parameterType="int">
+	delete from event_board where boardId=#{boardId}
+</delete>
+
+
+</mapper>

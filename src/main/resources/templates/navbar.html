@@ -2,8 +2,8 @@
 
 <nav th:fragment="navbarFragment" class="navbar">
 
-<script type="text/javascript"></script>
 <script type="text/javascript" src="/js/ajaxUtil.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 <script type="text/javascript">
 
@@ -98,6 +98,32 @@ window.onload = function () {
 	
 }
 
+function alertLogin(){
+
+	Swal.fire({
+		  title: '로그인 후 이용해주세요',
+		  icon: 'error',
+		  iconHtml: 'X',
+		  confirmButtonText: '확인',
+		  cancelButtonText: '취소',
+		  showCancelButton: true,
+		  showCloseButton: true
+		}).then((result)=>{
+			
+			if(result.value){
+				
+				window.location.href='/user/login';
+				
+			}else{
+				
+				 location.reload();
+				
+			}
+			
+		});
+
+}
+
 
 </script>
 
@@ -106,9 +132,9 @@ window.onload = function () {
 
 <header>
 
-  <article id="header" >
+  <article id="header" style="height: 120px;">
       <section>
-        <div onclick="window.location.href='#'">
+        <div>
           <a href="/main"><img class="logo" src="/image/logo.png" alt=""></a>
         </div>
         
@@ -116,7 +142,7 @@ window.onload = function () {
 
         <nav class="lap-nav">
           <ul class="clearfix">
-      
+            
             <li><a>이벤트</a>
               <ul>
                 <li>진행/대기</li>
@@ -131,23 +157,33 @@ window.onload = function () {
                 <li>자료실</li>
               </ul>
             </li>
-            <li><a>북클럽</a>
-              <ul>
-                <li>이달의 책</li>
-                <li>커뮤니티</li>
-              	<li>아지트</li>
-              </ul>
-            </li>
-            <li><a>브랜드</a>
-              <ul>
-                <li>문학동네</li>
-                <li>연혁</li>
-                <li>제휴문의</li>
-              </ul>
-            </li>
+
+             <li class="category"><a>카테고리</a>
+			  <ul>
+			    <a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm"><li>&nbsp;&nbsp;&nbsp;전체&nbsp;&nbsp;&nbsp;</li></a>
+			    <a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=100"><li>&nbsp;&nbsp;&nbsp;철학&nbsp;&nbsp;&nbsp;</li></a>
+			    <a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=200"><li>&nbsp;&nbsp;&nbsp;종교&nbsp;&nbsp;&nbsp;</li></a>			    
+			    <a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=300"><li>사회과학</li></a>
+              	<a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=400"><li>자연과학</li></a>
+			    <a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=500"><li>기술과학</li></a>
+                <a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=600"><li>&nbsp;&nbsp;&nbsp;예술&nbsp;&nbsp;&nbsp;</li></a>
+                <a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=700"><li>언어(어학)</li></a>
+                <a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=800"><li>&nbsp;&nbsp;&nbsp;문학&nbsp;&nbsp;&nbsp;</li></a>
+                <a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=900"><li>&nbsp;&nbsp;&nbsp;역사&nbsp;&nbsp;&nbsp;</li></a>
+			    
+<!-- 		  <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm"><li>전체</li></a>
+              <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=100"><li>철학</li></a>
+              <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=200"><li>종교</li></a>
+              <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=300"><li>사회과학</li></a>
+              <a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=400"><li>자연과학</li></a>
+			  
+			     -->
+			  </ul>
+			</li>            
             <li><a>도서</a>
               <ul>
-                <li>새로나온 책</li>
+                <li><a href="/NewBook.action">새로나온 책</a></li>
+                <a href="/BestBook.action"><li>베스트</li></a>
                 <li>수상도서</li>
                 <li>매거진</li>
               </ul>
@@ -168,13 +204,13 @@ window.onload = function () {
 				
 				<ul>
 				  <li>
-					<div id="suggestDiv" class="suggest">
+					<div id="suggestDiv" class="suggest" style="display: none;">
 					<ul>
-				    	<li><img alt="" src="" id="suggest0"><span id="suggest_Title0"></span></li><br/>
-				    	<li><img alt="" src="" id="suggest1"><span id="suggest_Title1"></span></li><br/>
-				    	<li><img alt="" src="" id="suggest2"><span id="suggest_Title2"></span></li><br/>
-				    	<li><img alt="" src="" id="suggest3"><span id="suggest_Title3"></span></li><br/>
-				    	<li><img alt="" src="" id="suggest4"><span id="suggest_Title4"></span></li><br/>
+				    	<li><img alt="" src="" id="suggest0"><span id="suggest_Title0"></span></li><br>
+				    	<li><img alt="" src="" id="suggest1"><span id="suggest_Title1"></span></li><br>
+				    	<li><img alt="" src="" id="suggest2"><span id="suggest_Title2"></span></li><br>
+				    	<li><img alt="" src="" id="suggest3"><span id="suggest_Title3"></span></li><br>
+				    	<li><img alt="" src="" id="suggest4"><span id="suggest_Title4"></span></li><br>
 				    </ul>
 					</div>
 					
@@ -187,15 +223,19 @@ window.onload = function () {
   		</div>  
 
   	<a href="/user/mypage"><i class="fas fa-user"></i></a>
-    <a href="/bag.action" th:if="${session.user}!=null"><i class="fas fa-shopping-cart"></i></a>
-    <a href="/user/login" th:unless="${session.user}!=null" onclick="javascript:alert('로그인 후 이용해주세요')"><i class="fas fa-shopping-cart"></i></a>
+    <a href="/bag.action" th:if="${session.OauthUser !=null or session.user != null}"><i class="fas fa-shopping-cart"></i></a>
+    <a href= "#" th:unless="${session.OauthUser !=null or session.user != null}"><i class="fas fa-shopping-cart" onclick="alertLogin();"></i></a>
+    <a href="/logout" th:if="${session.OauthUser !=null or session.user != null}"><i class="fas fa-sign-out-alt"></i></a><!-- 로그아웃 -->
+    <a href="/user/login" th:unless="${session.OauthUser !=null or session.user != null}"><i class="fas fa-sign-in-alt"></i></a><!-- 로그인 -->
+
       </section>
       
     </article>
 
 </header>
-<br/><br/><br/><br/>
-<br/><br/><br/>
+<br><br><br><br>
+<br><br><br>
 
 </div>
 </nav>
+

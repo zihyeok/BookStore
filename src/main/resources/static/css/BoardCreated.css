@@ -62,7 +62,7 @@
 
 
 /********productdetail********/
-.product_detail{margin-top:50px}
+
 .product_detail .product_top{font-size:0;}
 .product_detail .product_top>div{width:calc(50% - 30px); display:inline-block; vertical-align: text-top;}
 .product_detail .product_top>div:first-child{margin-right:60px; overflow:hidden}

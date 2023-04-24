@@ -29,14 +29,14 @@
 .notice {
   width: 1200px;
   margin: 0 auto;
-  padding: 15rem 0;
+  padding: 10rem 0;
   padding-bottom: 7rem;
 }
 
 .notice h2{
   text-align: center;
   font-size: 3rem;
-  margin-bottom: 7rem;
+  
 }
 .notice>div{
   display: flex;
@@ -90,9 +90,9 @@ height: 330px;
     cursor: pointer;
     margin-bottom: 7rem;
   }
-    .quick img:hover{
-      opacity: 1;
-      transition: 0.8s;
+  .quick img:hover{
+    opacity: 1;
+    transition: 0.8s;
     }
   .quick h2{
     margin-bottom: 4rem;
@@ -112,8 +112,8 @@ height: 330px;
     margin: 0 auto;
   }
 .search2 select{
-    width: 80px;
-    border: 1px solid #666;
+  width: 80px;
+  border: 1px solid #666;
   height: 50px;
   padding: 0 5px;
   font-family: inherit;
@@ -173,9 +173,9 @@ height: 330px;
   margin-bottom: 40px;
   
 }
-
+/* ¿¿ */
 .weather-header-details {
-  flex:1;
+  flex:0.24;
   font-size: 120%;
   font-family: 'NEXON Lv1 Gothic OTF';
   

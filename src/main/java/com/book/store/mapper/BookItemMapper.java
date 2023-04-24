@@ -11,12 +11,18 @@ import com.book.store.dto.BookDTO;
 public interface BookItemMapper {
 
 	public int maxNum() throws Exception;
+	
+	public int backUpMaxNum() throws Exception;
 
 	public void insertData(BookDTO dto) throws Exception;
+	
+	public void insertBackUp(BookDTO dto) throws Exception;
 
 	public int getDataCount(@Param("searchKey")String searchKey,@Param("searchValue")String searchValue) throws Exception;
 
 	public List<BookDTO> getLists(@Param("start")int start,@Param("end")int end,@Param("searchKey")String searchKey,@Param("searchValue")String searchValue) throws Exception;
+	
+	public List<BookDTO> categoryLists(@Param("start")int start,@Param("end")int end,@Param("searchKey")String searchKey,@Param("searchValue")String searchValue) throws Exception;
 	
 	public List<BookDTO> recentLists(@Param("start")int start,@Param("end")int end) throws Exception;
 	
