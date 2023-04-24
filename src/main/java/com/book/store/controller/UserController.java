@@ -335,7 +335,7 @@ public class UserController {
 			userService.updateUserData(userId, passwordEncoder.encode(pwd), addr, email, birth, tel, pwd);
 		}
 		
-		mav.setViewName("redirect:/user/logout");
+		mav.setViewName("redirect:/logout");
 		
 		return mav;
 	}
