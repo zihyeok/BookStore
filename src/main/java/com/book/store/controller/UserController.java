@@ -345,11 +345,11 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		
 		String userId = request.getParameter("userId");
-		
-		httpSession.removeAttribute("user");
-		httpSession.removeAttribute("OauthUser");
-		
-		userService.deleteUserData(userId);
+		System.out.println("삭제함");
+//		httpSession.removeAttribute("user");
+//		httpSession.removeAttribute("OauthUser");
+//		
+//		userService.deleteUserData(userId);
 		
 		mav.setViewName("redirect:/main");
 		return mav;
