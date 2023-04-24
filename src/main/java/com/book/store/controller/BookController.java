@@ -51,14 +51,18 @@ public class BookController {
 			
 		}else if(httpSession.getAttribute("OauthUser") != null) {
 			user = (UserData) httpSession.getAttribute("OauthUser");
+			if(user.getUserAddr()==null) {
+				mav.setViewName("redirect:/user/oaumember");
+				return mav;
+			}
 		}
 		
-		//OAuth로 첫 로그인시 기타 회원정보 추가를 위해 가입페이지로 이동
-		if(user!=null && user.getUserAddr()==null) {
-		
-			mav.setViewName("redirect:/user/oaumember");
-			return mav;
-		}
+//		//OAuth로 첫 로그인시 기타 회원정보 추가를 위해 가입페이지로 이동
+//		if(user!=null && user.getUserAddr()==null) {
+//		
+//			mav.setViewName("redirect:/user/oaumember");
+//			return mav;
+//		}
 		
 		int start = 1;
 		int end = 20;
@@ -596,7 +600,11 @@ public class BookController {
 
 			ModelAndView mav = new ModelAndView();
 			
+<<<<<<< HEAD
 			System.out.print(lists + "lists");
+=======
+			/**System.out.print(lists + "lists");*/
+>>>>>>> d65343a2d685d9fa8ba4048afe70573b7b9a7e78
 			
 
 			mav.addObject("lists", lists); 

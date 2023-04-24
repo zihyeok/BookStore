@@ -84,6 +84,11 @@ public class UserServiceImpl implements UserService{
 		
 	}
 
+	@Override
+	public void deleteUserData(String userId) throws Exception {
+		userMapper.deleteUserData(userId);
+	}
+
 	
 
 	

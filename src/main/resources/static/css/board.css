@@ -29,14 +29,14 @@
 .notice {
   width: 1200px;
   margin: 0 auto;
-  padding: 15rem 0;
+  padding: 10rem 0;
   padding-bottom: 7rem;
 }
 
 .notice h2{
   text-align: center;
   font-size: 3rem;
-  margin-bottom: 7rem;
+  
 }
 .notice>div{
   display: flex;

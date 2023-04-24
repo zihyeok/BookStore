@@ -51,4 +51,8 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	where userid = #{userId}
 </update>
 
+<delete id="deleteUserData" parameterType="String">
+	delete userdata where userid = #{userId}
+</delete>
+
 </mapper>

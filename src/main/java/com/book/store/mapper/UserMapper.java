@@ -32,4 +32,7 @@ public interface UserMapper {
 	public void updateUserData(@Param("userId")String userId,@Param("userPwd")String userPwd,
 			@Param("userAddr")String userAddr,@Param("userEmail")String userEmail,
 			@Param("userBirth")String userBirth,@Param("userTel")String userTel,@Param("realPwd")String realPwd) throws Exception;
+	
+	public void deleteUserData(String userId) throws Exception;
+	
 }
