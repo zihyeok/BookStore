@@ -5,6 +5,7 @@ div.BookList-container {
   display: block;
   width: 100%;
   justify-content: space-between;
+
 }
 
 div.BookList-container h5 {
@@ -23,11 +24,20 @@ div.BookList-container .BookList-row {
 
 }
 
+div.BookList-container .BookList-row .BookList-img-box{
+	
+	 border: 4px double #bcbcbc;
+	 padding: 10px;
+	
+}
+
 div.BookList-container .BookList-row .BookList-img-box img {
   width: 120px;
   height: 150px;
   border-radius: 5px;
   margin-bottom: 20px;
+  box-shadow: 5px 5px 5px 3px grey;
+
 }
 
 div.BookList-container .BookList-row .BookList-img-box span {
