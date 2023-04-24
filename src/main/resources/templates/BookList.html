@@ -25,7 +25,10 @@
 </br></br></br></br>
 </br></br></br></br>
 
-<div th:if="${searchValue != '' and searchKey != 'kdc_Nm'}" class="searchResult_box">'[[${searchValue}]]'로 검색한 결과 [[${dataCount}]]개가 검색되었습니다.</p></div>
+<!-- 왜 string 타입의 null이라는 글자가 들어갔을까 -->
+<div th:if="${searchKey}=='null'" class="searchResult_box">해당 게시물은 존재하지 않습니다</div>
+
+<div th:if="${searchValue != '' and searchKey == 'title_Nm'}" class="searchResult_box">'[[${searchValue}]]'로 검색한 결과 [[${dataCount}]]개가 검색되었습니다.</p></div>
 
 <div class="BookList-container" th:each="i : ${#numbers.sequence(0,2)}" th:if="${#lists.size(lists)}>0">
 	<div class="BookList-row" th:each="j : ${#numbers.sequence(0,2)}">
@@ -35,11 +38,11 @@
 			<a th:href="@{${articleUrl}} + '&seq_No=' + @{${dto.seq_No}}">
 			<img alt="상품 준비중" th:src="@{${dto.image_Url}}"></a><br/><br/>
 			
-			<span th:if="${#strings.length(dto.title_Nm) < 20}">[[${dto.title_Nm}]]</span>
-			<span th:unless="${#strings.length(dto.title_Nm) < 20}">[[${#strings.substring(dto.title_Nm,0,19)}]]...</span>
-			<br/><span>[[${dto.authr_Nm}]]</span><br/>
-			<span>출판사:[[${dto.publisher_Nm}]]</span><br/>
-			<span>가격:[[${#numbers.formatInteger(dto.prc_Value, 1,'COMMA')}]]원</span><br/>
+			<h5>[[${dto.title_Nm}]]</h5>
+         <span>[[${dto.authr_Nm}]]</span><br/>
+         <span>[[${dto.publisher_Nm}]]</span><br/>
+         <span>가격:[[${#numbers.formatInteger(dto.prc_Value, 1,'COMMA')}]]원</span><br/>
+			
 			
 			<div th:id="${dto.seq_No}">
 			<a th:onclick="|javascript:sendBag('${dto.seq_No}')|"><button style="background-color: #fff;" type="button">🤍</button></a>

@@ -14,10 +14,16 @@ public interface ReviewService {
 	//댓글 작성
 	public void insertData(ReviewDTO dto) throws Exception;
 	
-	//댓글 개수
+	//해당 글의 댓글 개수
 	public int getDataCount(@Param("seq_No")int seq_No) throws Exception;
 	
+	//해당 유저의 댓글 개수
+	public int getReviewCount(@Param("userId")String userId) throws Exception;
+	
 	public List<ReviewDTO> getLists(@Param("start")int start,@Param("end")int end,@Param("seq_No")int seq_No) throws Exception;
+	
+	//유저별 리뷰
+	public List<ReviewDTO> userReview(@Param("start")int start,@Param("end")int end,@Param("userId")String userId) throws Exception;
     
 	//댓글 목록
 	public ReviewDTO getReadData(int num) throws Exception;

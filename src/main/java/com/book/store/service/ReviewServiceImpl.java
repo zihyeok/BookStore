@@ -68,6 +68,18 @@ public class ReviewServiceImpl implements ReviewService{
 		return reviewMapper.checkUserId(seq_No, userId);
 	}
 
+	@Override
+	public List<ReviewDTO> userReview(int start, int end, String userId) throws Exception {
+		
+		return reviewMapper.userReview(start, end, userId);
+	}
+
+	@Override
+	public int getReviewCount(String userId) throws Exception {
+		
+		return reviewMapper.getReviewCount(userId);
+	}
+
 
 
 }

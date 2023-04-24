@@ -16,11 +16,10 @@
    body {
       font-family: 'Roboto', sans-serif;
       font-size: 0.9rem;
-      color: #999;
+      /* color: #999; */
       line-height: 1rem;
       letter-spacing: 0.1px;
     }
-
 
 
     h1,
@@ -95,11 +94,11 @@
     /* start */
 
 
-header img {
+/* header img {
   width: 100px;
   margin: 14px 0 7px 0;
 }
-
+ */
     ul,
     ol,
     li {
@@ -180,7 +179,8 @@ header img {
 
 main span {
   font-size: 5rem;
-  color: #fff;
+  color: red;
+  line-height: 2;
 }
 
 
@@ -215,7 +215,7 @@ main button {
 
     .imgs section>:last-child img {
       width: 484px;
-      height: 215px;
+      /* height: 215px; */
       margin-left: 1rem;
     }
 
@@ -235,11 +235,11 @@ main button {
     .swiper-slide {
       text-align: center;
       display: flex;
-      /* ³»¿ëÀ» Áß¾ÓÁ¤·Ä ÇÏ±âÀ§ÇØ flex »ç¿ë */
+      /* ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß¾ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½ flex ï¿½ï¿½ï¿½ */
       align-items: center;
-      /* À§¾Æ·¡ ±âÁØ Áß¾ÓÁ¤·Ä */
+      /* ï¿½ï¿½ï¿½Æ·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß¾ï¿½ï¿½ï¿½ï¿½ï¿½ */
       justify-content: center;
-      /* ÁÂ¿ì ±âÁØ Áß¾ÓÁ¤·Ä */
+      /* ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß¾ï¿½ï¿½ï¿½ï¿½ï¿½ */
     }
 
     .swiper-slide img {
@@ -318,6 +318,7 @@ main button {
       margin: 0 auto;
       text-align: center;
       padding: 70px 0;
+      color: #999;
     }
 
     .big h2{
@@ -490,8 +491,9 @@ main button {
 
     footer {
       padding: 3rem 0;
-        margin: 0 auto;
-        text-align: center;
+      margin: 0 auto;
+      text-align: center;
+      color: #999;
     }
 
     footer div {

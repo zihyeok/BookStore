@@ -21,7 +21,10 @@ dl, dt, dd, ol, ul, li, fieldset, form, label, legend
      margin: 0; 
      border: 0;
      text-decoration: none; 
-     box-sizing: border-box;}
+     box-sizing: border-box;
+     color: #000;
+     
+     }
 
 ul, ol, li {list-style: none; }
 
@@ -306,7 +309,8 @@ blockquote, q {quotes: "" "";}
 
 }
 
-/*park,kwon이 만듬 */
+
+
 
 .see-comments>p:nth-child(1) {
   margin-bottom: 20px;
@@ -481,6 +485,7 @@ blockquote, q {quotes: "" "";}
   color: #333;
 }
 
+
 #after { 
     width:  250px;
     height: 200px;
@@ -505,3 +510,4 @@ blockquote, q {quotes: "" "";}
 	opacity: 0;
 	 
 }
+

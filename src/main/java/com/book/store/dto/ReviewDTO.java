@@ -22,4 +22,9 @@ public class ReviewDTO {
 	private String fix_created;	
 	
 	
+	//리뷰 모아서 볼때 bookitem테이블에서 값 받으려면 dto가 필요?
+	
+	
+	
+	
 }
