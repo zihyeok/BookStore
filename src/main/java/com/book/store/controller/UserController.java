@@ -357,23 +357,14 @@ public class UserController {
 	
 	
 	
-//	@GetMapping("/test")
-//	public ModelAndView test123() throws Exception {
-//		ModelAndView mav = new ModelAndView();
-//		List<BookDTO> list = new ArrayList<BookDTO>();
-//		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일");
-//        String date = format.format(new Date());
-//		
-//		list.add(bookitemservice.getReadData(11111));
-//		list.add(bookitemservice.getReadData(11112));
-//		list.add(bookitemservice.getReadData(11113));
-//		mav.addObject("lists", list);
-//		mav.addObject("user", (userService.findUserName("zzz123")).get());
-//		mav.addObject("vip", Integer.parseInt((userService.findUserName("zzz123")).get().getUserVip()));
-//		mav.addObject("date", date);
-//		mav.setViewName("paymentlist");
-//		return mav;
-//	}
+	@GetMapping("/test")
+	public ModelAndView test123() throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("user", (userService.findUserName("zzz123")).get());
+		mav.setViewName("orderHistory");
+		return mav;
+	}
 		
 	
 	
