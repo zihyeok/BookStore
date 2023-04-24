@@ -335,7 +335,7 @@ public class UserController {
 			userService.updateUserData(userId, passwordEncoder.encode(pwd), addr, email, birth, tel, pwd);
 		}
 		
-		mav.setViewName("redirect:/user/logout");
+		mav.setViewName("redirect:/logout");
 		
 		return mav;
 	}
@@ -345,11 +345,11 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		
 		String userId = request.getParameter("userId");
-		
-		httpSession.removeAttribute("user");
-		httpSession.removeAttribute("OauthUser");
-		
-		userService.deleteUserData(userId);
+		System.out.println("삭제함");
+//		httpSession.removeAttribute("user");
+//		httpSession.removeAttribute("OauthUser");
+//		
+//		userService.deleteUserData(userId);
 		
 		mav.setViewName("redirect:/main");
 		return mav;
