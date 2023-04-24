@@ -4,6 +4,7 @@
 
 <meta charset="UTF-8">
 
+
   <!-- Layer popup start -->
       <script language="JavaScript">
   <!--
@@ -22,6 +23,7 @@
   //-->  
   
   </script>
+
 <body>
 
 <div layout:fragment="content1" >
@@ -29,13 +31,13 @@
   <main>
     <div>
       <!-- <img src="https://i.postimg.cc/WpC1QZtt/a.png"> -->
-      <h5> <span>김치</span> <br>
+      <h5> <span>— </span> <br>
 문학이조에서 발원한 다양한 임프란트와 계열사들이 함께하고 있으며,<br>
 저마다 개성있는 소리와 빛으로 풍요롭고 다채로운 책의 세계를 만들어가고 있습니다.<br>
 문학이조출판그룹은 책에 대한 열정과 기획능력이 있는 이에게 기회를 제공합니다.</h5>
       <button>Read more</button>
     </div>
-    <div class="background">
+    <div class= background>
     </div>
   </main>
   
@@ -62,74 +64,36 @@
   </article>
 
   <article class="slider">
-    <h2>New</h2>
-     <div class="swiper-container swiper-container-initialized swiper-container-horizontal">
-      <div class="swiper-wrapper" style="transform: translate3d(0px, 0px, 0px);">
-        <div class="swiper-slide swiper-slide-active" style="width: 1000px;">
-     <a href="/BookArticle.action?seq_No=11596">
-     <img src="https://image.aladin.co.kr/product/31518/67/cover500/k102832638_1.jpg" style="width: 150px; height: 200px; margin-right: 50px;"></a>
+    <h2>NEW BOOK</h2>
+     <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" th:each="i : ${#numbers.sequence(0,3)}" th:if="${#lists.size(recentLists)}>0">
+     <a th:href="'/BookArticle.action?seq_No=' + @{${recentLists[4*i].seq_No}}">
+     <img th:src="${recentLists[4*i].image_Url}" style="width: 200px; height: 250px; margin-right: 50px;"></a>
      
-     <a href="/BookArticle.action?seq_No=11610">
-     <img src="https://image.aladin.co.kr/product/31529/25/cover500/k992832346_1.jpg" style="width: 150px; height: 200px; margin-right: 50px;"></a>
+     <a th:href="'/BookArticle.action?seq_No=' + @{${recentLists[4*i+1].seq_No}}">
+     <img th:src="${recentLists[4*i+1].image_Url}" style="width: 200px; height: 250px; margin-right: 50px;"></a>
      
-     <a href="/BookArticle.action?seq_No=11618">
-     <img src="image/20230421152924368705202883100google.png" style="width: 150px; height: 200px; margin-right: 50px;"></a>
-     <a href="/BookArticle.action?seq_No=11619">
+     <a th:href="'/BookArticle.action?seq_No=' + @{${recentLists[4*i+2].seq_No}}">
+     <img th:src="${recentLists[4*i+2].image_Url}" style="width: 200px; height: 250px; margin-right: 50px;"></a>
+     <a th:href="'/BookArticle.action?seq_No=' + @{${recentLists[4*i+3].seq_No}}">
      
-     <img src="image/20230421153052368792917165400naver.png" style="width: 150px; height: 200px; margin-right: 20px;"></a>
-        </div>
-        <div class="swiper-slide swiper-slide-next" style="width: 1000px;">
-     <a href="/BookArticle.action?seq_No=11607">
-     <img src="https://image.aladin.co.kr/product/31325/1/cover500/k832832683_3.jpg" style="width: 150px; height: 200px; margin-right: 50px;"></a>
-     
-     <a href="/BookArticle.action?seq_No=11597">
-     <img src="https://image.aladin.co.kr/product/31518/86/cover500/8950944960_1.jpg" style="width: 150px; height: 200px; margin-right: 50px;"></a>
-     
-     <a href="/BookArticle.action?seq_No=11601">
-     <img src="https://image.aladin.co.kr/product/31484/34/cover500/k712832622_1.jpg" style="width: 150px; height: 200px; margin-right: 50px;"></a>
-     <a href="/BookArticle.action?seq_No=11581">
-     
-     <img src="https://image.aladin.co.kr/product/31397/83/cover500/k472832200_1.jpg" style="width: 150px; height: 200px; margin-right: 20px;"></a>
-        </div>
-        <div class="swiper-slide" style="width: 1000px;">
-     <a href="/BookArticle.action?seq_No=11586">
-     <img src="https://image.aladin.co.kr/product/31440/13/cover500/8954691749_2.jpg" style="width: 150px; height: 200px; margin-right: 50px;"></a>
-     
-     <a href="/BookArticle.action?seq_No=11595">
-     <img src="https://image.aladin.co.kr/product/31250/53/cover500/k262832360_1.jpg" style="width: 150px; height: 200px; margin-right: 50px;"></a>
-     
-     <a href="/BookArticle.action?seq_No=11615">
-     <img src="https://image.aladin.co.kr/product/31424/4/cover500/k482832219_1.jpg" style="width: 150px; height: 200px; margin-right: 50px;"></a>
-     <a href="/BookArticle.action?seq_No=11612">
-     
-     <img src="https://image.aladin.co.kr/product/31410/89/cover500/8954691536_1.jpg" style="width: 150px; height: 200px; margin-right: 20px;"></a>
-        </div>
-        <div class="swiper-slide" style="width: 1000px;">
-     <a href="/BookArticle.action?seq_No=11605">
-     <img src="https://image.aladin.co.kr/product/31382/33/cover500/8936439022_2.jpg" style="width: 150px; height: 200px; margin-right: 50px;"></a>
-     
-     <a href="/BookArticle.action?seq_No=11616">
-     <img src="https://image.aladin.co.kr/product/31417/92/cover500/k632832111_2.jpg" style="width: 150px; height: 200px; margin-right: 50px;"></a>
-     
-     <a href="/BookArticle.action?seq_No=11609">
-     <img src="https://image.aladin.co.kr/product/31337/5/cover500/8960519790_1.jpg" style="width: 150px; height: 200px; margin-right: 50px;"></a>
-     <a href="/BookArticle.action?seq_No=11608">
-     
-     <img src="https://image.aladin.co.kr/product/31381/71/cover500/k992832006_1.jpg" style="width: 150px; height: 200px; margin-right: 20px;"></a>
+     <img th:src="${recentLists[4*i+3].image_Url}" style="width: 200px; height: 250px; margin-right: 50px;"></a>
+
         </div>
       </div>
 
       <!-- 네비게이션 지정 -->
-      <div class="swiper-button-next" tabindex="0" role="button" aria-label="Next slide" aria-disabled="false"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
-      <div class="swiper-button-prev swiper-button-disabled" tabindex="0" role="button" aria-label="Previous slide" aria-disabled="true"></div><!-- 이전 버튼 -->
-    <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span></div>
+      <div class="swiper-button-next"></div><!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+      <div class="swiper-button-prev"></div><!-- 이전 버튼 -->
+    </div>
 
 
   </article>
 
   <article class="video">
     <div>
-      <iframe width="100%;" height="500px;" src="https://www.youtube.com/embed/JSJ-7C6ltEw" title="제 딸을 살해한 놈들을 15년 후에 죽여주세요" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
+    <iframe width="100%;" height="500px;" src="https://www.youtube.com/embed/JSJ-7C6ltEw" title="제 딸을 살해한 놈들을 15년 후에 죽여주세요" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen=""></iframe>
     </div> 
 
     <div class="bg">
@@ -155,15 +119,16 @@
   <article class="big">
     <h2>Best</h2>
     <div>
-      <section>
+      <section th:if="${#lists.size(topSalLists)}>0" th:each="topLists:${topSalLists}">
         <div class="image-container">
 
-          <img src="https://image.aladin.co.kr/product/43/68/cover500/8937460882_3.jpg">
+          <img th:src="${topLists.image_Url}" />
 
           <div class="after">
 
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11592'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
+        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" 
+        	th:onclick="|location.href='@{/BookArticle.action(seq_No=${topLists.seq_No})}'|">
+            <!-- <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png"> -->
 
           </div>
 
@@ -172,368 +137,7 @@
           </div> -->
         </div>
 
-        <p>오만과 편견</p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/45/40/cover500/8937460947_3.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11600'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>차라투스트라는 이렇게 말했다</p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/41/89/cover500/s122531356_1.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11593'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>1984</p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/28203/8/cover500/898392845x_2.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11590'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>해리 포터와 비밀의 방 (미나리마 에디션) </p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/25399/72/cover500/8983928204_2.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11589'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>해리 포터와 마법사의 돌 (미나리마 에디션) </p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/30466/25/cover500/8986836831_1.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11588'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>왜 나는 너를 사랑하는가 (70만 부 기념 리커버)</p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/31440/13/cover500/8954691749_2.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11586'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>2023 제14회 젊은작가상 수상작품집</p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/2584/37/cover500/8998441012_3.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11585'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>모순</p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/53/28/cover500/s772832909_1.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11584'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>고래</p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/19393/14/cover500/k422635210_1.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11598'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>혼자 공부하는 자바 - JAVA 8 &amp; 11 지원 / 무료 동영상 강의 제공</p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/11561/49/cover500/8937434482_1.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11583'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>노르웨이의 숲</p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/30929/51/cover500/s302832892_1.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11582'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>세이노의 가르침</p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/31397/83/cover500/k472832200_1.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11581'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>어린 왕자, 영원이 된 순간 - 인간에 대한 희망으로 창조한 생텍쥐페리의 세계</p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/21856/89/cover500/8965402603_2.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11599'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>스프링 부트와 AWS로 혼자 구현하는 웹 서비스 - 인텔리제이, JPA, JUnit 테스트, 그레이들, 소셜 로그인, AWS 인프라로 무중단 배포까지</p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/1801/21/cover500/8932023158_1.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11587'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>비행운</p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/25313/30/cover/8934986654_1.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11580'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>어떻게 말해줘야 할까 - 오은영의 현실밀착 육아회화</p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/28331/32/cover/8986022478_2.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11579'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>한그루 열두 가지</p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/17048/25/cover/8932473900_1.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11578'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>이기적 유전자 - 40주년 기념판</p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/31105/45/cover500/8962624842_3.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11591'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>챗GPT에게 묻는 인류의 미래 - 김대식 교수와 생성인공지능과의 대화</p>
-      </section>
-      <section>
-        <div class="image-container">
-
-          <img src="https://image.aladin.co.kr/product/29137/2/cover500/8936434594_1.jpg">
-
-          <div class="after">
-
-        	<img src="https://i.postimg.cc/SNWLXZdQ/256-256-60d899b276f7df8280ce9777d4aa29e5.png" onclick="location.href='/BookArticle.action?seq_No=11603'">
-            <img src="https://i.postimg.cc/WpnDpDks/256-256-5eea0c1930aab7916cc960e027d032db.png">
-
-          </div>
-
-          <!-- <div class="object">
-            Top
-          </div> -->
-        </div>
-
-        <p>채식주의자</p>
+        <p>[[${topLists.title_Nm}]]</p>
       </section>
 	</div>
   </article>
@@ -629,10 +233,9 @@ if ( cookiedata.indexOf("maindiv=done") < 0 ){
 }
 </script>
 
-</div>
+</div> 
 
 </body>
-
 
 
 </html>
