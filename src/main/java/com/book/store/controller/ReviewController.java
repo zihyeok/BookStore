@@ -196,7 +196,7 @@ public class ReviewController {
 
 		int dataCount = reviewService.getReviewCount(userId);
 
-		int numPerPage = 5;
+		int numPerPage = 3;
 
 		int totalPage = myUtil2.getPageCount(numPerPage, dataCount);
 
@@ -209,8 +209,6 @@ public class ReviewController {
 
 		List<ReviewDTO> lists = reviewService.userReview(start, end, userId);
 		
-		System.out.println(lists);
-		
 		String listUrl = "/userReview.action";
 
 		String pageIndexList = myUtil2.pageIndexList(currentPage, totalPage, listUrl);
@@ -221,7 +219,7 @@ public class ReviewController {
 		mav.addObject("pageNum", currentPage);
 		mav.addObject("pageIndexList", pageIndexList);
 
-		mav.setViewName("userReviewTest");
+		mav.setViewName("userReviewLists");
 
 		return mav;
 	}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" >
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/augmented-ui@2/augmented-ui.min.css">
+<link rel="stylesheet" type="text/css" href="/css/userReviewLists.css">
+
+</head>
+<body>
+
+<h5>&lt;내가 작성한 리뷰&gt;</h5>
+
+<div th:if="${#lists.size(lists)}>0" th:each="dto: ${lists}">
+
+<a class="listing" th:href="'/BookArticle.action?seq_No=' + @{${dto.seq_No}}" target="_blank">
+  <img th:src="${dto.image_Url}"
+    alt="해당 게시물은 존재하지 않습니다." th:unless="${dto.image_Url == null}">
+  <img src="/image/itemReady.jpg"
+    alt="" th:if="${dto.image_Url == null}">
+  <div>
+    <div class="price">[[${dto.publisher_Nm}]]</div>
+    <p class="title_Nm">[[${dto.title_Nm}]]</p><br/>
+    <p class="title_Nm">[[${dto.authr_Nm}]]</p>
+    <p class="content">댓글내용 : [[${dto.content}]]</p>
+  </div>
+</a>
+
+</div>
+
+<div style="padding-top: 100px;" onclick="location.href='/user/mypage'"><button class="btn">마이페이지</button> </div>
+
+<div th:utext="${pageIndexList}" style="height: 100px; margin-top: 100px;"></div>
+
+
+</body>
+</html>
+
+
+
+

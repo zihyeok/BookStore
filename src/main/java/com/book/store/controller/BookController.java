@@ -599,13 +599,6 @@ public class BookController {
 			if(!param.equals("")) { articleUrl += "&" + param; }
 
 			ModelAndView mav = new ModelAndView();
-			
-<<<<<<< HEAD
-			System.out.print(lists + "lists");
-=======
-			/**System.out.print(lists + "lists");*/
->>>>>>> d65343a2d685d9fa8ba4048afe70573b7b9a7e78
-			
 
 			mav.addObject("lists", lists); 
 			mav.addObject("pageIndexList", pageIndexList);
