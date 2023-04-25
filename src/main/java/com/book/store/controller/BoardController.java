@@ -155,6 +155,7 @@ public class BoardController {
 		    }
 
 		    String listUrl = "/BoardList.action";
+		    
 		    if (!param.equals("")) {
 		        listUrl += "?" + param;
 		    }
@@ -177,7 +178,7 @@ public class BoardController {
 			mav.addObject("pageIndexList", pageIndexList);
 			mav.addObject("dataCount", dataCount);
 			mav.addObject("articleUrl", articleUrl);
-			
+		
 			
 			mav.setViewName("boardlist");
 
@@ -255,14 +256,19 @@ public class BoardController {
 			
 			if(httpSession.getAttribute("user") != null) {
 				user = (UserData) httpSession.getAttribute("user");
-				mav.addObject("userId", user.getUserId());
-				mav.addObject("RULE", user.getUserRole());
+		
 			}else if(httpSession.getAttribute("OauthUser") != null) {
 				user = (UserData) httpSession.getAttribute("OauthUser");
-				mav.addObject("userId", user.getUserId());
-				mav.addObject("RULE", user.getUserRole());
+		
 			}
+			
+			
+			if(user==null) {
 
+				mav.setViewName("redirect:/user/login");
+				
+				return mav;
+			}
 			
 			
 			mav.addObject("preNum", preNum);
@@ -273,6 +279,7 @@ public class BoardController {
 			mav.addObject("dto", dto);
 			mav.addObject("params", param);
 			mav.addObject("pageNum", pageNum);
+			
 			mav.addObject("user", user.getUserId());
 			
 			mav.setViewName("boardarticle");
@@ -449,7 +456,6 @@ public class BoardController {
 			mav.addObject("pageIndexList", pageIndexList);
 			mav.addObject("boardId", boardId);
 			mav.addObject("pageNum", currentPage);
-			
 			
 			
 			
