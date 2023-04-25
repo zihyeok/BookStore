@@ -24,18 +24,19 @@
 	        <table class="table table-condensed">
 	          <thead>
 	            <tr>
-	              <th>상품코드</th>
-	               <th class="text-center">제품명</th>
+	              <th>주문번호</th>
+	               <th class="text-center">상품명</th>
 	               <th class="text-center">수량</th>
-	               <th class="text-center" width="180px">금액</th>
+	               <th class="text-center" width="180px">주문날자</th>
 	            </tr>
 	          </thead>
 	          <tbody>
-	            <tr>
-	              <td >주문번호</td>
-	              <td class="text-center">첫번째책이름</td>
-	              <td class="text-center">몰라</td>
-	              <td class="text-center">총금액</td>
+	            <tr th:each="dto : ${findOrder}">
+	              <td>[[${dto.orderId}]]</td>
+	              <td th:if="${dto.su > 1}" class="text-center"><a th:href="@{/user/orderOne(orderId=${dto.orderId},userId=${userId},day=${dto.day})}">[[${dto.title}]] 외 [[${dto.su -1}]]권</a></td>
+	              <td th:if="${dto.su == 1}" class="text-center"><a th:href="@{/user/orderOne(orderId=${dto.orderId},userId=${userId},day=${dto.day})}">[[${dto.title}]]</a></td>
+	              <td class="text-center">[[${dto.su}]]</td>
+	              <td class="text-center">[[${dto.day}]]</td>
 	            </tr>
 	          </tbody>
 	        </table>

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.book.store.dto.BagDTO;
 import com.book.store.dto.BookDTO;
+import com.book.store.dto.FindOrderDTO;
 import com.book.store.mapper.BagMapper;
 
 @Service
@@ -54,6 +55,26 @@ public class BagServiceImpl implements BagService{
 	@Override
 	public int findOrderCount(String userId) throws Exception {
 		return bagMapper.findOrderCount(userId);
+	}
+
+	@Override
+	public List<FindOrderDTO> findAllOrders(String userId) throws Exception {
+		return bagMapper.findAllOrders(userId);
+	}
+
+	@Override
+	public String findOrderTitle(int orderId) throws Exception {
+		return bagMapper.findOrderTitle(orderId);
+	}
+
+	@Override
+	public int findOrderSu(String userId, int orderId) throws Exception {
+		return bagMapper.findOrderSu(userId, orderId);
+	}
+
+	@Override
+	public List<BookDTO> findOrderGroup(String userId, int orderId) throws Exception {
+		return bagMapper.findOrderGroup(userId, orderId);
 	}
 
 	

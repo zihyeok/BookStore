@@ -139,7 +139,7 @@ function outBtn(){
 	        <div class="text">찜한상품</div>
 	        <div class="right"> > </div>
 	    </a>
-	    <a href="/user/test" class="item">
+	    <a th:href="@{/user/order(userId=${user.userId})}" class="item">
 	        <div class="icon">ii</div>
 	        <div class="text">주문목록</div>
 	        <div class="right"> > </div>

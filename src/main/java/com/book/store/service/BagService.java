@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import com.book.store.dto.BagDTO;
 import com.book.store.dto.BookDTO;
+import com.book.store.dto.FindOrderDTO;
 
 public interface BagService {
 
@@ -26,4 +27,12 @@ public interface BagService {
 	public void insertOrderData(@Param("orderId")int orderId,@Param("userId")String userId,@Param("seq_No")int seq_No,@Param("orderGroup")int orderGroup) throws Exception;
 
 	public int findOrderCount(String userId) throws Exception;
+	
+	public List<FindOrderDTO> findAllOrders(String userId) throws Exception;
+	
+	public String findOrderTitle(int orderId) throws Exception;
+	
+	public int findOrderSu(String userId,int orderId) throws Exception;
+	
+	public List<BookDTO> findOrderGroup(@Param("userId")String userId,@Param("orderId")int orderId) throws Exception;
 }
