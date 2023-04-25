@@ -350,7 +350,7 @@
 				<div class="product_top" style="display: inline-flex; width: 100%;">
 
 				<div style="margin: 50px 0 0 150px;">
-				<img alt="" th:src="${dto.image_Url}" style="width: 200px; height: 250px; ">
+				<img alt="" th:src="${dto.image_Url}" style="width: 190px; height: 240px; ">
 				<span>
 				<th:block th:switch="${#strings.substring(dto.kdc_Nm, 0, 1)}">
 				    <img alt="" th:case="0" src="/image/총류.gif" id="before">
@@ -388,25 +388,9 @@
 									<span class="mob_close"></span>
 								</div>
 							  <div class="product_option_box_in">
-								<div class="drop-down01">
-									<select class="productname" name="nameoption">
-										<option value="00">상품명</option>
-										<option value="01">[[${dto.title_Nm}]]</option>
-										
-									</select>
-								</div>
-								<div class="drop-down02">
-									<p>가격</p>
-									<ul class="productprice" name="priceoption">									
-										<li><span>[[${dto.prc_Value}]]원</span></li>
-									</ul>
-								</div>
+							
 								<div class="option_btm">
-									<div class="prod"></div>
-									<div class="price clearfix">
-										<strong>합계</strong>
-										<span><strong class="price_total">0</strong>원</span>
-									</div>
+									
 									<div th:if="${RULE == 'RULE_ADMIN' }" style="text-align: center; white-space: nowrap;">
 										<button class="btn-111" th:onclick="@{|location.href='/BookUpdate.action?seq_No=${dto.seq_No}&${params}'|}">수정</button>
 										<button class="btn-111" onclick="alertDelete();">삭제</button>
@@ -442,7 +426,7 @@
 					</div>
 				</div>				
 				</div>
-				
+				<br/><br/><br/><br/>
 				<div class="content">
 					<div class="tab_list">
 						<ul>
