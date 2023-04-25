@@ -237,13 +237,17 @@ public class UserAjax {
 	}
 
 	@RequestMapping("/fail")
-	public String fail() {
-		return "실패";
+	public ModelAndView fail() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/bag.action");
+		return mav;
 	}
 	
 	@RequestMapping("/cancel")
-	public String cancel() {
-		return "취소";
+	public ModelAndView cancel() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("redirect:/bag.action");
+		return mav;
 	}
 	
 	//결제가 완료될때까지 대기하는 페이지
