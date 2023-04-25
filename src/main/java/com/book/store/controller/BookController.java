@@ -248,11 +248,12 @@ public class BookController {
 		if(httpSession.getAttribute("user") != null) {
 			user = (UserData) httpSession.getAttribute("user");
 			mav.addObject("userId", user.getUserId());
+			mav.addObject("RULE", user.getUserRole());
 		}else if(httpSession.getAttribute("OauthUser") != null) {
 			user = (UserData) httpSession.getAttribute("OauthUser");
 			mav.addObject("userId", user.getUserId());
+			mav.addObject("RULE", user.getUserRole());
 		}
-		
 		int seq_No = Integer.parseInt(request.getParameter("seq_No"));
 
 		String pageNum = request.getParameter("pageNum");
@@ -441,6 +442,16 @@ public class BookController {
 	
 	@GetMapping("/BookCategoryList.action")
 	public ModelAndView categoryList(HttpServletRequest request) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		
+		UserData user = null;
+		if(httpSession.getAttribute("user") != null) {
+			user = (UserData) httpSession.getAttribute("user");
+			mav.addObject("RULE", user.getUserRole());
+		}else if(httpSession.getAttribute("OauthUser") != null) {
+			user = (UserData) httpSession.getAttribute("OauthUser");
+			mav.addObject("RULE", user.getUserRole());
+		}
 		
 		String pageNum = request.getParameter("pageNum");
 
@@ -507,7 +518,6 @@ public class BookController {
 
 		if(!param.equals("")) { articleUrl += "&" + param; }
 
-		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("lists", lists); 
 		mav.addObject("pageIndexList", pageIndexList);

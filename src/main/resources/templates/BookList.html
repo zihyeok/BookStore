@@ -59,7 +59,7 @@
 <br/>
 
 <div style="text-align: right; margin-right: 200px;">
-	<button class="btn-555 float-r" th:onclick="|location.href='@{BookCreated.action}'|">등록하기</button>
+	<button th:if="${RULE == 'RULE_ADMIN'}" class="btn-555 float-r" th:onclick="|location.href='@{BookCreated.action}'|">등록하기</button>
 </div>
 
 <div style="text-align: center;">
