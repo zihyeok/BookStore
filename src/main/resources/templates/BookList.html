@@ -1,7 +1,7 @@
 <html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- 밑의내용부터 content layout에 들어가니깐 이 내용이 charset=UTF-8라는 걸 적어야 한글이 안깨짐 -->
-<div layout:fragment="content">
+<div layout:fragment="content" >
 
 <link rel="stylesheet" type="text/css" href="css/BookList.css">
 <style>
@@ -62,7 +62,7 @@
 	<button th:if="${RULE == 'RULE_ADMIN'}" class="btn-555 float-r" th:onclick="|location.href='@{BookCreated.action}'|">등록하기</button>
 </div>
 
-<div style="text-align: center;">
+<div style="text-align: center; padding-left: 5%;">
 <a th:utext="${pageIndexList}"></a>
 </div>
 <br/><br/><br/><br/>

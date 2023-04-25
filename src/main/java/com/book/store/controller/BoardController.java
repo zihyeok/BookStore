@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import com.book.store.dto.BoardDTO;
 import com.book.store.service.BoardAnswerService;
 import com.book.store.service.BoardAnswerServiceImpl;
 import com.book.store.service.BoardService;
+import com.book.store.user.UserData;
 import com.book.store.util.BoardUtil;
 import com.book.store.util.MyUtil;
 
@@ -32,6 +34,9 @@ public class BoardController {
 	
 	@Resource
 	BoardAnswerService BoardAnswerService = new BoardAnswerServiceImpl();
+	
+	@Resource
+	HttpSession httpSession;
 	
 	@Autowired
 	BoardUtil BoardUtil;
@@ -56,9 +61,24 @@ public class BoardController {
 		@GetMapping("/Board.action")
 		public ModelAndView created(BoardDTO dto,HttpServletRequest request) throws Exception{
 				
+			UserData user = null;
+			
 			ModelAndView mav = new ModelAndView();
 			
-			mav.setViewName("boardcreated");
+
+			if(httpSession.getAttribute("user") != null) {
+				user = (UserData) httpSession.getAttribute("user");
+				mav.addObject("RULE", user.getUserRole());
+				
+			}else if(httpSession.getAttribute("OauthUser") != null) {
+				user = (UserData) httpSession.getAttribute("OauthUser");
+				mav.addObject("RULE", user.getUserRole());
+			}
+			
+			
+			mav.addObject("user", user.getUserId());
+			
+			mav.setViewName("BoardCreated");
 			 //(html)로 갈때는 setViewName /class로 갈때는 setView
 			
 			return mav;
@@ -87,10 +107,10 @@ public class BoardController {
 		@RequestMapping("/BoardList.action")
 		public ModelAndView list(BoardDTO dto,HttpServletRequest request) throws Exception{
 			
-			
 			String pageNum = request.getParameter("pageNum");
 		    int currentPage = 1;
-			
+		  
+		    
 			if (pageNum != null) {
 		        currentPage = Integer.parseInt(pageNum);
 		    }
@@ -147,9 +167,9 @@ public class BoardController {
 		        articleUrl += "&" + param;
 		    }
 			
-		    
 			//ModelAndView로 전송
 			ModelAndView mav = new ModelAndView();
+			
 			
 			
 			//포워딩할 데이터
@@ -157,7 +177,7 @@ public class BoardController {
 			mav.addObject("pageIndexList", pageIndexList);
 			mav.addObject("dataCount", dataCount);
 			mav.addObject("articleUrl", articleUrl);
-
+			
 			
 			mav.setViewName("boardlist");
 
@@ -172,7 +192,7 @@ public class BoardController {
 			ModelAndView mav = new ModelAndView();
 			
 			int boardId = Integer.parseInt(request.getParameter("num"));
-			
+			UserData user = null;
 			String pageNum = request.getParameter("pageNum");
 			
 			String searchKey = request.getParameter("searchKey");
@@ -232,6 +252,19 @@ public class BoardController {
 				param += "&searchValue=" + URLEncoder.encode(searchValue, "utf-8");
 			}
 			
+			
+			if(httpSession.getAttribute("user") != null) {
+				user = (UserData) httpSession.getAttribute("user");
+				mav.addObject("userId", user.getUserId());
+				mav.addObject("RULE", user.getUserRole());
+			}else if(httpSession.getAttribute("OauthUser") != null) {
+				user = (UserData) httpSession.getAttribute("OauthUser");
+				mav.addObject("userId", user.getUserId());
+				mav.addObject("RULE", user.getUserRole());
+			}
+
+			
+			
 			mav.addObject("preNum", preNum);
 			mav.addObject("preSubject", preSubject);
 			mav.addObject("nextNum", nextNum);
@@ -240,6 +273,7 @@ public class BoardController {
 			mav.addObject("dto", dto);
 			mav.addObject("params", param);
 			mav.addObject("pageNum", pageNum);
+			mav.addObject("user", user.getUserId());
 			
 			mav.setViewName("boardarticle");
 			

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
 
-<div layout:fragment="content2">
+<div layout:fragment="content">
     <!-- Begin Head -->
     <head>
         
@@ -388,9 +388,16 @@
 									<span class="mob_close"></span>
 								</div>
 							  <div class="product_option_box_in">
+<<<<<<< HEAD
 							
 								<div class="option_btm">
 									
+=======
+						
+						
+								<div class="option_btm">
+								
+>>>>>>> 2f144759d6a3d3ec08a6d4a4e29fdc86151e2ce2
 									<div th:if="${RULE == 'RULE_ADMIN' }" style="text-align: center; white-space: nowrap;">
 										<button class="btn-111" th:onclick="@{|location.href='/BookUpdate.action?seq_No=${dto.seq_No}&${params}'|}">수정</button>
 										<button class="btn-111" onclick="alertDelete();">삭제</button>
@@ -464,7 +471,7 @@
                         <p th:unless="${session.OauthUser==null}"><label>UserID</label><input type="text" th:value="${session.OauthUser.userId}" name="userId" readonly="readonly"></p>
                         <p th:if="${session.user==null and session.OauthUser==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
                         <p th:unless="${session.user==null}"><label>내용</label><textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
-                        <p th:unless="${session.OauthUser==null}"><label>내용</label><textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
+                        <p th:unless="${session.OauthUser}"><label>내용</label><textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
                         <div class="btn_box" th:if="${session.user!=null or session.OauthUser !=null}">
                            <button class="btn-555 float-r m-btn" onclick="sendReview();" type="button">리뷰 작성</button>
                            <!-- button은 기본type이 submit 그래서 바로 폼 주소로 가지만 이걸 벗어나려면 type button -->
@@ -523,6 +530,7 @@
 			</div><!--in_box E-->
 		</div><!--container E-->
 
+<br/><br/>
 		
 		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 		<script type="text/javascript">		

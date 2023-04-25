@@ -45,10 +45,13 @@
 	       
 	       <p>
 	        <span >
-	        <a th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}"
+	        
+	        <a th:if="${session.user?.userId == dto.userId || session.OauthUser?.userId == dto.userId}"
          		th:onclick="@{|location='/AnswerUpdated.action?answerNum=${dto.answerNum }&pageNum=${pageNum }&num=${boardId }'|}">수정</a>
+        	<!-- 여기서 ?.는 세이프 호출 연산자입니다. session.user 또는 
+        	session.OauthUser가 null일 경우 null을 반환하며, 그렇지 않은 경우 userId 값을 반환합니다. -->
         	&nbsp;
-	        <a th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}" 
+	        <a th:if="${session.user?.userId == dto.userId || session.OauthUser?.userId == dto.userId}" 
 	        th:href="'javascript:deleteData(\'' + ${dto.answerNum} + '\', \'' + ${pageNum} + '\')'">삭제</a>  
 	        </span>
 	      </p>
