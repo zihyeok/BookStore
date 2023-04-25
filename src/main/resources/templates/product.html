@@ -408,7 +408,7 @@
 										<strong>합계</strong>
 										<span><strong class="price_total">0</strong>원</span>
 									</div>
-									<div style="text-align: center; white-space: nowrap;">
+									<div th:if="${RULE == 'RULE_ADMIN' }" style="text-align: center; white-space: nowrap;">
 										<button class="btn-111" th:onclick="@{|location.href='/BookUpdate.action?seq_No=${dto.seq_No}&${params}'|}">수정</button>
 										<button class="btn-111" onclick="alertDelete();">삭제</button>
 										<button class="btn-111" th:onclick="@{|location.href='/BookList.action?${params}'|}">목록으로</button>

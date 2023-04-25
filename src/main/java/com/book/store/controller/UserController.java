@@ -73,7 +73,7 @@ public class UserController {
 			
 			userService.insertData(userdata);
 			
-			mav.setViewName("redirect:/user/hi");
+			mav.setViewName("redirect:/main");
 			
 			return mav;
 			
@@ -113,7 +113,7 @@ public class UserController {
 		userService.insertData(oauthUser);
 		httpSession.setAttribute("OauthUser", oauthUser);
 		
-		mav.setViewName("redirect:/user/hi");
+		mav.setViewName("redirect:/main");
 		
 		return mav;
 	}
@@ -128,44 +128,44 @@ public class UserController {
 //		
 //	}
 	
-	@GetMapping("/hi")
-	public ModelAndView test() throws Exception {
-		
-		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("minsungTest3");
-		
-		UserData user = (UserData) httpSession.getAttribute("user");
-		UserData OauthUser = (UserData) httpSession.getAttribute("OauthUser");
-		
-		
-		
-		if(user!=null) {
-			mav.addObject("userId", user.getUserId());
-			mav.addObject("userPwd", user.getUserPwd());
-			mav.addObject("userEmail", user.getUserEmail());
-			mav.addObject("realPwd", user.getRealPwd());
-			
-		}
-
-		//OAuth로 첫 로그인시 기타 회원정보 추가를 위해 가입페이지로 이동
-		if(OauthUser!=null && OauthUser.getUserAddr()==null) {
-		
-			mav.setViewName("redirect:/user/oaumember");
-			return mav;
-		}
-		
-		
-		if(OauthUser!=null) {
-			mav.addObject("userId", OauthUser.getUserId());
-			mav.addObject("userPwd", OauthUser.getUserPwd());
-			mav.addObject("userEmail", OauthUser.getUserEmail());
-			
-			
-		}
-		
-		return mav;
-	}
+//	@GetMapping("/hi")
+//	public ModelAndView test() throws Exception {
+//		
+//		ModelAndView mav = new ModelAndView();
+//		
+//		mav.setViewName("minsungTest3");
+//		
+//		UserData user = (UserData) httpSession.getAttribute("user");
+//		UserData OauthUser = (UserData) httpSession.getAttribute("OauthUser");
+//		
+//		
+//		
+//		if(user!=null) {
+//			mav.addObject("userId", user.getUserId());
+//			mav.addObject("userPwd", user.getUserPwd());
+//			mav.addObject("userEmail", user.getUserEmail());
+//			mav.addObject("realPwd", user.getRealPwd());
+//			
+//		}
+//
+//		//OAuth로 첫 로그인시 기타 회원정보 추가를 위해 가입페이지로 이동
+//		if(OauthUser!=null && OauthUser.getUserAddr()==null) {
+//		
+//			mav.setViewName("redirect:/user/oaumember");
+//			return mav;
+//		}
+//		
+//		
+//		if(OauthUser!=null) {
+//			mav.addObject("userId", OauthUser.getUserId());
+//			mav.addObject("userPwd", OauthUser.getUserPwd());
+//			mav.addObject("userEmail", OauthUser.getUserEmail());
+//			
+//			
+//		}
+//		
+//		return mav;
+//	}
 	
 	@GetMapping("/login")
 	public ModelAndView mypage(HttpServletRequest request) {
