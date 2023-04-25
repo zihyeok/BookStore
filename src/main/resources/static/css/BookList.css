@@ -1,11 +1,12 @@
 @charset "UTF-8";
 
 div.BookList-container {
+	
   text-align: center;
   display: block;
   width: 100%;
   justify-content: space-between;
-
+  padding-left: 6%;
 
 }
 
