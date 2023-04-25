@@ -1,6 +1,6 @@
 <meta charset="UTF-8">
 
-<nav th:fragment="navbarFragment" class="navbar">
+<nav th:fragment="navbarFragment" class="navbar" >
 
 <script type="text/javascript" src="/js/ajaxUtil.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -127,7 +127,7 @@ function alertLogin(){
 
 function Check(){
 	  
-	  window.open("/Notice.do", "win", "width=1200, height=800");
+	  window.open("/Notice.do", "win", "width=1300, height=800");
 	  
 	}
 
@@ -137,9 +137,9 @@ function Check(){
 
 <div class="container-fluid">
 
-<header>
+<header >
 
-  <article id="header" style="height: 120px;">
+  <article id="header" style="height: 120px; ">
       <section>
         <div>
           <a href="/main"><img class="logo" src="/image/logo.png" alt=""></a>
@@ -147,8 +147,8 @@ function Check(){
         
         <div class="backdiv"> </div>
 
-        <nav class="lap-nav">
-          <ul class="clearfix">
+        <nav class="lap-nav" >
+          <ul class="clearfix" >
             
             <li><a>이벤트</a>
               <ul>
@@ -165,7 +165,7 @@ function Check(){
               </ul>
             </li>
 
-             <li class="category"><a>카테고리</a>
+             <li class="category" ><a>카테고리</a>
 			  <ul>
 			    <a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm"><li>&nbsp;&nbsp;&nbsp;전체&nbsp;&nbsp;&nbsp;</li></a>
 			    <a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=100"><li>&nbsp;&nbsp;&nbsp;철학&nbsp;&nbsp;&nbsp;</li></a>
@@ -192,7 +192,7 @@ function Check(){
                 <li><a href="/NewBook.action">새로나온 책</a></li>
                 <a href="/BestBook.action"><li>베스트</li></a>
                 <li>수상도서</li>
-                <li>매거진</li>
+               
               </ul>
             </li>
           </ul>
