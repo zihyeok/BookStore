@@ -29,7 +29,7 @@ public interface ReviewService {
 	public ReviewDTO getReadData(int num) throws Exception;
 	
 	//별점 평균
-	public ReviewDTO getAvgStar(@Param("seq_No")int seq_No) throws Exception;
+	public double getAvgStar(@Param("seq_No")int seq_No) throws Exception;
 	
 	//리뷰 1개만 쓸 수 있게 id 체크할거임
 	public ReviewDTO checkUserId(@Param("seq_No")int seq_No,@Param("userId")String userId) throws Exception;

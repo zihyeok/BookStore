@@ -25,7 +25,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	where userId = #{userId}
 </select>
 
-<select id="getAvgStar" parameterType="int" resultType="int">
+<select id="getAvgStar" parameterType="int" resultType="double">
 	select nvl(avg(reviewStar),0) from review 
 	where seq_No = #{seq_No}
 </select>
