@@ -1,42 +1,54 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" >
-<head>
+<html layout:decorate="~{layout}">
 <meta charset="UTF-8">
-<title>Insert title here</title>
 
+<div layout:fragment="content" >
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<!-- 
 <link rel="stylesheet" type="text/css" href="https://unpkg.com/augmented-ui@2/augmented-ui.min.css">
+ -->
+ 
+<!--  -->
 <link rel="stylesheet" type="text/css" href="/css/userReviewLists.css">
 
-</head>
-<body>
 
-<h5>&lt;내가 작성한 리뷰&gt;</h5>
+<!-- font-family: 'NEXON Lv1 Gothic OTF'; -->
+<div style="text-align: center;">
 
+<h5 style="font-size: 40px; font-family: 'NEXON Lv1 Gothic OTF';">&lt;내가 작성한 리뷰&gt;</h5>
+<br/><br/>
 <div th:if="${#lists.size(lists)}<=0">리뷰를 쓰신 기록이 없습니다</div>
 
 <div th:if="${#lists.size(lists)}>0" th:each="dto: ${lists}">
 
-<a class="listing" th:href="'/BookArticle.action?seq_No=' + @{${dto.seq_No}}" target="_blank">
+<div class="listing" th:href="'/BookArticle.action?seq_No=' + @{${dto.seq_No}}" target="_blank">
   <img th:src="${dto.image_Url}"
     alt="해당 게시물은 존재하지 않습니다." th:unless="${dto.image_Url == null}">
   <img src="/image/itemReady.jpg"
     alt="" th:if="${dto.image_Url == null}">
-  <div>
+  
+  <div style="text-align: left; margin-left: 20%; ">
+  
     <div class="price">[[${dto.publisher_Nm}]]</div>
+    <br/><br/>
     <p class="title_Nm">[[${dto.title_Nm}]]</p><br/>
     <p class="title_Nm">[[${dto.authr_Nm}]]</p>
     <p class="content">댓글내용 : [[${dto.content}]]</p>
   </div>
-</a>
+  
+</div>
 
 </div>
 
-<div style="padding-top: 100px;" onclick="location.href='/user/mypage'"><button class="btn">마이페이지</button> </div>
 
-<div th:utext="${pageIndexList}" style="height: 100px; margin-top: 100px;"></div>
+<div th:utext="${pageIndexList}" style="height: 100px; margin-top: 100px; font-size: 20px;"></div>
+
+</div>
 
 
-</body>
+</div>
 </html>
 
 
