@@ -22,8 +22,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 
-</br></br></br></br>
-</br></br></br></br>
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
 
 <!-- 왜 string 타입의 null이라는 글자가 들어갔을까 -->
 <div th:if="${searchKey}=='null'" class="searchResult_box">해당 게시물은 존재하지 않습니다</div>
@@ -33,7 +33,7 @@
 <div class="BookList-container" th:each="i : ${#numbers.sequence(0,2)}" th:if="${#lists.size(lists)}>0">
 	<div class="BookList-row" th:each="j : ${#numbers.sequence(0,2)}">
 		
-		<div class="BookList-img-box" th:each="dto: ${lists[3*i+j]}"> 
+		<div class="BookList-img-box" th:each="dto: ${lists[3*i+j]}" style=" line-height: 1.8; "> 
 			
 			<a th:href="@{${articleUrl}} + '&seq_No=' + @{${dto.seq_No}}">
 			<img alt="상품 준비중" th:src="@{${dto.image_Url}}"></a><br/><br/>
@@ -41,22 +41,22 @@
 			<h5>[[${dto.title_Nm}]]</h5>
          <span>[[${dto.authr_Nm}]]</span><br/>
          <span>[[${dto.publisher_Nm}]]</span><br/>
-         <span>가격:[[${#numbers.formatInteger(dto.prc_Value, 1,'COMMA')}]]원</span><br/>
+         <span>가격: [[${#numbers.formatInteger(dto.prc_Value, 1,'COMMA')}]]원</span>
 			
 			
-			<div th:id="${dto.seq_No}">
-			<a th:onclick="|javascript:sendBag('${dto.seq_No}')|"><button style="background-color: #fff;" type="button">🤍</button></a>
+			<div th:id="${dto.seq_No}" >
+			<a th:onclick="|javascript:sendBag('${dto.seq_No}')|"><button style="background-color: #fff; font-size: 20px;" type="button">🤍</button></a>
 			</div>
 			<div th:id="'delete' + ${dto.seq_No}" style="display: none;">
-			<a th:onclick="|javascript:sendDeleteBag('${dto.seq_No}')|"><button style="background-color: #fff;" type="button">❤️</button></a>
+			<a th:onclick="|javascript:sendDeleteBag('${dto.seq_No}')|"><button style="background-color: #fff; font-size: 20px;" type="button">❤️</button></a>
 			</div>
-			
+		
 		</div>
 
 	</div>
 </div>
 
-</br>
+<br/>
 
 <div style="text-align: right; margin-right: 200px;">
 	<button class="btn-555 float-r" th:onclick="|location.href='@{BookCreated.action}'|">등록하기</button>
