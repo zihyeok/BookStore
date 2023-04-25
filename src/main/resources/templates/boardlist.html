@@ -2,10 +2,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <div layout:fragment="content" >
-</br></br></br></br>
-</br></br></br></br>
-<link rel="stylesheet" href="/css/board.css">
-<link rel="stylesheet" type="text/css" href="/css/BoardCreated.css">
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<link rel="stylesheet" href="/css/board.css"/>
+<link rel="stylesheet" type="text/css" href="/css/BoardCreated.css"/>
 
 
   <article class="search2">
@@ -46,7 +46,8 @@
       <summary>
         <div class="city-list-header" th:if="${#lists.size(lists)}>0" th:each="dto:${lists}" >
           <span style="margin-left: 20px" class="weather-header-details" >[[${dto.boardId}]]</span>
-          <span  class="weather-header-details" th:text="${dto.userId}" >작성자</span>
+          <span class="weather-header-details" 
+          th:text="${#strings.length(dto.userId) > 10 ? #strings.substring(dto.userId, 0, 10) + '..' : dto.userId}" >작성자</span>
           
           <span  class="weather-header-details" th:if="${dto.fix_created} == ${dto.created}" 
           th:text="${#strings.length(dto.created) > 10 ? #strings.substring(dto.created, 0, 10) + '.' : dto.created}" >
