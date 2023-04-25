@@ -136,6 +136,8 @@ public class ReviewController {
 		int end = currentPage*numPerPage;
 
 		List<ReviewDTO> lists = reviewService.getLists(start, end, seq_No);
+		
+		double avgStar = reviewService.getAvgStar(seq_No);
 
 		String pageIndexList = myUtil.pageIndexList(currentPage, totalPage);
 
@@ -145,6 +147,7 @@ public class ReviewController {
 		mav.addObject("pageNum", currentPage);
 		mav.addObject("pageIndexList", pageIndexList);
 		mav.addObject("checkId", checkId);
+		mav.addObject("avgStar", avgStar);
 
 		mav.setViewName("commentList");
 

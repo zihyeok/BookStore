@@ -57,7 +57,7 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public ReviewDTO getAvgStar(int seq_No) throws Exception {
+	public double getAvgStar(int seq_No) throws Exception {
 		
 		return reviewMapper.getAvgStar(seq_No);
 	}
