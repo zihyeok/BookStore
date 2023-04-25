@@ -38,7 +38,7 @@
       <tr>
         <th>작성자 :</th>
         <td>[[${dto.userId}]]</td>
-        <!-- [[${session.user.userId}]] -->
+      
         <th th:if="${dto.fix_created} == ${dto.created} ">작성일 :</th>
         <td th:if="${dto.fix_created} == ${dto.created} ">[[${dto.created}]]</td>
         <th th:if="${dto.fix_created} != ${dto.created} ">수정일 :</th>
@@ -72,7 +72,7 @@
     
   </table>
   <br/>
-  <!-- max-width: 1170px; -->
+
   
   
   <br/><br/><br/><br/>
@@ -87,12 +87,14 @@
 <div style="margin-top: 20px; margin-right: 17%;">
 	  <button  class="black-btn float-r m-btn" 
 	  th:onclick="@{|location='/BoardUpdated.action?num=${dto.boardId }&${params }'|}"
-	  th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">
+	  th:if="${session.user?.userId == dto.userId || session.OauthUser?.userId == dto.userId}">
 	  수정</button>
 	  <button class="black-btn float-r m-btn"
 	  th:onclick="'location.href=\'BoardDeleted_ok.action?num=' + @{${dto.boardId}} + '&' + @{${params}} + '\''"
-	  th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId}">
+	  th:if="${session.user?.userId == dto.userId || session.OauthUser?.userId == dto.userId}">
 	  삭제</button>
+	  <!-- 여기서 ?.는 세이프 호출 연산자입니다. session.user 또는 
+	  session.OauthUser가 null일 경우 null을 반환하며, 그렇지 않은 경우 userId 값을 반환합니다. -->
 	  <button class="black-btn float-r m-btn" 
 	  th:onclick="@{|location.href='/BoardList.action?${params }'|}">
 	  리스트</button>
@@ -109,12 +111,13 @@
 			
 			<div class="ask_box">
 				<!-- disabled적용하면 form으로 안 날라감 -->
-				<p th:if="${session.user==null}"><label>작성자</label><input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
-				<p th:unless="${session.user==null}"><label>작성자</label><input type="text" th:value="${session.user.userId}" id="userId" name="userId" readonly="readonly"></p>
-				<p th:if="${session.user==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
-				<p th:unless="${session.user==null}"><label>내용</label><textarea name="content" id="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
+				<p th:if="${session.user==null and session.OauthUser==null}"><label>작성자</label><input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
+				<p th:unless="${session.user==null and session.OauthUser==null}"><label>작성자</label><input type="text" th:value="${user}" id="userId" name="userId" readonly="readonly"></p>
 				
-				<div class="btn_box" th:if="${session.user!=null}">
+				<p th:if="${session.user==null and session.OauthUser==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
+				<p th:unless="${session.user==null and session.OauthUser==null}"><label>내용</label><textarea name="content" id="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
+				
+				<div class="btn_box" th:if="${session.user != null or session.OauthUser != null}" >
 					<button class="btn-555 float-r m-btn" onclick="sendButton();" type="button" id="sendButton">리뷰 작성</button>
 					<!-- button은 기본type이 submit 그래서 바로 폼 주소로 가지만 이걸 벗어나려면 type button -->
 				</div>
@@ -135,7 +138,7 @@
 <br/><br/><br/><br/>
 <br/><br/><br/><br/>
 <!-- 댓글창 합쳐보기 -->
-<!-- <script th:inline="javascript"> -->
+
 <script th:inline="javascript">
 
 $(function () {

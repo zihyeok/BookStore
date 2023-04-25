@@ -176,10 +176,16 @@
       line-height: 1.5rem;
       color: #fff;
     }
-
+	
+	main>div>h4 {
+	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+	font-family: 'NEXON Lv1 Gothic OTF';
+	color: #ffffff
+	
+    }
+	
 main span {
-  font-size: 5rem;
-  color: red;
+  font-size: 3rem;
   line-height: 2;
 }
 
@@ -235,11 +241,11 @@ main button {
     .swiper-slide {
       text-align: center;
       display: flex;
-      /* ������ �߾����� �ϱ����� flex ��� */
+      /* 占쏙옙占쏙옙占쏙옙 占쌩억옙占쏙옙占쏙옙 占싹깍옙占쏙옙占쏙옙 flex 占쏙옙占� */
       align-items: center;
-      /* ���Ʒ� ���� �߾����� */
+      /* 占쏙옙占싣뤄옙 占쏙옙占쏙옙 占쌩억옙占쏙옙占쏙옙 */
       justify-content: center;
-      /* �¿� ���� �߾����� */
+      /* 占승울옙 占쏙옙占쏙옙 占쌩억옙占쏙옙占쏙옙 */
     }
 
     .swiper-slide img {
