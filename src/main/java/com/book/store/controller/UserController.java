@@ -2,8 +2,10 @@ package com.book.store.controller;
 
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.book.store.dto.BookDTO;
+import com.book.store.dto.FindOrderDTO;
 import com.book.store.service.BagService;
 import com.book.store.service.BookItemService;
 import com.book.store.service.UserService;
@@ -70,7 +73,7 @@ public class UserController {
 			
 			userService.insertData(userdata);
 			
-			mav.setViewName("redirect:/user/hi");
+			mav.setViewName("redirect:/main");
 			
 			return mav;
 			
@@ -110,7 +113,7 @@ public class UserController {
 		userService.insertData(oauthUser);
 		httpSession.setAttribute("OauthUser", oauthUser);
 		
-		mav.setViewName("redirect:/user/hi");
+		mav.setViewName("redirect:/main");
 		
 		return mav;
 	}
@@ -125,44 +128,44 @@ public class UserController {
 //		
 //	}
 	
-	@GetMapping("/hi")
-	public ModelAndView test() throws Exception {
-		
-		ModelAndView mav = new ModelAndView();
-		
-		mav.setViewName("minsungTest3");
-		
-		UserData user = (UserData) httpSession.getAttribute("user");
-		UserData OauthUser = (UserData) httpSession.getAttribute("OauthUser");
-		
-		
-		
-		if(user!=null) {
-			mav.addObject("userId", user.getUserId());
-			mav.addObject("userPwd", user.getUserPwd());
-			mav.addObject("userEmail", user.getUserEmail());
-			mav.addObject("realPwd", user.getRealPwd());
-			
-		}
-
-		//OAuth로 첫 로그인시 기타 회원정보 추가를 위해 가입페이지로 이동
-		if(OauthUser!=null && OauthUser.getUserAddr()==null) {
-		
-			mav.setViewName("redirect:/user/oaumember");
-			return mav;
-		}
-		
-		
-		if(OauthUser!=null) {
-			mav.addObject("userId", OauthUser.getUserId());
-			mav.addObject("userPwd", OauthUser.getUserPwd());
-			mav.addObject("userEmail", OauthUser.getUserEmail());
-			
-			
-		}
-		
-		return mav;
-	}
+//	@GetMapping("/hi")
+//	public ModelAndView test() throws Exception {
+//		
+//		ModelAndView mav = new ModelAndView();
+//		
+//		mav.setViewName("minsungTest3");
+//		
+//		UserData user = (UserData) httpSession.getAttribute("user");
+//		UserData OauthUser = (UserData) httpSession.getAttribute("OauthUser");
+//		
+//		
+//		
+//		if(user!=null) {
+//			mav.addObject("userId", user.getUserId());
+//			mav.addObject("userPwd", user.getUserPwd());
+//			mav.addObject("userEmail", user.getUserEmail());
+//			mav.addObject("realPwd", user.getRealPwd());
+//			
+//		}
+//
+//		//OAuth로 첫 로그인시 기타 회원정보 추가를 위해 가입페이지로 이동
+//		if(OauthUser!=null && OauthUser.getUserAddr()==null) {
+//		
+//			mav.setViewName("redirect:/user/oaumember");
+//			return mav;
+//		}
+//		
+//		
+//		if(OauthUser!=null) {
+//			mav.addObject("userId", OauthUser.getUserId());
+//			mav.addObject("userPwd", OauthUser.getUserPwd());
+//			mav.addObject("userEmail", OauthUser.getUserEmail());
+//			
+//			
+//		}
+//		
+//		return mav;
+//	}
 	
 	@GetMapping("/login")
 	public ModelAndView mypage(HttpServletRequest request) {
@@ -357,15 +360,57 @@ public class UserController {
 	
 	
 	
-	@GetMapping("/test")
-	public ModelAndView test123() throws Exception {
+	@GetMapping("/order")
+	public ModelAndView order(HttpServletRequest req) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		String userId = req.getParameter("userId");
 		
-		mav.addObject("user", (userService.findUserName("zzz123")).get());
+		List<FindOrderDTO> foDto = bagservice.findAllOrders(userId);
+		
+		Iterator<FindOrderDTO> it = foDto.iterator();
+		
+		while(it.hasNext()) {
+			
+			FindOrderDTO dto = it.next();
+			
+			dto.setTitle(bagservice.findOrderTitle(dto.getOrderId()));
+			dto.setSu(bagservice.findOrderSu(userId, dto.getOrderId()));
+			
+		}
+		
+		mav.addObject("findOrder", foDto);
+		mav.addObject("userId", userId);
 		mav.setViewName("orderHistory");
 		return mav;
 	}
 		
+	@GetMapping("/orderOne")
+	public ModelAndView orderOne(HttpServletRequest req) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		int orderId = Integer.parseInt(req.getParameter("orderId"));
+		String userId = req.getParameter("userId");
+		LocalDate day = LocalDate.parse(req.getParameter("day"));
+		int total_Price = 0;
+		
+		UserData user = (userService.findUserName(userId)).get();
+		List<BookDTO> dto = bagservice.findOrderGroup(userId, orderId);
+		
+		Iterator<BookDTO> it = dto.iterator();
+		while(it.hasNext()) {
+			BookDTO book = it.next();
+			
+			total_Price += book.getPrc_Value();
+		}
+		
+		mav.addObject("orderId", orderId);
+		mav.addObject("bookDto", dto);
+		mav.addObject("user", user);
+		mav.addObject("total_Price", total_Price);
+		mav.addObject("day", day);
+		mav.setViewName("orderOne");
+		return mav;
+	}
 	
 	
 }

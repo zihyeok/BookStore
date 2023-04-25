@@ -45,4 +45,23 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	select count(distinct ordergroup) from orderbag where userid = #{userId}
 </select>
 
+<select id="findAllOrders" parameterType="String" resultType="com.book.store.dto.FindOrderDTO">
+	select distinct orderid,ordergroup,to_char(orderdate,'yyyy-mm-dd') day 
+	from orderbag where userid = #{userId} order by ordergroup desc
+</select>
+
+<select id="findOrderTitle" parameterType="int" resultType="String">
+	select * from (select title_Nm from orderbag A,bookitem B where A.seq_no = B.seq_no and A.orderid = #{orderId}) 
+	where rownum = 1
+</select>
+
+<select id="findOrderSu" parameterType="map" resultType="int">
+	select count(*) from orderbag where userid = #{userId} and orderid = #{orderId}
+</select>
+
+<select id="findOrderGroup" parameterType="map" resultType="com.book.store.dto.BookDTO">
+	select b.* from orderbag a INNER JOIN bookitem b on a.seq_No = b.seq_No where 
+	userId = #{userId} and orderid = #{orderId} order by ordergroup desc
+</select>
+
 </mapper>

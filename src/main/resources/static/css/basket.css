@@ -84,24 +84,24 @@ td {
 }
 
 .cart__list__option {
-  vertical-align: top;
+  vertical-align: middle;
   padding: 20px;
 }
 
 .cart__list__option p {
-  margin-bottom: 25px;
   position: relative;
+  font-weight: bold;
 }
 
-.cart__list__option p::after {
-  content: "";
-  width: 90%;
-  height: 1px;
-  background-color: lightgrey;
-  left: 0px;
-  top: 25px;
-  position: absolute;
-}
+/* .cart__list__option p::after { */
+/*   content: ""; */
+/*   width: 90%; */
+/*   height: 1px; */
+/*   background-color: lightgrey; */
+/*   left: 0px;  */
+/*   top: 25px; */
+/*   position: absolute; */
+/* } */
 
 .cart__list__optionbtn {
   background-color: white;

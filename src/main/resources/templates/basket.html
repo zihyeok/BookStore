@@ -23,7 +23,7 @@
                     <tr>
                         <td><input type="checkbox" id="checkAll"></td>
                         <td colspan="2">상품정보</td>
-                        <td>옵션</td>
+                        <td>제목</td>
                         <td>상품금액</td>
                         <td>배송비</td>
                     </tr>
@@ -40,8 +40,7 @@
                             [[${dto.prc_Value}]]</span>
                         </td>
                         <td class="cart__list__option">
-                            <p>제목 : [[${dto.title_Nm}]]</p>
-                            <button class="cart__list__optionbtn" type="button">주문조건 추가/변경</button>
+                            <p>[[${dto.title_Nm}]]</p>
                         </td>
                         <td><span class="price">[[${dto.prc_Value}]]원</span><br>
                             <button class="cart__list__orderbtn" type="button" id="one_Order" name="one_Order">주문하기</button>
