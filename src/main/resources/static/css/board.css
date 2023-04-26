@@ -167,13 +167,18 @@ height: 330px;
 
 .city-list-header {
   display: flex;
+  justify-content: center;
+  align-items: center;
   
   border-bottom:1.5px solid #9C9C9C ; 
   margin-top: 10px;
   margin-bottom: 40px;
-  
+  padding-bottom:1%;
+
+
 }
-/* ¿¿ */
+
+
 .weather-header-details {
   flex:0.24;
   font-size: 120%;
