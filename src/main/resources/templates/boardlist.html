@@ -58,10 +58,10 @@
           수정일</span>
           
           <span  class="weather-header-details" th:text="${dto.hitCount}" style="margin-left: 50px">조회수</span>
-          <a th:href="@{|${articleUrl}&num=@{${dto.boardId}}|}" style="margin-bottom: 20px; margin-right: 40px">
-			<span  class="weather-header-details" 
-				th:text="${#strings.length(dto.subject) > 10 ? #strings.substring(dto.subject, 0, 10) + '...' : dto.subject}" 
-			    th:href="@{|${articleUrl}&num=@{${dto.boardId}}|}">제목</span> 
+          
+          <a th:href="@{|${articleUrl}&num=${dto.boardId}|}" style="margin-bottom: 20px; margin-right: 40px">
+			<span class="weather-header-details" th:text="${#strings.length(dto.subject) > 10 ? #strings.substring(dto.subject, 0, 10) + '...' : dto.subject}" >
+			제목</span> 
 		  </a>
 		  
         </div>
