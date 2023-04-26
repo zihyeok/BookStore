@@ -55,8 +55,16 @@ public class EventBoardServiceImpl implements EventBoardService{
 	public void deleteData(int boardId) throws Exception {
 		eventBoardMapper.deleteData(boardId);
 	}
-	
-	
-	
+
+	@Override
+	public int backUpMaxNum() throws Exception {
+		return eventBoardMapper.backUpMaxNum();
+	}
+
+	@Override
+	public void insertBackUp(EventBoardDTO dto) throws Exception {
+		eventBoardMapper.insertBackUp(dto);		
+	}
+		
 	
 }

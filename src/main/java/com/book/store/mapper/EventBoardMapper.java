@@ -11,6 +11,10 @@ import com.book.store.dto.EventBoardDTO;
 public interface EventBoardMapper {
 	
 	public int maxNum() throws Exception;
+	
+	public int backUpMaxNum() throws Exception;
+	
+	public void insertBackUp(EventBoardDTO dto) throws Exception;
 
 	public void insertData(EventBoardDTO dto) throws Exception;
 

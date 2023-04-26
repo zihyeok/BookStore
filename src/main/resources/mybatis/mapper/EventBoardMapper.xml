@@ -11,8 +11,8 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <insert id="insertData" parameterType="com.book.store.dto.EventBoardDTO">
-	insert into event_board (boardId,userId,pwd,subject,content,image,ipAddr,hitCount,created) 
-	values(#{boardId},#{userId},#{pwd},#{subject},#{content},#{image},#{ipAddr},0,sysdate)
+	insert into event_board (boardId,userId,pwd,subject,content,image_Url,ipAddr,hitCount,created) 
+	values(#{boardId},#{userId},#{pwd},#{subject},#{content},#{image_Url},#{ipAddr,jdbcType=NULL},0,#{created,jdbcType=NULL})
 </insert>
 
 <select id="getDataCount" parameterType="map" resultType="int">
@@ -23,7 +23,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 <select id="getLists" parameterType="map" resultType="com.book.store.dto.EventBoardDTO">
 	select * from (
 	select rownum rnum,data.* from (
-	select boardId,userId,subject,content,image,ipAddr,hitCount,to_char(created,'YYYY-MM-DD') created 
+	select boardId,userId,pwd,subject,content,image_Url,ipAddr,hitCount,to_char(created,'YYYY-MM-DD') created 
 	from event_board where ${searchKey} like '%' || #{searchValue} || '%' 
 	order by boardId desc) data) 
 <![CDATA[
@@ -36,7 +36,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 </update>
 
 <select id="getReadData" parameterType="int" resultType="com.book.store.dto.EventBoardDTO">
-	select boardId,userId,pwd,subject,content,image,ipAddr,hitCount,created from event_board 
+	select boardId,userId,pwd,subject,content,image_Url,ipAddr,hitCount,created from event_board 
 	where boardId=#{boardId}
 </select>
 
@@ -46,7 +46,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	pwd=#{pwd},
 	subject=#{subject},
 	content=#{content},
-	image=#{image} 
+	image_Url=#{image_Url} 
 	where boardId=#{boardId}
 </update>
 

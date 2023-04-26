@@ -10,7 +10,7 @@ public class EventBoardDTO {
 	private String pwd;
 	private String subject;
 	private String content;
-	private String image;
+	private String image_Url;
 	private String ipAddr;
 	private String created;
 	private int hitCount;
