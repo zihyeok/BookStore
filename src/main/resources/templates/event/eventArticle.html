@@ -1,20 +1,27 @@
-
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">>
+
+<div layout:fragment="content4">
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>게 시 판</title>
-
+<!-- 
 <link rel="stylesheet" type="text/css" href="css/style.css"/>
-<link rel="stylesheet" type="text/css" href="css/article.css"/>
+<link rel="stylesheet" type="text/css" href="css/article.css"/> -->
+
+<!-- product.css -->
+		<link rel="stylesheet" href="css/event.css">
 
 </head>
 <body>
 
+<br/><br/>
+
 <div id="bbs">
-	<div id="bbs_title">
-	게 시 판
-	</div>
+	<h2>Event / Magazine</h2>
+	<br/><br/>
+	
 	<div id="bbsArticle">
 		<div id="bbsArticle_header">
 			<!-- <p th:text="${dto.subject }"></p> -->
@@ -23,9 +30,7 @@
 		<div class="bbsArticle_bottomLine">
 			<dl>
 				<dt>작성자</dt>
-				<dd th:text="${dto.userId}"></dd>
-				<dt>줄수</dt>
-				<dd th:text="${lineSu}"></dd>			
+				<dd th:text="${dto.userId}"></dd>						
 			</dl>		
 		</div>
 		<div class="bbsArticle_bottomLine">
@@ -36,41 +41,36 @@
 				<dd th:text="${dto.hitCount }"></dd>			
 			</dl>		
 		</div>
-		<div id="bbsArticle_content">
-			<table class="table">
+		<div id="bbsArticle_content">			
 				<tr>
-					<td style="padding: 20px 80px 20px 0px;" valign="top" height="200">
-					
-					<textarea rows="12" cols="82" name="content"
-					style="padding-left: 20px; border: none; resize: none; background-color: #ffffff;"
-					class="boxTA" th:text="${dto.content}" disabled="disabled"></textarea>
-					
+					<td >
+						<textarea name="content"
+						style="padding-left: 20px; border: none; resize: none; background-color: #ffffff;"
+						class="" th:text="${dto.content}" disabled="disabled"></textarea>
+						<img alt="안녕" th:src="${dto.image_Url}" >
 					</td>
 				</tr>
 			</table>		
 		</div>
 	</div>
-	<div class="bbsArticle_noLine" style="text-align: right;">
+	<!-- <div style="text-align: right;">
 		From : [[${dto.ipAddr }]]
-	</div>
-	<div id="bbsArticle_footer">
-		<div id="leftFooter">
-			<input type="button" value=" 수정 " class="btn2" 
-			th:onclick="@{|location.href='/eventUpdated.action?num=${dto.boardId }&${params }'|}"/>
-			<input type="button" value=" 삭제 " class="btn2" 
-			th:onclick="'location.href=\'eventDeleted_ok.action?num=' + @{${dto.boardId}} + '&' + @{${params}} + '\''"/>		
-		</div>
-		<div id="rightFooter">
-			<input type="button" value=" 리스트 " class="btn2" 
-			th:onclick="@{|location.href='/eventList.action?${params }'|}"/>
-		</div>	
+	</div> -->
+	<div>
+	
+	
+	<div id="bbsArticle_footer" style="text-align: center;">
+		<button class="btn-7" th:onclick="@{|location.href='/eventUpdated.action?boardId=${dto.boardId}&${params}'|}">수정</button>
+		<button class="btn-7" th:onclick="@{|location.href='/eventDeleted.action?boardId=${dto.boardId}&${params}'|}">삭제</button>
+		<button class="btn-7" th:onclick="@{|location.href='/eventList.action?${params}'|}">목록으로</button>
+	</div>	
+	
 	</div>
 
 </div>
 
 </body>
+
+</div>
+
 </html>
-
-
-
-

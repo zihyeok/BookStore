@@ -4,8 +4,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>이벤트 게시판</title>
 
-<link rel="stylesheet" type="text/css" href="css/style.css"/>
-<link rel="stylesheet" type="text/css" href="css/created.css"/>
+<link rel="stylesheet" href="css/event.css">
 
 <script type="text/javascript" src="js/util.js"></script>
 <script type="text/javascript">
@@ -15,7 +14,7 @@
 		
 		var f = document.myForm;
 	
-	alert("aaa");
+	alert("등록");
 		
 		str = f.subject.value;
 		str = str.trim();
@@ -59,7 +58,7 @@
 		str = f.pwd.value;
 		str = str.trim();
 		
-		if(!str) { //
+		if(!str) { 
 			alert("\n패스워드를 입력하세요!");
 			f.pwd.focus();
 			return;
@@ -68,7 +67,6 @@
 		
 		f.action = "/eventCreated.action"; 
 		f.submit();
-		
 		
 	}
 
@@ -79,19 +77,17 @@
 
 
 <div id="bbs" >
-	<div id="bbs_title">
-		(´▽`ʃ♡ƪ)게 시 판(´▽`ʃ♡ƪ)
-	</div>
 
-
-
-	<form action="" name="myForm" method="post">
+	<h2 align="center">Board</h2>
+	<br/><br/>
+	
+	<form action="" name="myForm" method="post" enctype="multipart/form-data">
 	<div id="bbsCreated">
 		<div class="bbsCreated_bottomLine">
 			<dl>
 				<dt>제목</dt>
 				<dd>
-					<input type="text" name="subject" size="60" maxlength="100"
+					<input type="text" name="subject" size="70" maxlength="100"
 					class="boxTF"/>
 				</dd>	
 			</dl>
@@ -102,7 +98,7 @@
 			<dl>
 				<dt>아이디</dt>
 				<dd>
-					<input type="text" name="userId" size="35" maxlength="20"
+					<input type="text" name="userId" size="70" maxlength="20"
 					class="boxTF"/>
 				</dd>	
 			</dl>
@@ -113,7 +109,7 @@
 			<dl>
 				<dt>내용</dt>
 				<dd>
-					<textarea rows="12" cols="63" name="content" class="boxTA"
+					<textarea rows="12" cols="69" name="content" class="boxTA"
 					style="resize: none; background-color: #ffffff"></textarea>
 				</dd>	
 			</dl>
@@ -124,18 +120,21 @@
 			<dl>
 				<dt>패스워드</dt>
 				<dd>
-					<input type="text" name="pwd" size="35" maxlength="7"
-					class="boxTF"/>&nbsp;(게시물 수정 및 삭제시 필요!)
+					<input type="text" name="pwd" size="70" maxlength="10"
+					class="boxTF" placeholder="(게시물 수정 및 삭제시 필요)"/> 
 				</dd>	
 			</dl>
 		</div>
 	</div>
 	
+	<div style="margin-bottom: 15px; margin-top: 15px;">
+		<input type="file" name="upload" id="upload">
+	</div>
 	
-	<div id="bbsCreated_footer">
-	<input type="button" value=" 등록하기 " class="btn2" onclick="sendIt();"/>
-	<input type="reset" value=" 다시입력 " class="btn2" onclick="document.myForm.subject.focus();"/>
-	<input type="button" value=" 작성취소 " class="btn2" onclick="javascript:location.href='/eventList.action';"/>
+	<div id="bbsCreated_footer">	
+		<button class="btn-7" onclick="sendIt();">등록하기</button>
+		<button class="btn-7" onclick="document.myForm.subject.focus();">다시입력</button>
+		<button class="btn-7" onclick="javascript:location.href='/eventList.action';">작성취소</button>
 	</div>
 	
 	</form>
