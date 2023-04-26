@@ -208,7 +208,8 @@ blockquote, q {quotes: "" "";}
 .product_detail .tab_box .ask_box{background:#f5f5f5; border-top:3px solid #222; padding:40px 50px 115px 50px;}
 .product_detail .tab_box .ask_box p{margin-top:10px}
 .product_detail .tab_box .ask_box label{width:80px; display:inline-block; font-size:14px; vertical-align: top; padding-top: 8px;}
-.product_detail .tab_box .ask_box input{width:10%; min-width:100px; height:36px; padding:0 5px;}
+.product_detail .tab_box .ask_box input[type="radio"]{width:10%; min-width:50px; height:30px; padding:0px;}
+.product_detail .tab_box .ask_box input[type="text"]{width:20%; min-width:200px; height:36px; padding:0px;}
 
 /* .tab_box .ask_box input[type=radio] {
   display: inline-block;
