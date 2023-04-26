@@ -350,7 +350,7 @@
 				<div class="product_top" style="display: inline-flex; width: 100%;">
 
 				<div style="margin: 50px 0 0 150px;">
-				<img alt="" th:src="${dto.image_Url}" style="width: 200px; height: 250px; ">
+				<img alt="" th:src="${dto.image_Url}" style="width: 190px; height: 240px; ">
 				<span>
 				<th:block th:switch="${#strings.substring(dto.kdc_Nm, 0, 1)}">
 				    <img alt="" th:case="0" src="/image/총류.gif" id="before">
@@ -388,10 +388,10 @@
 									<span class="mob_close"></span>
 								</div>
 							  <div class="product_option_box_in">
-						
-						
+							
 								<div class="option_btm">
 								
+
 									<div th:if="${RULE == 'RULE_ADMIN' }" style="text-align: center; white-space: nowrap;">
 										<button class="btn-111" th:onclick="@{|location.href='/BookUpdate.action?seq_No=${dto.seq_No}&${params}'|}">수정</button>
 										<button class="btn-111" onclick="alertDelete();">삭제</button>
@@ -427,7 +427,7 @@
 					</div>
 				</div>				
 				</div>
-				
+				<br/><br/><br/><br/>
 				<div class="content">
 					<div class="tab_list">
 						<ul>
@@ -460,12 +460,12 @@
                         <input type="radio" name="reviewStar" value="1"><label for="rate5">★</label>
                         </p>
                         <!-- disabled적용하면 form으로 안 날라감 -->
-                        <p th:if="${session.user==null and session.OauthUser==null}"><label>UserID</label><input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
+                        <p th:if="${session.user==null and session.OauthUser==null}"><label>UserID</label><input type="text" placeholder="로그인 후 이용" disabled="disabled"></p>
                         <p th:unless="${session.user==null}"><label>UserID</label><input type="text" th:value="${session.user.userId}" name="userId" readonly="readonly"></p>
                         <p th:unless="${session.OauthUser==null}"><label>UserID</label><input type="text" th:value="${session.OauthUser.userId}" name="userId" readonly="readonly"></p>
                         <p th:if="${session.user==null and session.OauthUser==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
                         <p th:unless="${session.user==null}"><label>내용</label><textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
-                        <p th:unless="${session.OauthUser}"><label>내용</label><textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
+                        <p th:unless="${session.OauthUser==null}"><label>내용</label><textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
                         <div class="btn_box" th:if="${session.user!=null or session.OauthUser !=null}">
                            <button class="btn-555 float-r m-btn" onclick="sendReview();" type="button">리뷰 작성</button>
                            <!-- button은 기본type이 submit 그래서 바로 폼 주소로 가지만 이걸 벗어나려면 type button -->
