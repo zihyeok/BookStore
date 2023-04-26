@@ -412,5 +412,12 @@ public class UserController {
 		return mav;
 	}
 	
-	
+//	@GetMapping("test")
+//	public ModelAndView test() throws Exception{
+//		ModelAndView mav = new ModelAndView();
+//		
+//		mav.setViewName("paymentlist");
+//		return mav;
+//	}
+//	
 }
