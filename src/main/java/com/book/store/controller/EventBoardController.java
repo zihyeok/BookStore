@@ -19,7 +19,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.book.store.dto.EventBoardDTO;
 import com.book.store.service.EventBoardService;
-import com.book.store.user.UserData;
 import com.book.store.util.FileManagerEvt;
 import com.book.store.util.MyUtil;
 
@@ -232,6 +231,8 @@ public class EventBoardController {
          
          mav.setViewName("event/eventArticle");
          
+         
+
          return mav;
          
          
