@@ -24,9 +24,10 @@
 
     h1,
     h2,
-    h3 {
-    font-family: 'Noto Sans KR', sans-serif;
-      color: #444;
+    h3,
+    h4 {
+    font-family: 'Noto Sans KR', sans-serif !important;
+      color: #444 !important;
     }
 
     p{
@@ -50,10 +51,16 @@
       font-size: 1.4rem;
       line-height: 1.4rem;
     }
+    
+    h4 { 
+      font-size: 0.8rem !important;
+      line-height: 1.0rem !important;
+      text-transform: uppercase !important;     
+    }
 
     a:link {
       color: #666;
-      text-decoration: none;
+      text-decoration: none !important;
     }
 
     a:visited {
@@ -176,17 +183,10 @@
       line-height: 1.5rem;
       color: #fff;
     }
-	
-	main>div>h4 {
-	text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
-	font-family: 'NEXON Lv1 Gothic OTF';
-	color: #ffffff
-	
-    }
-	
+
 main span {
-  font-size: 3rem;
-  line-height: 2;
+  font-size: 5rem;
+  color: #fff;
 }
 
 
@@ -241,15 +241,20 @@ main button {
     .swiper-slide {
       text-align: center;
       display: flex;
-      /* 占쏙옙占쏙옙占쏙옙 占쌩억옙占쏙옙占쏙옙 占싹깍옙占쏙옙占쏙옙 flex 占쏙옙占� */
+      /* 내용을 중앙정렬 하기위해 flex 사용 */
       align-items: center;
-      /* 占쏙옙占싣뤄옙 占쏙옙占쏙옙 占쌩억옙占쏙옙占쏙옙 */
+      /* 위아래 기준 중앙정렬 */
       justify-content: center;
-      /* 占승울옙 占쏙옙占쏙옙 占쌩억옙占쏙옙占쏙옙 */
+      /* 좌우 기준 중앙정렬 */
+
     }
 
     .swiper-slide img {
-      width: 100%;
+      width: 190px;
+      height: 250px;
+      margin-right: 20px;
+      margin-left: 20px;
+      
     }
 
 
@@ -330,6 +335,7 @@ main button {
     .big h2{
       margin-bottom: 1.5rem;
     }
+    
 
     .big>div {
 
@@ -496,33 +502,50 @@ main button {
     }
 
     footer {
-      padding: 3rem 0;
-      margin: 0 auto;
-      text-align: center;
-      color: #999;
+      padding: 3rem 0 !important;
+      margin: 0 auto !important;
+      text-align: center !important;
+      color: #999 !important;
+      font-size: 0.9rem !important;
     }
 
     footer div {
-      width: 1000px;
-      margin: 0 auto;
-      text-align: center;
+      width: 1000px !important;
+      margin: 0 auto !important;
+      text-align: center !important;
     }
 
 
     footer ul {
-      width: 800px;
-      list-style: none;
-      display: flex;
-      justify-content: space-around;
-        margin: 0 auto;
-        margin-bottom: 2rem;
+      font-family:'Roboto', sans-serif !important;
+      width: 800px !important;
+      list-style: none !important;
+      display: flex !important;
+      justify-content: space-around !important;
+      margin: 0 auto !important;
+      margin-bottom: 2rem !important;
     }
 
     footer p {
 
-      width: 800px;
-      line-height: 1.2rem;
-        margin: 0 auto;
+      width: 800px !important;
+      line-height: 1.2rem !important;
+        margin: 0 auto !important;
+    }
+    
+    
+    footer a:visited {
+      color: #666;
+    }
+
+    footer a:hover {
+      color: #6c500d;
+      /* color: #3967ED; */
+    }
+
+    footer a:active {
+      color:#6c500d;
+    /* #3967ED; */
     }
 
 

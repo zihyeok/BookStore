@@ -1,6 +1,5 @@
 package com.book.store.controller;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,11 +9,9 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.book.store.dto.BookDTO;
 import com.book.store.dto.ReviewDTO;
 import com.book.store.service.BookItemService;
 import com.book.store.service.ReviewService;
@@ -203,57 +200,24 @@ public class ReviewController {
 
 		}
 		
-		if(user==null) {
-			
-			ModelAndView mav = new ModelAndView();
-			
-			mav.setViewName("redirect:/user/login");
-
-			return mav;
-
-		}
-		
 		String userId = user.getUserId();
-
-		String pageNum = request.getParameter("pageNum");
-
-		int currentPage = 1; //첫화면은 1페이지 
-
-		if(pageNum!=null) {
-
-			currentPage = Integer.parseInt(pageNum);
-			//1페이지가 아닌 get방식 주소로 받은 pageNum로 변경
-		}
-
+		
+		int numPerPage = 2;
+		
 		int dataCount = reviewService.getReviewCount(userId);
 
-		int numPerPage = 3;
-
-		int totalPage = myUtil2.getPageCount(numPerPage, dataCount);
-
-		if(currentPage>totalPage) {
-			currentPage=totalPage;
-		}
-
-		int start = (currentPage-1)*numPerPage+1;
-		int end = currentPage*numPerPage;
-
-		List<ReviewDTO> lists = reviewService.userReview(start, end, userId);
-		
-		String listUrl = "/userReview.action";
-
-		String pageIndexList = myUtil2.pageIndexList(currentPage, totalPage, listUrl);
-
+		List<ReviewDTO> lists = reviewService.userReview(1, numPerPage, userId);
+	
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("lists", lists);
-		mav.addObject("pageNum", currentPage);
-		mav.addObject("pageIndexList", pageIndexList);
-
+		mav.addObject("dataCount", dataCount);
+		mav.addObject("numPerPage", numPerPage);
+		
 		mav.setViewName("userReviewLists");
 
 		return mav;
 	}
-
+	
 
 }

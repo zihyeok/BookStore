@@ -1,0 +1,24 @@
+<meta charset="UTF-8">
+
+
+<div th:if="${#lists.size(lists)}>0" th:each="dto: ${lists}">
+
+<div target="_blank">
+	<a th:href="'/BookArticle.action?seq_No=' + @{${dto.seq_No}}">
+	  <img th:src="${dto.image_Url}"
+	    alt="해당 게시물은 존재하지 않습니다." th:unless="${dto.image_Url == null}">
+	  <img src="/image/itemReady.jpg"
+	    alt="" th:if="${dto.image_Url == null}">
+	  
+	  <div style="text-align: left; margin-left: 20%; ">
+	  
+	    <div class="price">[[${dto.publisher_Nm}]]</div>
+	    <br/><br/>
+	    <p class="title_Nm">[[${dto.title_Nm}]]</p><br/>
+	    <p class="title_Nm">[[${dto.authr_Nm}]]</p>
+	    <p class="content">댓글내용 : [[${dto.content}]]</p>
+	  </div>
+	</a>
+</div>
+
+</div>

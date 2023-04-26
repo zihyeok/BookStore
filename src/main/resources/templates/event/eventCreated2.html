@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<link rel="stylesheet" type="text/css" href="css/BookCreated.css">
+<style type="text/css">
+
+.alert_box {
+
+	font-size: 15px;
+	color: green;
+	display: none;
+
+}
+
+</style>
+</head>
+<body>
+
+<h1>Board</h1>
+
+<h3>게시물 등록하기</h3>
+
+<div style="padding-left: 23%; width: 60%;">
+
+<form action="" name="myEvent" method="POST" enctype="multipart/form-data">
+<!-- form의 기본 method는 get이다 post로 할꺼면 post라고 적어야됨 -->
+제목
+<input type="text" name="subject" id="subject" class="value_box"  placeholder="제목을 입력하세요.">
+<div id="subject_alert" class="alert_box"></div><br/>
+
+이름
+<input type="text" name="userId" id="userId" class="value_box" placeholder="이름을 입력하세요.">
+<div id="userId_alert" class="alert_box"></div><br/>
+
+
+비밀번호
+<input type="text" name="pwd" id="pwd" class="value_box" placeholder="이름을 입력하세요.">
+<div id="pwd_alert" class="alert_box"></div><br/>
+
+<!-- 내용
+<input type="text" name="content" id="content" class="content" placeholder="내용을 입력하세요.">
+<div id="content_alert" class="alert_box"></div><br/> -->
+
+<textarea name="content" id="content"  placeholder="내용을 입력하세요." style="margin-top: 20px;"></textarea>
+<div id="content_alert" class="alert_box"></div><br/>
+
+<div style="margin-bottom: 15px;">
+<input type="file" name="upload" id="upload">
+</div>
+<div id="upload_alert" class="alert_box"></div><br/>
+
+<div>
+	<button class="btn-555" id="sendEvent" type="button">등록하기</button>
+</div>
+
+</form>
+
+</div>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.js"></script>
+<script type="text/javascript">
+
+var f = document.myEvent;
+
+$("#sendEvent").click(function(){
+	
+	if($("#subject").val()==""){
+		
+		title_alert = document.getElementById("subject_alert");//var 안 적으면 전역변수로 빠짐
+		
+		title_alert.innerHTML = "제목을 입력해주세요";
+		
+		title_alert.style.display = "block";
+		
+		$("#subject").focus();
+		
+		return;
+		
+	}
+	
+	if($("#userId").val()==""){
+		
+		userId_alert = document.getElementById("userId_alert");
+		
+		userId_alert.innerHTML = "이름을 입력해주세요";
+		
+		userId_alert.style.display = "block";
+		
+		$("#userId").focus();
+		
+		return;
+		
+	}
+	
+	if($("#pwd").val()==""){
+		
+		pwd_alert = document.getElementById("pwd_alert");
+		
+		pwd_alert.innerHTML = "비밀번호를 입력해주세요";
+		
+		pwd_alert.style.display = "block";
+		
+		$("#pwd").focus();
+		
+		return;
+		
+	}
+
+	
+	if($("#content").val()==""){
+		
+		content_alert = document.getElementById("content_alert");
+		
+		content_alert.innerHTML = "내용을 입력해주세요";
+		
+		content_alert.style.display = "block";
+		
+		$("#content").focus();
+		
+		return;
+		
+	}else if($("#content").val().length > 500){
+		
+		content_alert = document.getElementById("content_alert");
+		
+		content_alert.innerHTML = "책 설명은 최대 500자 입니다";
+		
+		content_alert.style.display = "block";
+		
+		$("#content").focus();
+		
+		return;
+		
+	}
+	
+	if($("#upload").val()==""){
+		
+		upload_alert = document.getElementById("upload_alert");
+		
+		upload_alert.innerHTML = "파일을 업로드 해주세요";
+		
+		upload_alert.style.display = "block";
+		
+		$("#upload").focus();
+		
+		return;
+		
+	}
+	
+	alertSubmit();
+	
+	/* f.action = "/BookCreated.action";
+	
+	alert("책이 등록되었습니다");
+	
+	f.submit(); */
+
+});
+
+//값 들어가면 경고문 지우기
+
+$("#subject").change(function(){
+	
+	subject_alert.style.display = "none";
+
+});
+
+$("#userId").change(function(){
+	
+	userId_alert.style.display = "none";
+	
+});
+
+$("#pwd").change(function(){
+	
+	pwd_alert.style.display = "none";
+	
+});
+
+
+$("#content").change(function(){
+	
+	Intrcn_alert.style.display = "none";
+
+});
+
+$("#upload").change(function(){
+	
+	upload_alert.style.display = "none";
+
+});
+
+//등록하시겠습니까? 디자인
+		
+function alertSubmit(){
+
+	Swal.fire({
+		  title: '등록하시겠습니까?',
+		  icon: 'question',
+		  iconHtml: '?',
+		  confirmButtonText: '확인',
+		  cancelButtonText: '취소',
+		  showCancelButton: true,
+		  showCloseButton: true
+		}).then((result)=>{
+			
+			if(result.value){
+				
+				f.action = "/eventCreated.action";
+				
+				f.submit();
+				
+			}
+			
+		});
+
+}
+
+</script>
+
+</html>

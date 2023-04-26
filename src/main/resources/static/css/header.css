@@ -125,10 +125,11 @@ b89c87
   background: #fff;
 }
 
-.clearfix>li>ul>li {
+.clearfix>li>ul>li,
+.clearfix>li>ul>li>a {
   display: block;
   color: #222222;
-  border-bottom: 2px solid #fff;
+  border-bottom: 2px solid #fff !important; 
   transition: 0.4s;
 }
 
@@ -137,7 +138,8 @@ b89c87
 }
 
 .lap-nav>ul>li>a:hover,
-.lap-nav>ul>li>ul>li:hover {
+.lap-nav>ul>li>ul>li:hover,
+.lap-nav>ul>li>ul>li>a:hover {
   color: #c80a1e;
 }
 
