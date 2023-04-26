@@ -25,12 +25,13 @@ th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
 	    <div>
 	      <p>
 	        <b th:each="i : ${#numbers.sequence(0,dto.reviewStar-1)}">★</b>
-	        <span>[[${dto.created}]] | [[${dto.userId}]] </span>
+	        <span>[[${dto.created}]] | [[${dto.userId}]]</span>
 	       </p>
 	       <p>
 	        <span><a th:href="'javascript:deleteReview(\'' + ${dto.reviewId} + '\', \'' + ${pageNum} + '\')'" 
 	        th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId} or ${session.OauthUser}!=null and ${session.OauthUser.userId} == ${dto.userId} ">삭제</a></span>
 	      </p>
+	      
 	      <p th:utext="${dto.content.replaceAll('(\r\n|\r|\n)', '<br/>')}"></p>
 	    </div>
 	    <div><img src="https://user-images.githubusercontent.com/112612653/189023767-c8fd2d91-9928-41bd-a758-b94befaafe23.png"></div>
