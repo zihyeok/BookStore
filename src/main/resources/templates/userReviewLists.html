@@ -13,6 +13,60 @@
 <!--  -->
 <link rel="stylesheet" type="text/css" href="/css/userReviewLists.css">
 
+<script th:inline="javascript">
+
+var count = 2;
+var numPerPage = [[${numPerPage}]];
+
+function sendCount(){
+
+	if([[${session.user == null and session.OauthUser == null}]]){
+		
+		alert("로그인 후 이용해주세요");
+		
+		location.href="/user/login";
+		
+		return;
+		
+	}
+	
+	userReviewAjax();
+
+	count += 1;
+	
+	if((count-1)*numPerPage+1 > [[${dataCount}]]){
+		
+		var button = document.getElementById("moreButton");
+
+		button.style.display = "none";
+		
+	}
+
+}
+
+function userReviewAjax(){
+	
+	var params = "count=" + count + "&numPerPage=" + numPerPage;
+
+		$.ajax({
+			type:"POST",
+			url:"/userReviewSub.action",
+			data:params,
+			dataType:"text",
+			success:function(args){
+				
+				console.log(args);
+				
+				$("#listing1").append(args);
+
+			}
+		
+		});
+	
+}
+
+</script>
+
 
 <!-- font-family: 'NEXON Lv1 Gothic OTF'; -->
 <div style="text-align: center;">
@@ -21,11 +75,10 @@
 <br/><br/>
 <div th:if="${#lists.size(lists)}<=0">리뷰를 쓰신 기록이 없습니다</div>
 
-<div th:if="${#lists.size(lists)}>0" th:each="dto: ${lists}">
+<div th:if="${#lists.size(lists)}>0" th:each="dto,dtoStat: ${lists}">
 
-
-
-<div class="listing"  target="_blank">
+<!-- ajax로 가져올 html에 똑같이 class listing주면 2배씩 늘어나서 안됨 -->
+<div class="listing" th:id="'listing'+@{${dtoStat.index}}"  target="_blank">
 	<a th:href="'/BookArticle.action?seq_No=' + @{${dto.seq_No}}">
 	  <img th:src="${dto.image_Url}"
 	    alt="해당 게시물은 존재하지 않습니다." th:unless="${dto.image_Url == null}">
@@ -48,10 +101,10 @@
 </div>
 
 
-<div th:utext="${pageIndexList}" style="height: 100px; margin-top: 100px; font-size: 20px;"></div>
+<button class="moreButton" id="moreButton" onclick="sendCount();" type="button">Review More</button>
+<br/><br/><br/><br/><br/><br/><br/><br/>
 
 </div>
-
 
 </div>
 </html>

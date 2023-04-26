@@ -460,7 +460,7 @@
                         <input type="radio" name="reviewStar" value="1"><label for="rate5">★</label>
                         </p>
                         <!-- disabled적용하면 form으로 안 날라감 -->
-                        <p th:if="${session.user==null and session.OauthUser==null}"><label>UserID</label><input type="text" placeholder="로그인 후 이용" disabled="disabled"></p>
+                        <p th:if="${session.user==null and session.OauthUser==null}"><label>UserID</label><input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
                         <p th:unless="${session.user==null}"><label>UserID</label><input type="text" th:value="${session.user.userId}" name="userId" readonly="readonly"></p>
                         <p th:unless="${session.OauthUser==null}"><label>UserID</label><input type="text" th:value="${session.OauthUser.userId}" name="userId" readonly="readonly"></p>
                         <p th:if="${session.user==null and session.OauthUser==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
