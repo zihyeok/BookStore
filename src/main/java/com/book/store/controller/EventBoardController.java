@@ -39,7 +39,7 @@ public class EventBoardController {
      
         ModelAndView mav = new ModelAndView();
      
-        mav.setViewName("#");
+        mav.setViewName("event/eventList");
      
         return mav;
      
