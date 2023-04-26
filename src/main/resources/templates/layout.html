@@ -27,16 +27,16 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
+
 </head>
 <body>
 <!-- header -->
-<nav th:replace="navbar :: navbarFragment"></nav>
+<nav th:replace="navbar :: navbarFragment" ></nav>
+
 
 <!-- content -->
-<th:block layout:fragment="content"></th:block><!-- BookList -->
-<th:block layout:fragment="content1"></th:block><!-- main -->
+<th:block layout:fragment="content"></th:block>
 
-<th:block layout:fragment="content2"></th:block><!-- product -->
 
 <th:block layout:fragment="content3"></th:block><!-- eventList -->
 <th:block layout:fragment="content4"></th:block><!-- eventList -->

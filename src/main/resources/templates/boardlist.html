@@ -2,10 +2,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <div layout:fragment="content" >
-</br></br></br></br>
-</br></br></br></br>
-<link rel="stylesheet" href="/css/board.css">
-<link rel="stylesheet" type="text/css" href="/css/BoardCreated.css">
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
+<link rel="stylesheet" href="/css/board.css"/>
+<link rel="stylesheet" type="text/css" href="/css/BoardCreated.css"/>
 
 
   <article class="search2">
@@ -43,29 +43,36 @@
     </div>
     
     
-      <summary>
-        <div class="city-list-header" th:if="${#lists.size(lists)}>0" th:each="dto:${lists}" >
-          <span style="margin-left: 20px" class="weather-header-details" >[[${dto.boardId}]]</span>
-          <span  class="weather-header-details" th:text="${dto.userId}" >작성자</span>
+      <summary >
+        <div class="city-list-header" th:if="${#lists.size(lists)}>0" th:each="dto:${lists}"  >
+          <span  class="weather-header-details" >[[${dto.boardId}]]</span>
           
+          <span class="weather-header-details" 
+          th:text="${#strings.length(dto.userId) > 10 ? #strings.substring(dto.userId, 0, 10) + '..' : dto.userId}" style="width: 100%;">작성자</span>
+        
+          <a style="text-align: center; margin: auto;">
           <span  class="weather-header-details" th:if="${dto.fix_created} == ${dto.created}" 
           th:text="${#strings.length(dto.created) > 10 ? #strings.substring(dto.created, 0, 10) + '.' : dto.created}" >
           작성일</span>
-          
+        
           <span  class="weather-header-details" th:if="${dto.fix_created} != ${dto.created}" 
           th:text="${#strings.length(dto.fix_created) > 10 ? #strings.substring(dto.fix_created, 0, 10) + '.' : dto.fix_created}">
           수정일</span>
+          </a>
+        
+          <a style=" text-align: center; margin: auto; padding-right: 10%;">
+          <span  class="weather-header-details" th:text="${dto.hitCount}" style="">조회수</span>
+          </a>
           
-          <span  class="weather-header-details" th:text="${dto.hitCount}" style="margin-left: 50px">조회수</span>
-          <a th:href="@{|${articleUrl}&num=@{${dto.boardId}}|}" style="margin-bottom: 20px; margin-right: 40px">
-			<span  class="weather-header-details" 
-				th:text="${#strings.length(dto.subject) > 10 ? #strings.substring(dto.subject, 0, 10) + '...' : dto.subject}" 
-			    th:href="@{|${articleUrl}&num=@{${dto.boardId}}|}">제목</span> 
+          <a th:href="@{|${articleUrl}&num=${dto.boardId}|}" style="width: 20%;">
+			<span class="weather-header-details" th:text="${#strings.length(dto.subject) > 10 ? #strings.substring(dto.subject, 0, 10) + '...' : dto.subject}" >
+			제목</span> 
 		  </a>
 		  
         </div>
         
       </summary>
+      
       
   </div>
 

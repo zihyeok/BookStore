@@ -131,7 +131,7 @@ function outBtn(){
 	    </a>
 	    <a href="#" class="item">
 	        <div class="icon">ii</div>
-	        <div class="text">상품문의</div>
+	        <div class="text"  th:onclick="@{|location.href='/BoardList.action'|}">상품문의</div>
 	        <div class="right"> > </div>
 	    </a>
 	    <a href="/bag.action" class="item">
@@ -139,9 +139,9 @@ function outBtn(){
 	        <div class="text">찜한상품</div>
 	        <div class="right"> > </div>
 	    </a>
-	    <a href="/bag.action" class="item">
+	    <a th:href="@{/user/order(userId=${user.userId})}" class="item">
 	        <div class="icon">ii</div>
-	        <div class="text">뭐넣음?</div>
+	        <div class="text">주문목록</div>
 	        <div class="right"> > </div>
 	    </a>
 	  </div>
@@ -157,10 +157,10 @@ function outBtn(){
 	      <div><i class="fa-solid fa-bullhorn"></i></div>
 	      <div>이용안내</div>
 	    </a>    
-<!-- 	    <a th:href="@{/user/delete(userId=${user.userId})}" class="item"> -->
+
 		<a onclick="outBtn()" class="item">
 	      <div><i class="fa-solid fa-person-through-window"></i></div>
-	      <div>고객센터</div>
+	      <div>회원탈퇴</div>
 	    </a>
 	  </div>
 	</div>

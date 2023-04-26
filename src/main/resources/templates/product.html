@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout}">
 
-<div layout:fragment="content2">
+<div layout:fragment="content">
     <!-- Begin Head -->
     <head>
         
@@ -349,12 +349,21 @@
 			<div class="in_box"><!--in_box S-->
 				<div class="product_top" style="display: inline-flex; width: 100%;">
 
-				<div style="margin: 100px 0 0 150px;">
-				<img alt="" th:src="${dto.image_Url}" style="width: 220px; height: 300px;">
-
+				<div style="margin: 50px 0 0 150px;">
+				<img alt="" th:src="${dto.image_Url}" style="width: 190px; height: 240px; ">
 				<span>
-				<img alt="" src="image/test1.jpg" id="after">
-				<img alt="" src="image/test2.jpeg" id="before">
+				<th:block th:switch="${#strings.substring(dto.kdc_Nm, 0, 1)}">
+				    <img alt="" th:case="0" src="/image/총류.gif" id="before">
+				    <img alt="" th:case="1" src="/image/철학.gif" id="before">
+				    <img alt="" th:case="2" src="/image/종교.gif" id="before">
+				    <img alt="" th:case="3" src="/image/사회과학.gif" id="before">
+				    <img alt="" th:case="4" src="/image/자연과학.gif" id="before">
+				    <img alt="" th:case="5" src="/image/기술과학.gif" id="before">
+				    <img alt="" th:case="6" src="/image/예술.gif" id="before">
+				    <img alt="" th:case="7" src="/image/언어.gif" id="before">
+				    <img alt="" th:case="8" src="/image/문학.gif" id="before">
+				    <img alt="" th:case="9" src="/image/역사.gif" id="before">
+				</th:block>
 				</span>
 				</div>
 
@@ -379,26 +388,11 @@
 									<span class="mob_close"></span>
 								</div>
 							  <div class="product_option_box_in">
-								<div class="drop-down01">
-									<select class="productname" name="nameoption">
-										<option value="00">상품명</option>
-										<option value="01">[[${dto.title_Nm}]]</option>
-										
-									</select>
-								</div>
-								<div class="drop-down02">
-									<p>가격</p>
-									<ul class="productprice" name="priceoption">									
-										<li><span>[[${dto.prc_Value}]]원</span></li>
-									</ul>
-								</div>
+							
 								<div class="option_btm">
-									<div class="prod"></div>
-									<div class="price clearfix">
-										<strong>합계</strong>
-										<span><strong class="price_total">0</strong>원</span>
-									</div>
-									<div style="text-align: center; white-space: nowrap;">
+								
+
+									<div th:if="${RULE == 'RULE_ADMIN' }" style="text-align: center; white-space: nowrap;">
 										<button class="btn-111" th:onclick="@{|location.href='/BookUpdate.action?seq_No=${dto.seq_No}&${params}'|}">수정</button>
 										<button class="btn-111" onclick="alertDelete();">삭제</button>
 										<button class="btn-111" th:onclick="@{|location.href='/BookList.action?${params}'|}">목록으로</button>
@@ -433,7 +427,7 @@
 					</div>
 				</div>				
 				</div>
-				
+				<br/><br/><br/><br/>
 				<div class="content">
 					<div class="tab_list">
 						<ul>
@@ -446,7 +440,8 @@
 					<div class="tab_content">
 						<div class="tab_box tab_box01">
 						
-							<span id="book_Intrcn_Cn" style="line-height: 1.5rem;"></span>
+							<span id="book_Intrcn_Cn" 
+							th:utext="${dto.book_Intrcn_Cn.replaceAll('(\r\n|\r|\n)', '<br/>')}" style="line-height: 1.5rem;"></span>
 
 						</div>
 						<div class="tab_box">
@@ -465,7 +460,7 @@
                         <input type="radio" name="reviewStar" value="1"><label for="rate5">★</label>
                         </p>
                         <!-- disabled적용하면 form으로 안 날라감 -->
-                        <p th:if="${session.user==null and session.OauthUser==null}"><label>UserID</label><input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
+                        <p th:if="${session.user==null and session.OauthUser==null}"><label>UserID</label><input type="text" placeholder="로그인 후 이용" disabled="disabled"></p>
                         <p th:unless="${session.user==null}"><label>UserID</label><input type="text" th:value="${session.user.userId}" name="userId" readonly="readonly"></p>
                         <p th:unless="${session.OauthUser==null}"><label>UserID</label><input type="text" th:value="${session.OauthUser.userId}" name="userId" readonly="readonly"></p>
                         <p th:if="${session.user==null and session.OauthUser==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
@@ -529,6 +524,7 @@
 			</div><!--in_box E-->
 		</div><!--container E-->
 
+<br/><br/>
 		
 		<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 		<script type="text/javascript">		
@@ -706,19 +702,6 @@
                 
                 }
 		</script>
-		
-	<!-- 댓글 줄바꿈 -->
-	<script th:inline="javascript">
-	//dto영역안에 자바스크립트 영역열면 dto를 인식함
-	
-	var Intrcn_Cn = [[${dto.book_Intrcn_Cn}]];
-	
-	Intrcn_Cn = Intrcn_Cn.replace(/(\r\n|\r|\n)/g,'<br/>');
-	
-	$("#book_Intrcn_Cn").html(Intrcn_Cn);
-
-	</script>
-	<!-- 댓글 줄바꿈 끝	-->
 
     </body>
     <!-- End Body -->
