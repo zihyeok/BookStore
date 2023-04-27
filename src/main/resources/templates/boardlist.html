@@ -26,7 +26,8 @@
 	  </form>
 
        
-      <button style="margin-top: 10px; " class="black-btn float-r m-btn" onclick="location='/Board.action'">
+      <button style="margin-top: 10px; " class="black-btn float-r m-btn" onclick="location='/Board.action'"
+		th:if="${session.user!=null || session.OauthUser!=null}" >
       등록</button>
       
       </div>

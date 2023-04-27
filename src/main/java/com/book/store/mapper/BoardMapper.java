@@ -9,8 +9,8 @@ import com.book.store.dto.BoardDTO;
 
 
 //정의해놓은 sql와 개발할 때 사용하는 메소드를 연결하고 
-//결과 값을 정의해놓은 타입으로 매핑 시켜주는 것
-@Mapper//Mapper로 등록 시킨다.
+// 결과 값을 정의해놓은 타입으로 매핑 시켜주는 것
+@Mapper //Mapper로 등록 시킨다.
 public interface BoardMapper {
 
 	

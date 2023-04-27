@@ -52,7 +52,7 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 
 		mav.setViewName("Notice");
-		//jsp(html)로 갈때는 setViewName /class로 갈때는 setView
+		//(html)로 갈때는 setViewName /class로 갈때는 setView
 		
 		return mav;
 
@@ -68,11 +68,11 @@ public class BoardController {
 
 			if(httpSession.getAttribute("user") != null) {
 				user = (UserData) httpSession.getAttribute("user");
-				mav.addObject("RULE", user.getUserRole());
+			
 				
 			}else if(httpSession.getAttribute("OauthUser") != null) {
 				user = (UserData) httpSession.getAttribute("OauthUser");
-				mav.addObject("RULE", user.getUserRole());
+				
 			}
 			
 			
@@ -109,8 +109,8 @@ public class BoardController {
 			
 			String pageNum = request.getParameter("pageNum");
 		    int currentPage = 1;
-		  
 		    
+			
 			if (pageNum != null) {
 		        currentPage = Integer.parseInt(pageNum);
 		    }
@@ -170,15 +170,13 @@ public class BoardController {
 			
 			//ModelAndView로 전송
 			ModelAndView mav = new ModelAndView();
-			
-			
-			
+		
+		
 			//포워딩할 데이터
 			mav.addObject("lists", lists);
 			mav.addObject("pageIndexList", pageIndexList);
 			mav.addObject("dataCount", dataCount);
 			mav.addObject("articleUrl", articleUrl);
-		
 			
 			mav.setViewName("boardlist");
 
