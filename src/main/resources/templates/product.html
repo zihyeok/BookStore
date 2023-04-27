@@ -349,22 +349,8 @@
 			<div class="in_box"><!--in_box S-->
 				<div class="product_top" style="display: inline-flex; width: 100%;">
 
-				<div style="margin: 50px 0 0 150px;">
-				<img alt="" th:src="${dto.image_Url}" style="width: 190px; height: 240px; ">
-				<span>
-				<th:block th:switch="${#strings.substring(dto.kdc_Nm, 0, 1)}">
-				    <img alt="" th:case="0" src="/image/총류.gif" id="before">
-				    <img alt="" th:case="1" src="/image/철학.gif" id="before">
-				    <img alt="" th:case="2" src="/image/종교.gif" id="before">
-				    <img alt="" th:case="3" src="/image/사회과학.gif" id="before">
-				    <img alt="" th:case="4" src="/image/자연과학.gif" id="before">
-				    <img alt="" th:case="5" src="/image/기술과학.gif" id="before">
-				    <img alt="" th:case="6" src="/image/예술.gif" id="before">
-				    <img alt="" th:case="7" src="/image/언어.gif" id="before">
-				    <img alt="" th:case="8" src="/image/문학.gif" id="before">
-				    <img alt="" th:case="9" src="/image/역사.gif" id="before">
-				</th:block>
-				</span>
+				<div style="margin: 100px 0 0 100px;">
+				<img alt="" th:src="${dto.image_Url}" class="product_Image">
 				</div>
 
 					<div class="product_box">				
@@ -378,8 +364,43 @@
 						<div class="product_info">
 						
 							<p><strong>적립혜택</strong><span>구매 시 교원포인트 50% 적립 (~5/31까지)</span></p>
-							<p><strong>판매수량</strong><span>1,243 구매</span></p>
+							<p><strong>판매수량</strong><span>[[${#numbers.formatInteger(dto.sal_Count, 1,'COMMA')}]]부</span></p>
 						</div>
+						
+				<div>
+				<p style="font-size: 0.8rem;"><strong>서적 위치</strong></p>
+				<th:block th:switch="${#strings.substring(dto.kdc_Nm, 0, 1)}">
+				    <a href="/image/총류.gif" onClick="window.open(this.href, '', 'width=400, height=430, left=1000, top=300'); return false;">
+				    <img alt="" th:case="0" src="/image/총류.gif" id="before"></a>
+				    
+				    <a href="/image/철학.gif" onClick="window.open(this.href, '', 'width=400, height=430, left=1000, top=300'); return false;">
+				    <img alt="" th:case="1" src="/image/철학.gif" id="before"></a>
+				    
+				    <a href="/image/종교.gif" onClick="window.open(this.href, '', 'width=400, height=430, left=1000, top=300'); return false;">
+				    <img alt="" th:case="2" src="/image/종교.gif" id="before"></a>
+				    
+				    <a href="/image/사회과학.gif" onClick="window.open(this.href, '', 'width=400, height=430, left=1000, top=300'); return false;">
+				    <img alt="" th:case="3" src="/image/사회과학.gif" id="before"></a>
+				    
+				    <a href="/image/자연과학.gif" onClick="window.open(this.href, '', 'width=400, height=430, left=1000, top=300'); return false;">
+				    <img alt="" th:case="4" src="/image/자연과학.gif" id="before"></a>
+				    
+				    <a href="/image/기술과학.gif" onClick="window.open(this.href, '', 'width=400, height=430, left=1000, top=300'); return false;">
+				    <img alt="" th:case="5" src="/image/기술과학.gif" id="before"></a>
+				    
+				    <a href="/image/예술.gif" onClick="window.open(this.href, '', 'width=400, height=430, left=1000, top=300'); return false;">
+				    <img alt="" th:case="6" src="/image/예술.gif" id="before"></a>
+				    
+				    <a href="/image/언어.gif" onClick="window.open(this.href, '', 'width=400, height=430, left=1000, top=300'); return false;">
+				    <img alt="" th:case="7" src="/image/언어.gif" id="before"></a>
+				    
+				    <a href="/image/문학.gif" onClick="window.open(this.href, '', 'width=400, height=430, left=1000, top=300'); return false;">
+				    <img alt="" th:case="8" src="/image/문학.gif" id="before"></a>
+				    
+				    <a href="/image/역사.gif" onClick="window.open(this.href, '', 'width=400, height=430, left=1000, top=300'); return false;">
+				    <img alt="" th:case="9" src="/image/역사.gif" id="before"></a>
+				</th:block>
+				</div>	
 
 						<div class="product_option">														
 							<div class="product_option_box">	
@@ -399,7 +420,7 @@
 									</div>
 								
 								</div>
-							</div>					
+							</div>		
 						</div>
 						<!-- 장바구니버튼 test -->
 							<div th:id="${dto.seq_No}" class="btn_box">
@@ -420,11 +441,11 @@
 							
 							<button class="btn-order" th:unless="${session.user==null and session.OauthUser == null}" name="one_Order" type="button" 
 							onclick="one_order()">바로 구매</button>
-							
-							
+
 
 						</div>
 					</div>
+					
 				</div>				
 				</div>
 				<br/><br/><br/><br/>

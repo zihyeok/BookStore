@@ -487,30 +487,43 @@ blockquote, q {quotes: "" "";}
 }
 
 
-#after { 
+/* #after { 
     width:  250px;
     height: 200px;
     position: absolute;
     top : 17%;
     left:   13%;
 }
-
+ */
 #before { 
     width:  250px;
-    height: 200px;
-    position: absolute;
-    top: 14%;
-    left:   13%;
+    height: 250px;
+    margin-left: 100px;
+
     
     /* opacity: 1; 
   	transition: opacity 1.5s;
   	*/
 }
 
-#before:hover{
-	/* opacity: 0; */
+/* #before:hover{
+	opacity: 0;
 	width: 500px;
 	height: 450px;
 	 
+} */
+
+.product_Image {
+	
+	width: 330px;
+	height: 450px;
+	box-shadow: 5px 5px 5px 3px grey;
+	filter: drop-shadow(8px 8px 8px #000);
+	
 }
 
+.product_Image:hover {
+	
+	
+	
+}
