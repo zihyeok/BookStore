@@ -231,5 +231,15 @@
 .product_detail .product_option .btn_box{margin:0;}
 .price_rows{padding:13px 0}
 
+}
 
+.gimchi{
+	
+	word-wrap: break-word;
+	 margin-left: 30%; 
+	 width: 40%; 
+	 font-size: 25px; 
+	 line-height: 120%;
+	 font-family: 'NEXON Lv1 Gothic OTF';
+	 
 }

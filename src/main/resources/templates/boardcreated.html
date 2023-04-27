@@ -11,7 +11,7 @@
         <div class="tab_box">
           <p class="tit" style="text-align: center;">Q & A 게시판 등록</p>
           <br /><br />
-          <!-- th:action="@{boardcreated.action}" /action="/submit-form"  -->
+          
           <form th:action="@{BoardCreated.action}" method="post" name="myForm" >
             <div class="ask_box">
             
@@ -23,7 +23,6 @@
                 <label>작성자</label>
                 <input type="text" name="userId" readonly="readonly"  th:value="${user}" />
             
-                <!--  readonly="readonly" th:value="${dto.userId }" --> 
               </p>
               <p>
                 <label>패스워드</label>

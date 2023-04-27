@@ -4,17 +4,13 @@
 <div layout:fragment="content" >
 <link rel="stylesheet" type="text/css" href="/css/BoardCreated.css">
 
-
 <div class="container product_detail">
-	<div class="in_box"><!--in_box S-->
-			
+	<div class="in_box"><!--in_box S-->	
 		<div class="content">
-		
 			<div class="tab_content">
-
 				<div class="tab_box">
 					<p class="tit" style="text-align: center;">Q&A 게시판 수정</p>
-					</br></br>
+					<br/><br/>
 					<form th:action="@{AnswerUpdated_ok.action}" method="post" name="myForm">
 					
 					<div class="ask_box">
@@ -41,23 +37,14 @@
 							th:onclick="@{|location='/BoardArticle.action?pageNum=${pageNum }&num=${dto.boardId }'|}" >
 							수정취소</button>
 						</div>
-						
 					</div>
-					
 					</form>
 					</div>
-					
 				</div>
-				
 			</div>
 		</div>
-
 	</div><!--in_box E-->
-
-</br></br>
-
-
+<br/><br/>
 </div>
-
 
 </html>

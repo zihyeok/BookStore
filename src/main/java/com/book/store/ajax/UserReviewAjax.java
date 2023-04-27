@@ -30,8 +30,6 @@ public class UserReviewAjax {
 		
 		int count = Integer.parseInt(request.getParameter("count"));
 		int numPerPage = Integer.parseInt(request.getParameter("numPerPage"));
-
-		System.out.println(count);
 		
 		UserData user = null;
 
