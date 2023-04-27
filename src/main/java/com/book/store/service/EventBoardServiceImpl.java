@@ -65,6 +65,24 @@ public class EventBoardServiceImpl implements EventBoardService{
 	public void insertBackUp(EventBoardDTO dto) throws Exception {
 		eventBoardMapper.insertBackUp(dto);		
 	}
+
+	@Override
+	public EventBoardDTO preReadData(int boardId, String subject, String searchKey, String searchValue)
+			throws Exception {
+		return eventBoardMapper.preReadData(boardId, subject, searchKey, searchValue);
+	}
+
+	@Override
+	public EventBoardDTO nextReadData(int boardId, String subject, String searchKey, String searchValue)
+			throws Exception {
+		return eventBoardMapper.nextReadData(boardId, subject, searchKey, searchValue);
+	}
+
+	@Override
+	public List<EventBoardDTO> categoryLists(int start, int end, String searchKey, String searchValue)
+			throws Exception {
+		return eventBoardMapper.categoryLists(start, end, searchKey, searchValue);
+	}
 		
 	
 }

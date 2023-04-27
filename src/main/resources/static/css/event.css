@@ -230,6 +230,18 @@
 	text-align:left;
 }
 
+
+#bbsArticle_content p{
+	padding-top: 20px;
+	padding-bottom: 20px;
+	width: 700px; 
+	border: none; 
+	resize: none; 
+	background-color: #ffffff; 
+	text-align: center; 
+	font-family: 'Noto Sans', sans-serif;
+}
+
 #bbsArticle_content img {
   max-width: 100%;
 }

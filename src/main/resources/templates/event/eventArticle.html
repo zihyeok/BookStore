@@ -44,10 +44,9 @@
 		<div id="bbsArticle_content">			
 				<tr>
 					<td >
-						<textarea name="content"
-						style="padding-left: 20px; border: none; resize: none; background-color: #ffffff;"
-						class="" th:text="${dto.content}" disabled="disabled"></textarea>
-						<img alt="안녕" th:src="${dto.image_Url}" >
+						<p name="content"
+						class="" th:text="${dto.content}" disabled="disabled"></p>
+						<img alt="" th:if="${dto.image_Url}" th:src="${dto.image_Url}">
 					</td>
 				</tr>
 			</table>		
@@ -59,7 +58,24 @@
 	<div>
 	
 	
+	
 	<div id="bbsArticle_footer" style="text-align: center;">
+		<tr>
+		  <!-- 이전글 다음글 -->
+		  <td style="font-family: 'NEXON Lv1 Gothic OTF';">
+		    <h5 th:if="${preSubject != null and preSubject != ''}">
+		      <a th:href="@{|/eventArticle.action?${params}&boardId=${preNum}|}">
+		        이전글 : <span th:text="${preSubject}"></span>
+		      </a>
+		    </h5>
+		    <h5 th:if="${nextSubject != null and nextSubject != ''}">
+		      <a th:href="@{|/eventArticle.action?${params}&boardId=${nextNum}|}">
+		        다음글 : <span th:text="${nextSubject}"></span>
+		      </a>
+		    </h5>
+		  </td>
+		</tr>
+	
 		<button class="btn-7" th:onclick="@{|location.href='/eventUpdated.action?boardId=${dto.boardId}&${params}'|}">수정</button>
 		<button class="btn-7" th:onclick="@{|location.href='/eventDeleted.action?boardId=${dto.boardId}&${params}'|}">삭제</button>
 		<button class="btn-7" th:onclick="@{|location.href='/eventList.action?${params}'|}">목록으로</button>
