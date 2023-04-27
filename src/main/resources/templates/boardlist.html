@@ -45,8 +45,8 @@
     
     
       <summary >
-        <div class="city-list-header" th:if="${#lists.size(lists)}>0" th:each="dto:${lists}"  >
-          <span  class="weather-header-details" style="padding-left: 3%;">[[${dto.boardId}]]</span>
+        <div class="city-list-header" th:if="${#lists.size(lists)}>0" th:each="dto,loop:${lists}"  >
+          <span  class="weather-header-details" style="padding-left: 3%;" th:text="${dataCount - (start + loop.index-1)}"></span>
           
           <span class="weather-header-details" 
           th:text="${#strings.length(dto.userId) > 10 ? #strings.substring(dto.userId, 0, 10) + '..' : dto.userId}" style="width: 100%;">작성자</span>

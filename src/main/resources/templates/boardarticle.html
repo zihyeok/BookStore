@@ -78,7 +78,7 @@
   <br/><br/><br/><br/>
   
   <!-- 내용 -->
-  <div  style="word-wrap: break-word; margin-left: 30%; width: 40%;" th:utext="${dto.content}"></div>
+  <div class="gimchi" th:utext="${dto.content}"></div>
 
 <!-- 선 -->  	
 <br/><br/><br/>
@@ -99,11 +99,13 @@
 	  th:onclick="@{|location.href='/BoardList.action?${params }'|}">
 	  리스트</button>
   </div>
-
+  
+<br/><br/><br/><br/>
+<br/><br/><br/><br/>
 <!-- 댓글 리스트 -->	
-<div style="max-width: 50%; margin-left: 25%;"><span id="listData" style="display: block;"></span></div>
+<div style="max-width: 50%; margin-left: 25%; "><span id="listData" style="display: block;"></span></div>
 
-<div class="container product_detail"><!--container S-->
+<div class="container product_detail" ><!--container S-->
 	<div class="in_box"><!--in_box S-->
 		<div class="tab_box">
 		
