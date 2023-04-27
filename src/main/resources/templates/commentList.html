@@ -21,7 +21,7 @@ th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
 
 	<div class="see-comments">
 	  <section>
-	    <div> <img th:src="'/image/' + @{${dto.vip} + '.png'}" alt="확인"></div>
+	    <div><img th:src="'/image/' + @{${dto.vip} + '.png'}" alt="확인"></div>
 	    <div>
 	      <p>
 	        <b th:each="i : ${#numbers.sequence(0,dto.reviewStar-1)}">★</b>
