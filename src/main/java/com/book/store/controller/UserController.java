@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.book.store.dto.BookDTO;
 import com.book.store.dto.FindOrderDTO;
+import com.book.store.dto.ReviewDTO;
 import com.book.store.service.BagService;
 import com.book.store.service.BookItemService;
 import com.book.store.service.UserService;
@@ -256,7 +257,6 @@ public class UserController {
 	public ModelAndView myPage() throws Exception {
 		ModelAndView mav = new ModelAndView();
 		
-		
 		UserData user = null;
 		int bagitem_length = 0;
 		
@@ -274,6 +274,7 @@ public class UserController {
 			mav.setViewName("alert");
 			return mav;
 		}
+		
 		user = (userService.findUserName(user.getUserId())).get();
 
 		mav.addObject("user", user);

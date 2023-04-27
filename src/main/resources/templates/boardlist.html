@@ -26,7 +26,8 @@
 	  </form>
 
        
-      <button style="margin-top: 10px; " class="black-btn float-r m-btn" onclick="location='/Board.action'">
+      <button style="margin-top: 10px; " class="black-btn float-r m-btn" onclick="location='/Board.action'"
+		th:if="${session.user!=null || session.OauthUser!=null}" >
       등록</button>
       
       </div>
@@ -45,7 +46,7 @@
     
       <summary >
         <div class="city-list-header" th:if="${#lists.size(lists)}>0" th:each="dto:${lists}"  >
-          <span  class="weather-header-details" >[[${dto.boardId}]]</span>
+          <span  class="weather-header-details" style="padding-left: 3%;">[[${dto.boardId}]]</span>
           
           <span class="weather-header-details" 
           th:text="${#strings.length(dto.userId) > 10 ? #strings.substring(dto.userId, 0, 10) + '..' : dto.userId}" style="width: 100%;">작성자</span>
