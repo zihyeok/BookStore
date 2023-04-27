@@ -71,7 +71,15 @@ function outBtn(){
 	    <div class="cross">
 	    <a href="/main"><img class="img" th:src="@{/image/cancel-button.png}"/></a>
 		 </div>
-	    <div class="modify">i</div>
+		 
+		<!-- vip 등급 사진 -->
+	    <img class="rankImage" alt="" th:src="${vip > 50} ? '/image/Diamond.png' : 
+	      (${vip > 40} ? '/image/Gold.png' : 
+	      (${vip > 30} ? '/image/Silver.png' : 
+	      (${vip > 20} ? '/image/Bronze.png' : 
+	      (${vip > 10} ? '/image/NewBie.png' : '/image/NewBie.png'))))">
+	      
+	      
 	  </div>
 	  <div class="summaryContainer">
 	    <div class="item">

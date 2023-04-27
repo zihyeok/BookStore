@@ -275,6 +275,7 @@ public class UserController {
 			return mav;
 		}
 		user = (userService.findUserName(user.getUserId())).get();
+
 		mav.addObject("user", user);
 		mav.addObject("bagitem_length", bagitem_length);
 		mav.addObject("vip", Integer.parseInt(user.getUserVip()));
