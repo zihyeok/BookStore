@@ -14,7 +14,7 @@
 		
 		var f = document.myForm;
 	
-	alert("등록");
+		alert("등록이 완료되었습니다.");
 		
 		str = f.subject.value;
 		str = str.trim();
@@ -70,6 +70,16 @@
 		
 	}
 
+	function resetForm() {
+	  document.myForm.reset(); // 입력란 초기화
+	  document.myForm.subject.focus(); // 제목 입력란에 포커스 맞춤
+	}
+	
+	
+	function backList() {
+		  location.href = '/eventList.action'; // 이벤트 게시판 목록 페이지로 이동
+		}
+	
 </script>
 
 </head>
@@ -91,6 +101,19 @@
 					class="boxTF"/>
 				</dd>	
 			</dl>
+		</div>
+		
+		<div class="bbsCreated_bottomLine">
+		    <dl>
+		        <dt>카테고리</dt>
+		        <dd>
+		            <select name="cno" class="boxTF">
+		                <option value="1">이벤트</option>
+		                <option value="2">매거진</option>
+		                <option value="3">당첨자 발표</option>
+		            </select>
+		        </dd>    
+		    </dl>
 		</div>
 		
 		
@@ -120,8 +143,8 @@
 			<dl>
 				<dt>패스워드</dt>
 				<dd>
-					<input type="text" name="pwd" size="70" maxlength="10"
-					class="boxTF" placeholder="(게시물 수정 및 삭제시 필요)"/> 
+					<input type="password" name="pwd" size="70" maxlength="10"
+					class="boxTF" placeholder="게시물 수정 및 삭제시 필요"/> 
 				</dd>	
 			</dl>
 		</div>
@@ -133,8 +156,9 @@
 	
 	<div id="bbsCreated_footer">	
 		<button class="btn-7" onclick="sendIt();">등록하기</button>
-		<button class="btn-7" onclick="document.myForm.subject.focus();">다시입력</button>
-		<button class="btn-7" onclick="javascript:location.href='/eventList.action';">작성취소</button>
+		<button class="btn-7" type="button" onclick="document.myForm.subject.focus();" >다시입력</button>
+		<button class="btn-7" type="button" onclick="javascript:location.href='/eventList.action';" >목록으로</button>
+		
 	</div>
 	
 	</form>

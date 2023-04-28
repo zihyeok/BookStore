@@ -28,4 +28,10 @@ public interface EventBoardService {
 	
 	public void deleteData(int boardId) throws Exception;
 
+	public EventBoardDTO preReadData(int boardId,String subject,String searchKey,String searchValue) throws Exception;
+	
+	public EventBoardDTO nextReadData(int boardId,String subject,String searchKey,String searchValue) throws Exception;
+
+	public List<EventBoardDTO> categoryLists(int start,int end,String searchKey,String searchValue) throws Exception;
+	
 }
