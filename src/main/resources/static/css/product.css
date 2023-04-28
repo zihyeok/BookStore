@@ -435,6 +435,7 @@ blockquote, q {quotes: "" "";}
   transition: 0.3s;
   outline: none;
   cursor: pointer;
+  margin-right: 10px;
 	
   background: #555;
   color: #fff;
