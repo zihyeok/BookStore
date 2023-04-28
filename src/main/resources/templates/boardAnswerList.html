@@ -21,10 +21,12 @@
 
 <table  th:unless="${#lists.size(lists)}<=0" th:each="dto,loop: ${lists}">
 
+
 	<div class="see-comments" style="font-family: 'NEXON Lv1 Gothic OTF'; font-size: 15px;">
 	  <section>
 	    <div> <img src="https://user-images.githubusercontent.com/112612653/189023768-c2387f31-2463-4198-9078-3e3eaa56f7a0.png" alt=""></div>
 	    <div>
+
 	    	No.&nbsp;<b th:text="${dataCount - (start + loop.index-1)}"></b>
 	      <p style="margin-top: 8px;">
 	      

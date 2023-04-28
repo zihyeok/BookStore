@@ -18,6 +18,20 @@
 var count = 2;
 var numPerPage = [[${numPerPage}]];
 
+
+window.onload  = function buttonHide(){
+	
+	if(numPerPage>=[[${dataCount}]]){
+		
+		var button = document.getElementById("moreButton");
+
+		button.style.display = "none";
+		
+	}
+}
+
+
+
 function sendCount(){
 
 	if([[${session.user == null and session.OauthUser == null}]]){
