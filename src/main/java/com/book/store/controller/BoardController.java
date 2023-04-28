@@ -455,7 +455,8 @@ public class BoardController {
 			mav.addObject("boardId", boardId);
 			mav.addObject("pageNum", currentPage);
 			
-			
+			mav.addObject("start", start);
+			mav.addObject("dataCount", dataCount);
 			
 			mav.setViewName("boardAnswerList");
 
