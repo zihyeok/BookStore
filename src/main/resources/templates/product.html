@@ -489,6 +489,7 @@
                         <p th:unless="${session.OauthUser==null}"><label>내용</label><textarea name="content" placeholder="문의내용을 입력해주세요." ></textarea></p>
                         <div class="btn_box" th:if="${session.user!=null or session.OauthUser !=null}">
                            <button class="btn-555 float-r m-btn" onclick="sendReview();" type="button">리뷰 작성</button>
+                           <button class="btn-555 float-r m-btn" type="reset">다시 입력</button>
                            <!-- button은 기본type이 submit 그래서 바로 폼 주소로 가지만 이걸 벗어나려면 type button -->
                         </div>
                      

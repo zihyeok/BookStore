@@ -73,3 +73,31 @@ div.BookList-container .BookList-row .BookList-img-box span {
   background-color: #fff;
 }
 
+.HyperLink-box{
+	
+	font-size: 1.2rem;
+	border-radius: 10px;
+	padding: 5px 8px 5px 8px;
+	opacity: 0.6;
+	
+}
+
+.HyperLink-box:hover{
+	
+	font-size: 1.2rem;
+	border-radius: 10px;
+	padding: 5px 8px 5px 8px;
+	opacity: 1;
+	
+}
+
+.Current_HyperLink-box {
+	
+	font-size: 1.2rem;
+	border-radius: 10px;
+	padding: 5px 8px 5px 8px;
+	opacity: 1;
+	font-weight: bold;
+	
+}
+
