@@ -30,4 +30,10 @@ public interface EventBoardMapper {
 	
 	public void deleteData(int boardId) throws Exception;
 
+	public EventBoardDTO preReadData(@Param("boardId")int boardId,@Param("subject")String subject,@Param("searchKey")String searchKey,@Param("searchValue")String searchValue) throws Exception;
+	
+	public EventBoardDTO nextReadData(@Param("boardId")int boardId,@Param("subject")String subject,@Param("searchKey")String searchKey,@Param("searchValue")String searchValue) throws Exception;
+	
+	public List<EventBoardDTO> categoryLists(@Param("start")int start,@Param("end")int end,@Param("searchKey")String searchKey,@Param("searchValue")String searchValue) throws Exception;
+	
 }

@@ -177,6 +177,8 @@ public class BoardController {
 			mav.addObject("pageIndexList", pageIndexList);
 			mav.addObject("dataCount", dataCount);
 			mav.addObject("articleUrl", articleUrl);
+
+			mav.addObject("start", start);
 			
 			mav.setViewName("boardlist");
 

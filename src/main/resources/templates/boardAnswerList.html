@@ -8,33 +8,26 @@
 <!-- Answer게시판 -->
 <link rel="stylesheet" href="/css/boardAnswerList.css">
 
-
 <body>
-
 <br/><br/><br/><br/>
 
 <p th:if="${#lists.size(lists)}<=0">등록된 리뷰가 없습니다</p>
 <p>후기 [[${#lists.size(lists)}]]개</p>
 
-
 <br/><br/><br/><br/>
 <br/><br/><br/><br/>
   
- 
 <p style="font-family: 'NEXON Lv1 Gothic OTF'; font-size: 15px;">댓글 [[${#lists.size(lists)}]]개</p>
 
 <table  th:unless="${#lists.size(lists)}<=0" th:each="dto,loop: ${lists}">
-
 
 
 	<div class="see-comments" style="font-family: 'NEXON Lv1 Gothic OTF'; font-size: 15px;">
 	  <section>
 	    <div> <img src="https://user-images.githubusercontent.com/112612653/189023768-c2387f31-2463-4198-9078-3e3eaa56f7a0.png" alt=""></div>
 	    <div>
-	    	<b >No.&nbsp;[[${dto.answerNum}]]</b>
-	    	<b th:text="${dataCount - (start + loop.index-1)}"></b>
-	    	
-	    	
+
+	    	No.&nbsp;<b th:text="${dataCount - (start + loop.index-1)}"></b>
 	      <p style="margin-top: 8px;">
 	      
 	        <a th:if="${dto.fix_created} == ${dto.created}" >등록일: [[${dto.created}]]</a>
@@ -61,26 +54,17 @@
 	    
 	       <br/><br/>
 	       <p colspan="4" style="word-wrap: break-word;" th:utext="${dto.content.replaceAll('(\r\n|\r|\n)', '<br/>')}"></p>
-	      
-	     
-  
+	        
 	    </div>
 	  </section>
 	</div> 
 
-
-
-
-</table>  
+</table><br/> 
   
-  	<br/>
-  	
 	<div style="text-align: center; font-family: 'NEXON Lv1 Gothic OTF'; font-size: 18px;">
 		<a th:if="${pageIndexList != null}" th:utext="${pageIndexList}"></a>
 		<a th:if="${pageIndexList == null or pageIndexList == ''}">등록된 게시물이 없습니다.</a>
-  	</div>
+  	</div><br/>
 
-	<br/>
-	
 </body>
 </html>

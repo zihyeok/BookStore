@@ -5,9 +5,10 @@ import lombok.Data;
 @Data
 public class EventBoardDTO {
 	
-	private int boardId;
+	private String boardId;
 	private String userId;
 	private String pwd;
+	private String cno;
 	private String subject;
 	private String content;
 	private String image_Url;

@@ -175,9 +175,10 @@ marker.setMap(map);
             
             <li><a>이벤트</a>
               <ul>
-                <li>진행/대기</li>
-                <li>당첨자 발표</li>
-                <li>전체보기</li>
+                <li><a href="/eventCategoryList.action?pageNum=1&searchKey=cno&searchValue=1">진행/대기</a></li>
+                <li><a href="/eventCategoryList.action?pageNum=1&searchKey=cno&searchValue=2">매거진</a></li>
+                <li><a href="/eventCategoryList.action?pageNum=1&searchKey=cno&searchValue=3">당첨자 발표</a></li>
+                <li th:onclick="@{|location.href='/eventList.action'|}">전체보기</li>
               </ul>
             </li>
             <li><a>고객지원</a>
@@ -190,16 +191,16 @@ marker.setMap(map);
 
              <li class="category" ><a>카테고리</a>
 			  <ul>
-			    <li><a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm">&nbsp;&nbsp;&nbsp;전체&nbsp;&nbsp;&nbsp;</a></li>
-			    <li><a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=100">&nbsp;&nbsp;&nbsp;철학&nbsp;&nbsp;&nbsp;</a></li>
-			    <li><a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=200">&nbsp;&nbsp;&nbsp;종교&nbsp;&nbsp;&nbsp;</a></li>		    
-			    <li><a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=300">사회과학</a></li>
-              	<li><a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=400">자연과학</a></li>
-			    <li><a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=500">기술과학</a></li>
-                <li><a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=600">&nbsp;&nbsp;&nbsp;예술&nbsp;&nbsp;&nbsp;</a></li>
-                <li><a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=700">언어(어학)</a></li>
-                <li><a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=800">&nbsp;&nbsp;&nbsp;문학&nbsp;&nbsp;&nbsp;</a></li>
-                <li><a href="/BookCategoryList.action?pageNum=1&amp;searchKey=kdc_Nm&amp;searchValue=900">&nbsp;&nbsp;&nbsp;역사&nbsp;&nbsp;&nbsp;</a></li>
+			    <li><a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm">&nbsp;&nbsp;&nbsp;전체&nbsp;&nbsp;&nbsp;</a></li>
+			    <li><a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=100">&nbsp;&nbsp;&nbsp;철학&nbsp;&nbsp;&nbsp;</a></li>
+			    <li><a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=200">&nbsp;&nbsp;&nbsp;종교&nbsp;&nbsp;&nbsp;</a></li>		    
+			    <li><a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=300">사회과학</a></li>
+              	<li><a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=400">자연과학</a></li>
+			    <li><a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=500">기술과학</a></li>
+                <li><a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=600">&nbsp;&nbsp;&nbsp;예술&nbsp;&nbsp;&nbsp;</a></li>
+                <li><a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=700">언어(어학)</a></li>
+                <li><a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=800">&nbsp;&nbsp;&nbsp;문학&nbsp;&nbsp;&nbsp;</a></li>
+                <li><a href="/BookCategoryList.action?pageNum=1&searchKey=kdc_Nm&searchValue=900">&nbsp;&nbsp;&nbsp;역사&nbsp;&nbsp;&nbsp;</a></li>
 			    
 			  </ul>
 			</li>            

@@ -11,8 +11,8 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <insert id="insertData" parameterType="com.book.store.dto.EventBoardDTO">
-	insert into event_board (boardId,userId,pwd,subject,content,image_Url,ipAddr,hitCount,created) 
-	values(#{boardId},#{userId},#{pwd},#{subject},#{content},#{image_Url},#{ipAddr,jdbcType=NULL},0,#{created,jdbcType=NULL})
+	insert into event_board (boardId,userId,pwd,cno,subject,content,image_Url,ipAddr,hitCount,created) 
+	values(#{boardId},#{userId},#{pwd},#{cno},#{subject},#{content},#{image_Url},#{ipAddr},0,sysdate)
 </insert>
 
 <select id="getDataCount" parameterType="map" resultType="int">
@@ -23,7 +23,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 <select id="getLists" parameterType="map" resultType="com.book.store.dto.EventBoardDTO">
 	select * from (
 	select rownum rnum,data.* from (
-	select boardId,userId,pwd,subject,content,image_Url,ipAddr,hitCount,to_char(created,'YYYY-MM-DD') created 
+	select boardId,userId,pwd,cno,subject,content,image_Url,ipAddr,hitCount,to_char(created,'YYYY-MM-DD') created 
 	from event_board where ${searchKey} like '%' || #{searchValue} || '%' 
 	order by boardId desc) data) 
 <![CDATA[
@@ -36,7 +36,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 </update>
 
 <select id="getReadData" parameterType="int" resultType="com.book.store.dto.EventBoardDTO">
-	select boardId,userId,pwd,subject,content,image_Url,ipAddr,hitCount,created from event_board 
+	select boardId,userId,pwd,cno,subject,content,image_Url,ipAddr,hitCount,created from event_board 
 	where boardId=#{boardId}
 </select>
 
@@ -44,6 +44,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	update event_board set 
 	userId=#{userId},
 	pwd=#{pwd},
+	cno=#{cno},
 	subject=#{subject},
 	content=#{content},
 	image_Url=#{image_Url} 
@@ -53,6 +54,40 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 <delete id="deleteData" parameterType="int">
 	delete from event_board where boardId=#{boardId}
 </delete>
+
+<select id="preReadData" parameterType="map" resultType="com.book.store.dto.EventBoardDTO">
+	select data.* from (
+	select boardId,subject from event_board
+	where ${searchKey} like '%' || #{searchValue} || '%' 
+<![CDATA[
+	and (boardId<#{boardId})
+	order by boardId desc)data 
+	where rownum=1
+]]> 
+</select>
+
+
+<select id="nextReadData" parameterType="map" resultType="com.book.store.dto.EventBoardDTO">
+	select data.* from (
+	select boardId,subject from event_board
+	where ${searchKey} like '%' || #{searchValue} || '%' 
+<![CDATA[
+	and (boardId>#{boardId})
+	order by boardId asc)data
+	where rownum=1
+]]> 
+</select> 
+
+<select id="categoryLists" parameterType="map" resultType="com.book.store.dto.EventBoardDTO">
+	select * from (
+	select rownum rnum,data.* from (
+	select boardId,userId,pwd,cno,subject,content,image_Url,ipAddr,hitCount,to_char(created,'YYYY-MM-DD') created 
+	from event_board where ${searchKey} like #{searchValue} || '%' 
+	order by boardId desc) data) 
+<![CDATA[
+	where rnum>=#{start} and rnum<=#{end}
+]]>
+</select>
 
 
 </mapper>
