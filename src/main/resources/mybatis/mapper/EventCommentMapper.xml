@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.book.store.mapper.EventCommentMapper">
+
+<select id="maxNum" parameterType="int" resultType="int">
+	SELECT nvl(MAX(commentId), 0) FROM evt_comment
+</select>
+
+<insert id="insertData" parameterType="com.book.store.dto.EventCommentDTO">
+	INSERT INTO evt_comment(commentId, boardId, userId, content, created, fix_created)
+	VALUES(#{commentId}, #{boardId}, #{userId}, #{content}, SYSDATE, SYSDATE)
+</insert>
+
+<select id="getDataCount" resultType="int" parameterType="int">
+	SELECT nvl(COUNT(*), 0) FROM evt_comment WHERE boardId = #{boardId}
+</select>
+
+<select id="getLists" parameterType="map" resultType="com.book.store.dto.EventCommentDTO">
+	SELECT *
+	FROM (
+		SELECT ROWNUM rnum, data.*
+		FROM (
+			SELECT commentId, boardId, userId, content,
+			to_char(created, 'YYYY-MM-DD HH24:MI:SS') created,
+			to_char(fix_created, 'YYYY-MM-DD HH24:MI:SS') fix_created
+			FROM evt_comment
+			WHERE boardId = #{boardId}
+			ORDER BY commentId DESC
+		) data
+	) 
+	<![CDATA[
+	WHERE rnum >= #{start} AND rnum <= #{end}
+	]]>
+</select>
+
+<delete id="deleteData" parameterType="int">
+	DELETE FROM evt_comment WHERE commentId = #{commentId}
+</delete>
+
+<select id="getReadData" parameterType="int" resultType="com.book.store.dto.EventCommentDTO">
+	SELECT commentId, boardId, userId, content, created, fix_created FROM evt_comment
+	WHERE commentId = #{commentId}
+</select>
+
+<update id="updateData" parameterType="com.book.store.dto.EventCommentDTO">
+	UPDATE evt_comment
+	SET boardId = #{boardId}, userId = #{userId}, content = #{content}, fix_created = SYSDATE
+	WHERE commentId = #{commentId}
+</update>
+
+</mapper>

@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" http-equiv="Content-Type"  ><!-- http-equiv="Content-Type" 한글나오게함 -->
+<title>comment</title>
+
+</head>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<!-- Answer게시판 -->
+<link rel="stylesheet" href="/css/event.css">
+
+<body>
+<br/><br/><br/><br/><br/>
+
+<p th:if="${#lists.size(lists)}<=0">등록된 댓글이 없습니다.</p>
+<p>댓글 [[${#lists.size(lists)}]]개</p>
+
+<br/><br/>	      
+	      
+<table border="0" cellpadding="0" cellspacing="0" style="margin: auto; width: 800px;" 
+th:unless="${#lists.size(lists)}<=0" th:each="dto: ${lists}">
+
+	<div class="see-comments">
+	  <section>
+	  <div> <img src="https://user-images.githubusercontent.com/112612653/189023768-c2387f31-2463-4198-9078-3e3eaa56f7a0.png" alt=""></div>
+	    <div>
+	      <p>
+	        <span>[[${dto.created}]] | [[${dto.userId}]]</span><br/>
+	       </p>
+	       <p>
+	        <span>	     
+	        <a th:href="'javascript:deleteComment(\'' + ${dto.commentId} + '\', \'' + ${pageNum} + '\')'" 
+	        th:if="${session.user}!=null and ${session.user.userId} == ${dto.userId} or ${session.OauthUser}!=null and ${session.OauthUser.userId} == ${dto.userId} ">삭제</a></span>
+	      </p>      
+	      <p th:utext="${dto.content.replaceAll('(\r\n|\r|\n)', '<br/>')}"></p>
+	    </div>
+	    <div><img src="https://user-images.githubusercontent.com/112612653/189023767-c8fd2d91-9928-41bd-a758-b94befaafe23.png"></div>
+	  </section>
+	</div> 
+
+</table>
+
+<br/>
+
+<div height="30" style="text-align: center;" id="page">
+	<a th:utext="${pageIndexList}"></a>
+</div>
+
+<br/>
+
+</body>
+</html>
