@@ -307,7 +307,6 @@ public class UserController {
 		}
 		
 		String[] birth = user.getUserBirth().split("-");
-		System.out.println(birth[0]+birth[1]+birth[2]);
 		
 		mav.addObject("user", user);
 		mav.addObject("year", birth[0]);
@@ -350,7 +349,7 @@ public class UserController {
 		ModelAndView mav = new ModelAndView();
 		
 		String userId = request.getParameter("userId");
-		System.out.println("삭제함");
+		
 		httpSession.removeAttribute("user");
 		httpSession.removeAttribute("OauthUser");
 		
