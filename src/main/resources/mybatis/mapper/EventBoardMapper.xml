@@ -82,7 +82,7 @@ PUBLIC "-mybatis.org//DTD Mapper 3.0//EN"
 	select * from (
 	select rownum rnum,data.* from (
 	select boardId,userId,pwd,cno,subject,content,image_Url,ipAddr,hitCount,to_char(created,'YYYY-MM-DD') created 
-	from event_board where ${searchKey} like #{searchValue} || '%' 
+	from event_board where ${searchKey} like '%' || #{searchValue} || '%'  
 	order by boardId desc) data) 
 <![CDATA[
 	where rnum>=#{start} and rnum<=#{end}
