@@ -105,8 +105,10 @@ input[type=radio]+.ico {
 }
 
 input[type=radio]:checked+.ico {
-  border: 1px solid #5f0081;
-  background-color: #5f0080;
+/*   border: 1px solid #5f0081;
+  background-color: #5f0080; */
+  border: 1px solid #6c500d;
+  background-color: #6c500d;
 }
 
 input[type=radio]:checked+.ico::after {
@@ -128,9 +130,11 @@ button {
   text-transform: uppercase;
   padding: 14px;
   margin-left: 10px;
-  border: 1px solid #5f0080;
+/*   border: 1px solid #5f0080; */
+  border: 1px solid #6c500d;
   border-radius: 4px;
-  color: #5f0080;
+/*   color: #5f0080; */
+  color: #6c500d;
   background: white;
   transition: 0.3s;
 }
@@ -140,7 +144,8 @@ button:hover {
 }
 
 button[type="submit"] {
-  background: #5f0080;
+/*   background: #5f0080; */
+  background:#6c500d;
   color: #fff;
 }
 
