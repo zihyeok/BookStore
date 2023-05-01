@@ -11,7 +11,10 @@
 <link rel="stylesheet" type="text/css" href="css/article.css"/> -->
 
 <!-- product.css -->
-		<link rel="stylesheet" href="css/event.css">
+<link rel="stylesheet" href="css/event.css">
+<!-- <link rel="stylesheet" href="css/product.css"> -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 </head>
 <body>
@@ -57,12 +60,46 @@
 	</div> -->
 	<div>
 	
+<!-- 댓글 -->
+<form action="/CommentCreated.action" method="post" id="CommentForm">
+<div>
+	<span id="commentListData" style="display: block;"></span>
+</div>
+<div class="container product_detail" >
+	<div class="in_box" style="width: 850px;">
+		<div class="tab_box">
+		
+			<p class="tit">comments</p>
+			
+			<div class="ask_box">
+				<!-- disabled적용하면 form으로 안 날라감 -->
+				<p th:if="${session.user==null and session.OauthUser==null}"><label>작성자</label><input type="text" placeholder="로그인 후 이용해주세요" disabled="disabled"></p>
+				<p th:unless="${session.user==null and session.OauthUser==null}"><label>작성자</label><input type="text" th:value="${userId}" id="userId" name="userId" readonly="readonly"></p>
+				
+				<p th:if="${session.user==null and session.OauthUser==null}"><label>내용</label><textarea disabled="disabled"></textarea></p>
+				<p th:unless="${session.user==null and session.OauthUser==null}"><label>내용</label><textarea name="content" id="content" placeholder="댓글을 입력해주세요." ></textarea></p>
+				
+				<div class="btn_box" th:if="${session.user != null or session.OauthUser != null}" style="text-align: right;">
+					<button class="btn-7 float-r m-btn"  type="button" id="sendComment">댓글 작성</button>
+					<!-- button은 기본type이 submit 그래서 바로 폼 주소로 가지만 이걸 벗어나려면 type button -->
+				</div>
+				
+				<input type="hidden" th:value="${dto.boardId}" name="boardId">
+			
+			</div>
 	
+		</div>
+		
+	</div>
+</div>
+</form> 
 	
-	<div id="bbsArticle_footer" style="text-align: center;">
+	<br/>
+	
+	<div id="bbsArticle_footer" style="text-align: center; font-size: 12pt;">
 		<tr>
 		  <!-- 이전글 다음글 -->
-		  <td style="font-family: 'NEXON Lv1 Gothic OTF';">
+		  <td>
 		    <h5 th:if="${preSubject != null and preSubject != ''}">
 		      <a th:href="@{|/eventArticle.action?${params}&boardId=${preNum}|}">
 		        이전글 : <span th:text="${preSubject}"></span>
@@ -75,15 +112,126 @@
 		    </h5>
 		  </td>
 		</tr>
-	
-		<button class="btn-7" th:onclick="@{|location.href='/eventUpdated.action?boardId=${dto.boardId}&${params}'|}">수정</button>
-		<button class="btn-7" th:onclick="@{|location.href='/eventDeleted.action?boardId=${dto.boardId}&${params}'|}">삭제</button>
-		<button class="btn-7" th:onclick="@{|location.href='/eventList.action?${params}'|}">목록으로</button>
+		<br/>
+		<div th:if="${RULE == 'RULE_ADMIN' }" style="text-align: center; white-space: nowrap; float: left; padding-right: 3px; padding-left: 15px;">
+			<button class="btn-7" th:onclick="@{|location.href='/eventUpdated.action?boardId=${dto.boardId}&${params}'|}">수정</button>
+			<button class="btn-7" th:onclick="@{|location.href='/eventDeleted.action?boardId=${dto.boardId}&${params}'|}">삭제</button>
+		</div>
+		<div style="float: right; padding-right: 15px;">
+			<button class="btn-7" th:onclick="@{|location.href='/eventList.action?${params}'|}">목록으로</button>
+		</div>
 	</div>	
 	
 	</div>
 
 </div>
+
+<script type="text/javascript">
+
+$(function () {
+    listPage(1);
+});
+
+$(document).ready(function() {
+    $("#sendComment").click(function() {
+        var param = "userId=" + $("#userId").val() +
+                    "&boardId=" + [[${dto.boardId}]] +
+                    "&content=" + $("#content").val();
+        
+        
+        $.ajax({
+            type: "POST",
+            url: "/CommentCreated.action",
+            data: param,
+            dataType: "text",
+            success: function(args) {
+                $("#content").val("");
+                listPage(1);
+                $('html, body').animate({
+                    scrollTop: $("#commentListData").offset().top
+                }, 500);
+            },
+            beforeSend: showRequest,
+            error: function(e) {
+                alert(e.responsetext);
+            }
+        });
+    });
+});
+
+
+function sendComment() {
+    $("#sendComment").click();
+}
+
+function listPage(page) {
+	
+	var url = "/CommentList.action";
+	var params = "boardId=" + [[${dto.boardId}]] + "&pageNum=" + page;
+	
+	$.ajax({
+		url: url,
+		type: "POST",
+		dataType:"text",
+		data:params,
+		success: function(args) {
+			$("#commentListData").html(args);
+			$("#commentListData").show();
+		},
+		error:function(e){
+			alert(e.responsetext);
+		}
+	});
+}
+
+  function showRequest() {
+	
+	var content = $.trim($("#content").val());
+
+	if(!content){
+		alert("\n내용을 입력하세요");
+		$("#content").focus();
+		return false;
+	}
+	
+	if(content.length>400){
+		alert("\n내용은 300자까지 가능합니다");
+		$("#content").focus();
+		return false;
+	}
+	
+	return true;
+	
+} 
+ 
+
+function deleteComment(boardId,page) {
+	
+	var params = "commentId=" + boardId + "&boardId=" + [[${dto.boardId}]] + "&pageNum=" + page;
+		
+		$.ajax({
+			url:"/CommentDeleted.action",
+			type: "POST",
+			dataType:"text",
+			data:params,
+			success: function(args) {
+				listPage(page);
+				
+			},
+			error:function(e){
+				alert(e.responsetext);
+			}
+		});
+		
+	}
+
+
+</script>
+
+
+
+
+
 
 </body>
 

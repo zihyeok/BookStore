@@ -13,16 +13,20 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.book.store.dto.BoardDTO;
-import com.book.store.dto.BookDTO;
 import com.book.store.dto.EventBoardDTO;
+import com.book.store.dto.EventCommentDTO;
 import com.book.store.service.EventBoardService;
+import com.book.store.service.EventCommentService;
+import com.book.store.service.EventCommentServiceImpl;
 import com.book.store.user.UserData;
+import com.book.store.util.BoardUtil;
 import com.book.store.util.FileManagerEvt;
 import com.book.store.util.MyUtil;
 
@@ -32,8 +36,14 @@ public class EventBoardController {
      @Resource 
      private EventBoardService eventBoardService;
      
+     @Resource
+     EventCommentService eventCommentService = new EventCommentServiceImpl();
+     
      @Resource 
      HttpSession httpSession;
+     
+     @Autowired
+     BoardUtil boardUtil;//아작스 페이징
      
      @Autowired
      private MyUtil myUtil;
@@ -98,6 +108,19 @@ public class EventBoardController {
      
      @GetMapping("/eventList.action")
       public ModelAndView list(EventBoardDTO dto,HttpServletRequest request) throws Exception{
+    	 
+    	 ModelAndView mav = new ModelAndView();
+         
+         UserData user = null;
+         
+ 		 if(httpSession.getAttribute("user") != null) {
+ 			user = (UserData) httpSession.getAttribute("user");
+ 			mav.addObject("RULE", user.getUserRole());
+ 		 }else if(httpSession.getAttribute("OauthUser") != null) {
+ 			user = (UserData) httpSession.getAttribute("OauthUser");
+ 			mav.addObject("RULE", user.getUserRole());
+ 		 }
+    	 
          
          String pageNum = request.getParameter("pageNum");
 
@@ -164,7 +187,6 @@ public class EventBoardController {
         	 articleUrl += "&" + param; 
          }
 
-         ModelAndView mav = new ModelAndView();
 
          mav.addObject("lists", lists); 
          mav.addObject("pageIndexList", pageIndexList);
@@ -532,6 +554,157 @@ public class EventBoardController {
  		return mav;
  		
  	}
+     
+		@PostMapping("/CommentCreated.action")
+		public ModelAndView CommentCreated(EventCommentDTO dto,HttpServletRequest request) throws Exception{
+						
+			int boardId = dto.getBoardId();
+			
+			int maxNum = eventCommentService.maxNum(boardId);
+
+			dto.setCommentId(maxNum + 1);
+			dto.setBoardId(boardId);
+					
+			
+			eventCommentService.insertData(dto);
+			
+			ModelAndView mav = new ModelAndView();
+			
+			
+			System.out.println("userId=" + dto.getUserId());
+			System.out.println("boardId=" + dto.getBoardId());
+			System.out.println("content=" + dto.getContent());
+			
+			
+			
+			mav.setViewName("redirect:/CommentList.action");
+
+			return mav;
+
+		}
+		
+		@RequestMapping("/CommentList.action")
+		public ModelAndView CommentList(EventCommentDTO dto,HttpServletRequest request) throws Exception{
+			
+			int boardId = dto.getBoardId();
+
+			String pageNum = request.getParameter("pageNum");
+			
+			int currentPage = 1;
+			
+			int numPerPage = 5;
+			
+			if(pageNum!=null && !pageNum.equals("")) {
+				currentPage = Integer.parseInt(pageNum);
+				
+			}
+			
+			int dataCount = eventCommentService.getDataCount(boardId);
+			
+			int totalPage = myUtil.getPageCount(numPerPage, dataCount);
+
+			if(currentPage>totalPage) {
+				currentPage=totalPage;
+			}
+			
+			int start = (currentPage-1)*numPerPage+1;
+			int end = currentPage*numPerPage;	
+			
+			List<EventCommentDTO> lists = eventCommentService.getLists(start, end, boardId);
+		
+			String pageIndexList = boardUtil.pageIndexList(currentPage, totalPage);
+			
+			//ModelAndView로 전송
+			ModelAndView mav = new ModelAndView();// "jsonView"
+			
+			
+			//포워딩할 데이터
+			mav.addObject("lists", lists);
+			mav.addObject("pageIndexList", pageIndexList);
+			mav.addObject("boardId", boardId);
+			mav.addObject("pageNum", currentPage);
+			
+			mav.addObject("start", start);
+			mav.addObject("dataCount", dataCount);
+			
+			mav.setViewName("event/eventCommentList");
+
+			return mav;
+			
+		}
+		
+		@RequestMapping("/CommentDeleted.action")
+		public ModelAndView CommentDeleted(EventCommentDTO dto,HttpServletRequest request) throws Exception{
+			
+			int commentId = Integer.parseInt(request.getParameter("commentId"));
+			
+			int boardId = dto.getBoardId();
+			
+			eventCommentService.deleteData(commentId);
+			
+			ModelAndView mav = new ModelAndView();
+			
+			mav.addObject("boardId", boardId);
+			mav.setViewName("redirect:/CommentList.action");
+			
+			return mav;
+			
+		}
+		
+		@GetMapping("/CommentUpdated.action")
+		public ModelAndView CommentUpdated(HttpServletRequest request) throws Exception{
+			
+			ModelAndView mav = new ModelAndView();
+			
+			int commentId = Integer.parseInt(request.getParameter("commentId"));
+			String pageNum = request.getParameter("pageNum");
+			
+			int boardId = Integer.parseInt(request.getParameter("boardId"));
+			
+		
+			EventCommentDTO dto = eventCommentService.getReadData(commentId);
+			
+			if(dto==null) {
+				
+				mav.setViewName("redirect:CommentList.action?pageNum=" + pageNum + "&boardId=" + boardId);
+				
+				return mav;
+			}
+			
+			String param =  "pageNum=" + pageNum + "&boardId=" + boardId ;
+		
+			mav.addObject("dto", dto);
+			mav.addObject("pageNum", pageNum);
+			mav.addObject("params", param);
+			mav.addObject("boardId", boardId);
+			
+			mav.setViewName("event/eventCommentList");
+			
+			return mav;
+		}
+		
+		@PostMapping(value = "/CommentUpdated_ok.action")
+		public ModelAndView CommentUpdated_ok(EventCommentDTO dto, HttpServletRequest request) throws Exception {
+			
+			String pageNum = request.getParameter("pageNum");
+			int boardId = Integer.parseInt(request.getParameter("boardId"));
+	
+		
+			eventCommentService.updateData(dto);
+			
+			
+			ModelAndView mav = new ModelAndView();
+			
+			String param =  "pageNum=" + pageNum + "&boardId=" + boardId ;
+			
+			
+			mav.setViewName("redirect:/eventArticle.action?" + param);
+								
+			return mav;
+			
+		}
+     
+     
      
      
  }

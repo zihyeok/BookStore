@@ -53,8 +53,10 @@
 		</form>
 		</div>
 		
-		<div id="rightHeader">
+		<div id="rightHeader" th:if="${RULE == 'RULE_ADMIN' }" style="text-align: center; white-space: nowrap; float: right; padding-left: 250px;">		
+			<!-- <div th:if="${RULE == 'RULE_ADMIN' }" style="text-align: center; white-space: nowrap;"> -->
 			<button class="btn-7 float-r" th:onclick="|location.href='@{eventCreated.action}'|">등록하기</button>
+
 		</div>
 		
 	</div>
@@ -65,7 +67,7 @@
 		<thead id="title">
 			<tr>
 				<th style="width: 5%;">번호</th>
-				<th style="width: 60%;">제목</th>
+				<th style="width: 60%; text-align: center;">제목</th>
 				<th style="width: 10%;">작성자</th>
 				<th style="width: 10%;">작성일</th>
 				<th style="width: 5%;">조회수</th>
@@ -109,6 +111,8 @@
 		</tbody>
 		
 		</table>
+		
+		
 		
 	</div>
 </div>
