@@ -351,10 +351,10 @@ public class UserController {
 		
 		String userId = request.getParameter("userId");
 		System.out.println("삭제함");
-//		httpSession.removeAttribute("user");
-//		httpSession.removeAttribute("OauthUser");
-//		
-//		userService.deleteUserData(userId);
+		httpSession.removeAttribute("user");
+		httpSession.removeAttribute("OauthUser");
+		
+		userService.deleteUserData(userId);
 		
 		mav.setViewName("redirect:/main");
 		return mav;

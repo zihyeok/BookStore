@@ -61,7 +61,7 @@ public class MyUtil {//Page처리
 		if(totalPage>numPerBlock && currentPageSetup>0) {
 			//get방식으로 pageNum 넘기는 거임 그래서 servlet에서 req.getparameter(pageNum)이 가능한것
 			//currentPageSetup은 ◀이전 을 생기게할지 말지 판단하는 조건임
-			sb.append("<a href=\"" + listUrl + "pageNum=" + 
+			sb.append("<a class=\"HyperLink-box\" href=\"" + listUrl + "pageNum=" + 
 						currentPageSetup + "\">◀이전</a>&nbsp;");
 			//<a href="list.jsp?pageNum=5">◀이전</a>&nbsp;
 			//\"는 "를 문자로 보라는 표시
@@ -74,11 +74,11 @@ public class MyUtil {//Page처리
 			
 			if(page == currentPage) {
 				
-				sb.append("<font color=\"Black\">" + page + "</font>&nbsp;");
+				sb.append("<font class=\"Current_HyperLink-box\" color=\"Black\">" + page + "</font>&nbsp;");
 				
 			}else {
 				
-				sb.append("<a href=\""+ listUrl + "pageNum=" + page + "\">" +
+				sb.append("<a class=\"HyperLink-box\" href=\""+ listUrl + "pageNum=" + page + "\">" +
 								page + "</a>&nbsp;");
 				//<a href="list.jsp?pageNum=7">7</a>&nbsp;
 				
@@ -90,7 +90,7 @@ public class MyUtil {//Page처리
 		//다음▶
 		if(totalPage-currentPageSetup>numPerBlock) {
 			
-			sb.append("<a href=\"" + listUrl + "pageNum=" + page + 
+			sb.append("<a class=\"HyperLink-box\" href=\"" + listUrl + "pageNum=" + page + 
 						"\">다음▶</a>&nbsp;");
 			
 		}
