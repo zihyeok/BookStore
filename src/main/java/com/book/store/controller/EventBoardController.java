@@ -467,7 +467,6 @@ public class EventBoardController {
  		//searchKey는 작가,제목,도서번호
  		String searchValue = request.getParameter("searchValue");
  		
-
  		if(searchValue==null || searchValue.equals("") || searchValue == "") {
 
  			searchKey = "subject";
@@ -495,11 +494,9 @@ public class EventBoardController {
 
  		int start = (currentPage-1)*numPerPage+1;
  		int end = currentPage*numPerPage;
- 		
- 		System.out.println(start+" "+end);
 
  		List<EventBoardDTO> lists = eventBoardService.categoryLists(start, end, searchKey, searchValue);
-
+ 		
 // 		for (int i = lists.size(); i < numPerPage; i++) {
 //
 // 			lists.add(null);
