@@ -442,6 +442,7 @@ public class BookController {
 	
 	@GetMapping("/BookCategoryList.action")
 	public ModelAndView categoryList(HttpServletRequest request) throws Exception{
+		
 		ModelAndView mav = new ModelAndView();
 		
 		UserData user = null;
@@ -542,6 +543,7 @@ public class BookController {
 		//신작
 		@GetMapping("/NewBook.action")
 		public ModelAndView newlist(HttpServletRequest request) throws Exception{
+
 			String pageNum = request.getParameter("pageNum");
 
 			int currentPage = 1; //첫화면은 1페이지 
@@ -693,7 +695,7 @@ public class BookController {
 			if(!param.equals("")) { articleUrl += "&" + param; }
 
 			ModelAndView mav = new ModelAndView();
-			
+
 			mav.addObject("lists", lists); 
 			mav.addObject("pageIndexList", pageIndexList);
 			mav.addObject("dataCount", dataCount); 

@@ -145,6 +145,7 @@ public class ReviewController {
 		mav.addObject("pageIndexList", pageIndexList);
 		mav.addObject("checkId", checkId);
 		mav.addObject("avgStar", avgStar);
+		mav.addObject("dataCount", dataCount);
 
 		mav.setViewName("commentList");
 
