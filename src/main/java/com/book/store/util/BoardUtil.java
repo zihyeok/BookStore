@@ -68,7 +68,7 @@ public class BoardUtil {
 				
 				if(page==currentPage) {
 					
-					strList += "<font color='Fuchsia'>" + page + "</font>&nbsp;";
+					strList += "<font color='gray'>" + page + "</font>&nbsp;";
 					
 				}else {
 					strList += "<a onclick='listPage(" + page + ");'>" + page + "</a>&nbsp;"; 
@@ -163,7 +163,7 @@ public class BoardUtil {
 				// 현재 페이지가 내가 보고있는 페이지랑 같으면 색깔로 지정 
 				if(page == currentPage) {
 					
-					sb.append("<font color=\"Fuchsia\">" + page + "</font>&nbsp;");
+					sb.append("<font color=\"Black\">" + page + "</font>&nbsp;");
 					//<font color="Fuchsia">6</font>&nbsp;
 				}else {
 					// 같지않으면

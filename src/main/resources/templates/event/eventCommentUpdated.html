@@ -1,0 +1,50 @@
+<html layout:decorate="~{layout}" xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+
+<div layout:fragment="content4" >
+<link rel="stylesheet" type="text/css" href="/css/BoardCreated.css">
+
+<div class="container product_detail">
+	<div class="in_box"><!--in_box S-->	
+		<div class="content">
+			<div class="tab_content">
+				<div class="tab_box">
+					<p class="tit" style="text-align: center;">게시판 수정</p>
+					<br/><br/>
+					<form th:action="@{AnswerUpdated_ok.action}" method="post" name="myForm">
+					
+					<div class="ask_box">
+						
+						<p>
+						<label>작성자</label> 
+						<input type="text"  name="userId" readonly="readonly" th:value="${dto.userId }"> 
+						</p>
+						
+						<p>
+						<label>내용</label> 
+						<textarea name="content" th:text="${dto.content }"></textarea> 
+						</p>
+						
+						<div class="btn_box">
+							<button class="black-btn float-r m-btn" type="submit">수정하기</button>
+						</div>
+						<input type="hidden" name="answerNum" th:value="${dto.answerNum }"/>
+						<input type="hidden" name="pageNum" th:value="${pageNum }"/>
+						<input type="hidden" name="boardId" th:value="${dto.boardId }"/>
+						
+						<div class="btn_box">
+							<button class="black-btn float-r m-btn" type="button" 
+							th:onclick="@{|location='/BoardArticle.action?pageNum=${pageNum }&num=${dto.boardId }'|}" >
+							수정취소</button>
+						</div>
+					</div>
+					</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!--in_box E-->
+<br/><br/>
+</div>
+
+</html>
