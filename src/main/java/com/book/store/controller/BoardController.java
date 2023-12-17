@@ -46,7 +46,7 @@ public class BoardController {
 	MyUtil myUtil; //@Service로 구현된 MyUtil을 불러온것
 
 
-	@GetMapping("/Notice.do")
+	@GetMapping("/Notice.do")//index
 	public ModelAndView index() throws Exception{
 
 		ModelAndView mav = new ModelAndView();
@@ -58,7 +58,7 @@ public class BoardController {
 
 	}
 
-	@GetMapping("/Board.action")
+	@GetMapping("/Board.action")//등록페이지
 	public ModelAndView created(BoardDTO dto,HttpServletRequest request) throws Exception{
 
 		UserData user = null;
@@ -85,7 +85,7 @@ public class BoardController {
 
 	}
 
-	@PostMapping("/BoardCreated.action")
+	@PostMapping("/BoardCreated.action")//등록값보내는곳곳
 	public ModelAndView created_ok(BoardDTO dto,HttpServletRequest request) throws Exception{
 
 		ModelAndView mav = new ModelAndView();
@@ -104,7 +104,7 @@ public class BoardController {
 	}
 
 
-	@RequestMapping("/BoardList.action")
+	@RequestMapping("/BoardList.action")//목록록
 	public ModelAndView list(BoardDTO dto,HttpServletRequest request) throws Exception{
 
 		String pageNum = request.getParameter("pageNum");
@@ -187,7 +187,7 @@ public class BoardController {
 	}
 
 
-	@GetMapping("/BoardArticle.action")
+	@GetMapping("/BoardArticle.action")//게시글 상세내용용
 	public ModelAndView article(HttpServletRequest request) throws Exception{
 
 		ModelAndView mav = new ModelAndView();
@@ -289,7 +289,7 @@ public class BoardController {
 	}
 
 
-	@GetMapping("/BoardUpdated.action")
+	@GetMapping("/BoardUpdated.action")//글 수정 
 	public ModelAndView updated(HttpServletRequest request) throws Exception{
 
 		ModelAndView mav = new ModelAndView();
@@ -331,7 +331,7 @@ public class BoardController {
 
 		return mav;
 	}
-
+	//수정값 보내는곳곳
 	@RequestMapping(value = "/BoardUpdated_ok.action",method = {RequestMethod.GET,RequestMethod.POST})
 	public ModelAndView updated_ok(BoardDTO dto,HttpServletRequest request) throws Exception{
 
@@ -362,7 +362,7 @@ public class BoardController {
 	}
 
 
-	@GetMapping("/BoardDeleted_ok.action")
+	@GetMapping("/BoardDeleted_ok.action")//글 삭제제
 	public ModelAndView deleted_ok(HttpServletRequest request) throws Exception{
 
 		int num = Integer.parseInt(request.getParameter("num"));
